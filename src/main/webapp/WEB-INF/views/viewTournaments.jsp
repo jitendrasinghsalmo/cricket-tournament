@@ -25,7 +25,6 @@
             --text-primary: #f0f4ff;
             --text-secondary: #a8b8d8;
             --border-glass: rgba(0, 217, 255, 0.25);
-            --body-overlay: rgba(10, 14, 39, 0.92);
         }
 
         body.light-mode {
@@ -40,17 +39,13 @@
             --text-primary: #1a2550;
             --text-secondary: #556688;
             --border-glass: rgba(0, 153, 204, 0.25);
-            --body-overlay: rgba(245, 247, 255, 0.92);
         }
 
         * { box-sizing: border-box; }
 
         body { 
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; 
-            background: linear-gradient(135deg, var(--body-overlay) 0%, var(--body-overlay) 100%), 
-                        url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: var(--bg-deep);
             color: var(--text-primary); 
             margin: 0; 
             padding: 0 0 60px 0; 
@@ -808,7 +803,7 @@
             line-height: 1.5;
         }
 
-        /* ============ GALLERY SECTION (GAP FIXED PERFECTLY) ============ */
+        /* ============ GALLERY SECTION (EQUAL HEIGHT, PERFECT FIT & SPIN ANIMATION) ============ */
         .footer-gallery-section {
             max-width: 1400px;
             margin: 0 auto 40px auto;
@@ -832,7 +827,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             height: 100%;
             transform-style: preserve-3d;
             animation: spinFiveSecs 5s linear infinite;
@@ -855,10 +849,15 @@
             100% { transform: rotateY(360deg); }
         }
 
+        /* Content box ab upar rahega aur saare cards me equal height maintain karega */
         .gallery-card-content {
-            padding: 16px;
+            padding: 18px 16px;
             text-align: center;
-            background: rgba(13, 18, 30, 0.7);
+            background: rgba(13, 18, 30, 0.85);
+            min-height: 95px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             order: 1;
         }
 
@@ -876,18 +875,20 @@
 
         .gallery-card-content p {
             margin: 0;
-            font-size: 12.5px;
+            font-size: 12px;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
+        /* Image wrapper niche rahega aur images exact fit hongi bina gap ke */
         .gallery-card-img-wrapper {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 190px;
             overflow: hidden;
             background: #020617;
             order: 2;
+            flex-grow: 1;
         }
 
         .gallery-card-img-wrapper img {
@@ -903,7 +904,7 @@
 
         /* FOOTER CSS STYLING */
         .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
         .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
@@ -1009,7 +1010,7 @@
         <!-- STATISTICS -->
         <div class="cricket-stats-section">
             <div class="stat-card">
-                <div class="stat-icon">🏆</div>
+                <div class="stat-icon">👥</div>
                 <div class="stat-label">Total Tournaments</div>
                 <div class="stat-value">${tournaments.size()}</div>
                 <div class="stat-desc">Active championship cups running</div>
@@ -1021,13 +1022,13 @@
                 <div class="stat-desc">Real-time tournament tracking</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">🌐</div>
+                <div class="stat-icon">💻</div>
                 <div class="stat-label">System Status</div>
                 <div class="stat-value" style="color: var(--neon-emerald);">ONLINE</div>
                 <div class="stat-desc">All services operational</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">📈</div>
+                <div class="stat-icon">🔗</div>
                 <div class="stat-label">Quick Access</div>
                 <div class="stat-value" style="font-size: 16px;">→</div>
                 <div class="stat-desc"><a href="/matches" style="color: var(--neon-cyan); text-decoration: none; font-weight: 700;">View Live Matches</a></div>
@@ -1087,7 +1088,7 @@
             </table>
         </div>
 
-        <!-- 🌟 NEW UNIQUE ALT STYLE SECTION (ADDED ABOVE YELLOW BANNER) -->
+        <!-- UNIQUE ALT STYLE SECTION -->
         <div class="unique-alt-section">
             <div class="alt-feature-box">
                 <div class="alt-icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
@@ -1131,18 +1132,18 @@
             </div>
         </div>
 
-        <!-- GALLERY -->
+        <!-- GALLERY SECTION -->
         <div class="footer-gallery-section">
             <div class="footer-gallery-grid">
-                <div class="gallery-card-item">
-                    <div class="gallery-card-content">
-                        <h4>🏟️ Grand Stadium Arena</h4>
-                        <p>World-class illumination designed for grand spectacles</p>
-                    </div>
-                    <div class="gallery-card-img-wrapper">
-                        <img src="https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2025/07/09/4619556-1034009131.jpg?itok=cdFO0JjU" alt="Stadium">
-                    </div>
-                </div>
+				<div class="gallery-card-item">
+				    <div class="gallery-card-content">
+				        <h4>🏟️ Grand Stadium Arena</h4>
+				        <p>Witness magnificent stadium lights, roaring crowds, massive roars</p>
+				    </div>
+				    <div class="gallery-card-img-wrapper">
+				        <img src="https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2025/07/09/4619556-1034009131.jpg?itok=cdFO0JjU" alt="Stadium">
+				    </div>
+				</div>
                 <div class="gallery-card-item">
                     <div class="gallery-card-content">
                         <h4>⚡ High Voltage Match Action</h4>
@@ -1173,24 +1174,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const titleEl = document.getElementById('animatedTitle');
-        titleEl.innerHTML = titleEl.innerText.split('').map((char, index) => 
-            char === ' ' ? '<span style="--i:' + index + '">&nbsp;</span>' : '<span style="--i:' + index + '">' + char + '</span>'
-        ).join('');
+        if(titleEl) {
+            titleEl.innerHTML = titleEl.innerText.split('').map((char, index) => 
+                char === ' ' ? '<span style="--i:' + index + '">&nbsp;</span>' : '<span style="--i:' + index + '">' + char + '</span>'
+            ).join('');
+        }
 
         const bodyElement = document.body;
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         if (localStorage.getItem('matchTheme') === 'light') {
             bodyElement.classList.add('light-mode');
-            themeToggleBtn.innerHTML = '☀️ Light Mode';
+            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
         }
         function toggleTheme() {
             if (bodyElement.classList.contains('light-mode')) {
                 bodyElement.classList.remove('light-mode');
                 localStorage.setItem('matchTheme', 'dark');
-                themeToggleBtn.innerHTML = '🌙 Dark Mode';
+                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
             } else {
                 bodyElement.classList.add('light-mode');
-                themeToggleBtn.innerHTML = '☀️ Light Mode';
+                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
             }
         }
 
@@ -1207,7 +1210,8 @@
                     cards[i].style.display = "none";
                 }
             }
-            document.querySelector('.stats-badge span').innerText = visibleCount;
+            let statSpan = document.querySelector('.stats-badge span');
+            if(statSpan) statSpan.innerText = visibleCount;
         }
 
         const galleryCards = document.querySelectorAll('.gallery-card-item');

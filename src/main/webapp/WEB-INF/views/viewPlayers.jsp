@@ -1,581 +1,1135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="page" value="players" />
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProMatch Arena | Squad Roster</title>
+    <!-- Bootstrap 5 CSS & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.88);
-            --neon-cyan: #38bdf8;
-            --neon-emerald: #10b981;
-            --neon-rose: #f43f5e;
-            --neon-amber: #f59e0b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-glass: rgba(56, 189, 248, 0.18);
-            --body-overlay: rgba(3, 7, 18, 0.95);
-            --search-bg: rgba(3, 7, 18, 0.7);
-            --meta-box-bg: rgba(3, 7, 18, 0.55);
+            --bg-deep: #0a0e27;
+            --card-surface: #0e1428;
+            --neon-cyan: #00d9ff;
+            --neon-emerald: #00ff88;
+            --neon-rose: #ff006e;
+            --neon-amber: #ffa500;
+            --neon-purple: #b537f2;
+            --neon-gold: #ffd700;
+            --text-primary: #f0f4ff;
+            --text-secondary: #a8b8d8;
+            --border-glass: #1e294b;
+            --body-overlay: #080b1e;
         }
 
-        body.light-theme {
-            --bg-deep: #f1f5f9;
-            --card-surface: rgba(255, 255, 255, 0.95);
-            --neon-cyan: #0284c7;
-            --neon-emerald: #059669;
-            --neon-rose: #e11d48;
-            --neon-amber: #d97706;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --border-glass: rgba(2, 132, 199, 0.22);
-            --body-overlay: rgba(241, 245, 249, 0.96);
-            --search-bg: rgba(255, 255, 255, 0.9);
-            --meta-box-bg: rgba(248, 250, 252, 0.9);
+        body.light-mode {
+            --bg-deep: #f5f7ff;
+            --card-surface: #ffffff;
+            --neon-cyan: #0099cc;
+            --neon-emerald: #00aa44;
+            --neon-rose: #dd0055;
+            --neon-amber: #ff8800;
+            --neon-purple: #8800ff;
+            --neon-gold: #cc8800;
+            --text-primary: #1a2550;
+            --text-secondary: #556688;
+            --border-glass: #cbd5e1;
+            --body-overlay: #f1f5f9;
         }
 
         * { box-sizing: border-box; }
 
         body { 
-            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
-            background: linear-gradient(135deg, var(--body-overlay) 0%, var(--body-overlay) 100%), 
-                        url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            background: var(--body-overlay);
             color: var(--text-primary); 
             margin: 0; 
-            padding: 35px 20px 60px 20px; 
+            padding: 0 0 60px 0; 
             transition: background 0.3s ease, color 0.3s ease;
         }
         
+        /* 🌟 STICKY NAVBAR STYLING */
+        nav {
+            background: #0d1222;
+            border-bottom: 1.5px solid var(--border-glass);
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { 
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
+            color: #030712; width: 38px; height: 38px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-weight: 900; font-size: 19px; 
+            box-shadow: 0 0 15px rgba(0,217,255,0.6); 
+        }
+        .logo-text { font-weight: 900; font-size: 18px; color: var(--text-primary); letter-spacing: 0.8px; }
+        .logo-text span { display: block; font-size: 9.5px; color: var(--neon-cyan); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; align-items: center; }
+        .nav-links a { 
+            color: var(--text-secondary); text-decoration: none; font-size: 13.5px; font-weight: 700; 
+            padding: 8px 16px; border-radius: 10px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .nav-links a:hover { color: var(--neon-cyan); background: rgba(0, 217, 255, 0.08); }
+        .nav-links a.active { 
+            color: #030712; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5); font-weight: 800; 
+        }
+
+        .main-content-wrap { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        
         .header-bar { 
             display: flex; justify-content: space-between; align-items: center; 
-            max-width: 1250px; margin: 0 auto 25px auto; 
-            background: transparent;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            padding: 16px 28px; border-radius: 18px; border: none; 
-            box-shadow: none;
+            margin-bottom: 30px; padding: 18px 30px; border-radius: 18px;
+            background: var(--card-surface);
+            border: 1.5px solid var(--border-glass);
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
-        .header-left { display: flex; align-items: center; gap: 10px; }
-        .header-right { display: flex; align-items: center; gap: 12px; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
-        .btn-back { background: rgba(56, 189, 248, 0.08); color: var(--neon-cyan); border: 1px solid var(--border-glass); padding: 9px 16px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
-        .btn-back:hover { background: var(--neon-cyan); color: #030712; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-
-        .btn-dashboard { background: rgba(16, 185, 129, 0.08); color: var(--neon-emerald); border: 1px solid rgba(16, 185, 129, 0.3); padding: 9px 16px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; }
-        .btn-dashboard:hover { background: var(--neon-emerald); color: #030712; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
-
-        .theme-toggle-btn {
-            background: var(--card-surface); color: var(--text-primary);
-            border: 1px solid var(--border-glass); padding: 9px 14px;
-            border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
+        .btn-back {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--neon-cyan);
+            border: 1.5px solid var(--neon-cyan);
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
         }
-        .theme-toggle-btn:hover { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); }
+        .btn-back:hover {
+            background: var(--neon-cyan);
+            color: #030712;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+        }
+        
+        .btn-theme-toggle {
+            background: rgba(181, 55, 242, 0.15);
+            color: var(--neon-purple);
+            border: 1.5px solid var(--neon-purple); 
+            padding: 10px 18px;
+            border-radius: 10px; 
+            font-weight: 700; 
+            font-size: 13px;
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .btn-theme-toggle:hover { 
+            background: var(--neon-purple);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(181, 55, 242, 0.5);
+        }
+
+        .btn-top-add {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            color: #ffffff;
+            border: 1.5px solid rgba(0, 217, 255, 0.6);
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-top-add:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+
+        .btn-delete-all {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(255, 106, 0, 0.15));
+            color: var(--neon-rose);
+            border: 1.5px solid var(--neon-rose); 
+            padding: 10px 18px;
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-delete-all:hover { 
+            background: var(--neon-rose); 
+            color: #fff; 
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+            transform: translateX(3px);
+        }
 
         .jumping-title {
-            text-align: center; color: var(--text-primary); margin: 0; font-weight: 900; font-size: 20px; letter-spacing: 1.5px; text-transform: uppercase;
-            display: inline-block; white-space: nowrap;
+            text-align: center; 
+            margin: 0; 
+            font-weight: 900; 
+            font-size: 22px; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+            display: inline-block;
+            overflow: visible;
         }
         .jumping-title span {
-            display: inline-block; opacity: 0; transform: translateY(-25px);
-            animation: dropInChar 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            animation-delay: calc(0.04s * var(--i));
+            display: inline-block;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 255, 136, 0.6);
+            transform: translateY(-30px);
+            opacity: 0;
+            animation: dropInChar 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: calc(0.05s * var(--i));
         }
-        .jumping-title span.highlight { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.6); }
 
         @keyframes dropInChar {
-            0% { opacity: 0; transform: translateY(-25px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(-30px) scale(0.5); }
+            60% { opacity: 1; transform: translateY(10px) scale(1.1); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .control-bar {
-            max-width: 1250px; margin: 0 auto 30px auto;
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--card-surface); backdrop-filter: blur(12px);
-            padding: 12px 20px; border-radius: 14px; border: 1px solid var(--border-glass);
-            flex-wrap: wrap; gap: 15px;
+            margin-bottom: 35px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: var(--card-surface); 
+            padding: 14px 24px; 
+            border-radius: 14px; 
+            border: 1.5px solid var(--border-glass);
+            flex-wrap: wrap;
+            gap: 15px;
         }
         .search-input {
-            background: var(--search-bg); border: 1px solid var(--border-glass);
-            border-radius: 8px; padding: 9px 15px; color: var(--text-primary); font-size: 13px;
-            width: 280px; outline: none; transition: 0.2s;
+            background: #030712; 
+            border: 1.5px solid var(--border-glass);
+            border-radius: 10px; 
+            padding: 10px 16px; 
+            color: var(--text-primary); 
+            font-size: 13px;
+            width: 320px; 
+            outline: none; 
+            transition: 0.3s;
         }
-        .search-input::placeholder { color: var(--text-secondary); }
-        .search-input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(56,189,248,0.3); }
-        
-        .control-right { display: flex; align-items: center; gap: 12px; }
-        .stats-badge { font-size: 12px; font-weight: 700; color: var(--text-secondary); background: var(--search-bg); padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border-glass); }
+        .search-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+        .search-input:focus { 
+            border-color: var(--neon-cyan); 
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+        }
+        .stats-badge { 
+            font-size: 13px; 
+            font-weight: 700; 
+            color: var(--text-secondary); 
+            background: #111827;
+            padding: 8px 16px; 
+            border-radius: 10px; 
+            border: 1.5px solid var(--border-glass); 
+        }
+        .stats-badge span { color: var(--neon-gold); font-weight: 800; }
 
-        .btn-delete-all {
-            background: rgba(244, 63, 94, 0.12); color: var(--neon-rose);
-            border: 1px solid rgba(244, 63, 94, 0.3); padding: 8px 14px;
-            border-radius: 8px; font-size: 12px; font-weight: 700; text-decoration: none;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-        }
-        .btn-delete-all:hover {
-            background: var(--neon-rose); color: #fff;
-            box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
-        }
-
-        .team-stats-section { max-width: 1250px; margin: 40px auto; }
+        .team-stats-section { max-width: 1400px; margin: 40px auto; }
         .section-title {
-            font-size: 16px; font-weight: 800; color: var(--text-primary);
-            text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 20px; padding-left: 8px;
-            border-left: 4px solid var(--neon-cyan);
+            font-size: 18px; font-weight: 800; color: var(--text-primary);
+            text-transform: uppercase; letter-spacing: 1.2px;
+            margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
         }
+        .section-title::before { content: ''; width: 4px; height: 24px; background: linear-gradient(180deg, var(--neon-cyan), var(--neon-emerald)); border-radius: 2px; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         @media(max-width: 1024px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(max-width: 768px) { .stats-grid { grid-template-columns: 1fr; } }
 
         .stat-box {
-            background: var(--card-surface); backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass); border-radius: 16px;
-            padding: 20px; text-align: center; transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: var(--card-surface);
+            border: 1.5px solid var(--border-glass); border-radius: 18px;
+            padding: 24px; text-align: center; transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .stat-box:hover {
-            border-color: var(--neon-cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
-        }
-        .stat-number { font-size: 28px; font-weight: 800; color: var(--neon-cyan); margin-bottom: 6px; }
-        .stat-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
-
-        .role-breakdown-section { max-width: 1250px; margin: 40px auto; }
-        .role-cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-        @media(max-width: 1024px) { .role-cards-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media(max-width: 768px) { .role-cards-grid { grid-template-columns: 1fr; } }
-
-        .role-card {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(16, 185, 129, 0.08));
-            border: 1.5px solid var(--border-glass); border-radius: 16px;
-            padding: 22px; text-align: center; transition: all 0.3s ease;
-        }
-        .role-card:hover { border-color: var(--neon-cyan); transform: translateY(-6px); }
-        .role-title { font-size: 14px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-bottom: 8px; }
-        .role-count { font-size: 24px; font-weight: 800; color: var(--neon-emerald); }
-
-        .squad-highlight-section {
-            max-width: 1250px; margin: 40px auto;
-            background: var(--card-surface); backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass); border-radius: 20px;
-            padding: 32px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        .highlight-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; align-items: center; }
-        @media(max-width: 968px) { .highlight-grid { grid-template-columns: 1fr; } }
-        .highlight-info h3 { font-size: 18px; font-weight: 800; color: var(--text-primary); margin: 0 0 10px 0; }
-        .highlight-info p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 16px 0; }
-        .highlight-badges { display: flex; gap: 10px; flex-wrap: wrap; }
-        .badge {
-            background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan);
-            border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px;
-            padding: 6px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase;
-        }
-        .badge.emerald { background: rgba(16, 185, 129, 0.15); color: var(--neon-emerald); border-color: rgba(16, 185, 129, 0.3); }
-        .badge.amber { background: rgba(245, 158, 11, 0.15); color: var(--neon-amber); border-color: rgba(245, 158, 11, 0.3); }
-
-        .highlight-stat { background: var(--meta-box-bg); border: 1px solid var(--border-glass); border-radius: 12px; padding: 16px; text-align: center; }
-        .highlight-stat-value { font-size: 26px; font-weight: 800; color: var(--neon-cyan); }
-        .highlight-stat-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; margin-top: 6px; font-weight: 600; }
+        .stat-box:hover { border-color: var(--neon-cyan); transform: translateY(-5px); }
+        .stat-number { font-size: 32px; font-weight: 900; color: var(--neon-cyan); margin-bottom: 6px; }
+        .stat-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
 
         /* PLAYERS GRID */
-        .players-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1250px; margin: 40px auto 0 auto; }
+        .players-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 28px; 
+            max-width: 1400px; 
+            margin: 40px auto; 
+        }
         @media(max-width: 1024px) { .players-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(max-width: 768px) { .players-grid { grid-template-columns: 1fr; } }
         
         .player-card {
-            background: var(--card-surface); backdrop-filter: blur(18px);
-            border-radius: 22px; border: 1px solid var(--border-glass);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.35); position: relative; overflow: hidden;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column; justify-content: space-between;
+            background: linear-gradient(145deg, #0e1428 0%, #060917 100%);
+            border-radius: 22px; 
+            border: 1.5px solid rgba(0, 217, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05); 
+            position: relative; 
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between;
+            padding: 26px;
         }
+        
         .player-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald));
-        }
-        .player-card:hover { transform: translateY(-8px); border-color: var(--neon-cyan); box-shadow: 0 22px 50px rgba(56, 189, 248, 0.25); }
-
-        .card-top-banner { padding: 20px 22px 10px 22px; display: flex; align-items: center; justify-content: space-between; }
-        .player-avatar-box {
-            width: 54px; height: 54px; border-radius: 16px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(16, 185, 129, 0.15));
-            border: 1px solid var(--border-glass); color: var(--neon-cyan);
-            display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px;
-        }
-        .jersey-pill {
-            font-size: 13px; font-weight: 800; color: var(--neon-amber);
-            background: rgba(245, 158, 11, 0.12); padding: 5px 12px;
-            border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.3);
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald), var(--neon-purple));
         }
 
-        .card-body { padding: 10px 22px 22px 22px; display: flex; flex-direction: column; gap: 14px; }
-        .player-name-title { font-size: 19px; font-weight: 800; color: var(--text-primary); }
-        .player-id-tag { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-top: 2px; text-transform: uppercase; }
-
-        .specs-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .spec-cell { background: var(--meta-box-bg); border: 1px solid var(--border-glass); border-radius: 12px; padding: 10px 14px; font-size: 11.5px; color: var(--text-secondary); }
-        .spec-cell span { display: block; color: var(--text-primary); font-weight: 700; font-size: 12.5px; margin-top: 3px; }
-
-        .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
-        .card-actions a {
-            text-align: center; text-decoration: none; padding: 10px; border-radius: 11px;
-            font-size: 12px; font-weight: 700; transition: all 0.2s ease; text-transform: uppercase;
+        .player-card:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            border-color: var(--neon-cyan); 
+            box-shadow: 0 20px 45px rgba(0, 217, 255, 0.25), 0 0 20px rgba(0, 255, 136, 0.15); 
         }
-        .btn-edit { background: rgba(56, 189, 248, 0.1); color: var(--neon-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
-        .btn-edit:hover { background: var(--neon-cyan); color: #030712; }
-        .btn-delete { background: rgba(244, 63, 94, 0.1); color: var(--neon-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
-        .btn-delete:hover { background: var(--neon-rose); color: #fff; }
 
-        .btn-add-player {
-            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
-            color: #ffffff; border: 1px solid rgba(56, 189, 248, 0.4);
-            display: inline-flex; justify-content: center; align-items: center;
-            padding: 9px 18px; border-radius: 12px; font-size: 12px; font-weight: 800;
-            text-decoration: none; transition: all 0.25s ease; text-transform: uppercase;
+        .player-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
-        .btn-add-player:hover { transform: translateY(-2px); background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); }
 
-        /* GALLERY SECTION (ABOVE FOOTER) */
-        .gallery-section {
-            max-width: 1250px;
-            margin: 50px auto 30px auto;
+        .player-id-badge {
+            font-size: 11.5px; 
+            font-weight: 800; 
+            color: var(--neon-cyan); 
+            background: rgba(0, 217, 255, 0.12); 
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 4px 10px; 
+            border-radius: 8px;
+            letter-spacing: 0.5px;
         }
-        .footer-gallery-grid {
+
+        .jersey-badge {
+            font-size: 12px; 
+            font-weight: 900; 
+            color: var(--neon-gold); 
+            background: rgba(255, 215, 0, 0.12); 
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 4px 10px; 
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .player-name {
+            margin: 0 0 16px 0; 
+            font-size: 20px; 
+            font-weight: 900; 
+            color: var(--text-primary); 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px;
+            border-bottom: 1.5px dashed var(--border-glass);
+            padding-bottom: 12px;
+        }
+
+        .player-info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .player-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(30, 41, 75, 0.5);
+        }
+
+        .player-info-item strong {
+            color: var(--text-primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-actions { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 25px; 
-            perspective: 1000px;
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
+            margin-top: auto; 
         }
+        
+        .card-actions a {
+            text-align: center; 
+            text-decoration: none; 
+            padding: 11px; 
+            border-radius: 12px;
+            font-size: 11.5px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-edit { 
+            background: rgba(0, 217, 255, 0.1); 
+            color: var(--neon-cyan); 
+            border: 1.5px solid var(--neon-cyan); 
+        }
+        .btn-edit:hover { 
+            background: var(--neon-cyan); 
+            color: #030712; 
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-delete { 
+            background: rgba(255, 0, 110, 0.1); 
+            color: var(--neon-rose); 
+            border: 1.5px solid var(--neon-rose); 
+        }
+        .btn-delete:hover { 
+            background: var(--neon-rose); 
+            color: #fff; 
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* 🌟 EXTRA LARGE BOLD HIGHLIGHT SECTIONS STYLING */
+        .highlight-sections-wrapper {
+            max-width: 1400px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .hl-row {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+        }
+        @media(max-width: 900px) { .hl-row { flex-direction: column; } }
+
+        /* BIG BOLD CARDS BASE */
+        .hl-box-large {
+            background: linear-gradient(145deg, var(--card-surface) 0%, #060917 100%);
+            border: 1.5px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 35px 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            width: 100%;
+        }
+        .hl-box-large:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .hl-big-icon {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            flex-shrink: 0;
+            margin-right: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .hl-content-large h3 { 
+            margin: 0 0 10px 0; 
+            font-size: 20px; 
+            font-weight: 900; 
+            color: var(--text-primary); 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px; 
+        }
+        .hl-content-large p { 
+            margin: 0; 
+            font-size: 14.5px; 
+            color: var(--text-secondary); 
+            line-height: 1.6; 
+        }
+
+        .hl-grand-wide {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(181, 55, 242, 0.1) 100%);
+            border: 1.5px solid var(--neon-cyan);
+            border-left: 8px solid var(--neon-cyan);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.18);
+            padding: 40px 45px;
+        }
+
+        /* 🌟 ULTIMATE MASTER HERO BANNER */
+        .master-hero-banner {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(14, 20, 40, 0.98) 0%, rgba(10, 14, 39, 0.99) 100%);
+            border: 2px solid var(--neon-purple);
+            border-radius: 30px;
+            padding: 50px 60px;
+            box-shadow: 0 25px 60px rgba(181, 55, 242, 0.25), inset 0 0 30px rgba(0, 217, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        .master-hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-emerald), var(--neon-gold));
+        }
+        .master-hero-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .master-hero-icon {
+            width: 95px;
+            height: 95px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #030712;
+            flex-shrink: 0;
+            box-shadow: 0 0 30px rgba(181, 55, 242, 0.6);
+        }
+        .master-hero-title h2 {
+            margin: 0 0 8px 0;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+        }
+        .master-hero-title span {
+            font-size: 13.5px;
+            color: var(--neon-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .master-hero-desc {
+            font-size: 15.5px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+        }
+        .master-hero-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+            border-top: 1.5px dashed var(--border-glass);
+            padding-top: 25px;
+        }
+        @media(max-width: 900px) { .master-hero-grid { grid-template-columns: 1fr; } .master-hero-banner { padding: 35px 25px; } }
+        
+        .hero-mini-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1.5px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .hero-mini-box:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-3px);
+            background: rgba(0, 217, 255, 0.04);
+        }
+        .hero-mini-box h4 {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--neon-emerald);
+            text-transform: uppercase;
+        }
+        .hero-mini-box p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* 🌟 PROFESSIONAL ELITE PRO-ARENA EXECUTIVE SHOWCASE (NAYA BDA PROFESSIONAL SECTION) */
+        .pro-executive-showcase {
+            width: 100%;
+            background: linear-gradient(135deg, #090e21 0%, #121936 100%);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 28px;
+            padding: 55px 60px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 255, 136, 0.03);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+        .pro-executive-showcase::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .pro-exec-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1.5px solid var(--border-glass);
+            padding-bottom: 25px;
+        }
+        .pro-exec-title-group h2 {
+            margin: 0 0 6px 0;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .pro-exec-title-group p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--neon-emerald);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .pro-exec-badge {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1.5px solid var(--neon-emerald);
+            color: var(--neon-emerald);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+        .pro-exec-content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        @media(max-width: 900px) { .pro-exec-content-grid { grid-template-columns: 1fr; } .pro-executive-showcase { padding: 35px 25px; } }
+        
+        .pro-exec-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1.5px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: 0.3s;
+        }
+        .pro-exec-card:hover {
+            border-color: var(--neon-emerald);
+            transform: translateY(-4px);
+            background: rgba(0, 255, 136, 0.03);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+        }
+        .pro-exec-card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1.5px solid var(--neon-emerald);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--neon-emerald);
+            flex-shrink: 0;
+        }
+        .pro-exec-card-text h4 {
+            margin: 0 0 8px 0;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .pro-exec-card-text p {
+            margin: 0;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* GALLERY SECTION - 360 FULL CARD ROTATION ON HOVER */
+        .gallery-section { max-width: 1400px; margin: 50px auto; }
+        .footer-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         @media(max-width: 768px) { .footer-gallery-grid { grid-template-columns: 1fr; } }
 
         .gallery-clean-card {
-            background: rgba(20, 25, 40, 0.95);
-            border-radius: 16px; overflow: hidden;
-            border: 1px solid var(--border-glass);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transform-style: preserve-3d;
-            animation: smoothInfiniteSpin 10s linear infinite;
-            display: flex; flex-direction: column;
+            background: var(--card-surface); border-radius: 16px; overflow: hidden; border: 1.5px solid var(--border-glass);
+            display: flex; flex-direction: column; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center center;
         }
-        @keyframes smoothInfiniteSpin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        .gallery-clean-card:hover { animation-play-state: paused; border-color: var(--neon-cyan); }
-        .gallery-card-content { padding: 16px; text-align: center; background: rgba(13, 18, 30, 0.5); order: 1; }
+        .gallery-card-content { padding: 20px; order: 1; }
         .gallery-card-content h4 { margin: 0 0 6px 0; font-size: 14.5px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; }
         .gallery-card-content p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
-        .gallery-card-img-wrapper { width: 100%; height: 170px; overflow: hidden; background: #020617; order: 2; }
+        
+        .gallery-card-img-wrapper {
+            width: 100%; height: 180px; overflow: hidden; order: 2;
+            background: #020617; border-top: 1.5px solid var(--border-glass);
+        }
         .gallery-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+        
+        .gallery-clean-card:hover {
+            transform: rotate(360deg) scale(1.03);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+        }
 
-        /* GRAND FOOTER SECTION */
-        .grand-footer-section {
-            background: var(--card-surface);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            max-width: 1250px;
-            margin: 0 auto;
-        }
-        .grand-footer-content {
-            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; align-items: start;
-        }
+        /* 🌟 GRAND CYBER FOOTER STYLING */
+        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
-        @media(max-width: 768px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
+        @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
+        .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
+        .footer-brand h3 span { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,217,255,0.5); }
+        .footer-brand p { margin: 0 0 20px 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+        .footer-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+        @media(max-width: 650px) { .footer-socials { justify-content: center; } }
+        .footer-socials a { width: 38px; height: 38px; border-radius: 50%; background: rgba(0, 217, 255, 0.1); border: 1.5px solid var(--border-glass); color: var(--neon-cyan); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; font-size: 14px; }
+        .footer-socials a:hover { background: var(--neon-cyan); color: #030712; transform: translateY(-3px); box-shadow: 0 0 15px rgba(0,217,255,0.6); }
+        .footer-links h4, .footer-newsletter h4 { margin: 0 0 18px 0; font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--neon-cyan); letter-spacing: 1px; }
+        .footer-links ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; }
+        .footer-links a:hover { color: var(--neon-cyan); transform: translateX(4px); }
+        .footer-newsletter p { font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.6; }
+        .footer-newsletter form { display: flex; gap: 8px; }
+        .footer-newsletter input { flex: 1; background: rgba(3, 7, 18, 0.7); border: 1.5px solid var(--border-glass); border-radius: 10px; padding: 10px 14px; color: var(--text-primary); font-size: 12.5px; outline: none; }
+        .footer-newsletter input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,217,255,0.3); }
+        .footer-newsletter button { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 800; font-size: 12.5px; cursor: pointer; transition: 0.3s; }
+        .footer-bottom-bar { max-width: 1350px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--text-secondary); font-size: 12px; letter-spacing: 0.5px; }
+        @media(max-width: 768px) { .footer-bottom-bar { flex-direction: column; text-align: center; } }
+        .footer-bottom-links { display: flex; gap: 20px; }
+        .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .footer-bottom-links a:hover { color: var(--neon-cyan); }
 
-        .footer-brand h3 { margin: 0 0 8px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1px; }
-        .footer-brand h3 span { color: var(--neon-cyan); }
-        .footer-brand p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
-
-        .footer-links h4 { margin: 0 0 12px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.5px; }
-        .footer-links ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 12.5px; font-weight: 600; transition: color 0.2s; }
-        .footer-links a:hover { color: var(--neon-cyan); }
-
-        .footer-bottom-bar { text-align: center; color: var(--text-secondary); font-size: 11.5px; margin-top: 30px; border-top: 1px dashed var(--border-glass); padding-top: 20px; }
-        .no-player { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; padding: 60px; font-size: 15px; background: var(--card-surface); border-radius: 18px; border: 1px solid var(--border-glass); }
+        .no-player { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; padding: 60px; font-size: 15px; font-weight: 700; background: var(--card-surface); border: 1.5px dashed var(--border-glass); border-radius: 16px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-    <div class="header-bar">
-        <div class="header-left">
-            <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+    <!-- 🌟 NAVBAR WITH HOME, TEAMS, VIEW PLAYERS, POINTS TABLE & TOURNAMENTS -->
+    <nav>
+        <a href="/home" class="logo-box">
+            <div class="logo-icon">P</div>
+            <div class="logo-text">ProMatch Arena<span>Control Center</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/home" class="${page == 'home' ? 'active' : ''}">Home</a></li>
+            <li><a href="/teams" class="${page == 'teams' ? 'active' : ''}">Teams</a></li>
+            <li><a href="#" class="${page == 'players' ? 'active' : ''}">View Players</a></li>
+            <li><a href="/matches" class="${page == 'matches' ? 'active' : ''}">Matches</a></li>
+            <li><a href="/pointsTable" class="${page == 'points' ? 'active' : ''}">Points Table</a></li>
+            <li><a href="/tournaments" class="${page == 'tournaments' ? 'active' : ''}">Tournaments</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrap">
+        <div class="header-bar">
+            <div class="header-left">
+                <a href="/teams" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Teams</a>
+            </div>
             
-            <c:choose>
-                <c:when test="${sessionScope.user.role.name() == 'ADMIN' || sessionScope.user.role.name() == 'ROLE_ADMIN'}">
-                    <a href="${pageContext.request.contextPath}/admin/home" class="btn-dashboard">
-                        <i class="fa-solid fa-gauge"></i> Admin Dashboard
+            <div>
+                <h2 class="jumping-title" id="animatedTitle">SQUAD ROSTER</h2>
+            </div>
+
+            <div class="header-right">
+                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+                <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" class="btn-top-add"><i class="fa-solid fa-plus"></i> Add Player</a>
+                <c:if test="${not empty players}">
+                    <a href="${pageContext.request.contextPath}/deleteAllPlayers/${teamId}" class="btn-delete-all" onclick="return confirm('⚠️ DANGER: Delete all players from this squad permanently?');">
+                        <i class="fa-solid fa-trash-can"></i> Delete All Squad
                     </a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/home" class="btn-dashboard">
-                        <i class="fa-solid fa-house"></i> Home
-                    </a>
-                </c:otherwise>
-            </c:choose>
-        </div>
-        
-        <div>
-            <h2 class="jumping-title" id="animatedTitle">Team Players Roster</h2>
-        </div>
-
-        <div class="header-right">
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-                🌙 <span id="themeBtnText">Dark</span>
-            </button>
-            <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" class="btn-add-player"><i class="fa-solid fa-plus"></i> Add Player</a>
-        </div>
-    </div>
-
-    <div class="control-bar">
-        <input type="text" id="playerSearch" class="search-input" placeholder="🔍 Search player by name..." onkeyup="filterPlayers()" autocomplete="off">
-        
-        <div class="control-right">
-            <c:if test="${not empty players}">
-                <a href="${pageContext.request.contextPath}/deleteAllPlayers/${teamId}" class="btn-delete-all" onclick="return confirm('⚠️ DANGER: Delete all players from this squad permanently?');">
-                    <i class="fa-solid fa-trash-can"></i> Delete All Squad
-                </a>
-            </c:if>
-            <div class="stats-badge">Total Squad: <span style="color: var(--neon-cyan); font-weight: 800;">${players.size()}</span></div>
-        </div>
-    </div>
-
-    <!-- SECTION 1: TEAM STATS OVERVIEW -->
-    <c:if test="${not empty players}">
-        <div class="team-stats-section">
-            <h3 class="section-title">📊 Squad Overview</h3>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-number">${players.size()}</div>
-                    <div class="stat-label">Total Players</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Active Roles</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Squad Ready</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">A+</div>
-                    <div class="stat-label">Performance</div>
-                </div>
+                </c:if>
             </div>
         </div>
-    </c:if>
 
-    <!-- SECTION 2: ROLE BREAKDOWN -->
-    <c:if test="${not empty players}">
-        <div class="role-breakdown-section">
-            <h3 class="section-title">🎪 Role Distribution</h3>
-            <div class="role-cards-grid">
-                <div class="role-card">
-                    <div class="role-title">Batsman</div>
-                    <div class="role-count">4</div>
-                </div>
-                <div class="role-card">
-                    <div class="role-title">Bowler</div>
-                    <div class="role-count">3</div>
-                </div>
-                <div class="role-card">
-                    <div class="role-title">All-Rounder</div>
-                    <div class="role-count">2</div>
-                </div>
-                <div class="role-card">
-                    <div class="role-title">Wicket Keeper</div>
-                    <div class="role-count">1</div>
-                </div>
-            </div>
+        <div class="control-bar">
+            <input type="text" id="playerSearch" class="search-input" placeholder="🔍 Search player by name..." onkeyup="filterPlayers()" autocomplete="off">
+            <div class="stats-badge">Total Squad: <span>${players.size()}</span></div>
         </div>
-    </c:if>
 
-    <!-- SECTION 3: SQUAD HIGHLIGHT -->
-    <c:if test="${not empty players}">
-        <div class="squad-highlight-section">
-            <h3 class="section-title">✨ Squad Highlights</h3>
-            <div class="highlight-grid">
-                <div class="highlight-info">
-                    <h3>🔥 Championship Ready Squad</h3>
-                    <p>Your squad is fully equipped with experienced players, strong team chemistry, and strategic depth. Ready to dominate the tournament with aggressive batting, powerful bowling, and solid fielding.</p>
-                    <div class="highlight-badges">
-                        <span class="badge">Experienced</span>
-                        <span class="badge emerald">Balanced</span>
-                        <span class="badge amber">Powerful</span>
-                    </div>
-                </div>
-                <div class="highlight-stat">
-                    <div class="highlight-stat-value">${players.size()}</div>
-                    <div class="highlight-stat-label">Players Active</div>
-                </div>
-                <div class="highlight-stat">
-                    <div class="highlight-stat-value">A+</div>
-                    <div class="highlight-stat-label">Squad Rating</div>
-                </div>
-            </div>
-        </div>
-    </c:if>
-
-    <!-- PLAYERS GRID -->
-    <div class="players-grid" id="playersGrid">
-        <c:forEach items="${players}" var="p">
-            <div class="player-card" data-name="${p.playerName.toLowerCase()}">
-                
-                <div class="card-top-banner">
-                    <div class="player-avatar-box">
-                        ${p.playerName.substring(0,1).toUpperCase()}
-                    </div>
-                    <span class="jersey-pill">👕 #${p.jerseyNumber}</span>
-                </div>
-
-                <div class="card-body">
+        <!-- PLAYERS GRID WITH PREMIUM DESIGN -->
+        <div class="players-grid" id="playersGrid">
+            <c:forEach items="${players}" var="p">
+                <div class="player-card" data-name="${p.playerName.toLowerCase()}">
                     <div>
-                        <div class="player-name-title" title="${p.playerName}">${p.playerName}</div>
-                        <div class="player-id-tag">Player ID: #PL-${p.id}</div>
+                        <div class="player-card-header">
+                            <span class="player-id-badge"><i class="fa-solid fa-id-badge"></i> #PL-${p.id}</span>
+                            <span class="jersey-badge"><i class="fa-solid fa-shirt"></i> #${p.jerseyNumber}</span>
+                        </div>
+                        
+                        <h4 class="player-name" title="${p.playerName}">${p.playerName}</h4>
+                        
+                        <div class="player-info-grid">
+                            <div class="player-info-item">
+                                <span>📍 Role</span>
+                                <strong style="color: var(--neon-emerald);">${p.role}</strong>
+                            </div>
+                            <div class="player-info-item">
+                                <span>📅 Age</span>
+                                <strong>${p.age} Years</strong>
+                            </div>
+                            <div class="player-info-item">
+                                <span>🏏 Batting</span>
+                                <strong>${p.battingStyle}</strong>
+                            </div>
+                            <div class="player-info-item">
+                                <span>⚡ Bowling</span>
+                                <strong>${p.bowlingStyle}</strong>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="specs-matrix">
-                        <div class="spec-cell">Role <span>${p.role}</span> &nbsp;</div>
-                        <div class="spec-cell">Age <span>${p.age} yrs</span></div>
-                        <div class="spec-cell">Batting <span>${p.battingStyle}</span></div>
-                        <div class="spec-cell">Bowling <span>${p.bowlingStyle}</span></div>
-                    </div>
-                    
                     <div class="card-actions">
-                        <a href="${pageContext.request.contextPath}/editPlayer/${p.id}" class="btn-edit">Edit</a>
-                        <a href="${pageContext.request.contextPath}/deletePlayer/${p.id}?teamId=${teamId}" class="btn-delete" onclick="return confirm('⚠️ Delete this player?');">Delete</a>
+                        <a href="${pageContext.request.contextPath}/editPlayer/${p.id}" class="btn-edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a href="${pageContext.request.contextPath}/deletePlayer/${p.id}?teamId=${teamId}" class="btn-delete" onclick="return confirm('⚠️ Delete this player permanently?');"><i class="fa-solid fa-trash"></i> Delete</a>
                     </div>
                 </div>
+            </c:forEach>
+            
+            <c:if test="${empty players}">
+                <div class="no-player">🏏 No active players registered in this squad yet.</div>
+            </c:if>
+        </div>
 
-            </div>
-        </c:forEach>
-        
-        <c:if test="${empty players}">
-            <div class="no-player">
-                No active players registered in this squad yet. 
-                <br><br>
-                <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" style="color: var(--neon-cyan); font-weight: 700; text-decoration: none;">Click here to add the first player ➡</a>
+        <!-- SECTION 1: SQUAD STATISTICS -->
+        <c:if test="${not empty players}">
+            <div class="team-stats-section">
+                <h3 class="section-title">📊 Squad Overview</h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">${players.size()}</div>
+                        <div class="stat-label">Squad Strength</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Active Roles</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Readiness</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">A+</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                </div>
             </div>
         </c:if>
-    </div>
 
-    <!-- GALLERY SECTION (ABOVE FOOTER) -->
-    <div class="gallery-section">
-        <div class="footer-gallery-grid">
-            <div class="gallery-clean-card">
-                <div class="gallery-card-content">
-                    <h4>🏟️ Floodlit Stadium</h4>
-                    <p>World-class arena illumination designed for grand cricket spectacles.</p>
+        <!-- 🌟 EXTRA LARGE BOLD HIGHLIGHT SECTIONS -->
+        <div class="highlight-sections-wrapper">
+            
+            <!-- Row 1: Elite Defense & Powerplay Dominance -->
+            <div class="hl-row">
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Elite Squad Defense</h3>
+                        <p>Engineered with high-end tactical balance, securing ultimate protection across all multi-format tournament challenges and playoff stages.</p>
+                    </div>
                 </div>
-                <div class="gallery-card-img-wrapper">
-                    <img src="https://wallpapers.ipl.com/files/preview/1280x925/465931758006175mirdxujrcngeqt4dbgwhwripvt0dwtcq3ffrkeqcfxxsrjb9nf5iyyjivqvksbmaoivkke3nmrodztmqh1cnaviorxhug3biicag.jpg" alt="Stadium">
+
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: linear-gradient(135deg, var(--neon-purple), var(--neon-rose)); color: #fff;">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Powerplay Dominance</h3>
+                        <p>Aggressive opening strike-rates designed to maximize early powerplay run-chases and put maximum pressure on opposing bowling units.</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="gallery-clean-card">
-                <div class="gallery-card-content">
-                    <h4>⚡ High-Voltage Action</h4>
-                    <p>Witness raw power-hitting, fierce bowling spells, and epic last-over finishes.</p>
-                </div>
-                <div class="gallery-card-img-wrapper">
-                    <img src="https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_lg_2x/f_auto/primary/ugvcvyuorglkafijaz4x" alt="Action">
+
+            <!-- Row 2: Grand Wide Feature Section -->
+            <div class="hl-row">
+                <div class="hl-box-large hl-grand-wide">
+                    <div class="hl-big-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)); color: #fff; box-shadow: 0 0 25px rgba(0, 217, 255, 0.5);">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3 style="font-size: 22px; color: var(--neon-cyan);">Advanced Analytics & Momentum Engine</h3>
+                        <p style="font-size: 15px;">Empowered by real-time player telemetry, tactical strike-rate tracking, and high-pressure middle-order stability metrics to completely dominate every single phase of a high-stakes match night.</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="gallery-clean-card">
-                <div class="gallery-card-content">
-                    <h4>🎯 Team Spirit</h4>
-                    <p>United by passion, discipline, and the pursuit of ultimate tournament glory.</p>
+
+            <!-- Row 3: 3 Large Modern Cards -->
+            <div class="hl-row">
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: rgba(255,215,0,0.15); border: 2px solid var(--neon-gold); color: var(--neon-gold);">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Champion Mentality</h3>
+                        <p>Unshakable mental toughness, unwavering focus, and supreme hunger for securing trophies on grand match nights.</p>
+                    </div>
                 </div>
-                <div class="gallery-card-img-wrapper">
-                    <img src="https://c8.alamy.com/comp/2RPC34J/members-of-the-team-india-sings-national-anthem-before-the-asia-cup-cricket-match-between-india-and-nepal-in-pallekele-sri-lanka-on-monday-sep-4-ap-photoeranga-jayawardena-2RPC34J.jpg" alt="Team">
+
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: rgba(0,255,136,0.15); border: 2px solid var(--neon-emerald); color: var(--neon-emerald);">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Seamless Synergy</h3>
+                        <p>Flawless on-field communication, coordination, and team bonding across all active playing eleven squad members.</p>
+                    </div>
+                </div>
+
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: rgba(255,0,110,0.15); border: 2px solid var(--neon-rose); color: var(--neon-rose);">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Clutch Performance</h3>
+                        <p>Delivering peak efficiency and decisive match-winning spells under immense pressure during crunch death overs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 4: Tactical Rotations & Precision Execution -->
+            <div class="hl-row">
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: rgba(255,165,0,0.15); border: 2px solid var(--neon-amber); color: var(--neon-amber);">
+                        <i class="fa-solid fa-arrows-spin"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Tactical Rotations</h3>
+                        <p>Seamless player substitutions, smart batting order shuffles, and expert spin-bowling variations tailored for turning pitches.</p>
+                    </div>
+                </div>
+
+                <div class="hl-box-large" style="flex: 1;">
+                    <div class="hl-big-icon" style="background: rgba(0,255,136,0.15); border: 2px solid var(--neon-emerald); color: var(--neon-emerald);">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="hl-content-large">
+                        <h3>Precision Execution</h3>
+                        <p>Clinical delivery execution in crunch-game situations and flawless boundary-stopping defensive fielding drills.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🌟 ULTIMATE MASTER HERO BANNER -->
+            <div class="master-hero-banner">
+                <div class="master-hero-header">
+                    <div class="master-hero-icon">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div class="master-hero-title">
+                        <span>ProMatch Arena Exclusive</span>
+                        <h2>Ultimate Championship Legacy & Grand Arena Mastery</h2>
+                    </div>
+                </div>
+                <p class="master-hero-desc">
+                    Welcome to the pinnacle of competitive sports management. Our squad roster is built upon rigorous data-driven performance metrics, unmatched athletic discipline, and psychological resilience under extreme match pressure. Every player, from opening batsmen to death-over specialists, is trained to operate at peak efficiency on world-class floodlit stages.
+                </p>
+                <div class="master-hero-grid">
+                    <div class="hero-mini-box">
+                        <h4><i class="fa-solid fa-shield-halved"></i> Strategic Defense</h4>
+                        <p>Fortified tactical frameworks designed to absorb pressure and stifle opposition momentum during critical middle overs.</p>
+                    </div>
+                    <div class="hero-mini-box">
+                        <h4><i class="fa-solid fa-fire"></i> High-Voltage Attack</h4>
+                        <p>Explosive batting line-ups and lethal bowling spells engineered to dictate terms from the very first ball of the game.</p>
+                    </div>
+                    <div class="hero-mini-box">
+                        <h4><i class="fa-solid fa-trophy"></i> Championship Glory</h4>
+                        <p>An unwavering commitment to lifting silverware, backed by seamless team chemistry and legendary match-winning performances.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🌟 NAYA PROFESSIONAL ELITE EXECUTIVE SHOWCASE (IMAGES KE THEEK UPAR BDA STYLISH SECTION) -->
+            <div class="pro-executive-showcase">
+                <div class="pro-exec-top">
+                    <div class="pro-exec-title-group">
+                        <p><i class="fa-solid fa-shield-cat"></i> Executive Control & Core Architecture</p>
+                        <h2>Pro-Arena High Performance Governance</h2>
+                    </div>
+                    <div class="pro-exec-badge">
+                        <i class="fa-solid fa-circle-check"></i> Verified Elite Standards
+                    </div>
+                </div>
+                <div class="pro-exec-content-grid">
+                    <div class="pro-exec-card">
+                        <div class="pro-exec-card-icon">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <div class="pro-exec-card-text">
+                            <h4>Telemetry & Real-Time Analytics</h4>
+                            <p>Continuous evaluation of player workload, strike efficacy, and ball-by-ball impact metrics to optimize tactical line-ups instantly.</p>
+                        </div>
+                    </div>
+                    <div class="pro-exec-card">
+                        <div class="pro-exec-card-icon">
+                            <i class="fa-solid fa-chess-rook"></i>
+                        </div>
+                        <div class="pro-exec-card-text">
+                            <h4>Dynamic Pitch Adaptation</h4>
+                            <p>Advanced tactical protocols designed to adjust spin variations and batting aggression dynamically according to pitch degradation.</p>
+                        </div>
+                    </div>
+                    <div class="pro-exec-card">
+                        <div class="pro-exec-card-icon">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div class="pro-exec-card-text">
+                            <h4>Player Wellness & Recovery</h4>
+                            <p>State-of-the-art sports science protocols ensuring optimal physical endurance and injury prevention throughout long tournament calendars.</p>
+                        </div>
+                    </div>
+                    <div class="pro-exec-card">
+                        <div class="pro-exec-card-icon">
+                            <i class="fa-solid fa-handshake-angle"></i>
+                        </div>
+                        <div class="pro-exec-card-text">
+                            <h4>Synergy & Leadership Core</h4>
+                            <p>Fostering an ecosystem of mutual trust, accountability, and veteran mentorship to steer the franchise toward unprecedented silverware.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GALLERY SECTION (HOVER PAR POORI CARD 360 ROTATE HOGI) -->
+        <div class="gallery-section">
+            <div class="footer-gallery-grid">
+                <div class="gallery-clean-card">
+                    <div class="gallery-card-content">
+                        <h4>🏟️ Floodlit Stadium</h4>
+                        <p>World-class arena illumination designed for grand cricket spectacles.</p>
+                    </div>
+                    <div class="gallery-card-img-wrapper">
+                        <img src="https://wallpapers.ipl.com/files/preview/1280x925/465931758006175mirdxujrcngeqt4dbgwhwripvt0dwtcq3ffrkeqcfxxsrjb9nf5iyyjivqvksbmaoivkke3nmrodztmqh1cnaviorxhug3biicag.jpg" alt="Stadium">
+                    </div>
+                </div>
+                
+                <div class="gallery-clean-card">
+                    <div class="gallery-card-content">
+                        <h4>⚡ High-Voltage Action</h4>
+                        <p>Witness raw power-hitting, fierce bowling spells, and epic last-over finishes.</p>
+                    </div>
+                    <div class="gallery-card-img-wrapper">
+                        <img src="https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_lg_2x/f_auto/primary/ugvcvyuorglkafijaz4x" alt="Action">
+                    </div>
+                </div>
+                
+                <div class="gallery-clean-card">
+                    <div class="gallery-card-content">
+                        <h4>🎯 Team Spirit</h4>
+                        <p>United by passion, discipline, and the pursuit of ultimate tournament glory.</p>
+                    </div>
+                    <div class="gallery-card-img-wrapper">
+                        <img src="https://c8.alamy.com/comp/2RPC34J/members-of-the-team-india-sings-national-anthem-before-the-asia-cup-cricket-match-between-india-and-nepal-in-pallekele-sri-lanka-on-monday-sep-4-ap-photoeranga-jayawardena-2RPC34J.jpg" alt="Team">
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- 🌟 GRAND CYBER FOOTER INCLUDE -->
+        <jsp:include page="footer.jsp" />
+
     </div>
 
-    <!-- GRAND FOOTER SECTION (NO IMAGES INSIDE) -->
-    <div class="grand-footer-section">
-        <div class="grand-footer-content">
-            <div class="footer-brand">
-                <h3><span>ProMatch</span> Arena</h3>
-                <p>Advanced Enterprise Cricket Tournament & Match Control Center. Built with Spring Boot, JSP, and PostgreSQL to deliver high-performance sports analytics.</p>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Quick Navigation</h4>
-                <ul>
-                    <li><a href="/home">🏠 Home Dashboard</a></li>
-                    <li><a href="/teams">👥 View Teams</a></li>
-                    <li><a href="/register-team">➕ Register Team</a></li>
-                    <li><a href="/matches">⚡ Live Matches</a></li>
-                    <li><a href="/tournaments">🏆 Tournaments</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Standings & Stats</h4>
-                <ul>
-                    <li><a href="/pointsTable">📊 Points Table</a></li>
-                    <li><a href="/about">📖 About Architecture</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Legal & Support</h4>
-                <ul>
-                    <li><a href="/faq">❓ FAQ Help Center</a></li>
-                    <li><a href="/privacy-policy">🔒 Privacy Policy</a></li>
-                    <li><a href="/terms-and-conditions">📄 Terms & Conditions</a></li>
-                    <li><a href="/contact">📞 Contact Us</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom-bar">
-            <p>&copy; 2026 ProMatch Arena &bull; All Rights Reserved. Crafted with high-end Cyber Glassmorphism UI.</p>
-        </div>
-    </div>
-
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            const titleEl = document.getElementById('animatedTitle');
-            if (titleEl) {
-                const textWords = titleEl.innerText;
-                titleEl.innerHTML = textWords.split('').map(function(char, index) {
-                    if (char === ' ') return '<span style="--i:' + index + '">&nbsp;</span>';
-                    let highlightClass = (index < 4) ? 'highlight' : '';
-                    return '<span class="' + highlightClass + '" style="--i:' + index + '">' + char + '</span>';
-                }).join('');
-            }
+        const titleEl = document.getElementById('animatedTitle');
+        if (titleEl) {
+            const textWords = titleEl.innerText;
+            titleEl.innerHTML = textWords.split('').map(function(char, index) {
+                if (char === ' ') return '<span style="--i:' + index + '">&nbsp;</span>';
+                return '<span style="--i:' + index + '">' + char + '</span>';
+            }).join('');
+        }
 
-            if (localStorage.getItem('promatch_theme') === 'light') {
-                document.body.classList.add('light-theme');
-                document.getElementById('themeToggleBtn').innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            }
-        });
+        const bodyElement = document.body;
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+        if (localStorage.getItem('matchTheme') === 'light') {
+            bodyElement.classList.add('light-mode');
+            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
+        }
 
         function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            let btn = document.getElementById('themeToggleBtn');
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('promatch_theme', 'light');
-                btn.innerHTML = '☀️ <span id="themeBtnText">Light</span>';
+            if (bodyElement.classList.contains('light-mode')) {
+                bodyElement.classList.remove('light-mode');
+                localStorage.setItem('matchTheme', 'dark');
+                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
             } else {
-                localStorage.setItem('promatch_theme', 'dark');
-                btn.innerHTML = '🌙 <span id="themeBtnText">Dark</span>';
+                bodyElement.classList.add('light-mode');
+                localStorage.setItem('matchTheme', 'light');
+                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
             }
         }
 
@@ -598,6 +1152,5 @@
             if(statsSpan) statsSpan.innerText = visibleCount;
         }
     </script>
-
 </body>
 </html>

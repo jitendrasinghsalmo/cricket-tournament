@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import Cricket_Tournament.Entity.Player;
 import Cricket_Tournament.Entity.Team;
@@ -17,8 +18,11 @@ import Cricket_Tournament.Repository.TeamRepository;
 @Controller
 public class PlayerController {
     
-    @Autowired private PlayerRepository playerRepo;
-    @Autowired private TeamRepository teamRepo;
+    @Autowired 
+    private PlayerRepository playerRepo;
+    
+    @Autowired 
+    private TeamRepository teamRepo;
 
     @GetMapping("/addPlayer/{teamId}")
     public String addPlayerPage(@PathVariable Long teamId, Model m) {
@@ -59,9 +63,10 @@ public class PlayerController {
     }
     
     @GetMapping("/deleteAllPlayers/{teamId}")
-    public String deleteAllPlayers(@PathVariable Long teamId) {
+    public String deleteAllPlayers(@PathVariable Long teamId, RedirectAttributes redirectAttributes) {
         var players = playerRepo.findByTeamId(teamId);
         playerRepo.deleteAll(players);
+        redirectAttributes.addFlashAttribute("message", "All players have been deleted successfully!");
         return "redirect:/viewPlayers/" + teamId;
     }
     
