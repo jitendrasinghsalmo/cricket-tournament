@@ -62,6 +62,7 @@
             padding: 10px 18px; border-radius: 12px; text-decoration: none;
             font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: all 0.2s ease; z-index: 100;
+            cursor: pointer;
         }
         .top-back-btn:hover { background: var(--neon-cyan); color: #030712; box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
 
@@ -208,7 +209,7 @@
 <body>
 
     <!-- Top Left Floating Back Button -->
-    <a href="/home" class="top-back-btn"><i class="fa-solid fa-arrow-left"></i> Home</a>
+    <button onclick="history.back()" class="top-back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
 
     <!-- Top Right Theme Toggle Button -->
     <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">

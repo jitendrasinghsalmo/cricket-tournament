@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="page" value="about" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,25 +11,41 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #030712;
-            --bg-card: rgba(13, 18, 35, 0.85);
-            --accent-blue: #00d9ff;
-            --accent-green: #00ff88;
-            --accent-amber: #ffa500;
-            --accent-rose: #ff006e;
-            --accent-gold: #ffd700;
-            --text-main: #f0f4ff;
-            --text-muted: #a8b8d8;
-            --border-color: rgba(0, 217, 255, 0.25);
+            --bg-deep: #0a0e27;
+            --card-surface: rgba(13, 18, 35, 0.85);
+            --neon-cyan: #00d9ff;
+            --neon-emerald: #00ff88;
+            --neon-rose: #ff006e;
+            --neon-amber: #ffa500;
+            --neon-purple: #b537f2;
+            --neon-gold: #ffd700;
+            --text-primary: #f0f4ff;
+            --text-secondary: #a8b8d8;
+            --border-glass: rgba(0, 217, 255, 0.25);
+        }
+
+        body.light-mode {
+            --bg-deep: #f5f7ff;
+            --card-surface: rgba(255, 255, 255, 0.9);
+            --neon-cyan: #0099cc;
+            --neon-emerald: #00aa44;
+            --neon-rose: #dd0055;
+            --neon-amber: #ff8800;
+            --neon-purple: #8800ff;
+            --neon-gold: #cc8800;
+            --text-primary: #1a2550;
+            --text-secondary: #556688;
+            --border-glass: rgba(0, 153, 204, 0.25);
         }
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: #080b1e;
-            color: var(--text-main);
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* 🌟 EXACT MATCHING NAVBAR */
@@ -36,7 +53,7 @@
             background: rgba(10, 14, 39, 0.92);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1.5px solid var(--border-color);
+            border-bottom: 1.5px solid var(--border-glass);
             padding: 14px 40px;
             display: flex;
             justify-content: space-between;
@@ -48,47 +65,97 @@
         }
         .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .logo-icon { 
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green)); 
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
             color: #030712; width: 38px; height: 38px; border-radius: 10px; 
             display: flex; align-items: center; justify-content: center; 
             font-weight: 900; font-size: 19px; 
             box-shadow: 0 0 15px rgba(0,217,255,0.6); 
         }
-        .logo-text { font-weight: 900; font-size: 18px; color: var(--text-main); letter-spacing: 0.8px; }
-        .logo-text span { display: block; font-size: 9.5px; color: var(--accent-blue); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+        .logo-text { font-weight: 900; font-size: 18px; color: var(--text-primary); letter-spacing: 0.8px; }
+        .logo-text span { display: block; font-size: 9.5px; color: var(--neon-cyan); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
 
         .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; align-items: center; }
         .nav-links a { 
-            color: var(--text-muted); text-decoration: none; font-size: 13.5px; font-weight: 700; 
+            color: var(--text-secondary); text-decoration: none; font-size: 13.5px; font-weight: 700; 
             padding: 8px 16px; border-radius: 10px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .nav-links a:hover { color: var(--accent-blue); background: rgba(0, 217, 255, 0.08); }
+        .nav-links a:hover { color: var(--neon-cyan); background: rgba(0, 217, 255, 0.08); }
         .nav-links a.active { 
-            color: #030712; background: linear-gradient(135deg, var(--accent-blue), var(--accent-green)); 
+            color: #030712; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
             box-shadow: 0 0 15px rgba(0, 217, 255, 0.5); font-weight: 800; 
         }
 
-        .container { max-width: 1300px; margin: 45px auto; padding: 0 20px; }
+        .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
+
+        /* HEADER BAR (Back Button + Page Title + Theme Toggle) */
+        .header-bar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 30px; 
+            padding: 18px 30px; 
+            border-radius: 18px;
+            background: var(--card-surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
+
+        .btn-back {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--neon-cyan);
+            border: 1.5px solid var(--neon-cyan);
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-back:hover {
+            background: var(--neon-cyan);
+            color: #030712;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+        }
+
+        .btn-theme-toggle {
+            background: rgba(181, 55, 242, 0.15);
+            color: var(--neon-purple);
+            border: 1.5px solid var(--neon-purple); 
+            padding: 10px 18px;
+            border-radius: 10px; 
+            font-weight: 700; 
+            font-size: 13px;
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .btn-theme-toggle:hover { 
+            background: var(--neon-purple);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(181, 55, 242, 0.5);
+        }
 
         /* HERO SECTION */
         .about-hero {
             position: relative;
-            background: linear-gradient(135deg, #030712 0%, #081126 25%, #05192d 50%, #061021 75%, #030712 100%);
-            background-size: 400% 400%;
-            animation: gradientMeshMove 12s ease infinite;
-            border: 1.5px solid rgba(0, 217, 255, 0.4);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.12), rgba(181, 55, 242, 0.12)), var(--card-surface);
+            border: 1.5px solid var(--border-glass);
             border-radius: 30px;
-            padding: 95px 50px;
+            padding: 85px 50px;
             text-align: center;
             margin-bottom: 45px;
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-        }
-
-        @keyframes gradientMeshMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            backdrop-filter: blur(20px);
         }
 
         .hero-wave-light {
@@ -105,202 +172,304 @@
 
         .dynamic-hero-content { position: relative; z-index: 2; }
 
-        .about-hero h1 { font-size: 46px; font-weight: 900; margin-bottom: 20px; color: var(--text-main); }
-        .about-hero h1 span { color: var(--accent-blue); text-shadow: 0 0 25px rgba(0,217,255,0.6); }
-        .about-hero p { color: var(--text-muted); font-size: 16.5px; max-width: 880px; margin: 0 auto; line-height: 1.85; }
+        .about-hero h1 { font-size: 42px; font-weight: 900; margin-bottom: 20px; color: var(--text-primary); text-transform: uppercase; }
+        .about-hero h1 span { color: var(--neon-cyan); text-shadow: 0 0 25px rgba(0,217,255,0.6); }
+        .about-hero p { color: var(--text-secondary); font-size: 16.5px; max-width: 880px; margin: 0 auto; line-height: 1.85; font-weight: 600; }
         
         .hero-badge {
             display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(0, 217, 255, 0.15); color: var(--accent-blue);
-            border: 1px solid rgba(0, 217, 255, 0.5); padding: 9px 20px;
+            background: rgba(0, 217, 255, 0.15); color: var(--neon-cyan);
+            border: 1px solid var(--border-glass); padding: 9px 20px;
             border-radius: 30px; font-size: 13px; font-weight: 800; text-transform: uppercase;
             letter-spacing: 1.5px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(0,217,255,0.3);
         }
 
         /* DETAILED PROJECT DESCRIPTION SECTION */
         .project-description-box {
-            background: rgba(13, 18, 35, 0.85);
-            border: 1.5px solid var(--border-color);
+            background: var(--card-surface);
+            border: 1.5px solid var(--border-glass);
             border-radius: 24px;
             padding: 50px;
             margin-bottom: 45px;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
         }
         .project-description-box h3 {
             font-size: 24px;
             font-weight: 900;
-            color: var(--accent-blue);
+            color: var(--neon-cyan);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1.5px solid var(--border-color);
+            border-bottom: 1.5px solid var(--border-glass);
             padding-bottom: 15px;
         }
         .project-description-content p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 15px;
             line-height: 1.85;
             margin-bottom: 20px;
-            font-weight: 500;
+            font-weight: 600;
         }
         .project-description-content h4 {
-            color: var(--text-main);
+            color: var(--text-primary);
             font-size: 18px;
             font-weight: 800;
             margin-top: 30px;
             margin-bottom: 12px;
         }
 
-        /* ELITE CRICKET SHOWCASE */
+        /* ELITE SHOWCASE CARDS */
         .elite-cricket-showcase {
             max-width: 1300px; margin: 0 auto 45px auto;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(0, 255, 136, 0.08));
-            border: 1.5px solid var(--border-color); border-radius: 28px; padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(0, 255, 136, 0.08)), var(--card-surface);
+            border: 1.5px solid var(--border-glass); border-radius: 28px; padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
         }
         .elite-showcase-title {
             text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 12px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green), var(--accent-gold));
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald), var(--neon-gold));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase;
         }
-        .elite-showcase-subtitle { text-align: center; color: var(--text-muted); font-size: 14.5px; max-width: 700px; margin: 0 auto 35px auto; }
+        .elite-showcase-subtitle { text-align: center; color: var(--text-secondary); font-size: 14.5px; max-width: 700px; margin: 0 auto 35px auto; font-weight: 600; }
         .elite-showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         @media(max-width: 900px) { .elite-showcase-grid { grid-template-columns: 1fr; } }
 
         .elite-showcase-card {
-            background: rgba(13, 18, 35, 0.9); border: 1.5px solid var(--border-color);
+            background: rgba(13, 18, 35, 0.9); border: 1.5px solid var(--border-glass);
             border-radius: 20px; padding: 35px 25px; text-align: center; transition: all 0.3s ease;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        .elite-showcase-card:hover { transform: translateY(-6px); border-color: var(--accent-blue); box-shadow: 0 15px 35px rgba(0,217,255,0.25); }
+        .elite-showcase-card:hover { transform: translateY(-6px); border-color: var(--neon-cyan); box-shadow: 0 15px 35px rgba(0,217,255,0.25); }
         .elite-icon-gem {
             width: 75px; height: 75px; background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 255, 136, 0.2));
-            border: 2px solid var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 30px; color: var(--accent-blue); margin: 0 auto 20px auto; box-shadow: 0 0 20px rgba(0,217,255,0.3);
+            border: 2px solid var(--neon-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: var(--neon-cyan); margin: 0 auto 20px auto; box-shadow: 0 0 20px rgba(0,217,255,0.3);
         }
-        .elite-card-body h4 { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
-        .elite-card-body p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px; }
+        .elite-card-body h4 { font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .elite-card-body p { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 25px; font-weight: 600; line-height: 1.6; }
         .elite-badge-tag {
-            display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 255, 136, 0.15);
-            color: var(--accent-green); border: 1px solid rgba(0, 255, 136, 0.4); padding: 6px 14px;
-            border-radius: 20px; font-size: 11.5px; font-weight: 800; text-transform: uppercase;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: rgba(0, 255, 136, 0.15);
+            color: var(--neon-emerald); border: 1px solid rgba(0, 255, 136, 0.4); padding: 8px 16px;
+            border-radius: 20px; font-size: 11.5px; font-weight: 800; text-transform: uppercase; margin: 0 auto;
         }
 
+        /* 🌟 HOVER ANIMATION ADDED TO DOC CARDS */
         .docs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px; }
         @media(max-width: 900px) { .docs-grid { grid-template-columns: 1fr; } }
 
         .doc-card {
-            background: rgba(13, 18, 35, 0.85); border: 1.5px solid var(--border-color);
-            border-radius: 24px; padding: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+            background: var(--card-surface); border: 1.5px solid var(--border-glass);
+            border-radius: 24px; padding: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .doc-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; color: var(--text-main); }
-        .doc-card h3 i { background: rgba(0, 217, 255, 0.12); padding: 12px; border-radius: 14px; border: 1px solid var(--border-color); color: var(--accent-blue); }
+        .doc-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 25px 50px rgba(0, 217, 255, 0.3);
+        }
+        .doc-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border-glass); padding-bottom: 16px; color: var(--text-primary); }
+        .doc-card h3 i { background: rgba(0, 217, 255, 0.12); padding: 12px; border-radius: 14px; border: 1px solid var(--border-glass); color: var(--neon-cyan); }
         
         .feature-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; }
-        .feature-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 14.5px; color: var(--text-muted); line-height: 1.65; }
-        .feature-list li i { color: var(--accent-green); margin-top: 4px; font-size: 16px; }
-        .feature-list li strong { color: var(--text-main); }
+        .feature-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 14.5px; color: var(--text-secondary); line-height: 1.65; font-weight: 600; }
+        .feature-list li i { color: var(--neon-emerald); margin-top: 4px; font-size: 16px; }
+        .feature-list li strong { color: var(--text-primary); }
 
         .tech-stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
         .tech-item {
-            background: rgba(3, 7, 18, 0.85); border: 1.5px solid var(--border-color); border-radius: 16px; padding: 18px 12px; text-align: center; transition: 0.3s;
+            background: rgba(3, 7, 18, 0.7); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 18px 12px; text-align: center; transition: 0.3s;
         }
-        .tech-item:hover { border-color: var(--accent-blue); background: rgba(0, 217, 255, 0.08); transform: translateY(-3px); }
-        .tech-item i { font-size: 26px; color: var(--accent-blue); margin-bottom: 10px; display: block; }
-        .tech-item span { font-size: 13px; font-weight: 800; color: var(--text-main); display: block; }
-        .tech-item p { font-size: 11px; color: var(--text-muted); margin: 4px 0 0 0; }
+        .tech-item:hover { border-color: var(--neon-cyan); background: rgba(0, 217, 255, 0.08); transform: translateY(-3px); }
+        .tech-item i { font-size: 26px; color: var(--neon-cyan); margin-bottom: 10px; display: block; }
+        .tech-item span { font-size: 13px; font-weight: 800; color: var(--text-primary); display: block; }
+        .tech-item p { font-size: 11px; color: var(--text-secondary); margin: 4px 0 0 0; font-weight: 600; }
 
         .workflow-box {
-            background: rgba(13, 18, 35, 0.85); border: 1.5px solid var(--border-color); border-radius: 24px; padding: 45px; margin-bottom: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 24px; padding: 45px; margin-bottom: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.4); backdrop-filter: blur(15px);
         }
         .workflow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         @media(max-width: 1024px) { .workflow-steps { grid-template-columns: repeat(2, 1fr); } }
         @media(max-width: 600px) { .workflow-steps { grid-template-columns: 1fr; } }
 
-        .step-card { background: rgba(3, 7, 18, 0.8); border: 1.5px solid var(--border-color); border-radius: 18px; padding: 25px; text-align: center; }
-        .step-num { width: 38px; height: 38px; background: var(--accent-blue); color: #030712; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; font-size: 15px; box-shadow: 0 0 15px rgba(0,217,255,0.6); }
-        .step-card h5 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
-        .step-card p { font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.55; }
+        /* 🌟 HOVER ANIMATION ADDED TO STEP CARDS */
+        .step-card { 
+            background: rgba(3, 7, 18, 0.7); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 25px; text-align: center; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .step-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--neon-cyan);
+            background: rgba(0, 217, 255, 0.05);
+            box-shadow: 0 15px 35px rgba(0, 217, 255, 0.25);
+        }
+        .step-num { width: 38px; height: 38px; background: var(--neon-cyan); color: #030712; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; font-size: 15px; box-shadow: 0 0 15px rgba(0,217,255,0.6); }
+        .step-card h5 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--text-primary); }
+        .step-card p { font-size: 12.5px; color: var(--text-secondary); margin: 0; line-height: 1.55; font-weight: 600; }
+
+        /* 🌟 NEW STUNNING SINGLE BANNER SECTION ADDED BEFORE VIDEOS */
+        .feature-highlight-banner {
+            max-width: 1300px;
+            margin: 0 auto 40px auto;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.12), rgba(0, 217, 255, 0.12)), var(--card-surface);
+            border: 2px solid var(--neon-emerald);
+            border-radius: 22px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 45px rgba(0, 255, 136, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+        }
+        .feature-highlight-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 55px rgba(0, 255, 136, 0.35);
+            border-color: var(--neon-cyan);
+        }
+        .feature-highlight-banner h3 {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--neon-emerald);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+        .feature-highlight-banner p {
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 600;
+        }
 
         .video-highlights-box {
-            background: rgba(13, 18, 35, 0.85); border: 1.5px solid var(--border-color); border-radius: 24px; padding: 45px; margin-bottom: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 24px; padding: 45px; margin-bottom: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.4); backdrop-filter: blur(15px);
         }
         .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 25px; }
         @media(max-width: 900px) { .video-grid { grid-template-columns: 1fr; } }
         
         .video-card-item { background: transparent; height: 380px; perspective: 1000px; cursor: pointer; }
         .video-card-flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
-        .video-card-item:hover .video-card-flip-inner { transform: rotateY(180deg); }
-        .v-card-front, .v-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 18px; overflow: hidden; border: 1.5px solid var(--border-color); background: rgba(13, 18, 35, 0.95); display: flex; flex-direction: column; }
-        .v-card-back { transform: rotateY(180deg); background: rgba(13, 18, 35, 0.98); align-items: center; justify-content: center; padding: 25px; color: var(--text-main); text-align: center; }
-        .v-card-back h5 { color: var(--accent-blue); font-weight: 800; margin-bottom: 10px; font-size: 16px; text-transform: uppercase; }
-        .v-card-back p { color: var(--text-muted); font-size: 13px; line-height: 1.5; margin: 0; }
-        .video-content-top { padding: 16px 14px; background: rgba(13, 18, 35, 0.98); border-bottom: 1.5px solid var(--border-color); text-align: left; }
-        .video-content-top h4 { margin: 0 0 4px 0; font-size: 15px; font-weight: 800; color: var(--accent-blue); }
-        .video-content-top p { margin: 0; font-size: 12px; color: var(--text-muted); }
+        .video-card-item:hover .video-card-flip-inner { transform: rotateY(360deg); }
+        
+        .v-card-front, .v-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 18px; overflow: hidden; border: 1.5px solid var(--border-glass); background: rgba(13, 18, 35, 0.95); display: flex; flex-direction: column; }
+        .v-card-back { transform: rotateY(180deg); background: rgba(13, 18, 35, 0.98); align-items: center; justify-content: center; padding: 25px; color: var(--text-primary); text-align: center; }
+        .v-card-back h5 { color: var(--neon-cyan); font-weight: 800; margin-bottom: 10px; font-size: 16px; text-transform: uppercase; }
+        .v-card-back p { color: var(--text-secondary); font-size: 13px; line-height: 1.5; margin: 0; font-weight: 600; }
+        .video-content-top { padding: 16px 14px; background: rgba(13, 18, 35, 0.98); border-bottom: 1.5px solid var(--border-glass); text-align: left; }
+        .video-content-top h4 { margin: 0 0 4px 0; font-size: 15px; font-weight: 800; color: var(--neon-cyan); }
+        .video-content-top p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 600; }
         .video-thumb-wrapper { position: relative; width: 100%; height: 250px; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-grow: 1; }
         .video-thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .play-btn-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 217, 255, 0.9); color: #030712; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 15px rgba(0,217,255,0.6); }
 
         .video-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.9); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; }
-        .video-modal-content { background: #0d121e; border: 1.5px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 800px; padding: 25px; position: relative; text-align: center; }
-        .close-modal { position: absolute; top: 15px; right: 20px; color: var(--text-muted); font-size: 24px; font-weight: 800; cursor: pointer; }
+        .video-modal-content { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 20px; width: 100%; max-width: 800px; padding: 25px; position: relative; text-align: center; }
+        .close-modal { position: absolute; top: 15px; right: 20px; color: var(--text-secondary); font-size: 24px; font-weight: 800; cursor: pointer; }
 
         /* PRO-SHOWCASE GALLERY WITH 360° HOVER ROTATION */
-        .pro-showcase-gallery-section { max-width: 1300px; margin: 0 auto 40px auto; background: rgba(13, 18, 35, 0.6); backdrop-filter: blur(15px); border: 1.5px solid var(--border-color); border-radius: 24px; padding: 40px; }
+        .pro-showcase-gallery-section { max-width: 1300px; margin: 0 auto 40px auto; background: var(--card-surface); backdrop-filter: blur(15px); border: 1.5px solid var(--border-glass); border-radius: 24px; padding: 40px; box-shadow: 0 20px 45px rgba(0,0,0,0.4); }
         .pro-showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         @media(max-width: 768px) { .pro-showcase-grid { grid-template-columns: 1fr; } }
-        .pro-showcase-box { background: rgba(13, 18, 35, 0.9); border: 1.5px solid var(--border-color); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .pro-showcase-box:hover { transform: translateY(-6px); border-color: var(--accent-blue); box-shadow: 0 15px 35px rgba(0,217,255,0.25); }
-        .pro-box-header { padding: 16px; text-align: center; background: rgba(13, 18, 35, 0.98); border-bottom: 1.5px solid var(--border-color); }
-        .pro-box-header h4 { margin: 0 0 5px 0; font-size: 15px; font-weight: 800; color: var(--accent-blue); text-transform: uppercase; }
-        .pro-box-header p { margin: 0; font-size: 12px; color: var(--text-muted); }
+        .pro-showcase-box { background: rgba(13, 18, 35, 0.9); border: 1.5px solid var(--border-glass); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+        .pro-showcase-box:hover { transform: translateY(-6px); border-color: var(--neon-cyan); box-shadow: 0 15px 35px rgba(0,217,255,0.25); }
+        .pro-box-header { padding: 16px; text-align: center; background: rgba(3, 7, 18, 0.95); border-bottom: 1.5px solid var(--border-glass); }
+        .pro-box-header h4 { margin: 0 0 5px 0; font-size: 15px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; }
+        .pro-box-header p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 600; }
         .pro-box-img-wrapper { width: 100%; height: 280px; overflow: hidden; background: #000; }
         .pro-box-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .pro-showcase-box:hover .pro-box-img-wrapper img { transform: rotate(360deg) scale(1.05); }
 
-        /* 🌟 EXACT GRAND CYBER FOOTER STYLING (MATCHING ABOUT PAGE WIDTH 1300px) */
-        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--accent-blue); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1300px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-color); padding-bottom: 40px; margin-bottom: 25px; }
+        /* ELITE DUO SECTION */
+        .elite-duo-section { max-width: 1300px; margin: 0 auto 40px auto; }
+        .elite-duo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        @media(max-width: 992px) { .elite-duo-grid { grid-template-columns: 1fr; } }
+        
+        .elite-duo-card {
+            background: linear-gradient(135deg, rgba(181, 55, 242, 0.1), rgba(0, 217, 255, 0.1)), var(--card-surface);
+            border: 1.5px solid var(--neon-purple);
+            border-radius: 18px; padding: 35px 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(181, 55, 242, 0.2);
+            display: flex; gap: 20px; align-items: center; transition: all 0.3s ease;
+        }
+        .elite-duo-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.3);
+        }
+        .elite-duo-icon {
+            min-width: 65px; height: 65px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            color: #030712; font-size: 26px; font-weight: 900;
+            box-shadow: 0 0 20px rgba(181, 55, 242, 0.5); flex-shrink: 0;
+        }
+        .elite-duo-content h3 {
+            font-size: 18px; font-weight: 900; color: var(--text-primary);
+            text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
+        }
+        .elite-duo-content p {
+            font-size: 13.5px; color: var(--text-secondary);
+            line-height: 1.6; margin: 0; font-weight: 600;
+        }
+
+        /* 🌟 GRAND CYBER FOOTER STYLING (Tournament Match Style) */
+        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
-        .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-main); letter-spacing: 1.5px; }
-        .footer-brand h3 span { color: var(--accent-blue); text-shadow: 0 0 10px rgba(0,217,255,0.5); }
-        .footer-brand p { margin: 0 0 20px 0; font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
-        
+        .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; border-left: none !important; padding-left: 0 !important; }
+        .footer-brand h3 span { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,217,255,0.5); }
+        .footer-brand p { margin: 0 0 20px 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
         .footer-socials { display: flex; gap: 10px; flex-wrap: wrap; }
         @media(max-width: 650px) { .footer-socials { justify-content: center; } }
-        .footer-socials a { width: 38px; height: 38px; border-radius: 50%; background: rgba(0, 217, 255, 0.1); border: 1.5px solid var(--border-color); color: var(--accent-blue); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; font-size: 14px; }
-        .footer-socials a:hover { background: var(--accent-blue); color: #030712; transform: translateY(-3px); box-shadow: 0 0 15px rgba(0,217,255,0.6); }
-
-        .footer-links h4, .footer-newsletter h4 { margin: 0 0 18px 0; font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--accent-blue); letter-spacing: 1px; }
+        .footer-socials a { width: 38px; height: 38px; border-radius: 50%; background: rgba(0, 217, 255, 0.1); border: 1.5px solid var(--border-glass); color: var(--neon-cyan); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; font-size: 14px; }
+        .footer-socials a:hover { background: var(--neon-cyan); color: #030712; transform: translateY(-3px); box-shadow: 0 0 15px rgba(0,217,255,0.6); }
+        .footer-links h4, .footer-newsletter h4 { margin: 0 0 18px 0; font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--neon-cyan); letter-spacing: 1px; }
         .footer-links ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; }
-        .footer-links a:hover { color: var(--accent-blue); transform: translateX(4px); }
-        .footer-links a::before { content: '>'; color: #ffffff; font-weight: 800; font-size: 13px; margin-right: 4px; }
-
-        .footer-newsletter p { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.6; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; }
+        .footer-links a:hover { color: var(--neon-cyan); transform: translateX(4px); }
+        .footer-newsletter p { font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.6; }
         .footer-newsletter form { display: flex; gap: 8px; }
-        .footer-newsletter input { flex: 1; background: rgba(3, 7, 18, 0.7); border: 1.5px solid var(--border-color); border-radius: 10px; padding: 10px 14px; color: var(--text-main); font-size: 12.5px; outline: none; }
-        .footer-newsletter input:focus { border-color: var(--accent-blue); box-shadow: 0 0 10px rgba(0,217,255,0.3); }
-        .footer-newsletter button { background: linear-gradient(135deg, var(--accent-blue), var(--accent-green)); color: #030712; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 800; font-size: 12.5px; cursor: pointer; transition: 0.3s; }
-
-        .footer-bottom-bar { max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--text-muted); font-size: 12px; letter-spacing: 0.5px; }
+        .footer-newsletter input { flex: 1; background: rgba(3, 7, 18, 0.7); border: 1.5px solid var(--border-glass); border-radius: 10px; padding: 10px 14px; color: var(--text-primary); font-size: 12.5px; outline: none; }
+        .footer-newsletter input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,217,255,0.3); }
+        .footer-newsletter button { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 800; font-size: 12.5px; cursor: pointer; transition: 0.3s; }
+        .footer-bottom-bar { max-width: 1350px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color: var(--text-secondary); font-size: 12px; letter-spacing: 0.5px; }
         @media(max-width: 768px) { .footer-bottom-bar { flex-direction: column; text-align: center; } }
         .footer-bottom-links { display: flex; gap: 20px; }
-        .footer-bottom-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-        .footer-bottom-links a:hover { color: var(--accent-blue); }
+        .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .footer-bottom-links a:hover { color: var(--neon-cyan); }
     </style>
 </head>
 <body>
 
-    <!-- 🌟 NAVBAR INCLUDE -->
     <jsp:include page="navbar.jsp" />
 
     <div class="container">
-        <!-- HERO SECTION -->
+        <!-- HEADER BAR (Back Button + Page Title + Theme Toggle) -->
+        <div class="header-bar">
+            <div class="header-left">
+                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            </div>
+            <div>
+                <h2 style="font-size: 20px; font-weight: 900; margin: 0; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1.5px;">About ProMatch</h2>
+            </div>
+            <div class="header-right">
+                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+            </div>
+        </div>
+
         <div class="about-hero">
             <div class="hero-wave-light"></div>
             <div class="dynamic-hero-content">
@@ -310,7 +479,6 @@
             </div>
         </div>
 
-        <!-- DETAILED PROJECT DESCRIPTION SECTION (600+ WORDS) -->
         <div class="project-description-box">
             <h3><i class="fa-solid fa-circle-info"></i> Comprehensive Overview & System Architecture</h3>
             <div class="project-description-content">
@@ -326,51 +494,49 @@
             </div>
         </div>
 
-        <!-- ELITE CRICKET SHOWCASE -->
         <div class="elite-cricket-showcase">
-            <h3 class="elite-showcase-title">🏆 Elite Cricket Championship Experience</h3>
-            <p class="elite-showcase-subtitle">Dive into professional cricket management, stunning stadium arenas, and high-voltage match action built into our platform.</p>
+            <h3 class="elite-showcase-title">⚡ Core Architecture Highlights</h3>
+            <p class="elite-showcase-subtitle">Discover the high-performance modules and secure engines powering the ProMatch Arena platform.</p>
             
             <div class="elite-showcase-grid">
                 <div class="elite-showcase-card">
-                    <div class="elite-icon-gem"><i class="fa-solid fa-stadium"></i></div>
-                    <div class="elite-card-body">
-                        <div>
-                            <h4>Floodlit Arenas</h4>
-                            <p>World-class stadium lighting and venue setups meticulously organized for grand tournament spectacles.</p>
+                    <div>
+                        <div class="elite-icon-gem"><i class="fa-solid fa-microchip"></i></div>
+                        <div class="elite-card-body">
+                            <h4>Spring Boot Core</h4>
+                            <p>High-throughput enterprise REST services designed to handle extreme concurrent traffic without latency.</p>
                         </div>
-                        <span class="elite-badge-tag"><i class="fa-solid fa-check"></i> Pro Venue</span>
                     </div>
+                    <span class="elite-badge-tag"><i class="fa-solid fa-bolt"></i> Ultra Fast</span>
                 </div>
 
                 <div class="elite-showcase-card">
-                    <div class="elite-icon-gem"><i class="fa-solid fa-bolt"></i></div>
-                    <div class="elite-card-body">
-                        <div>
-                            <h4>High-Voltage Action</h4>
-                            <p>Real-time match ball tracking, nail-biting finishes, and dynamic scorecard management.</p>
+                    <div>
+                        <div class="elite-icon-gem"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="elite-card-body">
+                            <h4>Secure Authorization</h4>
+                            <p>Advanced role-based access control protecting administrative commands and private user dashboards.</p>
                         </div>
-                        <span class="elite-badge-tag"><i class="fa-solid fa-check"></i> Live Scoring</span>
                     </div>
+                    <span class="elite-badge-tag"><i class="fa-solid fa-lock"></i> 100% Secure</span>
                 </div>
 
                 <div class="elite-showcase-card">
-                    <div class="elite-icon-gem"><i class="fa-solid fa-trophy"></i></div>
-                    <div class="elite-card-body">
-                        <div>
-                            <h4>Championship Glory</h4>
-                            <p>The ultimate reward for discipline, teamwork, and tactical masterclasses on the field.</p>
+                    <div>
+                        <div class="elite-icon-gem"><i class="fa-solid fa-credit-card"></i></div>
+                        <div class="elite-card-body">
+                            <h4>Razorpay Integration</h4>
+                            <p>Seamless, encrypted payment gateways ensuring verified financial transactions for tournament entries.</p>
                         </div>
-                        <span class="elite-badge-tag"><i class="fa-solid fa-check"></i> Grand Prize</span>
                     </div>
+                    <span class="elite-badge-tag"><i class="fa-solid fa-check-circle"></i> Instant Checkout</span>
                 </div>
             </div>
         </div>
 
-        <!-- ARCHITECTURE BOX -->
         <div class="workflow-box">
             <h3><i class="fa-solid fa-layer-group"></i> Enterprise Architecture & Tech Stack</h3>
-            <p style="color: var(--text-muted); font-size: 14.5px; margin-bottom: 25px;">Built on robust modern frameworks to guarantee high concurrency, secure session persistence, and zero-latency UI rendering.</p>
+            <p style="color: var(--text-secondary); font-size: 14.5px; margin-bottom: 25px; font-weight: 600;">Built on robust modern frameworks to guarantee high concurrency, secure session persistence, and zero-latency UI rendering.</p>
             
             <div class="tech-stack-grid">
                 <div class="tech-item"><i class="fa-solid fa-leaf"></i><span>Spring Boot</span><p>Core Backend & REST Services</p></div>
@@ -382,7 +548,6 @@
             </div>
         </div>
 
-        <!-- DOCS GRID -->
         <div class="docs-grid">
             <div class="doc-card">
                 <h3><i class="fa-solid fa-clipboard-list"></i> Core System Modules</h3>
@@ -407,19 +572,40 @@
         <div class="workflow-box">
             <h3><i class="fa-solid fa-route"></i> Tournament Registration & Match Workflow</h3>
             <div class="workflow-steps" style="margin-top: 22px;">
-                <div class="step-card"><div class="step-num">1</div><h5>User Authentication</h5><p>Secure login with role assignment (ADMIN vs USER) via Spring Security.</p></div>
-                <div class="step-card"><div class="step-num">2</div><h5>Team & Squad Entry</h5><p>Register tournament teams and add active player rosters with specs.</p></div>
-                <div class="step-card"><div class="step-num">3</div><h5>Payment Gateway</h5><p>Smooth integration with Razorpay for verified entry fee settlements.</p></div>
-                <div class="step-card"><div class="step-num">4</div><h5>Live Analytics</h5><p>Track fixture scorecards, points tables, and team standings in real-time.</p></div>
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h5>User Authentication</h5>
+                    <p>Secure login with role assignment (ADMIN vs USER) via Spring Security.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h5>Team & Squad Entry</h5>
+                    <p>Register tournament teams and add active player rosters with specs.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h5>Payment Gateway</h5>
+                    <p>Smooth integration with Razorpay for verified entry fee settlements.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h5>Live Analytics</h5>
+                    <p>Track fixture scorecards, points tables, and team standings in real-time.</p>
+                </div>
             </div>
         </div>
 
-        <!-- VIDEO HIGHLIGHTS SECTION -->
+        <!-- 🌟 NEW FEATURE HIGHLIGHT BANNER BEFORE VIDEOS -->
+        <div class="feature-highlight-banner">
+            <h3>🏆 Elite Tournament Experience & Live Streaming</h3>
+            <p>Immerse yourself in real-time match replays, tactical innings breakdowns, and championship celebrations designed with ultra-low streaming latency.</p>
+        </div>
+
         <div class="video-highlights-box">
             <h3 style="font-size: 20px; font-weight: 800; margin: 0 0 8px 0; display: flex; align-items: center; gap: 12px;">
-                <i class="fa-solid fa-video" style="color: var(--accent-blue);"></i> Live Cricket Match Highlights & Replays
+                <i class="fa-solid fa-video" style="color: var(--neon-cyan);"></i> Live Cricket Match Highlights & Replays
             </h3>
-            <p style="color: var(--text-muted); font-size: 14.5px; margin: 0 0 25px 0;">Experience the raw energy of professional tournament clashes. Hover to flip cards or click to stream high-definition match highlights instantly.</p>
+            <p style="color: var(--text-secondary); font-size: 14.5px; margin: 0 0 25px 0; font-weight: 600;">Experience the raw energy of professional tournament clashes. Hover to flip cards or click to stream high-definition match highlights instantly.</p>
 
             <div class="video-grid">
                 <div class="video-card-item" onclick="openVideo('https://www.youtube.com/embed/_TGTwnpqorI')">
@@ -481,10 +667,29 @@
             </div>
         </div>
 
+        <div class="elite-duo-section">
+            <div class="elite-duo-grid">
+                <div class="elite-duo-card">
+                    <div class="elite-duo-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="elite-duo-content">
+                        <h3>Dynamic NRR Tracking</h3>
+                        <p>Zero delay algorithm updates compute net run rates instantly across all active fixtures.</p>
+                    </div>
+                </div>
+                <div class="elite-duo-card">
+                    <div class="elite-duo-icon"><i class="fa-solid fa-shield-cat"></i></div>
+                    <div class="elite-duo-content">
+                        <h3>Secure Squad Management</h3>
+                        <p>Verified player authentications and robust role management built for professional leagues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="videoModal" class="video-modal">
             <div class="video-modal-content">
                 <span class="close-modal" onclick="closeVideo()">&times;</span>
-                <h4 style="color: var(--accent-blue); margin-bottom: 15px; font-weight: 800;">ProMatch Arena Live Stream</h4>
+                <h4 style="color: var(--neon-cyan); margin-bottom: 15px; font-weight: 800;">ProMatch Arena Live Stream</h4>
                 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
                     <iframe id="videoIframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe>
                 </div>
@@ -492,7 +697,7 @@
         </div>
 
         <div class="pro-showcase-gallery-section">
-            <h3 style="text-align:center; font-size: 22px; font-weight: 900; margin-bottom: 25px; color: var(--accent-blue); text-transform: uppercase;">🏟️ Pro Tournament Showcase</h3>
+            <h3 style="text-align:center; font-size: 22px; font-weight: 900; margin-bottom: 25px; color: var(--neon-cyan); text-transform: uppercase;">🏟️ Pro Tournament Showcase</h3>
             <div class="pro-showcase-grid">
                 <div class="pro-showcase-box">
                     <div class="pro-box-header">
@@ -517,57 +722,10 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 🌟 EXACT GRAND CYBER FOOTER SECTION -->
-    <footer class="grand-footer-section">
-        <div class="grand-footer-content">
-            <div class="footer-brand">
-                <h3>ProMatch <span>Arena</span></h3>
-                <p>The ultimate enterprise ecosystem for professional cricket tournaments, live points table telemetry, and seamless match orchestration.</p>
-                <div class="footer-socials">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/tournaments">Tournaments</a></li>
-                    <li><a href="/pointsTable">Points Table</a></li>
-                    <li><a href="/matches">Match Fixtures</a></li>
-                    <li><a href="/teams">Team Rosters</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Ecosystem</h4>
-                <ul>
-                    <li><a href="/about">About Architecture</a></li>
-                    <li><a href="/contact">Support Center</a></li>
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-newsletter">
-                <h4>Newsletter</h4>
-                <p>Subscribe to receive live tournament updates, score alerts, and championship announcements.</p>
-                <form onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
-                    <input type="email" placeholder="Enter your email..." required>
-                    <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom-bar">
-            <p>&copy; 2026 ProMatch Arena. All Rights Reserved.</p>
-            <div class="footer-bottom-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Security</a>
-            </div>
-        </div>
-    </footer>
+        <!-- 🌟 FOOTER INCLUDE (Exact Tournament Match Footer Style) -->
+        <jsp:include page="footer.jsp" />
+    </div>
 
     <script>
         function openVideo(videoUrl) {
@@ -577,6 +735,24 @@
         function closeVideo() {
             document.getElementById('videoIframe').src = '';
             document.getElementById('videoModal').style.display = 'none';
+        }
+
+        const bodyElement = document.body;
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        if (localStorage.getItem('matchTheme') === 'light') {
+            bodyElement.classList.add('light-mode');
+            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
+        }
+        function toggleTheme() {
+            if (bodyElement.classList.contains('light-mode')) {
+                bodyElement.classList.remove('light-mode');
+                localStorage.setItem('matchTheme', 'dark');
+                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
+            } else {
+                bodyElement.classList.add('light-mode');
+                localStorage.setItem('matchTheme', 'light');
+                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
+            }
         }
     </script>
 </body>

@@ -1,4 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<style>
+    /* Footer Newsletter Button & Input Alignment */
+    .footer-newsletter form { 
+        display: flex; 
+        gap: 8px; 
+        align-items: center; 
+    }
+    .footer-newsletter input { 
+        flex: 1; 
+        background: #030712; 
+        border: 1.5px solid var(--border-glass); 
+        border-radius: 10px; 
+        padding: 10px 14px; 
+        color: var(--text-primary); 
+        font-size: 12.5px; 
+        outline: none; 
+        height: 42px; 
+    }
+    .footer-newsletter button { 
+        background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
+        color: #030712; 
+        border: none; 
+        border-radius: 10px; 
+        padding: 0 16px; 
+        font-weight: 800; 
+        font-size: 12.5px; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        height: 42px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .footer-newsletter button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+    }
+
+    /* Footer Bottom Bar Alignment & Exact Text Size */
+    .footer-bottom-bar { 
+        max-width: 1350px; 
+        margin: 25px auto 0 auto; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        flex-wrap: wrap; 
+        gap: 15px; 
+        color: var(--text-primary); 
+        font-size: 11.5px; 
+        letter-spacing: 0.5px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(0, 217, 255, 0.15);
+    }
+    .footer-bottom-bar p { 
+        margin: 0; 
+        font-size: 11.5px; 
+        opacity: 0.95;
+    }
+    .footer-bottom-links { 
+        display: flex; 
+        gap: 20px; 
+    }
+    .footer-bottom-links a { 
+        color: var(--neon-cyan); 
+        text-decoration: none; 
+        font-size: 11.5px; 
+        font-weight: 600;
+        transition: color 0.2s; 
+    }
+    .footer-bottom-links a:hover { 
+        color: #ffffff; 
+        text-decoration: underline; 
+    }
+</style>
+
 <footer class="grand-footer-section">
     <div class="grand-footer-content">
         <div class="footer-brand">
@@ -17,7 +92,7 @@
         <div class="footer-links">
             <h4>Quick Navigation</h4>
             <ul>
-                <li><a href="/home"><i class="fa-solid fa-angle-right"></i> Home Dashboard</a></li>
+                <li><a href="/home"><i class="fa-solid fa-angle-right"></i> Home</a></li>
                 <li><a href="/teams"><i class="fa-solid fa-angle-right"></i> View Teams</a></li>
                 <li><a href="/register-team"><i class="fa-solid fa-angle-right"></i> Register Team</a></li>
                 <li><a href="/matches"><i class="fa-solid fa-angle-right"></i> Live Matches</a></li>
@@ -49,7 +124,7 @@
         <div class="footer-bottom-links">
             <a href="/privacy-policy">Privacy Policy</a>
             <a href="/terms-and-conditions">Terms & Conditions</a>
-            <a href="/contact">Support</a>
+            <a href="/contact">Help & Support</a>
         </div>
     </div>
 </footer>

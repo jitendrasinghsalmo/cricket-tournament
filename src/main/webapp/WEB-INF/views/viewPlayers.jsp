@@ -54,7 +54,7 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
         
-        /* 🌟 STICKY NAVBAR STYLING */
+        /* 🌟 STICKY CLEAN NAVBAR STYLING (No Button Effects) */
         nav {
             background: #0d1222;
             border-bottom: 1.5px solid var(--border-glass);
@@ -78,30 +78,28 @@
         .logo-text { font-weight: 900; font-size: 18px; color: var(--text-primary); letter-spacing: 0.8px; }
         .logo-text span { display: block; font-size: 9.5px; color: var(--neon-cyan); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
 
-        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; align-items: center; }
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; align-items: center; }
         .nav-links a { 
             color: var(--text-secondary); text-decoration: none; font-size: 13.5px; font-weight: 700; 
-            padding: 8px 16px; border-radius: 10px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 4px 0; transition: color 0.2s ease; text-transform: uppercase; letter-spacing: 0.5px;
+            background: none !important; border: none !important; box-shadow: none !important; border-radius: 0 !important;
         }
-        .nav-links a:hover { color: var(--neon-cyan); background: rgba(0, 217, 255, 0.08); }
-        .nav-links a.active { 
-            color: #030712; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
-            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5); font-weight: 800; 
-        }
+        .nav-links a:hover { color: var(--neon-cyan) !important; background: none !important; box-shadow: none !important; }
+        .nav-links a.active { color: var(--neon-cyan) !important; background: none !important; box-shadow: none !important; border: none !important; }
 
-        .main-content-wrap { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        .main-content-wrap { max-width: 1400px; margin: 40px auto; padding: 0 25px; }
         
         .header-bar { 
             display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 30px; padding: 18px 30px; border-radius: 18px;
+            margin-bottom: 40px; padding: 22px 35px; border-radius: 18px;
             background: var(--card-surface);
             border: 1.5px solid var(--border-glass);
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
         
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .header-right { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
 
         .btn-back {
             background: rgba(0, 217, 255, 0.1);
@@ -116,6 +114,7 @@
             align-items: center;
             gap: 6px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         .btn-back:hover {
             background: var(--neon-cyan);
@@ -209,12 +208,12 @@
         }
 
         .control-bar {
-            margin-bottom: 35px;
+            margin-bottom: 45px;
             display: flex; 
             justify-content: space-between; 
             align-items: center;
             background: var(--card-surface); 
-            padding: 14px 24px; 
+            padding: 16px 28px; 
             border-radius: 14px; 
             border: 1.5px solid var(--border-glass);
             flex-wrap: wrap;
@@ -247,38 +246,38 @@
         }
         .stats-badge span { color: var(--neon-gold); font-weight: 800; }
 
-        .team-stats-section { max-width: 1400px; margin: 40px auto; }
+        .team-stats-section { max-width: 1400px; margin: 55px auto; }
         .section-title {
             font-size: 18px; font-weight: 800; color: var(--text-primary);
             text-transform: uppercase; letter-spacing: 1.2px;
-            margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+            margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
         }
         .section-title::before { content: ''; width: 4px; height: 24px; background: linear-gradient(180deg, var(--neon-cyan), var(--neon-emerald)); border-radius: 2px; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
         @media(max-width: 1024px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(max-width: 768px) { .stats-grid { grid-template-columns: 1fr; } }
 
         .stat-box {
             background: var(--card-surface);
             border: 1.5px solid var(--border-glass); border-radius: 18px;
-            padding: 24px; text-align: center; transition: all 0.3s ease;
+            padding: 28px; text-align: center; transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .stat-box:hover { border-color: var(--neon-cyan); transform: translateY(-5px); }
         .stat-number { font-size: 32px; font-weight: 900; color: var(--neon-cyan); margin-bottom: 6px; }
         .stat-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
 
-        /* PLAYERS GRID */
+        /* PLAYERS GRID - Increased Gaping */
         .players-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 28px; 
+            gap: 35px; 
             max-width: 1400px; 
-            margin: 40px auto; 
+            margin: 45px auto; 
         }
-        @media(max-width: 1024px) { .players-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media(max-width: 768px) { .players-grid { grid-template-columns: 1fr; } }
+        @media(max-width: 1024px) { .players-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; } }
+        @media(max-width: 768px) { .players-grid { grid-template-columns: 1fr; gap: 20px; } }
         
         .player-card {
             background: linear-gradient(145deg, #0e1428 0%, #060917 100%);
@@ -291,7 +290,7 @@
             display: flex; 
             flex-direction: column; 
             justify-content: space-between;
-            padding: 26px;
+            padding: 30px;
         }
         
         .player-card::before {
@@ -314,7 +313,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .player-id-badge {
@@ -342,23 +341,23 @@
         }
 
         .player-name {
-            margin: 0 0 16px 0; 
+            margin: 0 0 20px 0; 
             font-size: 20px; 
             font-weight: 900; 
             color: var(--text-primary); 
             text-transform: uppercase; 
             letter-spacing: 0.8px;
             border-bottom: 1.5px dashed var(--border-glass);
-            padding-bottom: 12px;
+            padding-bottom: 14px;
         }
 
         .player-info-grid {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .player-info-item {
@@ -366,7 +365,7 @@
             align-items: center;
             justify-content: space-between;
             background: rgba(255, 255, 255, 0.02);
-            padding: 8px 12px;
+            padding: 10px 14px;
             border-radius: 10px;
             border: 1px solid rgba(30, 41, 75, 0.5);
         }
@@ -382,14 +381,14 @@
         .card-actions { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
+            gap: 14px; 
             margin-top: auto; 
         }
         
         .card-actions a {
             text-align: center; 
             text-decoration: none; 
-            padding: 11px; 
+            padding: 12px; 
             border-radius: 12px;
             font-size: 11.5px; 
             font-weight: 800; 
@@ -426,28 +425,28 @@
             transform: translateY(-2px);
         }
 
-        /* 🌟 EXTRA LARGE BOLD HIGHLIGHT SECTIONS STYLING */
+        /* EXTRA LARGE BOLD HIGHLIGHT SECTIONS STYLING - Increased Gaping */
         .highlight-sections-wrapper {
             max-width: 1400px;
-            margin: 50px auto;
+            margin: 60px auto;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 35px;
         }
 
         .hl-row {
             display: flex;
-            gap: 25px;
+            gap: 35px;
             width: 100%;
         }
-        @media(max-width: 900px) { .hl-row { flex-direction: column; } }
+        @media(max-width: 900px) { .hl-row { flex-direction: column; gap: 20px; } }
 
         /* BIG BOLD CARDS BASE */
         .hl-box-large {
             background: linear-gradient(145deg, var(--card-surface) 0%, #060917 100%);
             border: 1.5px solid var(--border-glass);
             border-radius: 24px;
-            padding: 35px 40px;
+            padding: 40px 45px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             display: flex;
             align-items: center;
@@ -496,23 +495,23 @@
             border: 1.5px solid var(--neon-cyan);
             border-left: 8px solid var(--neon-cyan);
             box-shadow: 0 20px 50px rgba(0, 217, 255, 0.18);
-            padding: 40px 45px;
+            padding: 45px 50px;
         }
 
-        /* 🌟 ULTIMATE MASTER HERO BANNER */
+        /* MASTER HERO BANNER */
         .master-hero-banner {
             width: 100%;
             background: linear-gradient(135deg, rgba(14, 20, 40, 0.98) 0%, rgba(10, 14, 39, 0.99) 100%);
             border: 2px solid var(--neon-purple);
             border-radius: 30px;
-            padding: 50px 60px;
+            padding: 55px 65px;
             box-shadow: 0 25px 60px rgba(181, 55, 242, 0.25), inset 0 0 30px rgba(0, 217, 255, 0.05);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 25px;
-            margin-bottom: 25px;
+            gap: 30px;
+            margin-bottom: 35px;
         }
         .master-hero-banner::before {
             content: '';
@@ -566,18 +565,18 @@
         .master-hero-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 25px;
             margin-top: 15px;
             border-top: 1.5px dashed var(--border-glass);
-            padding-top: 25px;
+            padding-top: 30px;
         }
-        @media(max-width: 900px) { .master-hero-grid { grid-template-columns: 1fr; } .master-hero-banner { padding: 35px 25px; } }
+        @media(max-width: 900px) { .master-hero-grid { grid-template-columns: 1fr; gap: 15px; } .master-hero-banner { padding: 35px 25px; } }
         
         .hero-mini-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1.5px solid var(--border-glass);
             border-radius: 16px;
-            padding: 20px;
+            padding: 24px;
             transition: 0.3s;
         }
         .hero-mini-box:hover {
@@ -599,20 +598,20 @@
             line-height: 1.5;
         }
 
-        /* 🌟 PROFESSIONAL ELITE PRO-ARENA EXECUTIVE SHOWCASE (NAYA BDA PROFESSIONAL SECTION) */
+        /* PROFESSIONAL ELITE PRO-ARENA EXECUTIVE SHOWCASE */
         .pro-executive-showcase {
             width: 100%;
             background: linear-gradient(135deg, #090e21 0%, #121936 100%);
             border: 2px solid rgba(0, 255, 136, 0.3);
             border-radius: 28px;
-            padding: 55px 60px;
+            padding: 60px 65px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 255, 136, 0.03);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            margin-bottom: 25px;
+            gap: 35px;
+            margin-bottom: 35px;
         }
         .pro-executive-showcase::after {
             content: '';
@@ -665,15 +664,15 @@
         .pro-exec-content-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            gap: 35px;
         }
-        @media(max-width: 900px) { .pro-exec-content-grid { grid-template-columns: 1fr; } .pro-executive-showcase { padding: 35px 25px; } }
+        @media(max-width: 900px) { .pro-exec-content-grid { grid-template-columns: 1fr; gap: 20px; } .pro-executive-showcase { padding: 35px 25px; } }
         
         .pro-exec-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1.5px solid var(--border-glass);
             border-radius: 18px;
-            padding: 25px;
+            padding: 30px;
             display: flex;
             gap: 20px;
             align-items: flex-start;
@@ -714,9 +713,9 @@
         }
 
         /* GALLERY SECTION - 360 FULL CARD ROTATION ON HOVER */
-        .gallery-section { max-width: 1400px; margin: 50px auto; }
-        .footer-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        @media(max-width: 768px) { .footer-gallery-grid { grid-template-columns: 1fr; } }
+        .gallery-section { max-width: 1400px; margin: 60px auto; }
+        .footer-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+        @media(max-width: 768px) { .footer-gallery-grid { grid-template-columns: 1fr; gap: 20px; } }
 
         .gallery-clean-card {
             background: var(--card-surface); border-radius: 16px; overflow: hidden; border: 1.5px solid var(--border-glass);
@@ -724,8 +723,8 @@
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             transform-origin: center center;
         }
-        .gallery-card-content { padding: 20px; order: 1; }
-        .gallery-card-content h4 { margin: 0 0 6px 0; font-size: 14.5px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; }
+        .gallery-card-content { padding: 25px; order: 1; }
+        .gallery-card-content h4 { margin: 0 0 8px 0; font-size: 14.5px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; }
         .gallery-card-content p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
         
         .gallery-card-img-wrapper {
@@ -740,7 +739,7 @@
             box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
         }
 
-        /* 🌟 GRAND CYBER FOOTER STYLING */
+        /* GRAND CYBER FOOTER STYLING */
         .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
         .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
@@ -772,7 +771,7 @@
 </head>
 <body>
 
-    <!-- 🌟 NAVBAR WITH HOME, TEAMS, VIEW PLAYERS, POINTS TABLE & TOURNAMENTS -->
+    <!-- 🌟 NAVBAR -->
     <nav>
         <a href="/home" class="logo-box">
             <div class="logo-icon">P</div>
@@ -791,7 +790,7 @@
     <div class="main-content-wrap">
         <div class="header-bar">
             <div class="header-left">
-                <a href="/teams" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Teams</a>
+                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
             </div>
             
             <div>
@@ -803,7 +802,7 @@
                 <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" class="btn-top-add"><i class="fa-solid fa-plus"></i> Add Player</a>
                 <c:if test="${not empty players}">
                     <a href="${pageContext.request.contextPath}/deleteAllPlayers/${teamId}" class="btn-delete-all" onclick="return confirm('⚠️ DANGER: Delete all players from this squad permanently?');">
-                        <i class="fa-solid fa-trash-can"></i> Delete All Squad
+                        <i class="fa-solid fa-trash-can"></i> Delete All
                     </a>
                 </c:if>
             </div>
@@ -858,7 +857,7 @@
             </c:if>
         </div>
 
-        <!-- SECTION 1: SQUAD STATISTICS -->
+        <!-- SQUAD STATISTICS -->
         <c:if test="${not empty players}">
             <div class="team-stats-section">
                 <h3 class="section-title">📊 Squad Overview</h3>
@@ -883,10 +882,10 @@
             </div>
         </c:if>
 
-        <!-- 🌟 EXTRA LARGE BOLD HIGHLIGHT SECTIONS -->
+        <!-- EXTRA LARGE BOLD HIGHLIGHT SECTIONS -->
         <div class="highlight-sections-wrapper">
             
-            <!-- Row 1: Elite Defense & Powerplay Dominance -->
+            <!-- Row 1 -->
             <div class="hl-row">
                 <div class="hl-box-large" style="flex: 1;">
                     <div class="hl-big-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;">
@@ -909,7 +908,7 @@
                 </div>
             </div>
 
-            <!-- Row 2: Grand Wide Feature Section -->
+            <!-- Row 2 -->
             <div class="hl-row">
                 <div class="hl-box-large hl-grand-wide">
                     <div class="hl-big-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)); color: #fff; box-shadow: 0 0 25px rgba(0, 217, 255, 0.5);">
@@ -922,7 +921,7 @@
                 </div>
             </div>
 
-            <!-- Row 3: 3 Large Modern Cards -->
+            <!-- Row 3 -->
             <div class="hl-row">
                 <div class="hl-box-large" style="flex: 1;">
                     <div class="hl-big-icon" style="background: rgba(255,215,0,0.15); border: 2px solid var(--neon-gold); color: var(--neon-gold);">
@@ -955,7 +954,7 @@
                 </div>
             </div>
 
-            <!-- Row 4: Tactical Rotations & Precision Execution -->
+            <!-- Row 4 -->
             <div class="hl-row">
                 <div class="hl-box-large" style="flex: 1;">
                     <div class="hl-big-icon" style="background: rgba(255,165,0,0.15); border: 2px solid var(--neon-amber); color: var(--neon-amber);">
@@ -978,7 +977,7 @@
                 </div>
             </div>
 
-            <!-- 🌟 ULTIMATE MASTER HERO BANNER -->
+            <!-- MASTER HERO BANNER -->
             <div class="master-hero-banner">
                 <div class="master-hero-header">
                     <div class="master-hero-icon">
@@ -1008,7 +1007,7 @@
                 </div>
             </div>
 
-            <!-- 🌟 NAYA PROFESSIONAL ELITE EXECUTIVE SHOWCASE (IMAGES KE THEEK UPAR BDA STYLISH SECTION) -->
+            <!-- PROFESSIONAL ELITE EXECUTIVE SHOWCASE -->
             <div class="pro-executive-showcase">
                 <div class="pro-exec-top">
                     <div class="pro-exec-title-group">
@@ -1061,7 +1060,7 @@
 
         </div>
 
-        <!-- GALLERY SECTION (HOVER PAR POORI CARD 360 ROTATE HOGI) -->
+        <!-- GALLERY SECTION -->
         <div class="gallery-section">
             <div class="footer-gallery-grid">
                 <div class="gallery-clean-card">

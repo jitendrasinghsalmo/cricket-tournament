@@ -14,19 +14,54 @@
     </ul>
 </nav>
 
+<style>
+    /* Completely Normal Text Links (No Buttons, No Box Backgrounds) */
+    .nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+    .nav-item-link {
+        color: var(--text-secondary, #a8b8d8);
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 700;
+        padding: 4px 0;
+        transition: color 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+    .nav-item-link:hover {
+        color: var(--neon-cyan, #00d9ff) !important;
+        background: none !important;
+        box-shadow: none !important;
+    }
+    .nav-item-link.active {
+        color: var(--neon-cyan, #00d9ff) !important;
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+</style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const links = document.querySelectorAll('#dynamicNavLinks .nav-item-link');
         const currentPath = window.location.pathname;
 
-        // Page load hone par current URL ke hisab se active class lagayein
         links.forEach(link => {
             const hrefAttr = link.getAttribute('href');
             if (currentPath === hrefAttr || (currentPath === '/' && hrefAttr === '/home')) {
                 link.classList.add('active');
             }
 
-            // Jab user kisi bhi link par click kare
             link.addEventListener('click', function() {
                 links.forEach(nav => nav.classList.remove('active'));
                 this.classList.add('active');

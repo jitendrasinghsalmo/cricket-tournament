@@ -114,6 +114,7 @@
             align-items: center;
             gap: 6px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         .btn-back:hover {
             background: var(--neon-cyan);
@@ -392,7 +393,7 @@
         .pagination-bar a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 217, 255, 0.5); }
         .page-indicator { font-size: 13px; font-weight: 700; color: var(--text-secondary); padding: 0 15px; border-left: 2px solid var(--border-glass); border-right: 2px solid var(--border-glass); }
 
-        /* 🌟 NEW UNIQUE LEADERBOARD SPOTLIGHT SECTION */
+        /* UNIQUE LEADERBOARD SPOTLIGHT SECTION */
         .unique-spotlight-section { max-width: 1400px; margin: 40px auto; }
         .spotlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         @media(max-width: 768px) { .spotlight-grid { grid-template-columns: 1fr; } }
@@ -411,7 +412,7 @@
         .spotlight-stat-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
         .spotlight-stat-value { font-size: 16px; font-weight: 900; color: var(--neon-emerald); }
 
-        /* 🌟 NEW UNIQUE MATCH FORMATION & TACTICAL INSIGHTS SECTION (ADDED ABOVE RECENT ACTIVITY) */
+        /* TACTICAL INSIGHTS SECTION */
         .tactical-insights-section { max-width: 1400px; margin: 40px auto; }
         .tactical-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
         @media(max-width: 768px) { .tactical-grid { grid-template-columns: 1fr; } }
@@ -470,7 +471,7 @@
             transform: rotate(360deg);
         }
 
-        /* 🌟 GRAND CYBER FOOTER STYLING */
+        /* GRAND CYBER FOOTER STYLING */
         .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
         .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
@@ -508,7 +509,7 @@
     <div class="main-content-wrap">
         <div class="header-bar">
             <div class="header-left">
-                <a href="/home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
             </div>
             
             <div>
@@ -601,7 +602,7 @@
             </c:choose>
         </div>
 
-        <!-- SECTION 1: LEAGUE STATISTICS -->
+        <!-- LEAGUE STATISTICS -->
         <c:if test="${not empty teams}">
             <div class="league-stats-section">
                 <h3 class="section-title">📊 League Overview</h3>
@@ -626,7 +627,7 @@
             </div>
         </c:if>
 
-        <!-- 🌟 UNIQUE LEADERBOARD SPOTLIGHT SECTION -->
+        <!-- UNIQUE LEADERBOARD SPOTLIGHT SECTION -->
         <div class="unique-spotlight-section">
             <h3 class="section-title">⚡ Leaderboard Power Spotlight</h3>
             <div class="spotlight-grid">
@@ -666,7 +667,7 @@
             </div>
         </div>
 
-        <!-- SECTION 2: TOP PERFORMING TEAMS -->
+        <!-- TOP PERFORMING TEAMS -->
         <c:if test="${not empty teams}">
             <div class="top-teams-section">
                 <h3 class="section-title">🏅 Top Performing Teams</h3>
@@ -693,7 +694,7 @@
             </div>
         </c:if>
 
-        <!-- SECTION 3: TOURNAMENT STATUS -->
+        <!-- TOURNAMENT STATUS -->
         <c:if test="${not empty teams}">
             <div class="tournament-status-section">
                 <h3 class="section-title">🎪 Current Tournament Status</h3>
@@ -719,7 +720,7 @@
             </div>
         </c:if>
 
-        <!-- 🌟 NEW UNIQUE MATCH FORMATION & TACTICAL INSIGHTS SECTION (ADDED ABOVE RECENT ACTIVITY) -->
+        <!-- TACTICAL MATCH FORMATIONS & INSIGHTS -->
         <div class="tactical-insights-section">
             <h3 class="section-title">⚡ Tactical Match Formations & Insights</h3>
             <div class="tactical-grid">
@@ -740,7 +741,7 @@
             </div>
         </div>
 
-        <!-- SECTION 4: RECENT ACTIVITY -->
+        <!-- RECENT ACTIVITY -->
         <c:if test="${not empty teams}">
             <div class="activity-section">
                 <h3 class="section-title">📢 Recent Activity</h3>
@@ -787,7 +788,7 @@
             </div>
         </div>
 
-        <!-- GALLERY SECTION (NORMAL RECTANGULAR CARDS, 360 HOVER ROTATION) -->
+        <!-- GALLERY SECTION -->
         <div class="gallery-section">
             <div class="footer-gallery-grid">
                 <div class="gallery-card-item">
