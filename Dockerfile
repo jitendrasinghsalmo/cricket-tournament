@@ -1,5 +1,5 @@
-# Stage 1: Build the application
-FROM eclipse-temurin:17-jdk AS build
+# Stage 1: Build the application using Maven image
+FROM maven:3.8.5-openjdk-17 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
