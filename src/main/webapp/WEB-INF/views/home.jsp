@@ -300,7 +300,7 @@
             overflow: hidden;
         }
         .about-us-video-wrap {
-            position: relative; z-index: 2; width: 100%; height: 340px; border-radius: 20px; overflow: hidden;
+            position: relative; z-index: 2; width: 100%; height: 520px; border-radius: 20px; overflow: hidden;
             box-shadow: 0 20px 45px rgba(0,0,0,0.55); border: 1.5px solid rgba(56, 189, 248, 0.35);
             background: #000;
         }
@@ -354,7 +354,7 @@
             border-color: var(--accent-blue);
             box-shadow: 0 25px 50px rgba(56, 189, 248, 0.35);
         }
-        .image-showcase-wrapper { width: 100%; height: 200px; background: #000; overflow: hidden; position: relative; }
+        .image-showcase-wrapper { width: 100%; height: 280px; background: #000; overflow: hidden; position: relative; }
         .image-showcase-wrapper video {
             width: 100%; height: 100%; object-fit: cover; display: block;
             transition: transform 0.5s ease, filter 0.5s ease;
@@ -379,7 +379,7 @@
             border-color: var(--accent-blue);
             box-shadow: 0 25px 50px rgba(56, 189, 248, 0.35);
         }
-        .video-wrapper { position: relative; width: 100%; height: 190px; background: #000; overflow: hidden; }
+        .video-wrapper { position: relative; width: 100%; height: 280px; background: #000; overflow: hidden; }
         .video-wrapper video {
             width: 100%; height: 100%; object-fit: cover; display: block;
             transition: transform 0.5s ease, filter 0.5s ease;
@@ -597,38 +597,105 @@
             .sponsors-strip { justify-content: center; }
         }
 
-        /* AI CHATBOT */
+        /* 🌟 ENHANCED AI CHATBOT STYLES */
         .chatbot-btn { 
-            position: fixed; bottom: 25px; right: 25px; background: var(--accent-blue); color: #030712; 
-            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-size: 22px; cursor: pointer; box-shadow: 0 0 20px rgba(56,189,248,0.4); z-index: 1000; border: none; transition: 0.3s; 
+            position: fixed; top: 70px; right: 25px; background: var(--accent-blue); color: #030712; 
+            width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; 
+            font-size: 20px; cursor: pointer; box-shadow: 0 0 25px rgba(56,189,248,0.5); z-index: 1000; border: none; 
+            transition: all 0.3s ease; font-weight: bold;
         }
-        .chatbot-btn:hover { transform: scale(1.1); }
+        .chatbot-btn:hover { 
+            transform: scale(1.12) rotate(5deg); 
+            background: #0284c7;
+            box-shadow: 0 0 40px rgba(56,189,248,0.8);
+        }
         
         .chat-window {
-            position: fixed; bottom: 95px; right: 25px; width: 340px; height: 450px;
-            background: #0d121e; border: 1px solid var(--border-color); border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6); z-index: 1001; display: none; flex-direction: column; overflow: hidden; backdrop-filter: blur(20px);
+            position: fixed; top: 135px; right: 25px; width: 360px; height: 450px;
+            background: linear-gradient(135deg, #0d121e 0%, #0a0f1d 100%); 
+            border: 1.5px solid var(--border-color); border-radius: 18px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7); z-index: 1001; display: none; 
+            flex-direction: column; overflow: hidden; backdrop-filter: blur(20px);
         }
-        .chat-window.open { display: flex; }
-        .chat-header { background: rgba(56, 189, 248, 0.1); padding: 12px 16px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 13.5px; color: var(--accent-blue); }
-        .chat-header button { background: none; border: none; color: var(--text-muted); font-size: 16px; cursor: pointer; }
-        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 12.5px; }
-        .chat-msg { padding: 9px 13px; border-radius: 10px; max-width: 85%; line-height: 1.4; word-wrap: break-word; }
-        .chat-msg.bot { background: rgba(56, 189, 248, 0.15); color: var(--text-main); align-self: flex-start; border: 1px solid rgba(56, 189, 248, 0.3); }
-        .chat-msg.user { background: var(--accent-blue); color: #030712; align-self: flex-end; font-weight: 600; }
-        .chat-footer { padding: 10px; border-top: 1px solid var(--border-color); display: flex; gap: 8px; background: rgba(3,7,18,0.8); }
-        .chat-footer input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 12px; color: #fff; font-size: 12px; outline: none; }
-        .chat-footer button { background: var(--accent-blue); color: #030712; border: none; border-radius: 8px; padding: 6px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
-        .ai-typing { font-size: 11px; color: var(--accent-blue); padding: 0 15px 5px 15px; display: none; }
+        .chat-window.open { display: flex; animation: slideUp 0.3s ease; }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .chat-header { 
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+            padding: 14px 18px; border-bottom: 1.5px solid var(--border-color); 
+            display: flex; justify-content: space-between; align-items: center; 
+            font-weight: 800; font-size: 14px; color: var(--accent-blue);
+        }
+        .chat-header button { 
+            background: none; border: none; color: var(--text-muted); font-size: 18px; 
+            cursor: pointer; transition: all 0.2s;
+        }
+        .chat-header button:hover { color: var(--accent-red); }
+        
+        .chat-body { 
+            flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; 
+            gap: 12px; font-size: 13px;
+        }
+        .chat-body::-webkit-scrollbar { width: 6px; }
+        .chat-body::-webkit-scrollbar-track { background: rgba(56,189,248,0.1); border-radius: 10px; }
+        .chat-body::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.3); border-radius: 10px; }
+        
+        .chat-msg { padding: 10px 14px; border-radius: 12px; max-width: 88%; line-height: 1.5; word-wrap: break-word; }
+        .chat-msg.bot { 
+            background: rgba(56, 189, 248, 0.12); color: #e0f2fe; align-self: flex-start; 
+            border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px 12px 12px 3px;
+        }
+        .chat-msg.user { 
+            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #030712; 
+            align-self: flex-end; font-weight: 600; border-radius: 12px 12px 3px 12px;
+            box-shadow: 0 4px 12px rgba(56,189,248,0.3);
+        }
+        .chat-msg span { display: block; }
+        
+        .chat-footer { 
+            padding: 12px; border-top: 1.5px solid var(--border-color); 
+            display: flex; gap: 8px; background: rgba(3,7,18,0.9); align-items: center;
+        }
+        .chat-footer input { 
+            flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); 
+            border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 13px; 
+            outline: none; transition: all 0.2s;
+        }
+        .chat-footer input:focus { 
+            border-color: var(--accent-blue); 
+            background: rgba(56,189,248,0.08);
+            box-shadow: 0 0 10px rgba(56,189,248,0.2);
+        }
+        .chat-footer button { 
+            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #030712; 
+            border: none; border-radius: 8px; padding: 8px 12px; font-weight: 700; 
+            font-size: 12px; cursor: pointer; transition: all 0.2s; width: 40px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .chat-footer button:hover { transform: scale(1.08); }
+        
+        .ai-typing { 
+            font-size: 12px; color: var(--accent-blue); padding: 0 16px 5px 16px; 
+            display: none; font-style: italic;
+        }
 
         /* SCROLL TO TOP */
         .scroll-top { 
-            position: fixed; bottom: 25px; right: 90px; background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); 
-            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; border: 1px solid var(--border-color); transition: all 0.3s ease; opacity: 0; visibility: hidden; z-index: 999; 
+            position: fixed; bottom: 25px; right: 90px; background: rgba(56, 189, 248, 0.15); 
+            color: var(--accent-blue); width: 50px; height: 50px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; 
+            border: 1.5px solid var(--border-color); transition: all 0.3s ease; 
+            opacity: 0; visibility: hidden; z-index: 999;
         }
         .scroll-top.show { opacity: 1; visibility: visible; }
+        .scroll-top:hover { 
+            background: rgba(56, 189, 248, 0.25); 
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(56,189,248,0.4);
+        }
     </style>
     <script>
         function toggleProfileMenu(event) {
@@ -664,7 +731,6 @@
                 document.getElementById('userAvatarContainer').innerHTML = '<img src="' + savedPic + '" alt="Profile">';
             }
 
-            // 🌟 DYNAMIC HOURLY COUNTER UPDATER FOR QR CARD
             const now = new Date();
             const currentHour = now.getHours();
             const formattedHour = currentHour % 12 === 0 ? 12 : currentHour % 12;
@@ -691,7 +757,6 @@
                 <li><a href="/matches">Matches</a></li>
                 <li><a href="/tournaments">Tournaments</a></li>
                 <li><a href="/pointsTable">Points Table</a></li>
-                <li><a href="/faq">FAQ</a></li>
             </ul>
         </div>
 
@@ -836,7 +901,7 @@
             </div>
             <div class="about-us-text">
                 <h2>About <span>ProMatch Arena</span></h2>
-                <p><strong>ProMatch Arena</strong> is India’s most loved cricket tournament and match discovery platform. We connect millions of users and local teams every day, offering seamless team registration, live match scheduling, and a rich sports analytics experience.</p>
+                <p><strong>ProMatch Arena</strong> is India's most loved cricket tournament and match discovery platform. We connect millions of users and local teams every day, offering seamless team registration, live match scheduling, and a rich sports analytics experience.</p>
                 <p>Founded to transform how people discover and manage cricket leagues, ProMatch Arena brings complete tournament control directly to your fingertips. With features like real-time squad controls, automated Net Run Rate (NRR) calculators, and secure role-based administration, we ensure organizers and players make informed competitive choices. Whether you are managing local gully tournaments or professional league cups, ProMatch Arena brings it to your dashboard fast and fresh.</p>
                 <ul class="about-us-features">
                     <li><i class="fa-solid fa-check"></i> Real-time live match scoring & ball-by-ball updates</li>
@@ -1169,50 +1234,11 @@
     </div>
 
     <!-- GRAND FOOTER SECTION -->
-    <div class="grand-footer-section">
-        <div class="grand-footer-content">
-            <div class="footer-brand">
-                <h3><span>ProMatch</span> Arena</h3>
-                <p>Advanced Enterprise Cricket Tournament & Match Control Center. Built with Spring Boot, JSP, and PostgreSQL to deliver high-performance sports analytics.</p>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Quick Navigation</h4>
-                <ul>
-                    <li><a href="/home">🏠 Home Dashboard</a></li>
-                    <li><a href="/teams">👥 View Teams</a></li>
-                    <li><a href="/register-team">➕ Register Team</a></li>
-                    <li><a href="/matches">⚡ Live Matches</a></li>
-                    <li><a href="/tournaments">🏆 Tournaments</a></li>
-                </ul>
-            </div>
+    <!-- 🌟 FOOTER INCLUDE -->
+    <jsp:include page="footer.jsp" />
 
-            <div class="footer-links">
-                <h4>Standings & Stats</h4>
-                <ul>
-                    <li><a href="/pointsTable">📊 Points Table</a></li>
-                    <li><a href="/about">📖 About Architecture</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Legal & Support</h4>
-                <ul>
-                    <li><a href="/faq">❓ FAQ Help Center</a></li>
-                    <li><a href="/privacy-policy">🔒 Privacy Policy</a></li>
-                    <li><a href="/terms-and-conditions">📄 Terms & Conditions</a></li>
-                    <li><a href="/contact">📞 Contact Us</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom-bar">
-            <p>&copy; 2026 ProMatch Arena &bull; All Rights Reserved. Crafted with high-end Cyber Glassmorphism UI.</p>
-        </div>
-    </div>
-
-    <!-- SMART AI CHATBOT -->
-    <button class="chatbot-btn" onclick="toggleChat()">
+    <!-- 🌟 ENHANCED SMART AI CHATBOT -->
+    <button class="chatbot-btn" onclick="toggleChat()" title="💬 Chat with ProMatch AI">
         <i class="fa-solid fa-robot"></i>
     </button>
 
@@ -1222,22 +1248,110 @@
             <button onclick="toggleChat()">&times;</button>
         </div>
         <div class="chat-body" id="chatBody">
-            <div class="chat-msg bot">Hello Jitendra! Main ProMatch AI Assistant hoon. Aap mujhse project, matches, points table, FAQ ya kisi bhi feature ke baare mein pooch sakte hain!</div>
+            <div class="chat-msg bot"><span>👋 Namaste! Main ProMatch AI Assistant hoon. Aap mujhse kuch bhi pooch sakte ho - Teams, Matches, Points Table, Tournament info, ya koi bhi help chaiye!</span></div>
         </div>
-        <div class="ai-typing" id="aiTyping">ProMatch AI is thinking...</div>
+        <div class="ai-typing" id="aiTyping"><i class="fa-solid fa-ellipsis"></i> ProMatch AI is thinking...</div>
         <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Ask anything or search views..." onkeypress="handleChatKey(event)">
-            <button onclick="sendChatMessage()">Send</button>
+            <input type="text" id="chatInput" placeholder="Kya poochna hai...?" onkeypress="handleChatKey(event)">
+            <button onclick="sendChatMessage()" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">
+    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" title="Back to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // 🌟 ADVANCED CHATBOT KNOWLEDGE BASE
+        const chatbotKB = {
+            "register": "🛡️ Team Registration: /register-team page pe ja kar apna team register kar sakte ho. Sirf 2 minutes lagenge! Logo, team name, captain details dalni hogi.",
+            "teams": "👥 Teams: View Teams section mein sab registered teams dekh sakte ho. Har team ke players, statistics aur performance details available hain.",
+            "matches": "⚡ Matches: Live Matches section mein current matches, upcoming fixtures aur past results dekh sakte ho. Ball-by-ball updates real-time milte hain!",
+            "points": "📊 Points Table: Har tournament ka complete standings aur NRR (Net Run Rate) automatically calculate hota hai. Rankings live update hoti hain.",
+            "tournaments": "🏆 Tournaments: Multiple tournaments run kar sakte ho. Season 2026 mein 4 major tournaments chal rahe hain. 128+ matches already scheduled hain.",
+            "nrr": "📈 NRR Calculator: Net Run Rate automatically calculate hota hai match complete hone ke baad. Ab manual calculation ki zaroorat nahi!",
+            "squad": "👨‍💼 Squad Management: Apne team ke liye players add/remove kar sakte ho, jerseys assign kar sakte ho, aur squad update kar sakte ho anytime.",
+            "admin": "🔐 Admin Features: ADMIN role ko special powers hain - tournaments create karna, matches control karna, teams manage karna sab possible hai.",
+            "live": "📡 Live Scoring: Cricket balls pe ball scoreboard update hota hai. Real-time animations ke saath live experience milta hai!",
+            "app": "📱 App: ProMatch Arena app download kar sakte ho Google Play ya App Store se. Push notifications ke through updates milte hain.",
+            "help": "🆘 Help: Kya specific problem hai? Team register karna hai, points table dekhnaa hai, ya kuch aur? Mujhe bata do!",
+            "hello": "👋 Hello! Main ProMatch Cricket AI hoon. Aapka welcome hai! Kya kaam karna hai?",
+            "hi": "👋 Hii! 🏏 ProMatch Arena mein welcome! Kaise help kar sakta hoon?",
+            "thanks": "🙏 Welcome! Agar aur kuch poochna ho to bilkul poocho!",
+            "default": "🤔 Interesting question! Try: **register**, **teams**, **matches**, **points**, **tournaments**, **live**, **app**, **help**, **nrr**, **squad**"
+        };
+
+        function toggleChat() {
+            const win = document.getElementById("chatWindow");
+            win.classList.toggle("open");
+            if (win.classList.contains("open")) {
+                setTimeout(() => document.getElementById("chatInput").focus(), 100);
+            }
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        function getChatbotResponse(userText) {
+            const text = userText.toLowerCase().trim();
+            
+            // Check for keyword matches
+            for (const [key, response] of Object.entries(chatbotKB)) {
+                if (text.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Check for common Hindi patterns
+            if (text.includes("kya") || text.includes("hai") || text.includes("kaise")) {
+                if (text.includes("register")) return chatbotKB["register"];
+                if (text.includes("team")) return chatbotKB["teams"];
+                if (text.includes("match")) return chatbotKB["matches"];
+                if (text.includes("point") || text.includes("table")) return chatbotKB["points"];
+                if (text.includes("tournament")) return chatbotKB["tournaments"];
+            }
+            
+            return chatbotKB["default"];
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById("chatInput");
+            const body = document.getElementById("chatBody");
+            const typingIndicator = document.getElementById("aiTyping");
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            // Add user message
+            const userDiv = document.createElement("div");
+            userDiv.className = "chat-msg user";
+            userDiv.innerHTML = `<span>${text}</span>`;
+            body.appendChild(userDiv);
+            input.value = "";
+            body.scrollTop = body.scrollHeight;
+
+            // Show typing
+            typingIndicator.style.display = "block";
+
+            // AI response
+            setTimeout(() => {
+                typingIndicator.style.display = "none";
+                const botDiv = document.createElement("div");
+                botDiv.className = "chat-msg bot";
+                const response = getChatbotResponse(text);
+                botDiv.innerHTML = `<span>${response}</span>`;
+                body.appendChild(botDiv);
+                body.scrollTop = body.scrollHeight;
+            }, 800);
+        }
+
+        // Scroll functions
         window.onscroll = function() {
             const btn = document.getElementById("scrollTopBtn");
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -1256,43 +1370,6 @@
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleChat() {
-            const win = document.getElementById("chatWindow");
-            win.classList.toggle("open");
-        }
-
-        function handleChatKey(e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById("chatInput");
-            const body = document.getElementById("chatBody");
-            const typingIndicator = document.getElementById("aiTyping");
-            const text = input.value.trim();
-            if(!text) return;
-
-            const userDiv = document.createElement("div");
-            userDiv.className = "chat-msg user";
-            userDiv.innerText = text;
-            body.appendChild(userDiv);
-            input.value = "";
-            body.scrollTop = body.scrollHeight;
-
-            typingIndicator.style.display = "block";
-
-            setTimeout(() => {
-                typingIndicator.style.display = "none";
-                const botDiv = document.createElement("div");
-                botDiv.className = "chat-msg bot";
-                botDiv.innerHTML = '🏏 Main ProMatch Arena assistant hoon! Aap <em>Live Matches, Points Table, Teams, Tournaments, FAQ</em> ya kisi bhi cheez ke baare mein pooch sakte hain!';
-                body.appendChild(botDiv);
-                body.scrollTop = body.scrollHeight;
-            }, 600);
         }
     </script>
 </body>
