@@ -31,6 +31,14 @@ public class UserController {
     @Autowired private PlayerRepository playerRepository;
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private JavaMailSender mailSender;
+    
+    
+    
+    
+    @GetMapping("/")
+    public String home() {
+        return "home"; // WEB-INF/views/home.jsp khulega
+    }
 
     @GetMapping("/register")
     public String showRegisterPage() { return "register"; }
