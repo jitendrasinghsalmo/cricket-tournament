@@ -26,12 +26,19 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
+                    "/",
+                    "/home",
                     "/login", 
                     "/register", 
                     "/forgot-password", 
                     "/verify-otp", 
                     "/reset-password", 
                     "/change-password",
+                    "/about",
+                    "/contact",
+                    "/faq",
+                    "/teams",
+                    "/search",
                     "/css/**", 
                     "/js/**", 
                     "/error"
