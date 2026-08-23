@@ -11,7 +11,6 @@
 	<groupId>Cricket_Tournament</groupId>
 	<artifactId>Cricket_Tournament</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>Cricket_Tournament</name>
 	<description>Cricket_Tournament</description>
 	<url/>
