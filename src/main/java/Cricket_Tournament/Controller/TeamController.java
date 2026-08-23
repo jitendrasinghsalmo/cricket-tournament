@@ -14,14 +14,20 @@ public class TeamController {
     @Autowired private TeamRepository repo;
 
     @GetMapping("/")
-    public String addTeamPage() { return "addTeam"; }
+    public String home() { 
+        return "home"; // WEB-INF/views/home.jsp ko load karega
+    }
     
+    // Agar addTeam page ke liye alag route chahiye
+    @GetMapping("/addTeam")
+    public String addTeamPage() { 
+        return "addTeam"; 
+    }
     
-    
- // Isse GET request accept ho jayegi aur aapka registration form khul jayega
+    // Isse GET request accept ho jayegi aur aapka registration form khul jayega
     @GetMapping("/register-team")
     public String showRegistrationForm() {
-        return "team_register"; // Agar aapke JSP ka naam team_register.jsp hai
+        return "team_register"; // team_register.jsp ko load karega
     }
 
     @GetMapping("/viewTeam")
@@ -51,7 +57,7 @@ public class TeamController {
     @PostMapping("/updateTeam")
     public String updateTeam(@ModelAttribute Team team) {
         repo.save(team);
-        repo.flush(); // Yeh cache ko instant flush karke DB se sync kar dega
+        repo.flush(); // Cache ko instant flush karke DB se sync karega
         return "redirect:/viewTeam";
     }
 
@@ -67,7 +73,6 @@ public class TeamController {
         repo.deleteAll();
         return "redirect:/viewTeam";
     }
-    
 
     // --- Payment & Registration Flow Methods ---
 
@@ -100,5 +105,4 @@ public class TeamController {
 
         return "redirect:/payment-page";
     }  
-    
 }
