@@ -35,10 +35,6 @@ public class UserController {
     
     
     
-    @GetMapping("/")
-    public String home() {
-        return "home"; // WEB-INF/views/home.jsp khulega
-    }
 
     @GetMapping("/register")
     public String showRegisterPage() { return "register"; }
