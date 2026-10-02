@@ -4,198 +4,209 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ProMatch Arena | Reset Password</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-body: linear-gradient(135deg, #0f172a 0%, #311042 40%, #581c44 70%, #9d174d 100%);
-            --card-base: #080f1d;
-            --text-heading: #ffffff;
-            --text-para: #cbd5e1;
-            --form-input-bg: #111a2e;
-            --form-border: rgba(255, 255, 255, 0.2);
-            --form-text: #ffffff;
-            --label-color: #00f2fe;
-            --brand-panel-bg: linear-gradient(135deg, #9d174d 0%, #0c1524 100%);
-            --panel-border: rgba(255, 255, 255, 0.15);
-            --accent-glow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            --input-focus-border: #ec4899;
+            --bg-deep: #030712;
+            --card-surface: rgba(13, 18, 30, 0.75);
+            --neon-cyan: #38bdf8;
+            --neon-emerald: #10b981;
+            --neon-rose: #f43f5e;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-glass: rgba(56, 189, 248, 0.25);
+            --body-overlay: rgba(3, 7, 18, 0.85);
+            --input-bg: rgba(3, 7, 18, 0.5);
         }
+
+        html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+        * { box-sizing: border-box; }
 
         body {
-            background: var(--bg-body);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-heading);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 12px;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--body-overlay) 0%, var(--body-overlay) 100%),
+                        url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-primary);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; min-height: 100dvh; padding: 10px;
         }
 
-        .split-auth-container {
-            width: 100%; max-width: 850px;
-            background: var(--card-base);
-            border: 2px solid var(--input-focus-border);
-            border-radius: 24px; overflow: hidden;
-            box-shadow: var(--accent-glow); position: relative;
+        .auth-container {
+            width: 100%; max-width: 480px;
+            background: var(--card-surface); backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass); border-radius: 22px;
+            padding: clamp(20px, 5.5vh, 52px) clamp(20px, 6vw, 46px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+            position: relative; overflow: hidden;
+        }
+        .auth-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald));
         }
 
-        .left-brand-panel {
-            background: var(--brand-panel-bg);
-            border-right: 2px solid var(--panel-border);
-            padding: 40px 30px; display: flex; flex-direction: column; justify-content: space-between;
+        .auth-title {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            font-size: clamp(17px, 5.6vw, 26px); font-weight: 900; color: var(--text-primary);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: clamp(4px, 1.2vh, 10px);
+            text-align: center; white-space: nowrap;
+        }
+        .title-emoji { font-size: 1em; line-height: 1; }
+        .auth-subtitle {
+            font-size: clamp(11.5px, 3.3vw, 13.5px); color: var(--text-secondary); text-align: center;
+            line-height: 1.55; margin-bottom: clamp(12px, 4vh, 34px);
         }
 
-        .back-arrow-btn {
-            width: 44px; height: 44px; border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15); color: #ffffff !important;
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid rgba(255, 255, 255, 0.2); text-decoration: none;
-            transition: all 0.2s ease; font-size: 1.1rem;
-        }
-        .back-arrow-btn:hover {
-            color: #00f2fe !important; border-color: #00f2fe;
-            transform: translateX(-3px); box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+        .alert-error {
+            background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4);
+            color: var(--neon-rose); padding: 9px 14px; border-radius: 10px;
+            font-size: 12.5px; font-weight: 700; margin-bottom: 14px; text-align: center;
         }
 
-        .brand-meta-title { font-size: 1.9rem; font-weight: 800; line-height: 1.3; color: #ffffff !important; }
-        .brand-meta-title span { color: #f472b6 !important; }
-        .brand-footer-text { color: #ffffff !important; font-weight: 800; font-size: 0.9rem; opacity: 0.8; }
-        .right-form-panel { padding: 40px; }
-
-        .form-label-custom {
-            color: var(--label-color) !important; font-weight: 800; font-size: 0.95rem;
-            margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+        /* Sizes scale with screen height so the form always fits without scrolling */
+        .form-group {
+            --gap: clamp(3px, 0.9vh, 8px);
+            --input-h: clamp(40px, 7vh, 58px);
+            display: flex; flex-direction: column; gap: var(--gap);
+            margin-bottom: clamp(10px, 3vh, 26px); position: relative;
         }
 
-        .form-control-custom {
-            background: var(--form-input-bg) !important;
-            border: 2px solid var(--form-border) !important;
-            color: var(--form-text) !important; border-radius: 12px;
-            height: 50px; font-weight: 700; font-size: 1rem; padding: 0.5rem 1rem;
+        label {
+            font-size: 11.5px; font-weight: 700; color: var(--text-secondary);
+            text-transform: uppercase; letter-spacing: 0.5px; line-height: 14px;
         }
-        .form-control-custom:focus {
-            border-color: var(--input-focus-border) !important;
-            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.25) !important;
-        }
-        .form-control-custom::placeholder { color: #94a3b8 !important; opacity: 0.7; }
 
-        /* Password Eye Toggle Styling */
-        .password-group {
-            position: relative;
+        input {
+            background: var(--input-bg); border: 1px solid var(--border-glass);
+            border-radius: 11px; padding: 0 46px 0 16px; color: var(--text-primary);
+            font-size: 16px; outline: none; transition: all 0.2s ease; width: 100%;
+            height: var(--input-h); backdrop-filter: blur(5px);
         }
+        input::placeholder { color: #64748b; }
+        input:focus {
+            border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+            background: var(--card-surface);
+        }
+
+        /* Eye toggle: always vertically centered on the input */
         .toggle-password {
             position: absolute;
-            top: 50px;
-            right: 15px;
-            transform: translateY(-50%);
+            top: calc(14px + var(--gap));
+            right: 6px;
+            height: var(--input-h);
+            width: 40px;
+            padding: 0;
+            display: flex; align-items: center; justify-content: center;
             background: none;
             border: none;
-            color: #94a3b8;
+            color: var(--text-secondary);
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             transition: color 0.2s;
         }
-        .toggle-password:hover {
-            color: #00f2fe;
+        .toggle-password:hover { color: var(--neon-cyan); }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            color: #ffffff; border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            height: clamp(42px, 7vh, 54px); border-radius: 12px;
+            font-size: 13.5px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.6px; cursor: pointer; transition: all 0.25s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-top: clamp(2px, 1vh, 10px);
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
         }
 
-        .btn-submit-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff !important; border: none; border-radius: 12px;
-            height: 50px; font-weight: 800; font-size: 1rem; width: 100%;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); transition: all 0.2s ease;
+        .auth-footer {
+            text-align: center; margin-top: clamp(10px, 3.2vh, 28px); font-size: 13px; color: var(--text-secondary);
         }
-        .btn-submit-success:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5); }
+        .auth-footer a {
+            color: var(--neon-cyan); font-weight: 700; text-decoration: none; transition: 0.2s;
+        }
+        .auth-footer a:hover { text-decoration: underline; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            body { padding: 8px; }
+            .auth-container { border-radius: 18px; }
+            .auth-title { letter-spacing: 0.5px; gap: 8px; }
+        }
+
+        /* Very short screens (landscape phones) */
+        @media (max-height: 460px) {
+            body { padding: 6px; }
+            label { font-size: 10.5px; }
+            .auth-footer { font-size: 12px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="split-auth-container">
-    <div class="row g-0">
-        <!-- Left Side Panel with Back Arrow -->
-        <div class="col-md-5 left-brand-panel">
-            <div>
-                <a href="${pageContext.request.contextPath}/login" class="back-arrow-btn" title="Back to Login">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-            </div>
-            <div class="mt-4 mb-3">
-                <h3 class="brand-meta-title">Credential Update<br><span>Security Hub.</span></h3>
-                <p class="text-white small fw-bold mt-3 opacity-90">Set a strong new password to secure your deployment account access.</p>
-            </div>
-            <div class="brand-footer-text d-none d-md-block">
-                <i class="fa-solid fa-shield-halved me-1"></i> ProMatch Arena Security
-            </div>
+    <div class="auth-container">
+        <div class="auth-title">
+            <span class="title-emoji">🔐</span>
+            <span>Reset Password</span>
         </div>
+        <div class="auth-subtitle">Set a strong new password to secure your account.</div>
 
-        <!-- Right Side Form Panel -->
-        <div class="col-md-7 right-form-panel">
-            <div class="mb-4">
-                <h3 class="fw-bold mb-1" style="color: var(--text-heading);">Reset New Password</h3>
-                <p class="small fw-bold opacity-70" style="color: var(--text-para);">Enter and confirm your new account password.</p>
+        <c:if test="${not empty error}">
+            <div class="alert-error">⚠️ ${error}</div>
+        </c:if>
+
+        <form action="${pageContext.request.contextPath}/reset-password" method="post" id="resetForm">
+
+            <div class="form-group">
+                <label>New Password</label>
+                <input type="password" name="newPassword" id="newPassInput" placeholder="Enter new password" required autocomplete="off">
+                <button type="button" class="toggle-password" onclick="togglePassword('newPassInput', this)">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
             </div>
 
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger fw-bold rounded-3 mb-3 py-2 px-3 small">
-                    <i class="fa-solid fa-triangle-exclamation me-1"></i> ${error}
-                </div>
-            </c:if>
-
-            <form action="${pageContext.request.contextPath}/reset-password" method="post" id="resetForm">
-                
-                <!-- New Password Field with Show/Hide Toggle -->
-                <div class="mb-3 password-group">
-                    <label class="form-label-custom" for="newPassInput"><i class="fa-solid fa-lock"></i> New Password</label>
-                    <input type="password" name="newPassword" class="form-control form-control-custom w-100 pe-5" id="newPassInput" placeholder="Enter new password" required autocomplete="off">
-                    <button type="button" class="toggle-password" onclick="togglePassword('newPassInput', this)">
-                        <i class="fa-regular fa-eye"></i>
-                    </button>
-                </div>
-
-                <!-- Confirm Password Field with Show/Hide Toggle -->
-                <div class="mb-4 password-group">
-                    <label class="form-label-custom" for="confirmPassInput"><i class="fa-solid fa-lock"></i> Confirm Password</label>
-                    <input type="password" name="confirmPassword" class="form-control form-control-custom w-100 pe-5" id="confirmPassInput" placeholder="Re-enter new password" required autocomplete="off">
-                    <button type="button" class="toggle-password" onclick="togglePassword('confirmPassInput', this)">
-                        <i class="fa-regular fa-eye"></i>
-                    </button>
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-submit-success">Update Password <i class="fa-solid fa-square-check ms-2"></i></button>
-                </div>
-            </form>
-
-            <div class="text-center mt-3">
-                <span class="small fw-bold" style="color: var(--text-para);">Back to </span>
-                <a href="${pageContext.request.contextPath}/login" class="text-decoration-none fw-bold" style="color: #ec4899;">Login</a>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassInput" placeholder="Re-enter new password" required autocomplete="off">
+                <button type="button" class="toggle-password" onclick="togglePassword('confirmPassInput', this)">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
             </div>
+
+            <button type="submit" class="btn-submit">
+                Update Password <i class="fa-solid fa-square-check"></i>
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Back to <a href="${pageContext.request.contextPath}/login">Login</a>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function togglePassword(fieldId, btn) {
-        const input = document.getElementById(fieldId);
-        const icon = btn.querySelector('i');
-        if (input.type === "password") {
-            input.type = "text";
-            icon.classList.remove("fa-eye");
-            icon.classList.add("fa-eye-slash");
-        } else {
-            input.type = "password";
-            icon.classList.remove("fa-eye-slash");
-            icon.classList.add("fa-eye");
+    <script>
+        function togglePassword(fieldId, btn) {
+            const input = document.getElementById(fieldId);
+            const icon = btn.querySelector('i');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>

@@ -3,19 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProMatch Arena | Add New Team</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.72); /* Transparent glassmorphism */
+            --card-surface: rgba(13, 18, 30, 0.72);
             --neon-cyan: #38bdf8;
             --neon-emerald: #10b981;
             --neon-rose: #f43f5e;
-            --neon-amber: #f59e0b;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --border-glass: rgba(56, 189, 248, 0.22);
             --body-overlay: rgba(3, 7, 18, 0.82);
+            --input-bg: rgba(3, 7, 18, 0.45);
         }
 
         body.light-mode {
@@ -24,12 +27,15 @@
             --neon-cyan: #0284c7;
             --neon-emerald: #059669;
             --neon-rose: #e11d48;
-            --neon-amber: #d97706;
             --text-primary: #0f172a;
             --text-secondary: #475569;
             --border-glass: rgba(2, 132, 199, 0.25);
             --body-overlay: rgba(241, 245, 249, 0.82);
         }
+
+        * { box-sizing: border-box; }
+
+        html, body { max-width: 100%; overflow-x: hidden; }
 
         body { 
             font-family: 'Inter', system-ui, -apple-system, sans-serif; 
@@ -38,133 +44,168 @@
             background-size: cover;
             color: var(--text-primary); 
             margin: 0; 
-            padding: 35px 20px 60px 20px; 
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        
-        .header-bar { 
-            display: flex; justify-content: space-between; align-items: center; 
-            max-width: 850px; margin: 0 auto 30px auto; 
-            background: var(--card-surface); backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 16px 28px; border-radius: 18px; border: 1px solid var(--border-glass);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        
-        .header-left { display: flex; align-items: center; gap: 15px; }
-
-        .btn-back { background: rgba(56, 189, 248, 0.08); color: var(--neon-cyan); border: 1px solid var(--border-glass); padding: 9px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.2s ease; }
-        .btn-back:hover { background: var(--neon-cyan); color: #030712; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-        
-        .btn-theme-toggle {
-            background: var(--card-surface); color: var(--text-primary);
-            border: 1px solid var(--border-glass); padding: 9px 15px;
-            border-radius: 10px; font-weight: 700; font-size: 13px;
-            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-            transition: all 0.2s ease;
-        }
-        .btn-theme-toggle:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
-
-        .jumping-title {
-            text-align: center; color: var(--text-primary); margin: 0; font-weight: 900; font-size: 20px; letter-spacing: 1.5px; text-transform: uppercase;
-            display: inline-block;
-            white-space: nowrap;
-        }
-        .jumping-title span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(-25px);
-            animation: dropInChar 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            animation-delay: calc(0.04s * var(--i));
-        }
-        .jumping-title span.highlight {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+            padding: 60px 15px 14px 15px; 
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes dropInChar {
-            0% { opacity: 0; transform: translateY(-25px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* Top-Left Back Button */
+        .btn-top-left-back {
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            background: rgba(14, 165, 233, 0.16);
+            color: #22d3ee;
+            border: 2px solid #06b6d4;
+            padding: 9px 22px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
+            transition: all 0.25s ease;
+            z-index: 1000;
+        }
+        .btn-top-left-back:hover {
+            background: #06b6d4;
+            color: #030712;
+            transform: translateX(-3px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         }
 
-        .form-container-card {
-            max-width: 850px;
-            margin: 0 auto;
+        /* Form container */
+        .form-container {
+            width: 100%;
+            max-width: 640px;
             background: var(--card-surface);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            border-radius: 18px;
+            padding: clamp(18px, 4.4vh, 44px) 34px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        .form-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald));
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+        h2 {
+            text-align: center;
+            color: var(--text-primary);
+            margin-top: 0;
+            margin-bottom: clamp(10px, 2.8vh, 28px);
+            font-weight: 800;
+            font-size: clamp(17px, 3.2vh, 25px);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        @media(max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
+        h2 span { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .form-group.full-width {
-            grid-column: 1 / -1;
+            margin-bottom: clamp(8px, 2.4vh, 20px);
         }
 
-        .form-label {
-            font-size: 12px;
+        label {
+            display: block;
+            font-size: clamp(10.5px, 1.9vh, 13px);
             font-weight: 700;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-secondary);
+            margin-bottom: clamp(3px, 0.8vh, 6px);
         }
 
-        .form-input {
-            background: rgba(3, 7, 18, 0.45);
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"],
+        select {
+            width: 100%;
+            background: var(--input-bg);
             border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: var(--text-primary);
-            font-size: 14px;
+            border-radius: 10px;
+            padding: clamp(8px, 2.4vh, 16px) 15px;
+            color: #ffffff;
+            font-size: clamp(12.5px, 2.1vh, 15px);
             font-family: inherit;
             outline: none;
+            box-sizing: border-box;
             transition: all 0.2s ease;
         }
-        .form-input:focus {
+
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.8;
+        }
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
+        select option {
+            background: #030712;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        ::placeholder {
+            color: #94a3b8;
+            opacity: 1;
+        }
+
+        input:focus, select:focus {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
             background: rgba(3, 7, 18, 0.7);
         }
 
-        .form-actions-row {
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row .form-group { min-width: 0; }
+
+        .button-group {
+            margin-top: clamp(10px, 2.8vh, 26px);
             display: flex;
-            justify-content: flex-end;
             gap: 15px;
-            margin-top: 35px;
-            border-top: 1px solid var(--border-glass);
-            padding-top: 25px;
+        }
+
+        .btn-submit, .btn-cancel {
+            flex: 1;
+            padding: clamp(10px, 2.4vh, 16px);
+            border-radius: 10px;
+            font-size: clamp(12.5px, 2.1vh, 15px);
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-submit {
             background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             color: #ffffff;
             border: 1px solid rgba(56, 189, 248, 0.4);
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
             box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-            transition: all 0.25s ease;
         }
+
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
@@ -172,110 +213,89 @@
         }
 
         .btn-cancel {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border: 1px solid var(--border-glass);
-            padding: 12px 22px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.2s ease;
+            background: rgba(244, 63, 94, 0.12);
+            color: var(--neon-rose);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.15);
         }
+
         .btn-cancel:hover {
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
             transform: translateY(-2px);
+            background: var(--neon-rose);
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+        }
+
+        /* Mobile */
+        @media(max-width: 768px) {
+            body { padding: 54px 12px 12px 12px; }
+            .btn-top-left-back { top: 12px; left: 14px; padding: 6px 15px; font-size: 13px; border-radius: 12px; gap: 8px; }
+            .form-container { padding: clamp(14px, 2.8vh, 24px) 16px; max-width: 480px; }
+            .form-row { gap: 10px; }
+            .form-row.stack-mobile { grid-template-columns: 1fr; gap: 0; }
+            h2 { font-size: clamp(15px, 2.7vh, 20px); margin-bottom: clamp(8px, 1.9vh, 16px); }
+            .form-group { margin-bottom: clamp(5px, 1.5vh, 13px); }
+            input[type="text"],
+            input[type="datetime-local"],
+            input[type="number"],
+            select { padding: clamp(6px, 1.65vh, 11px) 11px; font-size: clamp(12px, 1.9vh, 14px); border-radius: 8px; }
+            label { font-size: clamp(9.5px, 1.6vh, 11.5px); margin-bottom: 3px; }
+            .button-group { margin-top: clamp(8px, 1.8vh, 16px); gap: 10px; }
+            .btn-submit, .btn-cancel { padding: clamp(8px, 1.7vh, 12px); font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-bar">
-        <div class="header-left">
-            <a href="/viewTeam" class="btn-back">⬅ Back to Teams</a>
-        </div>
+    <!-- Top-Left Back Button (CHANGED: /viewTeam -> /teams) -->
+    <a href="${pageContext.request.contextPath}/teams" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+    <div class="form-container">
+        <h2><span>Register</span> New Team</h2>
         
-        <div>
-            <h2 class="jumping-title" id="animatedTitle">Register New Team</h2>
-        </div>
-
-        <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-    </div>
-
-    <div class="form-container-card">
         <form id="addTeamForm" action="${pageContext.request.contextPath}/register-team" method="post">
             <input type="hidden" name="amount" value="500">
-            
-            <div class="form-grid">
+
+            <div class="form-row stack-mobile">
                 <div class="form-group">
-                    <label class="form-label">Team Name</label>
-                    <input type="text" id="teamName" name="teamName" class="form-input" placeholder="Enter team name..." required autocomplete="off">
+                    <label>Team Name</label>
+                    <input type="text" id="teamName" name="teamName" placeholder="Enter team name..." required autocomplete="off">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">City</label>
-                    <input type="text" id="city" name="city" class="form-input" placeholder="Enter city..." required autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Coach Name</label>
-                    <input type="text" id="coachName" name="coachName" class="form-input" placeholder="Enter coach name..." required autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Owner Name</label>
-                    <input type="text" id="ownerName" name="ownerName" class="form-input" placeholder="Enter owner name..." required autocomplete="off">
-                </div>
-
-                <div class="form-group full-width">
-                    <label class="form-label">Logo URL</label>
-                    <input type="text" id="logoUrl" name="logoUrl" class="form-input" placeholder="Paste logo image URL..." autocomplete="off">
+                    <label>City</label>
+                    <input type="text" id="city" name="city" placeholder="Enter city..." required autocomplete="off">
                 </div>
             </div>
 
-            <div class="form-actions-row">
-                <a href="/viewTeam" class="btn-cancel">Cancel</a>
+            <div class="form-row stack-mobile">
+                <div class="form-group">
+                    <label>Coach Name</label>
+                    <input type="text" id="coachName" name="coachName" placeholder="Enter coach name..." required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label>Owner Name</label>
+                    <input type="text" id="ownerName" name="ownerName" placeholder="Enter owner name..." required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Logo URL</label>
+                <input type="text" id="logoUrl" name="logoUrl" placeholder="Paste logo image URL..." autocomplete="off">
+            </div>
+
+            <div class="button-group">
+                <!-- CHANGED: /viewTeam -> /teams -->
+                <a href="${pageContext.request.contextPath}/teams" class="btn-cancel">Cancel</a>
                 <button type="submit" class="btn-submit">Proceed to Pay ➡</button>
             </div>
         </form>
     </div>
 
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            const titleEl = document.getElementById('animatedTitle');
-            if (titleEl) {
-                const textWords = titleEl.innerText;
-                titleEl.innerHTML = textWords.split('').map(function(char, index) {
-                    if (char === ' ') return '<span style="--i:' + index + '">&nbsp;</span>';
-                    let highlightClass = (index < 4) ? 'highlight' : '';
-                    return '<span class="' + highlightClass + '" style="--i:' + index + '">' + char + '</span>';
-                }).join('');
-            }
-        });
-
-        const bodyElement = document.body;
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-
         if (localStorage.getItem('matchTheme') === 'light') {
-            bodyElement.classList.add('light-mode');
-            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-        }
-
-        function toggleTheme() {
-            if (bodyElement.classList.contains('light-mode')) {
-                bodyElement.classList.remove('light-mode');
-                localStorage.setItem('matchTheme', 'dark');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
-            } else {
-                bodyElement.classList.add('light-mode');
-                localStorage.setItem('matchTheme', 'light');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-            }
+            document.body.classList.add('light-mode');
         }
     </script>
 

@@ -28,21 +28,6 @@
             --body-overlay: #080b1e;
         }
 
-        body.light-mode {
-            --bg-deep: #f5f7ff;
-            --card-surface: #ffffff;
-            --neon-cyan: #0099cc;
-            --neon-emerald: #00aa44;
-            --neon-rose: #dd0055;
-            --neon-amber: #ff8800;
-            --neon-purple: #8800ff;
-            --neon-gold: #cc8800;
-            --text-primary: #1a2550;
-            --text-secondary: #556688;
-            --border-glass: #cbd5e1;
-            --body-overlay: #f1f5f9;
-        }
-
         * { box-sizing: border-box; }
 
         body { 
@@ -50,11 +35,11 @@
             background: var(--body-overlay);
             color: var(--text-primary); 
             margin: 0; 
-            padding: 0 0 60px 0; 
+            padding: 0; 
             transition: background 0.3s ease, color 0.3s ease;
         }
         
-        /* 🌟 STICKY CLEAN NAVBAR STYLING (No Button Effects) */
+        /* 🌟 STICKY CLEAN NAVBAR STYLING */
         nav {
             background: #0d1222;
             border-bottom: 1.5px solid var(--border-glass);
@@ -120,26 +105,6 @@
             background: var(--neon-cyan);
             color: #030712;
             box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
-        }
-        
-        .btn-theme-toggle {
-            background: rgba(181, 55, 242, 0.15);
-            color: var(--neon-purple);
-            border: 1.5px solid var(--neon-purple); 
-            padding: 10px 18px;
-            border-radius: 10px; 
-            font-weight: 700; 
-            font-size: 13px;
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-        .btn-theme-toggle:hover { 
-            background: var(--neon-purple);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(181, 55, 242, 0.5);
         }
 
         .btn-top-add {
@@ -268,7 +233,7 @@
         .stat-number { font-size: 32px; font-weight: 900; color: var(--neon-cyan); margin-bottom: 6px; }
         .stat-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
 
-        /* PLAYERS GRID - Increased Gaping */
+        /* PLAYERS GRID */
         .players-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -425,7 +390,7 @@
             transform: translateY(-2px);
         }
 
-        /* EXTRA LARGE BOLD HIGHLIGHT SECTIONS STYLING - Increased Gaping */
+        /* EXTRA LARGE BOLD HIGHLIGHT SECTIONS STYLING */
         .highlight-sections-wrapper {
             max-width: 1400px;
             margin: 60px auto;
@@ -441,7 +406,6 @@
         }
         @media(max-width: 900px) { .hl-row { flex-direction: column; gap: 20px; } }
 
-        /* BIG BOLD CARDS BASE */
         .hl-box-large {
             background: linear-gradient(145deg, var(--card-surface) 0%, #060917 100%);
             border: 1.5px solid var(--border-glass);
@@ -496,6 +460,60 @@
             border-left: 8px solid var(--neon-cyan);
             box-shadow: 0 20px 50px rgba(0, 217, 255, 0.18);
             padding: 45px 50px;
+        }
+
+        /* 🌟 3 NEW SECTIONS STYLING */
+        .new-added-sections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+        @media(max-width: 900px) { .new-added-sections-grid { grid-template-columns: 1fr; } }
+        
+        .new-custom-card {
+            background: linear-gradient(135deg, rgba(14, 20, 40, 0.95), rgba(8, 11, 30, 0.98));
+            border: 1.5px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .new-custom-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 15px 40px rgba(0,217,255,0.25);
+        }
+        .new-custom-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            background: rgba(0,217,255,0.12);
+            border: 1.5px solid var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0,217,255,0.2);
+        }
+        .new-custom-card h4 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+        .new-custom-card p {
+            margin: 0;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         /* MASTER HERO BANNER */
@@ -712,7 +730,7 @@
             line-height: 1.6;
         }
 
-        /* GALLERY SECTION - 360 FULL CARD ROTATION ON HOVER */
+        /* GALLERY SECTION */
         .gallery-section { max-width: 1400px; margin: 60px auto; }
         .footer-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
         @media(max-width: 768px) { .footer-gallery-grid { grid-template-columns: 1fr; gap: 20px; } }
@@ -739,9 +757,79 @@
             box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
         }
 
+        /* ===== NEW SECTION A: SQUAD ROLE BREAKDOWN ===== */
+        .role-breakdown-section { max-width: 1400px; margin: 60px auto; }
+        .role-breakdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 900px) { .role-breakdown-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .role-breakdown-grid { grid-template-columns: 1fr; } }
+        .role-card {
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px;
+            padding: 26px 20px; text-align: center; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .role-card:hover { transform: translateY(-5px); border-color: var(--neon-cyan); box-shadow: 0 15px 40px rgba(0,217,255,0.25); }
+        .role-icon { width: 56px; height: 56px; margin: 0 auto 14px auto; border-radius: 16px; background: rgba(0,217,255,0.12); border: 1.5px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--neon-cyan); }
+        .role-card h5 { margin: 0 0 6px 0; font-size: 14.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
+        .role-card p { margin: 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ===== NEW SECTION B: SELECTION CRITERIA QUICK INFO ===== */
+        .selection-criteria-section {
+            max-width: 1400px; margin: 60px auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+        }
+        @media(max-width: 900px) { .selection-criteria-section { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .selection-criteria-section { grid-template-columns: 1fr; } }
+        .criteria-card {
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 20px; display: flex; align-items: center; gap: 14px; transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+        .criteria-card:hover { border-color: var(--neon-emerald); transform: translateY(-3px); }
+        .criteria-icon {
+            width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+            background: rgba(0,255,136,0.14); border: 1.5px solid var(--neon-emerald);
+            display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--neon-emerald);
+        }
+        .criteria-card h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; }
+        .criteria-card p { margin: 0; font-size: 11.5px; color: var(--text-secondary); font-weight: 600; }
+
+        /* ===== NEW SECTION C: WEEKLY TRAINING REGIMEN ===== */
+        .training-section {
+            max-width: 1400px; margin: 60px auto;
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 20px; padding: 32px;
+        }
+        .training-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        @media(max-width: 768px) { .training-grid { grid-template-columns: 1fr; } }
+        .training-card {
+            background: #080b1e; border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 22px;
+            transition: all 0.3s ease; display: flex; gap: 16px; align-items: flex-start;
+        }
+        .training-card:hover { border-color: var(--neon-purple); transform: translateY(-4px); }
+        .training-icon { width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px; background: rgba(181,55,242,0.12); border: 1.5px solid var(--neon-purple); display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--neon-purple); }
+        .training-card h5 { margin: 0 0 6px 0; font-size: 14px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
+        .training-card p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ===== NEW SECTION D: CTA BANNER ===== */
+        .players-cta-banner {
+            max-width: 1400px; margin: 60px auto;
+            background: linear-gradient(135deg, rgba(0,217,255,0.16), rgba(0,255,136,0.1)), var(--card-surface);
+            border: 2px solid var(--neon-cyan); border-radius: 22px; padding: 40px;
+            display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap;
+            box-shadow: 0 20px 45px rgba(0,217,255,0.18);
+        }
+        .players-cta-text h3 { margin: 0 0 8px 0; font-size: 22px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; }
+        .players-cta-text p { margin: 0; font-size: 13.5px; color: var(--text-secondary); font-weight: 600; max-width: 560px; line-height: 1.6; }
+        .players-cta-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;
+            border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 0 25px rgba(0,217,255,0.5); transition: all 0.3s ease;
+        }
+        .players-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(0,255,136,0.7); color: #030712; }
+        @media(max-width: 700px) { .players-cta-banner { flex-direction: column; text-align: center; padding: 30px 22px; } }
+
         /* GRAND CYBER FOOTER STYLING */
-        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
+        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; width: calc(100% - 40px); box-sizing: border-box; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; max-width: 1350px; margin-left: auto; margin-right: auto; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
         .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
@@ -771,21 +859,11 @@
 </head>
 <body>
 
-    <!-- 🌟 NAVBAR -->
-    <nav>
-        <a href="/home" class="logo-box">
-            <div class="logo-icon">P</div>
-            <div class="logo-text">ProMatch Arena<span>Control Center</span></div>
-        </a>
-        <ul class="nav-links">
-            <li><a href="/home" class="${page == 'home' ? 'active' : ''}">Home</a></li>
-            <li><a href="/teams" class="${page == 'teams' ? 'active' : ''}">Teams</a></li>
-            <li><a href="#" class="${page == 'players' ? 'active' : ''}">View Players</a></li>
-            <li><a href="/matches" class="${page == 'matches' ? 'active' : ''}">Matches</a></li>
-            <li><a href="/pointsTable" class="${page == 'points' ? 'active' : ''}">Points Table</a></li>
-            <li><a href="/tournaments" class="${page == 'tournaments' ? 'active' : ''}">Tournaments</a></li>
-        </ul>
-    </nav>
+    <!-- 🌟 NAVBAR INCLUDE -->
+    <jsp:include page="navbar.jsp" />
+
+    <!-- 🌟 CHATBOT INCLUDE -->
+    <jsp:include page="chatbot.jsp" />
 
     <div class="main-content-wrap">
         <div class="header-bar">
@@ -798,8 +876,7 @@
             </div>
 
             <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-                <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" class="btn-top-add"><i class="fa-solid fa-plus"></i> Add Player</a>
+                <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" class="btn-top-add"><i class="fa-solid fa-plus"></i> New Player</a>
                 <c:if test="${not empty players}">
                     <a href="${pageContext.request.contextPath}/deleteAllPlayers/${teamId}" class="btn-delete-all" onclick="return confirm('⚠️ DANGER: Delete all players from this squad permanently?');">
                         <i class="fa-solid fa-trash-can"></i> Delete All
@@ -977,6 +1054,25 @@
                 </div>
             </div>
 
+            <!-- 🌟 3 NEW UNIQUE SECTIONS ADDED -->
+            <div class="new-added-sections-grid">
+                <div class="new-custom-card">
+                    <div class="new-custom-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h4>Player Fitness Matrix</h4>
+                    <p>Real-time telemetry tracking stamina levels, injury risks, and recovery rates for every individual athlete.</p>
+                </div>
+                <div class="new-custom-card">
+                    <div class="new-custom-icon"><i class="fa-solid fa-shield-dog"></i></div>
+                    <h4>Defensive Wall Protocol</h4>
+                    <p>Specialized fielding drills focused on catching efficiency and ground-coverage boundary saving metrics.</p>
+                </div>
+                <div class="new-custom-card">
+                    <div class="new-custom-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>Instant Power Boost</h4>
+                    <p>Pre-match energy allocation frameworks ensuring optimal mental focus and reflex sharpening.</p>
+                </div>
+            </div>
+
             <!-- MASTER HERO BANNER -->
             <div class="master-hero-banner">
                 <div class="master-hero-header">
@@ -1095,10 +1191,108 @@
             </div>
         </div>
 
-        <!-- 🌟 GRAND CYBER FOOTER INCLUDE -->
-        <jsp:include page="footer.jsp" />
+        <!-- ===== NEW SECTION A: SQUAD ROLE BREAKDOWN ===== -->
+        <div class="role-breakdown-section">
+            <h3 class="section-title">🎯 Squad Role Breakdown</h3>
+            <div class="role-breakdown-grid">
+                <div class="role-card">
+                    <div class="role-icon"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+                    <h5>Batsmen</h5>
+                    <p>Top and middle order run-scorers</p>
+                </div>
+                <div class="role-card">
+                    <div class="role-icon"><i class="fa-solid fa-wind"></i></div>
+                    <h5>Bowlers</h5>
+                    <p>Pace and spin wicket-takers</p>
+                </div>
+                <div class="role-card">
+                    <div class="role-icon"><i class="fa-solid fa-people-arrows"></i></div>
+                    <h5>All-Rounders</h5>
+                    <p>Dual-threat bat and ball specialists</p>
+                </div>
+                <div class="role-card">
+                    <div class="role-icon"><i class="fa-solid fa-hand"></i></div>
+                    <h5>Wicketkeepers</h5>
+                    <p>Behind-the-stumps glove specialists</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION B: SELECTION CRITERIA QUICK INFO ===== -->
+        <div class="selection-criteria-section">
+            <div class="criteria-card">
+                <div class="criteria-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div>
+                    <h5>Valid ID Proof</h5>
+                    <p>Required for squad registration</p>
+                </div>
+            </div>
+            <div class="criteria-card">
+                <div class="criteria-icon"><i class="fa-solid fa-shirt"></i></div>
+                <div>
+                    <h5>Unique Jersey #</h5>
+                    <p>Locked once first match starts</p>
+                </div>
+            </div>
+            <div class="criteria-card">
+                <div class="criteria-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div>
+                    <h5>Age Eligibility</h5>
+                    <p>Must meet tournament minimum age</p>
+                </div>
+            </div>
+            <div class="criteria-card">
+                <div class="criteria-icon"><i class="fa-solid fa-people-group"></i></div>
+                <div>
+                    <h5>One Team Only</h5>
+                    <p>A player represents a single squad</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION C: WEEKLY TRAINING REGIMEN ===== -->
+        <div class="training-section">
+            <h3 class="section-title">🏋️ Weekly Training Regimen</h3>
+            <div class="training-grid">
+                <div class="training-card">
+                    <div class="training-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                    <div>
+                        <h5>Strength & Conditioning</h5>
+                        <p>Gym sessions focused on core strength and explosive power.</p>
+                    </div>
+                </div>
+                <div class="training-card">
+                    <div class="training-icon"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+                    <div>
+                        <h5>Net Practice</h5>
+                        <p>Dedicated batting and bowling drills on match-simulated pitches.</p>
+                    </div>
+                </div>
+                <div class="training-card">
+                    <div class="training-icon"><i class="fa-solid fa-person-running"></i></div>
+                    <div>
+                        <h5>Fielding Drills</h5>
+                        <p>Catching, ground fielding and boundary-saving practice sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION D: CTA BANNER ===== -->
+        <div class="players-cta-banner">
+            <div class="players-cta-text">
+                <h3>🚀 Strengthen Your Squad</h3>
+                <p>Add more players to this roster and get the full team ready for the next tournament fixture.</p>
+            </div>
+            <a href="${pageContext.request.contextPath}/addPlayer/${teamId}" class="players-cta-btn">
+                <i class="fa-solid fa-user-plus"></i> Add Player
+            </a>
+        </div>
 
     </div>
+
+    <!-- 🌟 GRAND CYBER FOOTER INCLUDE -->
+    <jsp:include page="footer.jsp" />
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1110,26 +1304,6 @@
                 if (char === ' ') return '<span style="--i:' + index + '">&nbsp;</span>';
                 return '<span style="--i:' + index + '">' + char + '</span>';
             }).join('');
-        }
-
-        const bodyElement = document.body;
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-
-        if (localStorage.getItem('matchTheme') === 'light') {
-            bodyElement.classList.add('light-mode');
-            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-        }
-
-        function toggleTheme() {
-            if (bodyElement.classList.contains('light-mode')) {
-                bodyElement.classList.remove('light-mode');
-                localStorage.setItem('matchTheme', 'dark');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
-            } else {
-                bodyElement.classList.add('light-mode');
-                localStorage.setItem('matchTheme', 'light');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-            }
         }
 
         function filterPlayers() {

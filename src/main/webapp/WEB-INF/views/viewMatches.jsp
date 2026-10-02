@@ -50,7 +50,7 @@
             background: var(--body-overlay);
             color: var(--text-primary); 
             margin: 0; 
-            padding: 0 0 60px 0; 
+            padding: 0; 
             transition: background 0.3s ease, color 0.3s ease;
         }
 
@@ -365,8 +365,7 @@
         }
         .circle-badge-card:hover { transform: translateY(-5px); border-color: var(--neon-cyan); box-shadow: 0 15px 40px rgba(0, 217, 255, 0.25); }
         .circle-icon-wrap {
-            width: 75px; height: 75px; margin: 0 auto 15px auto; border-radius: 50%; background: rgba(0, 217, 255, 0.15); border: 2px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
-        }
+            width: 75px; height: 75px; margin: 0 auto 15px auto; border-radius: 50%; background: rgba(0, 217, 255, 0.15); border: 2px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 217, 255, 0.3); }
         .circle-badge-card h4 { margin: 0 0 8px 0; font-size: 15px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
         .circle-badge-card p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
 
@@ -491,9 +490,79 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* ===== NEW SECTION A: MATCH DAY PROTOCOL ===== */
+        .protocol-section {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+        }
+        @media(max-width: 900px) { .protocol-section { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .protocol-section { grid-template-columns: 1fr; } }
+        .protocol-card {
+            background: #0e1428; border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 20px; display: flex; align-items: center; gap: 14px; transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+        .protocol-card:hover { border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .protocol-icon {
+            width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0,217,255,0.18), rgba(181,55,242,0.18));
+            border: 1.5px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: var(--neon-cyan);
+        }
+        .protocol-card h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; }
+        .protocol-card p { margin: 0; font-size: 11.5px; color: var(--text-secondary); font-weight: 600; }
+
+        /* ===== NEW SECTION B: VENUE SPOTLIGHT ===== */
+        .venue-spotlight-section { max-width: 1400px; margin: 0 auto 40px auto; }
+        .venue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        @media(max-width: 768px) { .venue-grid { grid-template-columns: 1fr; } }
+        .venue-card {
+            background: #0e1428; border: 1.5px solid var(--border-glass); border-radius: 18px;
+            padding: 24px; text-align: center; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .venue-card:hover { transform: translateY(-6px); border-color: var(--neon-cyan); box-shadow: 0 15px 40px rgba(0,217,255,0.25); }
+        .venue-icon { width: 56px; height: 56px; margin: 0 auto 14px auto; border-radius: 16px; background: rgba(0,217,255,0.12); border: 1.5px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--neon-cyan); }
+        .venue-card h5 { margin: 0 0 6px 0; font-size: 14.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
+        .venue-card p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ===== NEW SECTION C: FAN QUICK ACCESS ===== */
+        .fan-access-section {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            background: #0e1428; border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 32px;
+        }
+        .fan-access-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media(max-width: 768px) { .fan-access-grid { grid-template-columns: 1fr; } }
+        .fan-access-item {
+            display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 12px;
+            background: #080b1e; border: 1px solid var(--border-glass); text-decoration: none; transition: all 0.25s ease;
+        }
+        .fan-access-item:hover { border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .fan-access-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 10px; background: rgba(0,217,255,0.12); border: 1px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-size: 17px; color: var(--neon-cyan); }
+        .fan-access-item h5 { margin: 0 0 2px 0; font-size: 13px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
+        .fan-access-item span { font-size: 11.5px; color: var(--text-secondary); font-weight: 600; }
+
+        /* ===== NEW SECTION D: CTA BANNER ===== */
+        .match-cta-banner {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            background: linear-gradient(135deg, rgba(0,217,255,0.16), rgba(0,255,136,0.1)), #0e1428;
+            border: 2px solid var(--neon-cyan); border-radius: 22px; padding: 40px;
+            display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap;
+            box-shadow: 0 20px 45px rgba(0,217,255,0.18);
+        }
+        .match-cta-text h3 { margin: 0 0 8px 0; font-size: 22px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; }
+        .match-cta-text p { margin: 0; font-size: 13.5px; color: var(--text-secondary); font-weight: 600; max-width: 560px; line-height: 1.6; }
+        .match-cta-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;
+            border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 0 25px rgba(0,217,255,0.5); transition: all 0.3s ease;
+        }
+        .match-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(0,255,136,0.7); color: #030712; }
+        @media(max-width: 700px) { .match-cta-banner { flex-direction: column; text-align: center; padding: 30px 22px; } }
+
         /* 🌟 GRAND CYBER FOOTER STYLING */
-        .grand-footer-section { background: #0d1222; border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
+        .grand-footer-section { background: #0d1222; border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; width: calc(100% - 40px); box-sizing: border-box; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; max-width: 1350px; margin-left: auto; margin-right: auto; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
         .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
@@ -535,7 +604,6 @@
                 <h2 class="jumping-title" id="animatedTitle">MATCH COMMAND CENTER</h2>
             </div>
             <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
                 <a href="addMatch" class="btn-top-add"><i class="fa-solid fa-plus"></i> New Match</a>
                 <a href="/deleteAllMatches" class="btn-delete-all" onclick="return confirm('⚠️ Warning: Delete ALL matches permanently?')">🗑 Delete All</a>
             </div>
@@ -785,10 +853,106 @@
             </div>
         </div>
 
-        <!-- 🌟 FOOTER INCLUDE -->
-        <jsp:include page="footer.jsp" />
+        <!-- ===== NEW SECTION A: MATCH DAY PROTOCOL ===== -->
+        <div class="protocol-section">
+            <div class="protocol-card">
+                <div class="protocol-icon"><i class="fa-solid fa-clock"></i></div>
+                <div>
+                    <h5>Report Time</h5>
+                    <p>30 mins before start</p>
+                </div>
+            </div>
+            <div class="protocol-card">
+                <div class="protocol-icon"><i class="fa-solid fa-coins"></i></div>
+                <div>
+                    <h5>Toss</h5>
+                    <p>15 mins before match</p>
+                </div>
+            </div>
+            <div class="protocol-card">
+                <div class="protocol-icon"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+                <div>
+                    <h5>Format</h5>
+                    <p>20 overs per innings</p>
+                </div>
+            </div>
+            <div class="protocol-card">
+                <div class="protocol-icon"><i class="fa-solid fa-user-shield"></i></div>
+                <div>
+                    <h5>Umpire's Call</h5>
+                    <p>On-field decision is final</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION B: VENUE SPOTLIGHT ===== -->
+        <div class="venue-spotlight-section">
+            <h3 class="section-title">🏟️ Venue Spotlight</h3>
+            <div class="venue-grid">
+                <div class="venue-card">
+                    <div class="venue-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h5>Floodlit Grounds</h5>
+                    <p>Premium night-match venues with full LED floodlight coverage.</p>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <h5>Certified Pitches</h5>
+                    <p>True-bounce wickets maintained and approved by match referees.</p>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-icon"><i class="fa-solid fa-square-parking"></i></div>
+                    <h5>Fan Facilities</h5>
+                    <p>On-site parking, seating and refreshments for every matchday.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION C: FAN QUICK ACCESS ===== -->
+        <div class="fan-access-section">
+            <h3 class="section-title">🔗 Quick Access</h3>
+            <div class="fan-access-grid">
+                <a href="/pointsTable" class="fan-access-item">
+                    <div class="fan-access-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                    <div>
+                        <h5>Points Table</h5>
+                        <span>Live standings and NRR</span>
+                    </div>
+                </a>
+                <a href="/tournaments" class="fan-access-item">
+                    <div class="fan-access-icon"><i class="fa-solid fa-trophy"></i></div>
+                    <div>
+                        <h5>Tournaments</h5>
+                        <span>Browse active cups</span>
+                    </div>
+                </a>
+                <a href="/teams" class="fan-access-item">
+                    <div class="fan-access-icon"><i class="fa-solid fa-users"></i></div>
+                    <div>
+                        <h5>Teams</h5>
+                        <span>Squads and rosters</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION D: CTA BANNER ===== -->
+        <div class="match-cta-banner">
+            <div class="match-cta-text">
+                <h3>🚀 Don't Miss the Next Fixture</h3>
+                <p>Add a new match to the control center or register your team to start competing on the arena.</p>
+            </div>
+            <a href="addMatch" class="match-cta-btn">
+                <i class="fa-solid fa-plus"></i> Add New Match
+            </a>
+        </div>
 
     </div>
+
+    <!-- 🌟 FOOTER INCLUDE -->
+    <jsp:include page="footer.jsp" />
+
+    <!-- CHATBOT INCLUDE -->
+    <jsp:include page="chatbot.jsp" />
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -797,23 +961,6 @@
         titleEl.innerHTML = titleEl.innerText.split('').map((char, index) => 
             char === ' ' ? '<span style="--i:' + index + '">&nbsp;</span>' : '<span style="--i:' + index + '">' + char + '</span>'
         ).join('');
-
-        const bodyElement = document.body;
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        if (localStorage.getItem('matchTheme') === 'light') {
-            bodyElement.classList.add('light-mode');
-            themeToggleBtn.innerHTML = '☀️ Light Mode';
-        }
-        function toggleTheme() {
-            if (bodyElement.classList.contains('light-mode')) {
-                bodyElement.classList.remove('light-mode');
-                localStorage.setItem('matchTheme', 'dark');
-                themeToggleBtn.innerHTML = '🌙 Dark Mode';
-            } else {
-                bodyElement.classList.add('light-mode');
-                themeToggleBtn.innerHTML = '☀️ Light Mode';
-            }
-        }
 
         function filterMatches() {
             let input = document.getElementById('matchSearch').value.toLowerCase().trim();

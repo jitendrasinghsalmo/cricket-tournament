@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.72);
+            --card-surface: rgba(13, 18, 30, 0.72); /* Transparent glassmorphism */
             --neon-cyan: #38bdf8;
             --neon-emerald: #10b981;
             --neon-rose: #f43f5e;
@@ -21,6 +21,10 @@
             --input-bg: rgba(3, 7, 18, 0.45);
         }
 
+        * { box-sizing: border-box; }
+
+        html, body { max-width: 100%; overflow-x: hidden; }
+
         body { 
             font-family: 'Inter', system-ui, -apple-system, sans-serif; 
             background: linear-gradient(135deg, var(--body-overlay) 0%, var(--body-overlay) 100%), 
@@ -28,49 +32,51 @@
             background-size: cover;
             color: var(--text-primary); 
             margin: 0; 
-            padding: 40px 20px 60px 20px; 
+            padding: 70px 15px 15px 15px; 
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* Top-Left Back Button */
         .btn-top-left-back {
-            position: fixed;
-            top: 25px;
-            left: 30px;
-            background: var(--card-surface);
-            color: var(--neon-cyan);
-            border: 1px solid var(--border-glass);
-            padding: 10px 20px;
-            border-radius: 12px;
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            background: rgba(14, 165, 233, 0.16);
+            color: #22d3ee;
+            border: 2px solid #06b6d4;
+            padding: 9px 22px;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
+            font-weight: 800;
+            font-size: 16px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
             transition: all 0.25s ease;
             z-index: 1000;
         }
         .btn-top-left-back:hover {
-            background: var(--neon-cyan);
+            background: #06b6d4;
             color: #030712;
-            transform: translateX(-4px);
+            transform: translateX(-3px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         }
 
         .form-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             background: var(--card-surface);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 35px 40px;
+            border-radius: 18px;
+            padding: 24px 34px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.6);
             position: relative;
             overflow: hidden;
@@ -84,16 +90,16 @@
             text-align: center;
             color: var(--text-primary);
             margin-top: 0;
-            margin-bottom: 25px;
+            margin-bottom: 16px;
             font-weight: 800;
-            font-size: 22px;
+            font-size: 21px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
         h2 span { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 13px;
         }
 
         label {
@@ -113,15 +119,16 @@
             background: var(--input-bg);
             border: 1px solid var(--border-glass);
             border-radius: 10px;
-            padding: 11px 15px;
+            padding: 11px 14px;
             color: #ffffff;
-            font-size: 13.5px;
+            font-size: 14px;
             font-family: inherit;
             outline: none;
             box-sizing: border-box;
             transition: all 0.2s ease;
         }
 
+        /* Calendar Icon visibility fix for date inputs */
         input[type="datetime-local"]::-webkit-calendar-picker-indicator {
             filter: invert(1);
             cursor: pointer;
@@ -151,17 +158,42 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 16px;
         }
 
+        .form-row .form-group { min-width: 0; }
+
         @media(max-width: 768px) {
-            .btn-top-left-back { top: 15px; left: 15px; padding: 8px 14px; font-size: 12px; }
-            .form-row { grid-template-columns: 1fr; gap: 0; }
-            .form-container { padding: 25px 20px; }
+            .btn-top-left-back { top: 12px; left: 14px; font-size: 14px; padding: 7px 16px; border-radius: 12px; gap: 8px; }
+            .form-container { padding: 22px 18px; max-width: 460px; }
+            h2 { font-size: 18px; margin-bottom: 16px; }
+            .form-group { margin-bottom: 12px; }
+        }
+
+        @media(max-width: 480px) {
+            body { padding: 58px 12px 12px 12px; }
+            .form-container { padding: 20px 14px; }
+            .form-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .form-row.stack-mobile { grid-template-columns: 1fr; gap: 0; }
+            input[type="text"],
+            input[type="datetime-local"],
+            select { padding: 9px 9px; font-size: 13px; }
+            label { font-size: 11px; }
+        }
+
+        @media(max-height: 640px) {
+            body { padding-top: 56px; }
+            .form-container { padding: 16px 16px; }
+            h2 { margin-bottom: 10px; font-size: 16px; }
+            .form-group { margin-bottom: 8px; }
+            input[type="text"],
+            input[type="datetime-local"],
+            select { padding: 7px 10px; }
+            .button-group { margin-top: 10px; }
         }
 
         .button-group {
-            margin-top: 25px;
+            margin-top: 16px;
         }
 
         .btn-submit {
@@ -169,9 +201,9 @@
             background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             color: #ffffff;
             border: 1px solid rgba(56, 189, 248, 0.4);
-            padding: 13px;
+            padding: 12px;
             border-radius: 10px;
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 800;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -189,7 +221,8 @@
 </head>
 <body>
 
-    <a href="/matches" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back to Matches</a>
+    <!-- Top-Left Back Button -->
+    <a href="/matches" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
 
     <div class="form-container">
         <h2>Add New <span>Match Fixture</span></h2>
@@ -228,7 +261,7 @@
                 </div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row stack-mobile">
                 <div class="form-group">
                     <label>Match Date & Time</label>
                     <input type="datetime-local" name="matchDateTime" required>

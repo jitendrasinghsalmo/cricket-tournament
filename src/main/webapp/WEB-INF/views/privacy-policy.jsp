@@ -216,6 +216,15 @@
             transition: color 0.2s; 
         }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* ===================== EXTRA PRIVACY SECTIONS (added, nothing else touched) ===================== */
+        .toc-box { background: rgba(0, 217, 255, 0.05); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 22px 28px; margin-bottom: 30px; }
+        .toc-box h4 { font-size: 15px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 14px 0; }
+        .toc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        @media(max-width: 650px) { .toc-list { grid-template-columns: 1fr; } }
+        .toc-list li a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .toc-list li a:hover { color: var(--neon-cyan); transform: translateX(3px); }
+        .toc-list li a i { color: var(--neon-emerald); font-size: 11px; }
     </style>
 </head>
 <body>
@@ -224,25 +233,32 @@
     <jsp:include page="navbar.jsp" />
 
     <div class="main-content-wrap">
-        <div class="header-bar">
-            <div class="header-left">
-                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            </div>
-            <div>
-                <h2 style="font-size: 20px; font-weight: 900; margin: 0; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1.5px;">Privacy Policy</h2>
-            </div>
-            <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-            </div>
-        </div>
 
         <div class="policy-container">
             <h1><i class="fa-solid fa-shield-halved"></i> Comprehensive Privacy Policy</h1>
             <span class="last-updated">Last updated & Effective Date: June 2026 | ProMatch Arena Governance & Data Compliance Framework</span>
+
+            <!-- ===================== TABLE OF CONTENTS ===================== -->
+            <div class="toc-box">
+                <h4>📑 Quick Navigation</h4>
+                <ul class="toc-list">
+                    <li><a href="#sec1"><i class="fa-solid fa-caret-right"></i> Technological Stack & Data Framework</a></li>
+                    <li><a href="#sec2"><i class="fa-solid fa-caret-right"></i> Categories of Information Collected</a></li>
+                    <li><a href="#sec3"><i class="fa-solid fa-caret-right"></i> Purpose & Scope of Data Utilization</a></li>
+                    <li><a href="#sec4"><i class="fa-solid fa-caret-right"></i> Data Security Protocols</a></li>
+                    <li><a href="#sec5"><i class="fa-solid fa-caret-right"></i> Participant Rights & Data Control</a></li>
+                    <li><a href="#sec6"><i class="fa-solid fa-caret-right"></i> Administrative & Developer Contact</a></li>
+                    <li><a href="#sec7"><i class="fa-solid fa-caret-right"></i> Cookies & Local Storage Policy</a></li>
+                    <li><a href="#sec8"><i class="fa-solid fa-caret-right"></i> Third-Party Services & Data Sharing</a></li>
+                    <li><a href="#sec9"><i class="fa-solid fa-caret-right"></i> Children's Privacy</a></li>
+                    <li><a href="#sec10"><i class="fa-solid fa-caret-right"></i> Data Retention & Deletion Policy</a></li>
+                    <li><a href="#sec11"><i class="fa-solid fa-caret-right"></i> Policy Updates & Changes</a></li>
+                </ul>
+            </div>
             
             <p>Welcome to <strong>ProMatch Arena</strong>. We value your digital privacy with absolute seriousness and transparency. Because our application functions as a fully realized, enterprise-grade cricket tournament management and sports analytics system, this comprehensive Privacy Policy outlines the complete lifecycle of data collection, structural processing, secure storage, and strict protection protocols enforced across our digital ecosystem. By interacting with our software modules, dashboards, and services, you consent to the data practices described within this governance document.</p>
 
-            <h3>1. Complete Technological Stack & Core Data Processing Framework</h3>
+            <h3 id="sec1">1. Complete Technological Stack & Core Data Processing Framework</h3>
             <p>To fully understand our data privacy standards and compliance metrics, it is vital to examine the multi-tier enterprise architecture that processes participant information within ProMatch Arena:</p>
             <ul>
                 <li><strong>Spring Boot Backend Engine:</strong> Operates as the core server-side architecture, managing modular routing, controller dispatching, asynchronous task execution, and core application service orchestration with minimal network latency and maximum request security.</li>
@@ -252,7 +268,7 @@
                 <li><strong>Automated Net Run Rate (NRR) Engine:</strong> A specialized mathematical calculation algorithm integrated into the backend core that computes precise Net Run Rates instantly upon match conclusion, updating tournament standings and team qualification brackets in real time.</li>
             </ul>
 
-            <h3>2. Categories of Information Collected and Processed</h3>
+            <h3 id="sec2">2. Categories of Information Collected and Processed</h3>
             <p>In accordance with data minimization principles, ProMatch Arena restricts data collection strictly to operational necessities required for efficient tournament administration, accurate scorekeeping, and secure user authentication:</p>
             <ul>
                 <li><strong>Identity & Authentication Records:</strong> Full legal or display names, secure login email addresses, and enterprise-hashed passwords managed securely through Spring Security active session scopes.</li>
@@ -260,7 +276,7 @@
                 <li><strong>Sports Analytics & Operational Logs:</strong> Registered team names, squad player configurations, jersey numbers, match score inputs, innings summaries, and navigation search keyword queries logged during active system interaction.</li>
             </ul>
 
-            <h3>3. Purpose and Scope of Data Utilization</h3>
+            <h3 id="sec3">3. Purpose and Scope of Data Utilization</h3>
             <p>Your personal and operational data is never commercialized, monetized, rented, or shared with external third-party advertising entities. Information processed within ProMatch Arena is utilized strictly for internal platform modules and tournament workflows:</p>
             <ul>
                 <li><strong>Secure Session Management:</strong> Authenticating user identity during login handshakes and securing restricted operational zones, including team registration portals, squad management dashboards, and password modification panels.</li>
@@ -268,13 +284,13 @@
                 <li><strong>Interactive AI Assistance & Navigation:</strong> Processing conversational text prompts submitted inside the embedded assistant chatbot module to deliver rapid navigation paths, troubleshooting steps, and technical architecture guidance.</li>
             </ul>
 
-            <h3>4. Robust Data Security Protocols and Architectural Safeguards</h3>
+            <h3 id="sec4">4. Robust Data Security Protocols and Architectural Safeguards</h3>
             <p>ProMatch Arena deploys multi-layered, defense-in-depth cybersecurity protocols. User credentials undergo advanced cryptographic hashing before persistence in the database; all database interactions utilize parameterized prepared statements to neutralize SQL injection vulnerabilities; and strict cross-origin resource sharing (CORS) boundaries protect the platform routing tiers from malicious external tampering.</p>
 
-            <h3>5. Participant Rights and Individual Data Control</h3>
+            <h3 id="sec5">5. Participant Rights and Individual Data Control</h3>
             <p>Registered participants maintain absolute control over their accounts and personal data profiles. You retain the full legal right to update or replace your user avatar at any time, clear local storage tokens, modify your account access credentials through the secure change-password portal, or terminate your active session securely via the platform logout routine.</p>
 
-            <h3>6. Official Administrative and Developer Support Contact</h3>
+            <h3 id="sec6">6. Official Administrative and Developer Support Contact</h3>
             <p>If you have any questions, formal compliance inquiries, vulnerability disclosures, or technical support requirements regarding this comprehensive Privacy Policy, please contact the platform creator and lead architect directly:</p>
             
             <div class="contact-box">
@@ -283,7 +299,47 @@
                 <p><i class="fa-solid fa-envelope me-2 text-primary"></i> Official Email: jitendrasingh07022004@gmail.com</p>
                 <p><i class="fa-solid fa-server me-2 text-primary"></i> System Architecture: ProMatch Arena Enterprise Tournament Hub</p>
             </div>
+
+            <!-- ===================== NEW SECTION 7: COOKIES & LOCAL STORAGE POLICY ===================== -->
+            <h3 id="sec7">7. Cookies & Local Storage Policy</h3>
+            <p>ProMatch Arena uses browser-based storage mechanisms strictly to enhance functional usability rather than for tracking or advertising purposes:</p>
+            <ul>
+                <li><strong>Session Cookies:</strong> Used exclusively to maintain your authenticated login state as you navigate between dashboards, squad pages, and tournament brackets.</li>
+                <li><strong>Local Storage (`matchTheme`):</strong> Stores your Dark Mode / Light Mode preference locally in your browser so the interface remembers your chosen theme across visits.</li>
+                <li><strong>No Third-Party Tracking Cookies:</strong> We do not deploy advertising pixels, cross-site tracking cookies, or behavioral profiling scripts anywhere on the platform.</li>
+                <li><strong>Browser Control:</strong> You may clear cookies and local storage at any time through your browser settings; doing so will reset your theme preference and require re-authentication.</li>
+            </ul>
+
+            <!-- ===================== NEW SECTION 8: THIRD-PARTY SERVICES & DATA SHARING ===================== -->
+            <h3 id="sec8">8. Third-Party Services & Limited Data Sharing</h3>
+            <p>ProMatch Arena integrates a minimal set of trusted third-party services strictly necessary for platform operation:</p>
+            <ul>
+                <li><strong>Razorpay Payment Gateway:</strong> Processes tournament entry fee transactions securely; ProMatch Arena never stores raw card or banking credentials on its own servers.</li>
+                <li><strong>Content Delivery Networks (CDNs):</strong> Bootstrap, Font Awesome, and Google Fonts are loaded from trusted CDN providers strictly for interface styling — no personal data is transmitted to these providers.</li>
+                <li><strong>Video Embeds:</strong> Match highlight videos are embedded via YouTube's standard iframe player, which operates under YouTube's own privacy terms when a video is played.</li>
+                <li><strong>No Data Resale:</strong> None of your personal information is sold, rented, or licensed to any third-party marketing or analytics company.</li>
+            </ul>
+
+            <!-- ===================== NEW SECTION 9: CHILDREN'S PRIVACY ===================== -->
+            <h3 id="sec9">9. Children's Privacy</h3>
+            <p>ProMatch Arena is intended for use by team administrators, players, and tournament organizers who are at least 13 years of age. We do not knowingly collect personal information from children under 13. Student and school-level teams registering through supervised programs must be represented by an authorized adult coordinator or coach. If we become aware that data has been inadvertently collected from a child under 13 without appropriate consent, we will take prompt steps to delete such information.</p>
+
+            <!-- ===================== NEW SECTION 10: DATA RETENTION & DELETION POLICY ===================== -->
+            <h3 id="sec10">10. Data Retention & Account Deletion Policy</h3>
+            <p>We retain personal and tournament-related data only as long as necessary to fulfill the purposes outlined in this policy:</p>
+            <ul>
+                <li><strong>Active Accounts:</strong> Data is retained for the full duration your account remains active and in good standing on the platform.</li>
+                <li><strong>Account Deletion Requests:</strong> Upon a verified deletion request, personal identity data is permanently purged from our PostgreSQL database within 7–10 business days, excluding anonymized historical match statistics required for tournament record integrity.</li>
+                <li><strong>Inactive Accounts:</strong> Accounts inactive for over 24 months may be archived or removed following prior notification to the registered email address.</li>
+            </ul>
+
+            <!-- ===================== NEW SECTION 11: POLICY UPDATES & CHANGES ===================== -->
+            <h3 id="sec11">11. Policy Updates & Changes</h3>
+            <p>ProMatch Arena reserves the right to revise this Privacy Policy periodically to reflect platform updates, new features, or evolving legal and regulatory requirements. The "Last updated" date at the top of this page will always indicate the most recent revision. Continued use of the platform following any policy update constitutes your acceptance of the revised terms. We encourage users to periodically review this page for the latest information on our data practices.</p>
         </div>
+
+        <!-- CHATBOT FILE INCLUDE -->
+        <jsp:include page="chatbot.jsp" />
 
         <!-- 🌟 FOOTER INCLUDE -->
         <jsp:include page="footer.jsp" />

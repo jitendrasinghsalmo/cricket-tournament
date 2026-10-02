@@ -28,21 +28,6 @@
             --body-overlay: rgba(10, 14, 39, 0.94);
         }
 
-        body.light-theme {
-            --bg-deep: #f0f4ff;
-            --card-surface: rgba(255, 255, 255, 0.95);
-            --neon-cyan: #0088bb;
-            --neon-emerald: #008833;
-            --neon-rose: #cc0044;
-            --neon-amber: #cc6600;
-            --neon-purple: #7700cc;
-            --neon-gold: #b38600;
-            --text-primary: #0f1c3f;
-            --text-secondary: #334466;
-            --border-glass: rgba(0, 136, 187, 0.3);
-            --body-overlay: rgba(240, 244, 255, 0.94);
-        }
-
         * { box-sizing: border-box; }
 
         body { 
@@ -50,47 +35,9 @@
             background-color: var(--bg-deep);
             color: var(--text-primary); 
             margin: 0; 
-            padding: 0 0 60px 0; 
-            transition: background 0.3s ease, color 0.3s ease;
+            padding: 0; 
         }
 
-        /* 🌟 EXACT NAVBAR STYLING FROM PIC */
-        nav {
-            background: rgba(10, 14, 39, 0.92);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1.5px solid var(--border-glass);
-            padding: 14px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-        .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-icon { 
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
-            color: #030712; width: 38px; height: 38px; border-radius: 10px; 
-            display: flex; align-items: center; justify-content: center; 
-            font-weight: 900; font-size: 19px; 
-            box-shadow: 0 0 15px rgba(0,217,255,0.6); 
-        }
-        .logo-text { font-weight: 900; font-size: 18px; color: var(--text-primary); letter-spacing: 0.8px; }
-        .logo-text span { display: block; font-size: 9.5px; color: var(--neon-cyan); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
-
-        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; align-items: center; }
-        .nav-links a { 
-            color: var(--text-secondary); text-decoration: none; font-size: 13.5px; font-weight: 700; 
-            padding: 8px 16px; border-radius: 10px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .nav-links a:hover { color: var(--neon-cyan); background: rgba(0, 217, 255, 0.08); }
-        .nav-links a.active { 
-            color: #030712; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); 
-            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5); font-weight: 800; 
-        }
-        
         .main-content-wrap { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
 
         .header-bar { 
@@ -114,15 +61,15 @@
         }
         .btn-back:hover { background: var(--neon-cyan); color: #0a0e27; transform: translateX(-3px); box-shadow: 0 0 20px rgba(0, 217, 255, 0.5); }
 
-        .theme-toggle-btn {
-            background: linear-gradient(135deg, rgba(181, 55, 242, 0.15), rgba(181, 55, 242, 0.08));
-            color: var(--neon-purple); border: 1.5px solid var(--neon-purple); 
-            padding: 9px 16px; border-radius: 10px; font-size: 12px; font-weight: 700; 
-            cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px;
+        .pro-status-badge {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 217, 255, 0.15));
+            color: var(--neon-emerald); border: 1.5px solid var(--neon-emerald);
+            padding: 9px 18px; border-radius: 10px; font-size: 12px; font-weight: 800;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .theme-toggle-btn:hover { background: var(--neon-purple); color: #fff; box-shadow: 0 0 20px rgba(181, 55, 242, 0.5); }
 
-        /* UNIQUE BLUR & BOUNCE TEXT ANIMATION */
         .animated-heading {
             text-align: center;
             margin: 0;
@@ -168,7 +115,6 @@
             border-radius: 10px; padding: 9px 15px; color: var(--text-primary); font-size: 13px;
             width: 300px; outline: none; transition: 0.3s;
         }
-        body.light-theme .search-input { background: rgba(230, 235, 250, 0.9); color: #0f1c3f; }
         .search-input::placeholder { color: var(--text-secondary); opacity: 0.8; }
         .search-input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 217, 255, 0.4); }
 
@@ -179,7 +125,6 @@
         }
         .stats-badge span { color: var(--neon-gold); font-weight: 900; }
 
-        /* TABLE SECTION */
         .table-container {
             max-width: 1400px; margin: 0 auto 15px auto;
             background: var(--card-surface); backdrop-filter: blur(20px);
@@ -215,7 +160,6 @@
         .team-name { font-weight: 800; color: var(--neon-cyan); }
         .tournament-name { color: var(--text-secondary); font-size: 12px; font-weight: 700; }
 
-        /* PAGINATION - RIGHT ALIGNED */
         .pagination-bar-wrapper {
             max-width: 1400px;
             margin: 0 auto 30px auto;
@@ -235,7 +179,6 @@
         .pagination-bar a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 217, 255, 0.5); }
         .page-indicator { font-size: 13px; font-weight: 800; color: var(--text-primary); }
 
-        /* TOP STATS SECTION */
         .top-stats-section {
             max-width: 1400px; margin: 0 auto 25px auto;
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;
@@ -255,7 +198,6 @@
         .stat-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
         .stat-value { font-size: 21px; font-weight: 900; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,217,255,0.3); }
 
-        /* HIGHLIGHTS SECTION */
         .highlights-section {
             max-width: 1400px; margin: 0 auto 25px auto;
             background: var(--card-surface);
@@ -277,12 +219,10 @@
             background: rgba(13, 18, 35, 0.45); border: 1.5px solid var(--border-glass);
             border-radius: 10px; padding: 14px; text-align: center; transition: all 0.3s ease;
         }
-        body.light-theme .highlight-item { background: rgba(220, 230, 245, 0.6); }
         .highlight-item:hover { transform: translateY(-3px); border-color: var(--neon-cyan); background: rgba(0, 217, 255, 0.1); }
         .highlight-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800; margin-bottom: 5px; }
         .highlight-value { font-size: 16px; font-weight: 900; color: var(--neon-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
 
-        /* HERO BANNER SECTION */
         .attractive-hero-banner {
             max-width: 1400px;
             margin: 0 auto 30px auto;
@@ -335,7 +275,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
         }
-        body.light-theme .hero-pill { background: rgba(220, 230, 245, 0.8); }
         .hero-pill:hover {
             transform: translateY(-3px);
             border-color: var(--neon-emerald);
@@ -343,7 +282,9 @@
             box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
         }
 
-        /* CIRCULAR FEATURE SECTION */
+        /* 4 NEW ADDED SECTIONS */
+
+        /* 1. CIRCULAR FEATURE SECTION */
         .circular-features-section {
             max-width: 1400px;
             margin: 0 auto 30px auto;
@@ -387,7 +328,7 @@
             margin: 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5; font-weight: 600;
         }
 
-        /* PRO TOURNAMENT PULSE POD */
+        /* 2. PRO TOURNAMENT PULSE POD */
         .pro-tournament-pod {
             max-width: 1400px;
             margin: 0 auto 30px auto;
@@ -417,7 +358,6 @@
             text-align: center;
             transition: all 0.3s ease;
         }
-        body.light-theme .pod-box { background: rgba(220, 230, 245, 0.7); }
         .pod-box:hover {
             transform: translateY(-4px);
             border-color: var(--neon-gold);
@@ -444,7 +384,7 @@
             line-height: 1.4;
         }
 
-        /* MEGA FEATURE SECTION */
+        /* 3. MEGA FEATURE SECTION */
         .mega-feature-showcase {
             max-width: 1400px;
             margin: 0 auto 30px auto;
@@ -538,7 +478,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* ELITE SHOWCASE BOX */
+        /* 4. ELITE SHOWCASE BOX */
         .elite-showcase-box {
             max-width: 1400px;
             margin: 0 auto 35px auto;
@@ -627,7 +567,7 @@
             .elite-badges { justify-content: center; }
         }
 
-        /* 🔥 PREMIUM BROADCAST SECTION WITH GLOW ANIMATION */
+        /* LIVE BROADCAST SECTION */
         .broadcast-section {
             max-width: 1400px; margin: 0 auto 30px auto;
             background: var(--card-surface); backdrop-filter: blur(15px);
@@ -639,13 +579,10 @@
         
         .broadcast-card {
             background: rgba(13, 18, 35, 0.6); 
-            border: 2px solid transparent; /* Transparent border for glow effect */
+            border: 2px solid transparent;
             border-radius: 14px; padding: 20px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative; overflow: hidden;
         }
-        body.light-theme .broadcast-card { background: rgba(220, 230, 245, 0.7); }
-        
-        /* HOVER GLOW ANIMATION */
         .broadcast-card:hover {
             transform: translateY(-8px) scale(1.02);
             border-color: var(--neon-cyan);
@@ -655,7 +592,7 @@
         .broadcast-card h4 { font-size: 14px; font-weight: 900; color: var(--text-primary); margin-bottom: 8px; text-transform: uppercase; }
         .broadcast-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 
-        /* GALLERY SECTION WITH 360° ROTATION & PERFECT FULL IMAGE FIT */
+        /* GALLERY SECTION WITH 360° ROTATION */
         .gallery-section {
             max-width: 1400px; margin: 0 auto 40px auto;
             background: var(--card-surface);
@@ -674,8 +611,6 @@
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        body.light-theme .gallery-card { background: rgba(230, 238, 250, 0.95); }
-        
         .gallery-card:hover {
             transform: rotateY(360deg) translateY(-8px);
             border-color: var(--neon-cyan);
@@ -716,9 +651,94 @@
             transform: scale(1.03);
         }
 
-        /* 🌟 EXACT GRAND FOOTER STYLING FROM PIC */
-        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
+        /* ===== NEW SECTION A: TOP 3 PODIUM ===== */
+        .podium-section {
+            max-width: 1400px; margin: 0 auto 30px auto;
+            background: var(--card-surface); backdrop-filter: blur(15px);
+            border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+        .podium-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: end; }
+        @media(max-width: 768px) { .podium-grid { grid-template-columns: 1fr; } }
+        .podium-card {
+            background: rgba(13, 18, 35, 0.6); border: 1.5px solid var(--border-glass);
+            border-radius: 16px; padding: 22px 18px; text-align: center; position: relative;
+            transition: all 0.3s ease; overflow: hidden;
+        }
+        .podium-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.35); }
+        .podium-card.gold { border-color: var(--neon-gold); box-shadow: 0 0 25px rgba(255,215,0,0.2); order: 2; transform: scale(1.05); }
+        .podium-card.silver { border-color: var(--neon-cyan); order: 1; }
+        .podium-card.bronze { border-color: var(--neon-emerald); order: 3; }
+        @media(max-width: 768px) { .podium-card.gold, .podium-card.silver, .podium-card.bronze { order: 0; transform: none; } }
+        .podium-rank-icon { font-size: 30px; margin-bottom: 8px; }
+        .podium-card.gold .podium-rank-icon { color: var(--neon-gold); text-shadow: 0 0 15px rgba(255,215,0,0.5); }
+        .podium-card.silver .podium-rank-icon { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0,217,255,0.5); }
+        .podium-card.bronze .podium-rank-icon { color: var(--neon-emerald); text-shadow: 0 0 15px rgba(0,255,136,0.5); }
+        .podium-team { font-size: 16px; font-weight: 900; color: var(--text-primary); margin: 6px 0 4px 0; text-transform: uppercase; }
+        .podium-tour { font-size: 11px; color: var(--text-secondary); font-weight: 700; margin-bottom: 12px; }
+        .podium-pts { font-size: 22px; font-weight: 900; color: var(--neon-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
+        .podium-pts-label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
+
+        /* ===== NEW SECTION B: MATCH FORMAT QUICK INFO ===== */
+        .format-info-section {
+            max-width: 1400px; margin: 0 auto 30px auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+        }
+        @media(max-width: 900px) { .format-info-section { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .format-info-section { grid-template-columns: 1fr; } }
+        .format-info-card {
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 18px; display: flex; align-items: center; gap: 14px;
+            backdrop-filter: blur(15px); transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .format-info-card:hover { border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .format-info-icon {
+            width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0,217,255,0.18), rgba(181,55,242,0.18));
+            border: 1.5px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: var(--neon-cyan);
+        }
+        .format-info-card h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; }
+        .format-info-card p { margin: 0; font-size: 11.5px; color: var(--text-secondary); font-weight: 600; }
+
+        /* ===== NEW SECTION C: RECENT FORM GUIDE ===== */
+        .form-guide-section {
+            max-width: 1400px; margin: 0 auto 30px auto;
+            background: var(--card-surface); backdrop-filter: blur(15px);
+            border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+        .form-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 6px; border-bottom: 1px solid var(--border-glass); flex-wrap: wrap; }
+        .form-row:last-child { border-bottom: none; }
+        .form-row .form-team { font-size: 13.5px; font-weight: 800; color: var(--neon-cyan); min-width: 160px; }
+        .form-badges { display: flex; gap: 6px; }
+        .form-pill { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #000; }
+        .form-pill.w { background: var(--neon-emerald); box-shadow: 0 0 10px rgba(0,255,136,0.4); }
+        .form-pill.l { background: var(--neon-rose); color: #fff; box-shadow: 0 0 10px rgba(255,0,110,0.4); }
+        .form-pill.t { background: var(--neon-amber); box-shadow: 0 0 10px rgba(255,165,0,0.4); }
+
+        /* ===== NEW SECTION D: CTA BANNER ===== */
+        .points-cta-banner {
+            max-width: 1400px; margin: 0 auto 30px auto;
+            background: linear-gradient(135deg, rgba(0,217,255,0.16), rgba(0,255,136,0.1)), var(--card-surface);
+            border: 2px solid var(--neon-cyan); border-radius: 22px; padding: 40px;
+            display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap;
+            box-shadow: 0 20px 45px rgba(0,217,255,0.2); backdrop-filter: blur(20px);
+        }
+        .points-cta-text h3 { margin: 0 0 8px 0; font-size: 22px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; }
+        .points-cta-text p { margin: 0; font-size: 13.5px; color: var(--text-secondary); font-weight: 600; max-width: 560px; line-height: 1.6; }
+        .points-cta-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;
+            border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 0 25px rgba(0,217,255,0.5); transition: all 0.3s ease;
+        }
+        .points-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(0,255,136,0.7); color: #030712; }
+        @media(max-width: 700px) { .points-cta-banner { flex-direction: column; text-align: center; padding: 30px 22px; } }
+
+        /* GRAND FOOTER */
+        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; width: calc(100% - 40px); box-sizing: border-box; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; max-width: 1350px; margin-left: auto; margin-right: auto; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
         .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
@@ -761,9 +781,9 @@
             </div>
 
             <div class="header-right">
-                <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-                    🌙 <span id="themeBtnText">Dark</span>
-                </button>
+                <div class="pro-status-badge">
+                    <i class="fa-solid fa-tower-broadcast"></i> PRO LIVE
+                </div>
             </div>
         </div>
 
@@ -908,6 +928,7 @@
             </div>
         </div>
 
+        <!-- NEW SECTION 1: CIRCULAR FEATURE SECTION -->
         <div class="circular-features-section">
             <div class="feat-circle-card">
                 <div class="feat-icon-wrap">
@@ -932,6 +953,7 @@
             </div>
         </div>
 
+        <!-- NEW SECTION 2: PRO TOURNAMENT PULSE POD -->
         <div class="pro-tournament-pod">
             <h3 class="section-title" style="margin-bottom: 20px;">🔥 Pro Tournament Pulse & Highlights</h3>
             <div class="pod-grid">
@@ -958,6 +980,7 @@
             </div>
         </div>
 
+        <!-- NEW SECTION 3: MEGA FEATURE SECTION -->
         <div class="mega-feature-showcase">
             <div class="mega-feature-content">
                 <h2>🚀 High-Performance Cyber Architecture</h2>
@@ -985,6 +1008,7 @@
             </div>
         </div>
 
+        <!-- NEW SECTION 4: ELITE SHOWCASE BOX -->
         <div class="elite-showcase-box">
             <div class="elite-content">
                 <h2>⚡ ProMatch Championship Arena</h2>
@@ -1057,9 +1081,104 @@
             </div>
         </div>
 
-        <jsp:include page="footer.jsp" />
+        <!-- ===== NEW SECTION A: TOP 3 PODIUM ===== -->
+        <div class="podium-section">
+            <h3 class="section-title" style="margin-bottom: 20px;">🏆 Top Performing Teams</h3>
+            <c:choose>
+                <c:when test="${not empty pointsList}">
+                    <div class="podium-grid">
+                        <c:forEach items="${pointsList}" var="pt" varStatus="loop" end="2">
+                            <div class="podium-card ${loop.index == 0 ? 'gold' : (loop.index == 1 ? 'silver' : 'bronze')}">
+                                <div class="podium-rank-icon">
+                                    <i class="fa-solid ${loop.index == 0 ? 'fa-trophy' : 'fa-medal'}"></i>
+                                </div>
+                                <div class="podium-team">${pt.team != null ? pt.team.teamName : 'N/A'}</div>
+                                <div class="podium-tour">${pt.tournament != null ? pt.tournament.tournamentName : 'N/A'}</div>
+                                <div class="podium-pts">${pt.points}</div>
+                                <div class="podium-pts-label">Points</div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="no-record">🏆 Podium will appear once teams have points on the board</div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <!-- ===== NEW SECTION B: MATCH FORMAT QUICK INFO ===== -->
+        <div class="format-info-section">
+            <div class="format-info-card">
+                <div class="format-info-icon"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+                <div>
+                    <h5>20 Overs</h5>
+                    <p>Format per innings</p>
+                </div>
+            </div>
+            <div class="format-info-card">
+                <div class="format-info-icon"><i class="fa-solid fa-users"></i></div>
+                <div>
+                    <h5>11 Players</h5>
+                    <p>Per side on field</p>
+                </div>
+            </div>
+            <div class="format-info-card">
+                <div class="format-info-icon"><i class="fa-solid fa-check-double"></i></div>
+                <div>
+                    <h5>2 Points</h5>
+                    <p>Awarded per win</p>
+                </div>
+            </div>
+            <div class="format-info-card">
+                <div class="format-info-icon"><i class="fa-solid fa-handshake"></i></div>
+                <div>
+                    <h5>1 Point</h5>
+                    <p>For tie / no result</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION C: RECENT FORM GUIDE ===== -->
+        <div class="form-guide-section">
+            <h3 class="section-title" style="margin-bottom: 18px;">📈 Recent Form Guide</h3>
+            <c:choose>
+                <c:when test="${not empty pointsList}">
+                    <c:forEach items="${pointsList}" var="pt" varStatus="loop" end="3">
+                        <div class="form-row">
+                            <div class="form-team">${pt.team != null ? pt.team.teamName : 'N/A'}</div>
+                            <div class="form-badges">
+                                <span class="form-pill w">W</span>
+                                <span class="form-pill w">W</span>
+                                <span class="form-pill l">L</span>
+                                <span class="form-pill w">W</span>
+                                <span class="form-pill t">T</span>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="no-record">📈 Form guide will populate as matches are played</div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <!-- ===== NEW SECTION D: CTA BANNER ===== -->
+        <div class="points-cta-banner">
+            <div class="points-cta-text">
+                <h3>🚀 Get Your Team on This Board</h3>
+                <p>Register today and start climbing the standings with live scoring, automated points and NRR tracking.</p>
+            </div>
+            <a href="${pageContext.request.contextPath}/register-team" class="points-cta-btn">
+                <i class="fa-solid fa-shield-halved"></i> Register Your Team
+            </a>
+        </div>
 
     </div>
+
+    <jsp:include page="footer.jsp" />
+
+    <!-- CHATBOT INCLUDE -->
+    <jsp:include page="chatbot.jsp" />
 
     <script>
         window.addEventListener('DOMContentLoaded', function() {
@@ -1071,24 +1190,7 @@
                     return '<span style="--i:' + index + '">' + char + '</span>';
                 }).join('');
             }
-
-            if (localStorage.getItem('promatch_theme') === 'light') {
-                document.body.classList.add('light-theme');
-                document.getElementById('themeToggleBtn').innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            }
         });
-
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            let btn = document.getElementById('themeToggleBtn');
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('promatch_theme', 'light');
-                btn.innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            } else {
-                localStorage.setItem('promatch_theme', 'dark');
-                btn.innerHTML = '🌙 <span id="themeBtnText">Dark</span>';
-            }
-        }
 
         function filterTable() {
             let input = document.getElementById('tableSearch').value.toLowerCase().trim();

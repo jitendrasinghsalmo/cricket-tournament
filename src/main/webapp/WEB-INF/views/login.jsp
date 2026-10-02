@@ -20,19 +20,6 @@
             --input-bg: rgba(3, 7, 18, 0.5);
         }
 
-        body.light-theme {
-            --bg-deep: #f1f5f9;
-            --card-surface: rgba(255, 255, 255, 0.82);
-            --neon-cyan: #0284c7;
-            --neon-emerald: #059669;
-            --neon-rose: #e11d48;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --border-glass: rgba(2, 132, 199, 0.25);
-            --body-overlay: rgba(241, 245, 249, 0.82);
-            --input-bg: rgba(255, 255, 255, 0.7);
-        }
-
         body { 
             font-family: 'Inter', system-ui, -apple-system, sans-serif; 
             background: linear-gradient(135deg, var(--body-overlay) 0%, var(--body-overlay) 100%), 
@@ -42,30 +29,7 @@
             margin: 0; 
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; padding: 20px; box-sizing: border-box;
-            transition: background 0.3s ease, color 0.3s ease;
         }
-
-        /* Top Left Back Button */
-        .btn-back {
-            position: absolute; top: 25px; left: 25px;
-            background: var(--card-surface); color: var(--neon-cyan);
-            border: 1px solid var(--border-glass); padding: 9px 16px;
-            border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-            backdrop-filter: blur(12px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .btn-back:hover { background: var(--neon-cyan); color: #030712; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-
-        /* Top Right Theme Toggle */
-        .theme-toggle-btn {
-            position: absolute; top: 25px; right: 25px;
-            background: var(--card-surface); color: var(--text-primary);
-            border: 1px solid var(--border-glass); padding: 9px 14px;
-            border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-            backdrop-filter: blur(12px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .theme-toggle-btn:hover { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); }
 
         .auth-container {
             width: 100%; max-width: 420px;
@@ -169,14 +133,6 @@
 </head>
 <body>
 
-    <!-- Top Left Back Button -->
-    <a href="${pageContext.request.contextPath}/home" class="btn-back">⬅ Back</a>
-
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-        🌙 <span id="themeBtnText">Dark</span>
-    </button>
-
     <div class="auth-container">
         <div class="auth-title">🔐 Secure Login</div>
         <div class="auth-subtitle">Access your ProMatch Arena portal</div>
@@ -213,25 +169,6 @@
     </div>
 
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('promatch_theme') === 'light') {
-                document.body.classList.add('light-theme');
-                document.getElementById('themeToggleBtn').innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            }
-        });
-
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            let btn = document.getElementById('themeToggleBtn');
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('promatch_theme', 'light');
-                btn.innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            } else {
-                localStorage.setItem('promatch_theme', 'dark');
-                btn.innerHTML = '🌙 <span id="themeBtnText">Dark</span>';
-            }
-        }
-
         function togglePassword() {
             const input = document.getElementById('passwordInput');
             const icon = document.getElementById('toggleIcon');

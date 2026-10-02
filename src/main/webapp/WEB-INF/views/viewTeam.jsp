@@ -28,21 +28,6 @@
             --body-overlay: #080b1e;
         }
 
-        body.light-mode {
-            --bg-deep: #f5f7ff;
-            --card-surface: #ffffff;
-            --neon-cyan: #0099cc;
-            --neon-emerald: #00aa44;
-            --neon-rose: #dd0055;
-            --neon-amber: #ff8800;
-            --neon-purple: #8800ff;
-            --neon-gold: #cc8800;
-            --text-primary: #1a2550;
-            --text-secondary: #556688;
-            --border-glass: #cbd5e1;
-            --body-overlay: #f1f5f9;
-        }
-
         * { box-sizing: border-box; }
 
         body { 
@@ -50,7 +35,7 @@
             background: var(--body-overlay);
             color: var(--text-primary); 
             margin: 0; 
-            padding: 0 0 60px 0; 
+            padding: 0; 
             transition: background 0.3s ease, color 0.3s ease;
         }
         
@@ -120,26 +105,6 @@
             background: var(--neon-cyan);
             color: #030712;
             box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
-        }
-        
-        .btn-theme-toggle {
-            background: rgba(181, 55, 242, 0.15);
-            color: var(--neon-purple);
-            border: 1.5px solid var(--neon-purple); 
-            padding: 10px 18px;
-            border-radius: 10px; 
-            font-weight: 700; 
-            font-size: 13px;
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-        .btn-theme-toggle:hover { 
-            background: var(--neon-purple);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(181, 55, 242, 0.5);
         }
 
         .btn-top-add {
@@ -471,9 +436,107 @@
             transform: rotate(360deg);
         }
 
+        /* 4 NEW EXTRA MODERN SECTIONS (DESIGNED WITH NEON CYAN / GOLD THEME & GLASSMORPHISM) */
+        .modern-feature-section { max-width: 1400px; margin: 40px auto; }
+        .modern-feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 1024px) { .modern-feature-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 600px) { .modern-feature-grid { grid-template-columns: 1fr; } }
+        .modern-card-item {
+            background: linear-gradient(135deg, rgba(14, 20, 40, 0.95), rgba(8, 11, 30, 0.98));
+            border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .modern-card-item:hover { transform: translateY(-5px); border-color: var(--neon-cyan); box-shadow: 0 15px 40px rgba(0,217,255,0.25); }
+        .modern-icon-box {
+            width: 48px; height: 48px; border-radius: 12px; background: rgba(0,217,255,0.12);
+            border: 1px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: var(--neon-cyan); margin-bottom: 16px; box-shadow: 0 0 15px rgba(0,217,255,0.2);
+        }
+        .modern-card-item h5 { margin: 0 0 8px 0; font-size: 15px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
+        .modern-card-item p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+
+        /* ===== NEW SECTION A: SQUAD REQUIREMENTS QUICK INFO ===== */
+        .squad-req-section {
+            max-width: 1400px; margin: 40px auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+        }
+        @media(max-width: 900px) { .squad-req-section { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .squad-req-section { grid-template-columns: 1fr; } }
+        .squad-req-card {
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 20px; display: flex; align-items: center; gap: 14px; transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+        .squad-req-card:hover { border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .squad-req-icon {
+            width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0,217,255,0.18), rgba(181,55,242,0.18));
+            border: 1.5px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: var(--neon-cyan);
+        }
+        .squad-req-card h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; }
+        .squad-req-card p { margin: 0; font-size: 11.5px; color: var(--text-secondary); font-weight: 600; }
+
+        /* ===== NEW SECTION B: FAN FAVORITE TEAMS ===== */
+        .fan-favorite-section { max-width: 1400px; margin: 40px auto; }
+        .fan-favorite-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        @media(max-width: 768px) { .fan-favorite-grid { grid-template-columns: 1fr; } }
+        .fan-favorite-card {
+            background: linear-gradient(135deg, rgba(255,215,0,0.06), rgba(0,217,255,0.06)), var(--card-surface);
+            border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 22px; text-align: center;
+            transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .fan-favorite-card:hover { transform: translateY(-6px); border-color: var(--neon-gold); box-shadow: 0 15px 40px rgba(255,215,0,0.2); }
+        .fan-favorite-icon { font-size: 26px; color: var(--neon-gold); margin-bottom: 10px; }
+        .fan-favorite-card h5 { margin: 0 0 6px 0; font-size: 15px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; }
+        .fan-favorite-bar { background: #080b1e; border: 1px solid var(--border-glass); border-radius: 10px; height: 10px; overflow: hidden; margin: 10px 0 6px 0; }
+        .fan-favorite-fill { height: 100%; background: linear-gradient(90deg, var(--neon-gold), var(--neon-amber)); }
+        .fan-favorite-card span { font-size: 11.5px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; }
+
+        /* ===== NEW SECTION C: TEAM REGISTRATION STEPS ===== */
+        .reg-steps-section {
+            max-width: 1400px; margin: 40px auto;
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 20px; padding: 32px;
+        }
+        .reg-steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 900px) { .reg-steps-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .reg-steps-grid { grid-template-columns: 1fr; } }
+        .reg-step-box {
+            background: #080b1e; border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 20px; text-align: center; transition: all 0.3s ease;
+        }
+        .reg-step-box:hover { transform: translateY(-4px); border-color: var(--neon-cyan); }
+        .reg-step-num {
+            width: 36px; height: 36px; margin: 0 auto 12px auto; border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;
+            display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px;
+            box-shadow: 0 0 15px rgba(0,217,255,0.4);
+        }
+        .reg-step-box h5 { margin: 0 0 6px 0; font-size: 13.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .reg-step-box p { margin: 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ===== NEW SECTION D: CTA BANNER ===== */
+        .teams-cta-banner {
+            max-width: 1400px; margin: 40px auto;
+            background: linear-gradient(135deg, rgba(0,217,255,0.16), rgba(0,255,136,0.1)), var(--card-surface);
+            border: 2px solid var(--neon-cyan); border-radius: 22px; padding: 40px;
+            display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap;
+            box-shadow: 0 20px 45px rgba(0,217,255,0.18);
+        }
+        .teams-cta-text h3 { margin: 0 0 8px 0; font-size: 22px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; }
+        .teams-cta-text p { margin: 0; font-size: 13.5px; color: var(--text-secondary); font-weight: 600; max-width: 560px; line-height: 1.6; }
+        .teams-cta-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;
+            border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 0 25px rgba(0,217,255,0.5); transition: all 0.3s ease;
+        }
+        .teams-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(0,255,136,0.7); color: #030712; }
+        @media(max-width: 700px) { .teams-cta-banner { flex-direction: column; text-align: center; padding: 30px 22px; } }
+
         /* GRAND CYBER FOOTER STYLING */
-        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
+        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; width: calc(100% - 40px); box-sizing: border-box; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; max-width: 1350px; margin-left: auto; margin-right: auto; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
         .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
@@ -499,12 +562,114 @@
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
 
         .no-team { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; padding: 60px; font-size: 15px; font-weight: 700; background: var(--card-surface); border: 1px dashed var(--border-glass); border-radius: 16px; text-transform: uppercase; }
+
+        /* =====================================================
+           FIX 1: DARK + LIGHT MODE  (text hamesha visible)
+           ===================================================== */
+        :root {
+            --pm-nav-bg: #0d1222;
+            --pm-input-bg: #030712;
+            --pm-chip-bg: #111827;
+            --pm-pod-bg: #080b1e;
+            --pm-img-bg: #020617;
+            --pm-badge-bg: rgba(3, 7, 18, 0.8);
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-modern-bg: linear-gradient(135deg, rgba(14, 20, 40, 0.95), rgba(8, 11, 30, 0.98));
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: #ffffff;
+            --body-overlay: #eef2f7;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #9333ea;
+            --neon-gold: #b45309;
+            --pm-nav-bg: #ffffff;
+            --pm-input-bg: #ffffff;
+            --pm-chip-bg: #e2e8f0;
+            --pm-pod-bg: #f1f5f9;
+            --pm-img-bg: #e2e8f0;
+            --pm-badge-bg: rgba(255, 255, 255, 0.92);
+            --pm-newsletter-bg: #ffffff;
+            --pm-modern-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); }
+        .search-input, .spotlight-progress-wrap { background: var(--pm-input-bg); }
+        .stats-badge { background: var(--pm-chip-bg); }
+        .tournament-stat, .pod, .fan-favorite-bar, .reg-step-box { background: var(--pm-pod-bg); }
+        .team-logo-avatar, .gallery-img-container { background: var(--pm-img-bg); }
+        .team-id-badge { background: var(--pm-badge-bg); }
+        .modern-card-item { background: var(--pm-modern-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+
+        /* =====================================================
+           FIX 2: FULL RESPONSIVE
+           ===================================================== */
+        img { max-width: 100%; }
+        body { overflow-x: hidden; }
+        .control-bar { flex-wrap: wrap; gap: 12px; }
+        .search-input { max-width: 100%; }
+        .team-title-wrap, .pod { min-width: 0; }
+
+        @media (max-width: 900px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .header-bar { flex-wrap: wrap; gap: 14px; padding: 16px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 7px 10px; font-size: 12px; }
+            .main-content-wrap { padding: 0 12px; margin: 18px auto; }
+            .header-bar { flex-direction: column; align-items: stretch; text-align: center; }
+            .header-left, .header-right { justify-content: center; flex-wrap: wrap; }
+            .jumping-title { font-size: 18px; letter-spacing: 1px; }
+            .control-bar { flex-direction: column; align-items: stretch; padding: 14px; }
+            .search-input { width: 100%; }
+            .stats-badge { text-align: center; }
+            .teams-grid { gap: 20px; margin: 24px auto; }
+            .pagination-bar { justify-content: center; flex-wrap: wrap; gap: 12px; padding: 12px; }
+            .tournament-status-section, .reg-steps-section { padding: 20px; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .teams-cta-banner { padding: 26px 18px; }
+        }
+
+        @media (max-width: 480px) {
+            .card-body-section { padding: 0 16px 20px 16px; }
+            .card-actions { grid-template-columns: 1fr 1fr; }
+            .card-actions .btn-view { grid-column: 1 / -1; }
+            .team-logo-avatar { width: 70px; height: 70px; }
+            .stat-number { font-size: 26px; }
+            .tactical-card { flex-direction: column; padding: 22px; }
+            .activity-item { padding: 16px; gap: 14px; }
+        }
     </style>
 </head>
 <body>
 
     <!-- 🌟 NAVBAR INCLUDE -->
     <jsp:include page="navbar.jsp" />
+
+    <!-- 🌟 CHATBOT INCLUDE -->
+    <jsp:include page="chatbot.jsp" />
 
     <div class="main-content-wrap">
         <div class="header-bar">
@@ -517,14 +682,13 @@
             </div>
 
             <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-                <a href="/register-team" class="btn-top-add"><i class="fa-solid fa-plus"></i> New Team</a>
+                <a href="/addTeam" class="btn-top-add"><i class="fa-solid fa-plus"></i> New Team</a>
                 <a href="/deleteAllTeams" class="btn-delete-all" onclick="return confirm('⚠️ Warning: Delete ALL teams permanently?')">🗑 Delete All</a>
             </div>
         </div>
 
         <div class="control-bar">
-            <input type="text" id="teamSearch" class="search-input" placeholder="🔍 Search team by name or city..." onkeyup="filterTeams()" autocomplete="off">
+            <input type="text" id="teamSearch" class="search-input" placeholder="🔍 Search team by name or city..." onkeyup="filterTeams()" oninput="filterTeams()" autocomplete="off">
             <div class="stats-badge">Total Teams: <span>${totalItems}</span></div>
         </div>
 
@@ -583,7 +747,7 @@
         <div class="pagination-bar">
             <c:choose>
                 <c:when test="${currentPage > 0}">
-                    <a href="/viewTeam?page=${currentPage - 1}">⬅ Previous</a>
+                    <a href="${pageContext.request.contextPath}/teams?page=${currentPage - 1}">⬅ Previous</a>
                 </c:when>
                 <c:otherwise>
                     <span style="opacity: 0.3; cursor: not-allowed; padding: 10px 20px; background: rgba(255,255,255,0.02); color: #64748b; border-radius: 10px; font-size: 12px; font-weight: 700;">⬅ Previous</span>
@@ -594,7 +758,7 @@
 
             <c:choose>
                 <c:when test="${currentPage + 1 < totalPages}">
-                    <a href="/viewTeam?page=${currentPage + 1}">Next ➡</a>
+                    <a href="${pageContext.request.contextPath}/teams?page=${currentPage + 1}">Next ➡</a>
                 </c:when>
                 <c:otherwise>
                     <span style="opacity: 0.3; cursor: not-allowed; padding: 10px 20px; background: rgba(255,255,255,0.02); color: #64748b; border-radius: 10px; font-size: 12px; font-weight: 700;">Next ➡</span>
@@ -788,6 +952,33 @@
             </div>
         </div>
 
+        <!-- 🌟 4 NEW ATTRATIVE SECTIONS ADDED -->
+        <div class="modern-feature-section">
+            <h3 class="section-title">💎 Elite Arena Advantage</h3>
+            <div class="modern-feature-grid">
+                <div class="modern-card-item">
+                    <div class="modern-icon-box"><i class="fa-solid fa-satellite-dish"></i></div>
+                    <h5>Live Telecast Hub</h5>
+                    <p>Integrated stream links and high-definition match feeds broadcasting live tournament actions globally.</p>
+                </div>
+                <div class="modern-card-item">
+                    <div class="modern-icon-box"><i class="fa-solid fa-medal"></i></div>
+                    <h5>MVP Honor Board</h5>
+                    <p>Recognizing exceptional individual brilliance, highest wicket-takers, and explosive run-scorers.</p>
+                </div>
+                <div class="modern-card-item">
+                    <div class="modern-icon-box"><i class="fa-solid fa-calculator"></i></div>
+                    <h5>Net Run-Rate (NRR) Calc</h5>
+                    <p>Automated equation engine calculating exact qualification scenarios for tight tournament league tables.</p>
+                </div>
+                <div class="modern-card-item">
+                    <div class="modern-icon-box"><i class="fa-solid fa-bolt-lightning"></i></div>
+                    <h5>Instant Action Sync</h5>
+                    <p>Real-time server synchronization reflecting squad edits and score updates across all devices instantly.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- GALLERY SECTION -->
         <div class="gallery-section">
             <div class="footer-gallery-grid">
@@ -823,10 +1014,107 @@
             </div>
         </div>
 
-        <!-- 🌟 GRAND CYBER FOOTER INCLUDE -->
-        <jsp:include page="footer.jsp" />
+        <!-- ===== NEW SECTION A: SQUAD REQUIREMENTS QUICK INFO ===== -->
+        <div class="squad-req-section">
+            <div class="squad-req-card">
+                <div class="squad-req-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <div>
+                    <h5>15 Max Squad</h5>
+                    <p>Maximum registered players per team</p>
+                </div>
+            </div>
+            <div class="squad-req-card">
+                <div class="squad-req-icon"><i class="fa-solid fa-users"></i></div>
+                <div>
+                    <h5>11 Min Squad</h5>
+                    <p>Minimum players to field a team</p>
+                </div>
+            </div>
+            <div class="squad-req-card">
+                <div class="squad-req-icon"><i class="fa-solid fa-shirt"></i></div>
+                <div>
+                    <h5>Unique Jersey #</h5>
+                    <p>Every player gets a unique number</p>
+                </div>
+            </div>
+            <div class="squad-req-card">
+                <div class="squad-req-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <div>
+                    <h5>Captain & Manager</h5>
+                    <p>One nominated point of contact each</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION B: FAN FAVORITE TEAMS ===== -->
+        <c:if test="${not empty teams}">
+            <div class="fan-favorite-section">
+                <h3 class="section-title">💛 Fan Favorite Teams</h3>
+                <div class="fan-favorite-grid">
+                    <div class="fan-favorite-card">
+                        <div class="fan-favorite-icon"><i class="fa-solid fa-heart"></i></div>
+                        <h5>Thunder Strikers</h5>
+                        <div class="fan-favorite-bar"><div class="fan-favorite-fill" style="width: 92%;"></div></div>
+                        <span>92% Fan Approval</span>
+                    </div>
+                    <div class="fan-favorite-card">
+                        <div class="fan-favorite-icon"><i class="fa-solid fa-heart"></i></div>
+                        <h5>Phoenix Rising</h5>
+                        <div class="fan-favorite-bar"><div class="fan-favorite-fill" style="width: 85%;"></div></div>
+                        <span>85% Fan Approval</span>
+                    </div>
+                    <div class="fan-favorite-card">
+                        <div class="fan-favorite-icon"><i class="fa-solid fa-heart"></i></div>
+                        <h5>Eagle Warriors</h5>
+                        <div class="fan-favorite-bar"><div class="fan-favorite-fill" style="width: 79%;"></div></div>
+                        <span>79% Fan Approval</span>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
+        <!-- ===== NEW SECTION C: TEAM REGISTRATION STEPS ===== -->
+        <div class="reg-steps-section">
+            <h3 class="section-title">📝 How Team Registration Works</h3>
+            <div class="reg-steps-grid">
+                <div class="reg-step-box">
+                    <div class="reg-step-num">1</div>
+                    <h5>Fill Team Details</h5>
+                    <p>Team name, city, coach, owner and logo</p>
+                </div>
+                <div class="reg-step-box">
+                    <div class="reg-step-num">2</div>
+                    <h5>Pay Entry Fee</h5>
+                    <p>Secure online payment to confirm slot</p>
+                </div>
+                <div class="reg-step-box">
+                    <div class="reg-step-num">3</div>
+                    <h5>Admin Approval</h5>
+                    <p>Team reviewed and approved by admin</p>
+                </div>
+                <div class="reg-step-box">
+                    <div class="reg-step-num">4</div>
+                    <h5>Ready to Play</h5>
+                    <p>Team appears in the directory and fixtures</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION D: CTA BANNER ===== -->
+        <div class="teams-cta-banner">
+            <div class="teams-cta-text">
+                <h3>🚀 Bring Your Squad to the Arena</h3>
+                <p>Register a new team today and get listed in the directory, points table and live fixtures.</p>
+            </div>
+            <a href="/register-team" class="teams-cta-btn">
+                <i class="fa-solid fa-shield-halved"></i> Register Your Team
+            </a>
+        </div>
 
     </div>
+
+    <!-- 🌟 GRAND CYBER FOOTER INCLUDE -->
+    <jsp:include page="footer.jsp" />
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -840,43 +1128,45 @@
             }).join('');
         }
 
-        const bodyElement = document.body;
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-
-        if (localStorage.getItem('matchTheme') === 'light') {
-            bodyElement.classList.add('light-mode');
-            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-        }
-
-        function toggleTheme() {
-            if (bodyElement.classList.contains('light-mode')) {
-                bodyElement.classList.remove('light-mode');
-                localStorage.setItem('matchTheme', 'dark');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
-            } else {
-                bodyElement.classList.add('light-mode');
-                localStorage.setItem('matchTheme', 'light');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-            }
-        }
+        var pmTotalText = null;
 
         function filterTeams() {
-            let input = document.getElementById('teamSearch').value.toLowerCase().trim();
-            let cards = document.getElementsByClassName('team-card');
-            let visibleCount = 0;
+            var box = document.getElementById('teamSearch');
+            var input = (box ? box.value : '').toLowerCase().replace(/\s+/g, ' ').trim();
+            var grid = document.getElementById('teamsGrid');
+            var cards = grid ? grid.querySelectorAll('.team-card') : [];
+            var statsSpan = document.querySelector('.stats-badge span');
+            var visibleCount = 0;
 
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getAttribute('data-name');
-                if (input === "" || name.indexOf(input) > -1) {
-                    cards[i].style.display = "";
-                    visibleCount++;
-                } else {
-                    cards[i].style.display = "none";
+            if (statsSpan && pmTotalText === null) pmTotalText = statsSpan.innerText;
+
+            cards.forEach(function (card) {
+                var nameEl = card.querySelector('.team-name');
+                var cityEl = card.querySelector('.team-city');
+                var text = ((card.getAttribute('data-name') || '') + ' ' +
+                            (nameEl ? nameEl.textContent : '') + ' ' +
+                            (cityEl ? cityEl.textContent : '')).toLowerCase().replace(/\s+/g, ' ');
+                var show = (input === '' || text.indexOf(input) > -1);
+                card.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Koi match na mile to message dikhao
+            var emptyMsg = document.getElementById('noSearchResult');
+            if (input !== '' && cards.length > 0 && visibleCount === 0) {
+                if (!emptyMsg) {
+                    emptyMsg = document.createElement('div');
+                    emptyMsg.id = 'noSearchResult';
+                    emptyMsg.className = 'no-team';
+                    emptyMsg.textContent = '🔍 No teams match your search.';
+                    grid.appendChild(emptyMsg);
                 }
+                emptyMsg.style.display = '';
+            } else if (emptyMsg) {
+                emptyMsg.style.display = 'none';
             }
-            
-            let statsSpan = document.querySelector('.stats-badge span');
-            if(statsSpan) statsSpan.innerText = visibleCount;
+
+            if (statsSpan) statsSpan.innerText = (input === '') ? pmTotalText : visibleCount;
         }
     </script>
 </body>

@@ -48,7 +48,7 @@
             background-color: var(--bg-deep);
             color: var(--text-primary); 
             margin: 0; 
-            padding: 0 0 60px 0; 
+            padding: 0; 
             transition: background 0.3s ease, color 0.3s ease;
         }
 
@@ -685,7 +685,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width: 100%;~
             height: 3px;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
         }
@@ -902,9 +902,99 @@
             display: block;
         }
 
+        /* ===== NEW SECTION A: TOURNAMENT JOURNEY TIMELINE ===== */
+        .journey-section {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            background: var(--card-surface); border: 1px solid var(--border-glass);
+            border-radius: 18px; padding: 32px; backdrop-filter: blur(15px);
+        }
+        .journey-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+        @media(max-width: 900px) { .journey-track { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .journey-track { grid-template-columns: 1fr; } }
+        .journey-step {
+            background: rgba(3, 7, 18, 0.5); border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 20px; text-align: center; position: relative; transition: all 0.3s ease;
+        }
+        .journey-step:hover { transform: translateY(-4px); border-color: var(--neon-cyan); box-shadow: 0 10px 25px rgba(0,217,255,0.2); }
+        .journey-num {
+            width: 36px; height: 36px; margin: 0 auto 12px auto; border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #000;
+            display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px;
+            box-shadow: 0 0 15px rgba(0,217,255,0.4);
+        }
+        .journey-step h5 { margin: 0 0 6px 0; font-size: 13.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .journey-step p { margin: 0; font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ===== NEW SECTION B: PRIZE POOL SHOWCASE ===== */
+        .prize-pool-section {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;
+        }
+        @media(max-width: 768px) { .prize-pool-section { grid-template-columns: 1fr; } }
+        .prize-pool-card {
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px;
+            padding: 28px; text-align: center; backdrop-filter: blur(15px); transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden;
+        }
+        .prize-pool-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; }
+        .prize-pool-card.gold { border-color: var(--neon-gold); }
+        .prize-pool-card.gold::before { background: linear-gradient(90deg, var(--neon-gold), var(--neon-amber)); }
+        .prize-pool-card.silver { border-color: var(--neon-cyan); }
+        .prize-pool-card.silver::before { background: linear-gradient(90deg, var(--neon-cyan), #7dd3fc); }
+        .prize-pool-card.bronze { border-color: var(--neon-emerald); }
+        .prize-pool-card.bronze::before { background: linear-gradient(90deg, var(--neon-emerald), #34d399); }
+        .prize-pool-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .prize-pool-icon { font-size: 34px; margin-bottom: 12px; }
+        .prize-pool-card.gold .prize-pool-icon { color: var(--neon-gold); }
+        .prize-pool-card.silver .prize-pool-icon { color: var(--neon-cyan); }
+        .prize-pool-card.bronze .prize-pool-icon { color: var(--neon-emerald); }
+        .prize-pool-card h4 { margin: 0 0 6px 0; font-size: 15px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .prize-pool-card p { margin: 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ===== NEW SECTION C: WHY JOIN FEATURES ===== */
+        .why-join-section {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+        }
+        @media(max-width: 900px) { .why-join-section { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 500px) { .why-join-section { grid-template-columns: 1fr; } }
+        .why-join-card {
+            background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 14px;
+            padding: 20px; display: flex; align-items: center; gap: 14px; backdrop-filter: blur(15px);
+            transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+        .why-join-card:hover { border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .why-join-icon {
+            width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0,217,255,0.18), rgba(181,55,242,0.18));
+            border: 1.5px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: var(--neon-cyan);
+        }
+        .why-join-card h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; }
+        .why-join-card p { margin: 0; font-size: 11.5px; color: var(--text-secondary); font-weight: 600; }
+
+        /* ===== NEW SECTION D: CTA BANNER ===== */
+        .tourn-cta-banner {
+            max-width: 1400px; margin: 0 auto 40px auto;
+            background: linear-gradient(135deg, rgba(0,217,255,0.16), rgba(0,255,136,0.1)), var(--card-surface);
+            border: 2px solid var(--neon-cyan); border-radius: 22px; padding: 40px;
+            display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap;
+            box-shadow: 0 20px 45px rgba(0,217,255,0.2); backdrop-filter: blur(20px);
+        }
+        .tourn-cta-text h3 { margin: 0 0 8px 0; font-size: 22px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; }
+        .tourn-cta-text p { margin: 0; font-size: 13.5px; color: var(--text-secondary); font-weight: 600; max-width: 560px; line-height: 1.6; }
+        .tourn-cta-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #030712;
+            border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 0 25px rgba(0,217,255,0.5); transition: all 0.3s ease;
+        }
+        .tourn-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(0,255,136,0.7); color: #030712; }
+        @media(max-width: 700px) { .tourn-cta-banner { flex-direction: column; text-align: center; padding: 30px 22px; } }
+
         /* FOOTER CSS STYLING */
-        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; }
-        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; }
+        .grand-footer-section { background: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99)); backdrop-filter: blur(25px); border-top: 2px solid var(--neon-cyan); border-radius: 28px 28px 0 0; padding: 60px 40px 30px 40px; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6); max-width: 1400px; margin: 60px auto 20px auto; width: calc(100% - 40px); box-sizing: border-box; }
+        .grand-footer-content { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; gap: 40px; align-items: start; border-bottom: 1.5px solid var(--border-glass); padding-bottom: 40px; margin-bottom: 25px; max-width: 1350px; margin-left: auto; margin-right: auto; }
         @media(max-width: 1024px) { .grand-footer-content { grid-template-columns: 1fr 1fr; } }
         @media(max-width: 650px) { .grand-footer-content { grid-template-columns: 1fr; text-align: center; } }
         .footer-brand h3 { margin: 0 0 12px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; color: var(--text-primary); letter-spacing: 1.5px; }
@@ -944,7 +1034,6 @@
                 <h2 class="jumping-title" id="animatedTitle">TOURNAMENT COMMAND CENTER</h2>
             </div>
             <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
                 <a href="/addTournament" class="btn-top-add"><i class="fa-solid fa-plus"></i> New Tournament</a>
                 <a href="/deleteAllTournaments" class="btn-delete-all" onclick="return confirm('⚠️ Warning: Delete ALL tournaments permanently?')">🗑 Delete All</a>
             </div>
@@ -1165,10 +1254,102 @@
             </div>
         </div>
 
-        <!-- 🌟 FOOTER INCLUDE -->
-        <jsp:include page="footer.jsp" />
+        <!-- ===== NEW SECTION A: TOURNAMENT JOURNEY TIMELINE ===== -->
+        <div class="journey-section">
+            <h3 class="section-title">🗺️ Tournament Journey</h3>
+            <div class="journey-track">
+                <div class="journey-step">
+                    <div class="journey-num">1</div>
+                    <h5>Registration</h5>
+                    <p>Teams submit squad details and pay the entry fee to secure a slot.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">2</div>
+                    <h5>League Stage</h5>
+                    <p>Round-robin matches decide the points table and NRR standings.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">3</div>
+                    <h5>Playoffs</h5>
+                    <p>Top four teams battle it out in high-stakes knockout fixtures.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-num">4</div>
+                    <h5>Grand Final</h5>
+                    <p>The last two teams face off for the championship trophy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION B: PRIZE POOL SHOWCASE ===== -->
+        <div class="prize-pool-section">
+            <div class="prize-pool-card gold">
+                <div class="prize-pool-icon"><i class="fa-solid fa-trophy"></i></div>
+                <h4>Champions</h4>
+                <p>Winner's trophy, medals and top billing on the leaderboard.</p>
+            </div>
+            <div class="prize-pool-card silver">
+                <div class="prize-pool-icon"><i class="fa-solid fa-award"></i></div>
+                <h4>Runners-Up</h4>
+                <p>Runner-up trophy and medals for the finalist squad.</p>
+            </div>
+            <div class="prize-pool-card bronze">
+                <div class="prize-pool-icon"><i class="fa-solid fa-medal"></i></div>
+                <h4>Player Awards</h4>
+                <p>Player of the Tournament, Best Batter and Best Bowler recognitions.</p>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION C: WHY JOIN FEATURES ===== -->
+        <div class="why-join-section">
+            <div class="why-join-card">
+                <div class="why-join-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div>
+                    <h5>Live Scoring</h5>
+                    <p>Ball-by-ball updates on every fixture</p>
+                </div>
+            </div>
+            <div class="why-join-card">
+                <div class="why-join-icon"><i class="fa-solid fa-calculator"></i></div>
+                <div>
+                    <h5>Auto NRR</h5>
+                    <p>Standings calculated with zero manual work</p>
+                </div>
+            </div>
+            <div class="why-join-card">
+                <div class="why-join-icon"><i class="fa-solid fa-lock"></i></div>
+                <div>
+                    <h5>Secure Access</h5>
+                    <p>Role-based control for admins and teams</p>
+                </div>
+            </div>
+            <div class="why-join-card">
+                <div class="why-join-icon"><i class="fa-solid fa-users-gear"></i></div>
+                <div>
+                    <h5>Squad Control</h5>
+                    <p>Manage rosters and jersey numbers easily</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NEW SECTION D: CTA BANNER ===== -->
+        <div class="tourn-cta-banner">
+            <div class="tourn-cta-text">
+                <h3>🚀 Ready to Enter the Arena?</h3>
+                <p>Register your team for the next tournament and start competing for live standings, automated NRR and championship glory.</p>
+            </div>
+            <a href="${pageContext.request.contextPath}/register-team" class="tourn-cta-btn">
+                <i class="fa-solid fa-shield-halved"></i> Register Your Team
+            </a>
+        </div>
 
     </div>
+
+    <!-- 🌟 FOOTER INCLUDE -->
+    <jsp:include page="footer.jsp" />
+
+    <!-- CHATBOT INCLUDE -->
+    <jsp:include page="chatbot.jsp" />
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1178,23 +1359,6 @@
             titleEl.innerHTML = titleEl.innerText.split('').map((char, index) => 
                 char === ' ' ? '<span style="--i:' + index + '">&nbsp;</span>' : '<span style="--i:' + index + '">' + char + '</span>'
             ).join('');
-        }
-
-        const bodyElement = document.body;
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        if (localStorage.getItem('matchTheme') === 'light') {
-            bodyElement.classList.add('light-mode');
-            if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-        }
-        function toggleTheme() {
-            if (bodyElement.classList.contains('light-mode')) {
-                bodyElement.classList.remove('light-mode');
-                localStorage.setItem('matchTheme', 'dark');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '🌙 Dark Mode';
-            } else {
-                bodyElement.classList.add('light-mode');
-                if(themeToggleBtn) themeToggleBtn.innerHTML = '☀️ Light Mode';
-            }
         }
 
         function filterTournaments() {

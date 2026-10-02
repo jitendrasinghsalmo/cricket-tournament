@@ -72,6 +72,11 @@ public class UserController {
         return "faq"; // Yeh faq.jsp ko load karega
     }
     
+    @GetMapping("/rules")
+    public String rulesPage() {
+        return "rules"; // Yeh rules.jsp ko load karega
+    }
+    
     
     @GetMapping("/login")
     public String showLoginPage() { return "login"; }

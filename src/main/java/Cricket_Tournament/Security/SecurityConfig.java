@@ -37,6 +37,7 @@ public class SecurityConfig {
                     "/about",
                     "/contact",
                     "/faq",
+                    "/rules",
                     "/teams",
                     "/search",
                     "/css/**", 

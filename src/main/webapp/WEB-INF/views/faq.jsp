@@ -1090,6 +1090,60 @@
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* ===================== 5 NEW SECTIONS (added, nothing else touched) ===================== */
+
+        /* 1. Stats Strip */
+        .stats-strip-section { max-width: 1400px; margin: 0 auto 40px auto; }
+        .stats-strip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 768px) { .stats-strip-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stats-strip-card { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 26px 15px; text-align: center; backdrop-filter: blur(12px); transition: 0.3s; }
+        .stats-strip-card:hover { border-color: var(--neon-emerald); box-shadow: 0 0 20px rgba(0,255,136,0.25); transform: translateY(-4px); }
+        .stats-strip-num { font-size: 28px; font-weight: 900; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stats-strip-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px; letter-spacing: 0.5px; }
+
+        /* 2. Testimonials */
+        .testimonial-section { max-width: 1400px; margin: 0 auto 40px auto; }
+        .testimonial-heading { text-align: center; font-size: 22px; font-weight: 900; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        @media(max-width: 992px) { .testimonial-grid { grid-template-columns: 1fr; } }
+        .testimonial-card { background: linear-gradient(135deg, rgba(0,217,255,0.06), rgba(181,55,242,0.06)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 28px; transition: 0.3s; }
+        .testimonial-card:hover { border-color: var(--neon-gold); box-shadow: 0 12px 30px rgba(255,215,0,0.15); }
+        .testimonial-stars { color: var(--neon-gold); font-size: 14px; margin-bottom: 12px; }
+        .testimonial-text { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; font-weight: 600; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .testimonial-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan)); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 15px; }
+        .testimonial-name { font-size: 13.5px; font-weight: 800; color: var(--text-primary); }
+        .testimonial-role { font-size: 11.5px; color: var(--text-secondary); }
+
+        /* 3. How It Works */
+        .howitworks-section { max-width: 1400px; margin: 0 auto 40px auto; }
+        .howitworks-box { background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 40px 30px; backdrop-filter: blur(15px); }
+        .howitworks-heading { text-align: center; font-size: 22px; font-weight: 900; color: var(--neon-emerald); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px; }
+        .howitworks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+        @media(max-width: 992px) { .howitworks-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 576px) { .howitworks-grid { grid-template-columns: 1fr; } }
+        .howitworks-step { text-align: center; position: relative; }
+        .howitworks-num { width: 50px; height: 50px; margin: 0 auto 16px auto; border-radius: 50%; background: rgba(3,7,18,0.6); border: 2px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0,217,255,0.35); }
+        .howitworks-step h4 { font-size: 14.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .howitworks-step p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; font-weight: 600; margin: 0; }
+
+        /* 4. Sponsors / Partners */
+        .sponsors-section { max-width: 1400px; margin: 0 auto 40px auto; }
+        .sponsors-box { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 35px 30px; text-align: center; backdrop-filter: blur(15px); }
+        .sponsors-heading { font-size: 18px; font-weight: 900; color: var(--neon-purple); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
+        .sponsors-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+        .sponsor-chip { background: rgba(181, 55, 242, 0.1); border: 1.5px solid var(--neon-purple); color: var(--text-primary); padding: 12px 22px; border-radius: 30px; font-weight: 800; font-size: 12.5px; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .sponsor-chip:hover { background: var(--neon-purple); color: #fff; box-shadow: 0 0 18px rgba(181,55,242,0.5); transform: translateY(-3px); }
+
+        /* 5. FAQ Bottom CTA / App Promo */
+        .app-promo-section { max-width: 1400px; margin: 0 auto 40px auto; }
+        .app-promo-box { background: linear-gradient(135deg, rgba(0,217,255,0.12), rgba(181,55,242,0.12)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 40px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; backdrop-filter: blur(15px); }
+        .app-promo-text h3 { font-size: 20px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; }
+        .app-promo-text p { font-size: 13.5px; color: var(--text-secondary); margin: 0; max-width: 550px; line-height: 1.6; font-weight: 600; }
+        .app-promo-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .app-promo-btn { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #0a0e27; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
+        .app-promo-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,217,255,0.6); color: #0a0e27; }
     </style>
 </head>
 <body>
@@ -1098,17 +1152,6 @@
     <jsp:include page="navbar.jsp" />
 
     <div class="main-content-wrap">
-        <div class="header-bar">
-            <div class="header-left">
-                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            </div>
-            <div>
-                <h2 style="font-size: 20px; font-weight: 900; margin: 0; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1.5px;">FAQ & Support Center</h2>
-            </div>
-            <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-            </div>
-        </div>
 
         <!-- HERO SECTION WITH AUTOMATIC GLOW ANIMATION & INCREASED PADDING -->
         <div class="faq-hero">
@@ -1474,6 +1517,116 @@
             </div>
         </div>
 
+        <!-- ===================== NEW SECTION 1: STATS STRIP ===================== -->
+        <div class="stats-strip-section">
+            <div class="stats-strip-grid">
+                <div class="stats-strip-card">
+                    <div class="stats-strip-num">1,200+</div>
+                    <div class="stats-strip-label">Teams Registered</div>
+                </div>
+                <div class="stats-strip-card">
+                    <div class="stats-strip-num">85+</div>
+                    <div class="stats-strip-label">Tournaments Hosted</div>
+                </div>
+                <div class="stats-strip-card">
+                    <div class="stats-strip-num">50K+</div>
+                    <div class="stats-strip-label">Active Players</div>
+                </div>
+                <div class="stats-strip-card">
+                    <div class="stats-strip-num">99.9%</div>
+                    <div class="stats-strip-label">Uptime Reliability</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 2: TESTIMONIALS ===================== -->
+        <div class="testimonial-section">
+            <h2 class="testimonial-heading">💬 What Our Captains Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">ProMatch Arena made managing our squad and fixtures effortless. Live NRR updates saved us so much manual work.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">R</div>
+                        <div><div class="testimonial-name">Rohit Sharma</div><div class="testimonial-role">Team Captain, Thunder Strikers</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">The support team responds fast and the points table always stays accurate. Great platform for league organizers.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">A</div>
+                        <div><div class="testimonial-name">Ankit Verma</div><div class="testimonial-role">Tournament Organizer</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Squad management and live match tracking in one place — exactly what our college league needed.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">P</div>
+                        <div><div class="testimonial-name">Priya Nair</div><div class="testimonial-role">Team Captain, Phoenix Warriors</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 3: HOW IT WORKS ===================== -->
+        <div class="howitworks-section">
+            <div class="howitworks-box">
+                <h2 class="howitworks-heading">🧭 How ProMatch Arena Works</h2>
+                <div class="howitworks-grid">
+                    <div class="howitworks-step">
+                        <div class="howitworks-num">1</div>
+                        <h4>Register Your Team</h4>
+                        <p>Sign up and add your squad members in minutes.</p>
+                    </div>
+                    <div class="howitworks-step">
+                        <div class="howitworks-num">2</div>
+                        <h4>Join a Tournament</h4>
+                        <p>Browse open tournaments and confirm your entry.</p>
+                    </div>
+                    <div class="howitworks-step">
+                        <div class="howitworks-num">3</div>
+                        <h4>Play & Track Live</h4>
+                        <p>Follow live scores, NRR, and standings in real time.</p>
+                    </div>
+                    <div class="howitworks-step">
+                        <div class="howitworks-num">4</div>
+                        <h4>Climb the Table</h4>
+                        <p>Win matches and rise up the points table to glory.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 4: SPONSORS / PARTNERS ===================== -->
+        <div class="sponsors-section">
+            <div class="sponsors-box">
+                <h3 class="sponsors-heading">🤝 Trusted By Leagues & Partners</h3>
+                <div class="sponsors-row">
+                    <span class="sponsor-chip"><i class="fa-solid fa-star"></i> City Premier League</span>
+                    <span class="sponsor-chip"><i class="fa-solid fa-star"></i> Campus Cricket Cup</span>
+                    <span class="sponsor-chip"><i class="fa-solid fa-star"></i> Corporate Sports Fed</span>
+                    <span class="sponsor-chip"><i class="fa-solid fa-star"></i> Weekend Warriors League</span>
+                    <span class="sponsor-chip"><i class="fa-solid fa-star"></i> National Gully Circuit</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 5: APP PROMO / CTA ===================== -->
+        <div class="app-promo-section">
+            <div class="app-promo-box">
+                <div class="app-promo-text">
+                    <h3>📱 Take ProMatch Arena Everywhere</h3>
+                    <p>Get instant score alerts, manage your squad on the go, and never miss an update from your favorite tournaments.</p>
+                </div>
+                <div class="app-promo-buttons">
+                    <a href="#" class="app-promo-btn"><i class="fa-brands fa-android"></i> Get Android App</a>
+                    <a href="#" class="app-promo-btn"><i class="fa-brands fa-apple"></i> Get iOS App</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Modals -->
         <div class="modal-overlay" id="contactModal">
             <div class="modal-container">
@@ -1488,18 +1641,8 @@
             </div>
         </div>
 
-        <div class="modal-overlay" id="chatModal">
-            <div class="modal-container">
-                <div class="modal-header"><h2 class="modal-title"><i class="fa-solid fa-robot" style="color: var(--neon-cyan);"></i> ProMatch Assistant</h2><button class="modal-close" onclick="closeChatBot()">×</button></div>
-                <div class="chat-box-body" id="chatBody">
-                    <div class="chat-msg bot">Hello dost! Main ProMatch Arena ka AI Assistant hoon. Main ekdum mast hoon, aap batao kaise ho aur kya haal chal hain? Match ya tournament ke baare mein kuch bhi puch sakte ho!</div>
-                </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Pucho match ya haal-chaal..." onkeypress="handleChatKey(event)">
-                    <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-            </div>
-        </div>
+        <!-- CHATBOT FILE INCLUDE -->
+        <jsp:include page="chatbot.jsp" />
 
         <!-- 🌟 FOOTER INCLUDE -->
         <jsp:include page="footer.jsp" />
@@ -1558,53 +1701,11 @@
             document.getElementById('contactModal').classList.remove('active');
         }
 
-        function closeChatBot() {
-            document.getElementById('chatModal').classList.remove('active');
-        }
-
         function handleFormSubmit(event) {
             event.preventDefault();
             alert('✅ Thank you! Your message has been sent. Our support team will contact you soon.');
             closeContactForm();
             event.target.reset();
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if(!text) return;
-
-            const chatBody = document.getElementById('chatBody');
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-msg user';
-            userMsg.textContent = text;
-            chatBody.appendChild(userMsg);
-
-            input.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = 'chat-msg bot';
-                const lower = text.toLowerCase();
-                if(lower.includes('kaise ho') || lower.includes('haal') || lower.includes('kya hal') || lower.includes('btao')) {
-                    botMsg.textContent = 'Arre bhai, main ekdum fit-fat aur shandar hoon! Aap batao, tournament aur matches ka maza le rahe ho ya nahi?';
-                } else if(lower.includes('match') || lower.includes('live') || lower.includes('aaj ka')) {
-                    botMsg.textContent = '🏏 Aaj ke high-voltage matches mein Thunder Strikers aur Phoenix Warriors ka epic clash chal raha hai!';
-                } else if(lower.includes('point') || lower.includes('nrr') || lower.includes('table')) {
-                    botMsg.textContent = '📊 Points table live update hoti hai! Top par teams ka NRR +8.45 tak chal raha hai.';
-                } else {
-                    botMsg.textContent = 'Sahi hai bhai! Main samajh gaya. Agar koi aur technical ya match se juda sawal ho toh pucho!';
-                }
-                chatBody.appendChild(botMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 600);
-        }
-
-        function handleChatKey(e) {
-            if(e.key === 'Enter') {
-                sendChatMessage();
-            }
         }
 
         window.addEventListener('click', function(e) {

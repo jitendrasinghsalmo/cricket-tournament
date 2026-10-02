@@ -10,17 +10,35 @@
     <style>
         :root {
             --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.92);
+            --card-surface: rgba(13, 18, 30, 0.72);
             --neon-cyan: #38bdf8;
             --neon-emerald: #10b981;
             --neon-rose: #f43f5e;
-            --neon-amber: #f59e0b;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --border-glass: rgba(56, 189, 248, 0.22);
-            --body-overlay: rgba(3, 7, 18, 0.94);
-            --input-bg: rgba(3, 7, 18, 0.75);
+            --body-overlay: rgba(3, 7, 18, 0.82);
+            --input-bg: rgba(3, 7, 18, 0.45);
+            --input-text: #ffffff;
         }
+
+        body.light-mode {
+            --bg-deep: #f8fafc;
+            --card-surface: rgba(255, 255, 255, 0.82);
+            --neon-cyan: #0284c7;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: rgba(2, 132, 199, 0.25);
+            --body-overlay: rgba(241, 245, 249, 0.82);
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --input-text: #0f172a;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body { max-width: 100%; overflow-x: hidden; }
 
         body { 
             font-family: 'Inter', system-ui, -apple-system, sans-serif; 
@@ -29,97 +47,85 @@
             background-size: cover;
             color: var(--text-primary); 
             margin: 0; 
-            padding: 40px 20px; 
+            padding: 60px 15px 14px 15px; 
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            position: relative;
-            box-sizing: border-box;
+            justify-content: center;
         }
 
-        /* Top-Left Floating Back Button */
-        .top-back-btn {
+        /* Top-Left Back Button */
+        .btn-top-left-back {
             position: absolute;
-            top: 25px;
-            left: 25px;
-            background: var(--card-surface);
-            backdrop-filter: blur(15px);
-            color: var(--neon-cyan);
-            border: 1px solid var(--border-glass);
-            padding: 10px 18px;
-            border-radius: 12px;
+            top: 18px;
+            left: 22px;
+            background: rgba(14, 165, 233, 0.16);
+            color: #22d3ee;
+            border: 2px solid #06b6d4;
+            padding: 9px 22px;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
+            font-weight: 800;
+            font-size: 16px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
-            z-index: 100;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
+            transition: all 0.25s ease;
+            z-index: 1000;
         }
-        .top-back-btn:hover {
-            background: var(--neon-cyan);
+        .btn-top-left-back:hover {
+            background: #06b6d4;
             color: #030712;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+            transform: translateX(-3px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         }
 
+        /* Same card size as Edit Tournament */
         .form-container {
             width: 100%;
-            max-width: 520px;
+            max-width: 500px;
             background: var(--card-surface);
-            backdrop-filter: blur(22px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border-radius: 18px;
+            padding: clamp(18px, 4vh, 40px) 28px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
             position: relative;
             overflow: hidden;
-            box-sizing: border-box;
-            margin-top: 20px;
         }
         .form-container::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald));
         }
 
-        .form-header {
-            margin-bottom: 25px;
+        h2 {
             text-align: center;
+            color: var(--text-primary);
+            margin-top: 0;
+            margin-bottom: clamp(10px, 2.8vh, 28px);
+            font-weight: 800;
+            font-size: clamp(17px, 3.2vh, 25px);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-
-        .jumping-title {
-            color: var(--text-primary); margin: 0; font-weight: 900; font-size: 22px; letter-spacing: 1px; text-transform: uppercase;
-        }
-        .jumping-title span { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+        h2 span { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: clamp(8px, 2.4vh, 20px);
         }
 
         label {
             display: block;
-            font-size: 12.5px;
+            font-size: clamp(10.5px, 1.9vh, 13px);
             font-weight: 700;
             color: var(--text-secondary);
-            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-wrapper > i:first-child {
-            position: absolute;
-            left: 14px;
-            color: var(--neon-cyan);
-            font-size: 14px;
+            margin-bottom: clamp(3px, 0.8vh, 6px);
         }
 
         input[type="text"],
@@ -129,94 +135,146 @@
             width: 100%;
             background: var(--input-bg);
             border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            padding: 12px 14px 12px 42px;
-            color: var(--text-primary);
-            font-size: 14px;
+            border-radius: 10px;
+            padding: clamp(8px, 2.4vh, 16px) 15px;
+            color: var(--input-text);
+            font-size: clamp(12.5px, 2.1vh, 15px);
             font-family: inherit;
             outline: none;
-            transition: all 0.2s ease;
             box-sizing: border-box;
+            transition: all 0.2s ease;
         }
 
-        /* Password right icon (Eye Toggle) */
-        .toggle-password {
-            position: absolute;
-            right: 14px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-        .toggle-password:hover {
-            color: var(--neon-cyan);
+        select option {
+            background: #030712;
+            color: #ffffff;
+            padding: 10px;
         }
 
-        select {
-            appearance: none;
-            cursor: pointer;
+        ::placeholder {
+            color: #94a3b8;
+            opacity: 1;
         }
 
         input:focus, select:focus {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+            background: rgba(3, 7, 18, 0.7);
+        }
+        body.light-mode input:focus, body.light-mode select:focus { background: #ffffff; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
+        .form-row .form-group { min-width: 0; }
+
         .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 15px;
+            margin-top: clamp(10px, 2.8vh, 26px);
         }
 
         .btn-submit {
-            flex: 1;
-            background: linear-gradient(135deg, var(--neon-cyan), #0284c7);
-            color: #030712;
-            border: none;
-            padding: 13px;
-            border-radius: 12px;
+            width: 100%;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            color: #ffffff;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: clamp(10px, 2.4vh, 16px);
+            border-radius: 10px;
+            font-size: clamp(12.5px, 2.1vh, 15px);
             font-weight: 800;
-            font-size: 13.5px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.55);
+            letter-spacing: 0.8px;
         }
 
-        .btn-clear {
-            flex: 1;
-            background: rgba(244, 63, 94, 0.1);
-            color: var(--neon-rose);
-            border: 1px solid rgba(244, 63, 94, 0.3);
-            padding: 13px;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 13.5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .btn-clear:hover {
-            background: var(--neon-rose);
-            color: #030712;
-            box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+        .btn-submit:hover {
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+
+        /* password eye toggle */
+        .pw-wrap { position: relative; }
+        .pw-wrap input { padding-right: 42px; }
+        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: color 0.2s; }
+        .toggle-password:hover { color: var(--neon-cyan); }
+        select { appearance: none; -webkit-appearance: none; cursor: pointer; }
+
+        /* Mobile (same as Edit Tournament) */
+        @media(max-width: 768px) {
+            body { padding: 54px 12px 12px 12px; }
+            .btn-top-left-back { top: 12px; left: 14px; padding: 6px 15px; font-size: 13px; border-radius: 12px; gap: 8px; }
+            .form-container { padding: clamp(14px, 2.8vh, 24px) 16px; max-width: 480px; }
+            .form-row { gap: 10px; }
+            .form-row.stack-mobile { grid-template-columns: 1fr; gap: 0; }
+            h2 { font-size: clamp(15px, 2.7vh, 20px); margin-bottom: clamp(8px, 1.9vh, 16px); }
+            .form-group { margin-bottom: clamp(5px, 1.5vh, 13px); }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            select { padding: clamp(6px, 1.65vh, 11px) 11px; font-size: clamp(12px, 1.9vh, 14px); border-radius: 8px; }
+            label { font-size: clamp(9.5px, 1.6vh, 11.5px); margin-bottom: 3px; }
+            .button-group { margin-top: clamp(8px, 1.8vh, 16px); }
+            .btn-submit { padding: clamp(8px, 1.7vh, 12px); font-size: 13px; }
         }
     </style>
+</head>
+<body>
+
+    <!-- Top-Left Back Button -->
+    <a href="/admin/users" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+    <div class="form-container">
+        <h2><span>Edit</span> User</h2>
+
+        <form id="editUserForm" action="/admin/updateUser" method="post">
+            <input type="hidden" name="id" value="${user.id}">
+
+            <div class="form-row stack-mobile">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" value="${user.name}" required placeholder="Enter full name" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" value="${user.email}" required placeholder="Enter email address" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-row stack-mobile">
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="pw-wrap">
+                        <input type="password" id="passwordField" name="password" value="${user.password}" required placeholder="Enter password">
+                        <i class="fa-solid fa-eye toggle-password" id="eyeIcon" onclick="togglePasswordVisibility()" title="Show/Hide Password"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" value="${user.phone}" placeholder="Enter phone number" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>System Role</label>
+                <select name="role">
+                    <option value="USER" ${user.role == 'USER' ? 'selected' : ''}>USER</option>
+                    <option value="ADMIN" ${user.role == 'ADMIN' ? 'selected' : ''}>ADMIN</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-submit">💾 Update User</button>
+            </div>
+        </form>
+    </div>
+
     <script>
         function togglePasswordVisibility() {
             let passwordInput = document.getElementById('passwordField');
@@ -232,74 +290,10 @@
             }
         }
 
-        function clearForm() {
-            document.getElementById('editUserForm').reset();
+        if (localStorage.getItem('promatch_theme') === 'light' || localStorage.getItem('matchTheme') === 'light') {
+            document.body.classList.add('light-mode');
         }
     </script>
-</head>
-<body>
-
-    <!-- Top Left Floating Back Button -->
-    <a href="/admin/users" class="top-back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Users</a>
-
-    <div class="form-container">
-        <div class="form-header">
-            <h2 class="jumping-title">Edit <span>User</span></h2>
-        </div>
-        
-        <form id="editUserForm" action="/admin/updateUser" method="post">
-            <input type="hidden" name="id" value="${user.id}">
-            
-            <div class="form-group">
-                <label>Full Name</label>
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" name="name" value="${user.name}" required placeholder="Enter full name">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Email Address</label>
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" name="email" value="${user.email}" required placeholder="Enter email address">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="passwordField" name="password" value="${user.password}" required placeholder="Enter password">
-                    <i class="fa-solid fa-eye toggle-password" id="eyeIcon" onclick="togglePasswordVisibility()" title="Show/Hide Password"></i>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Phone Number</label>
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-phone"></i>
-                    <input type="text" name="phone" value="${user.phone}" placeholder="Enter phone number">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>System Role</label>
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <select name="role">
-                        <option value="USER" ${user.role == 'USER' ? 'selected' : ''}>USER</option>
-                        <option value="ADMIN" ${user.role == 'ADMIN' ? 'selected' : ''}>ADMIN</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="button-group">
-                <button type="button" class="btn-clear" onclick="clearForm()"><i class="fa-solid fa-rotate-right"></i> Clear</button>
-                <button type="submit" class="btn-submit"><i class="fa-solid fa-floppy-disk"></i> Update</button>
-            </div>
-        </form>
-    </div>
 
 </body>
 </html>

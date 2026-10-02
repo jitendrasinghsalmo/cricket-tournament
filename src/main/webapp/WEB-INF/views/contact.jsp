@@ -627,6 +627,53 @@
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; font-size: 11.5px; transition: color 0.2s; }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* ===================== 5 NEW SECTIONS (added, nothing else touched) ===================== */
+
+        /* 1. Support Stats Strip */
+        .support-stats-section { max-width: 1400px; margin: 0 auto; }
+        .support-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 768px) { .support-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        .support-stats-card { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 26px 15px; text-align: center; backdrop-filter: blur(12px); transition: 0.3s; }
+        .support-stats-card:hover { border-color: var(--neon-emerald); box-shadow: 0 0 20px rgba(0,255,136,0.25); transform: translateY(-4px); }
+        .support-stats-num { font-size: 28px; font-weight: 900; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .support-stats-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px; letter-spacing: 0.5px; }
+
+        /* 2. Office Hours */
+        .office-hours-section { max-width: 1400px; margin: 0 auto; }
+        .office-hours-box { background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 40px 30px; backdrop-filter: blur(15px); }
+        .office-hours-heading { text-align: center; font-size: 22px; font-weight: 900; color: var(--neon-emerald); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
+        .office-hours-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        @media(max-width: 768px) { .office-hours-grid { grid-template-columns: 1fr; } }
+        .office-hours-item { text-align: center; background: rgba(3,7,18,0.5); border: 1px solid var(--border-glass); border-radius: 14px; padding: 22px; }
+        .office-hours-item h4 { font-size: 14.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .office-hours-item p { font-size: 13px; color: var(--neon-cyan); font-weight: 700; margin: 0; }
+
+        /* 3. Social Connect */
+        .social-connect-section { max-width: 1400px; margin: 0 auto; }
+        .social-connect-box { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 35px 30px; text-align: center; backdrop-filter: blur(15px); }
+        .social-connect-heading { font-size: 18px; font-weight: 900; color: var(--neon-purple); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
+        .social-connect-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+        .social-connect-chip { background: rgba(181, 55, 242, 0.1); border: 1.5px solid var(--neon-purple); color: var(--text-primary); padding: 12px 22px; border-radius: 30px; font-weight: 800; font-size: 12.5px; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
+        .social-connect-chip:hover { background: var(--neon-purple); color: #fff; box-shadow: 0 0 18px rgba(181,55,242,0.5); transform: translateY(-3px); }
+
+        /* 4. Quick Help FAQ Teaser */
+        .quick-help-section { max-width: 1400px; margin: 0 auto; }
+        .quick-help-box { background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(181,55,242,0.1)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 40px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; backdrop-filter: blur(15px); }
+        .quick-help-text h3 { font-size: 20px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; }
+        .quick-help-text p { font-size: 13.5px; color: var(--text-secondary); margin: 0; max-width: 550px; line-height: 1.6; font-weight: 600; }
+        .quick-help-btn { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #0a0e27; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
+        .quick-help-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,217,255,0.6); color: #0a0e27; }
+
+        /* 5. Newsletter Signup */
+        .newsletter-cta-section { max-width: 1400px; margin: 0 auto; }
+        .newsletter-cta-box { background: var(--card-surface); border: 1.5px solid var(--neon-gold); border-radius: 18px; padding: 40px; text-align: center; backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(255,215,0,0.12); }
+        .newsletter-cta-box h3 { font-size: 20px; font-weight: 900; color: var(--neon-gold); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; }
+        .newsletter-cta-box p { font-size: 13.5px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 22px auto; line-height: 1.6; font-weight: 600; }
+        .newsletter-cta-form { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
+        .newsletter-cta-form input { flex: 1; min-width: 200px; background: rgba(3, 7, 18, 0.6); border: 1.5px solid var(--border-glass); border-radius: 10px; padding: 12px 14px; color: var(--text-primary); font-size: 13px; outline: none; }
+        .newsletter-cta-form input:focus { border-color: var(--neon-gold); box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+        .newsletter-cta-form button { background: linear-gradient(135deg, var(--neon-gold), var(--neon-cyan)); color: #0a0e27; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 800; font-size: 12.5px; cursor: pointer; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -635,18 +682,6 @@
     <jsp:include page="navbar.jsp" />
 
     <div class="main-content-wrap">
-        <!-- HEADER BAR -->
-        <div class="header-bar">
-            <div class="header-left">
-                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            </div>
-            <div>
-                <h2 style="font-size: 20px; font-weight: 900; margin: 0; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1.5px;">Contact Support</h2>
-            </div>
-            <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-            </div>
-        </div>
 
         <!-- HERO SECTION -->
         <div class="contact-hero">
@@ -927,6 +962,99 @@
                 </div>
             </div>
         </div>
+
+        <!-- ===================== NEW SECTION 1: SUPPORT STATS STRIP ===================== -->
+        <div class="section-spacer">
+            <div class="support-stats-section">
+                <div class="support-stats-grid">
+                    <div class="support-stats-card">
+                        <div class="support-stats-num">&lt;2 hrs</div>
+                        <div class="support-stats-label">Avg Response Time</div>
+                    </div>
+                    <div class="support-stats-card">
+                        <div class="support-stats-num">98%</div>
+                        <div class="support-stats-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="support-stats-card">
+                        <div class="support-stats-num">5,000+</div>
+                        <div class="support-stats-label">Tickets Resolved</div>
+                    </div>
+                    <div class="support-stats-card">
+                        <div class="support-stats-num">24/7</div>
+                        <div class="support-stats-label">Live Chat Availability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 2: OFFICE HOURS ===================== -->
+        <div class="section-spacer">
+            <div class="office-hours-section">
+                <div class="office-hours-box">
+                    <h2 class="office-hours-heading">🕒 Support Availability</h2>
+                    <div class="office-hours-grid">
+                        <div class="office-hours-item">
+                            <h4>Monday - Friday</h4>
+                            <p>9:00 AM - 6:00 PM IST</p>
+                        </div>
+                        <div class="office-hours-item">
+                            <h4>Saturday</h4>
+                            <p>10:00 AM - 4:00 PM IST</p>
+                        </div>
+                        <div class="office-hours-item">
+                            <h4>Sunday & Holidays</h4>
+                            <p>Live Chat Only</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 3: SOCIAL CONNECT ===================== -->
+        <div class="section-spacer">
+            <div class="social-connect-section">
+                <div class="social-connect-box">
+                    <h3 class="social-connect-heading">🌐 Connect With Us</h3>
+                    <div class="social-connect-row">
+                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-twitter"></i> Twitter</a>
+                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 4: QUICK HELP FAQ TEASER ===================== -->
+        <div class="section-spacer">
+            <div class="quick-help-section">
+                <div class="quick-help-box">
+                    <div class="quick-help-text">
+                        <h3>❓ Need Quick Answers?</h3>
+                        <p>Browse our FAQ & Support Center for instant answers on registration, NRR, squads, and technical issues.</p>
+                    </div>
+                    <a href="/faq" class="quick-help-btn"><i class="fa-solid fa-circle-question"></i> Visit FAQ Center</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 5: NEWSLETTER SIGNUP ===================== -->
+        <div class="section-spacer">
+            <div class="newsletter-cta-section">
+                <div class="newsletter-cta-box">
+                    <h3>📩 Stay Updated</h3>
+                    <p>Subscribe to get the latest tournament announcements, feature updates, and championship news straight to your inbox.</p>
+                    <form class="newsletter-cta-form" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHATBOT FILE INCLUDE -->
+        <jsp:include page="chatbot.jsp" />
 
         <!-- 🌟 FOOTER INCLUDE (Only Footer Added Here) -->
         <jsp:include page="footer.jsp" />

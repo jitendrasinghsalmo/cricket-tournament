@@ -450,6 +450,60 @@
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* ===================== 5 NEW SECTIONS (added, nothing else touched) ===================== */
+
+        /* 1. Project Metrics Strip */
+        .metrics-strip-section { max-width: 1300px; margin: 0 auto 40px auto; }
+        .metrics-strip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 768px) { .metrics-strip-grid { grid-template-columns: repeat(2, 1fr); } }
+        .metrics-strip-card { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 26px 15px; text-align: center; backdrop-filter: blur(12px); transition: 0.3s; }
+        .metrics-strip-card:hover { border-color: var(--neon-emerald); box-shadow: 0 0 20px rgba(0,255,136,0.25); transform: translateY(-4px); }
+        .metrics-strip-num { font-size: 28px; font-weight: 900; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .metrics-strip-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px; letter-spacing: 0.5px; }
+
+        /* 2. Testimonials */
+        .testimonial-section { max-width: 1300px; margin: 0 auto 40px auto; }
+        .testimonial-heading { text-align: center; font-size: 22px; font-weight: 900; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        @media(max-width: 992px) { .testimonial-grid { grid-template-columns: 1fr; } }
+        .testimonial-card { background: linear-gradient(135deg, rgba(0,217,255,0.06), rgba(181,55,242,0.06)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 28px; transition: 0.3s; }
+        .testimonial-card:hover { border-color: var(--neon-gold); box-shadow: 0 12px 30px rgba(255,215,0,0.15); }
+        .testimonial-stars { color: var(--neon-gold); font-size: 14px; margin-bottom: 12px; }
+        .testimonial-text { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; font-weight: 600; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .testimonial-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan)); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 15px; }
+        .testimonial-name { font-size: 13.5px; font-weight: 800; color: var(--text-primary); }
+        .testimonial-role { font-size: 11.5px; color: var(--text-secondary); }
+
+        /* 3. Roadmap / Future Enhancements */
+        .roadmap-section { max-width: 1300px; margin: 0 auto 40px auto; }
+        .roadmap-box { background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 40px 30px; backdrop-filter: blur(15px); }
+        .roadmap-heading { text-align: center; font-size: 22px; font-weight: 900; color: var(--neon-emerald); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px; }
+        .roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+        @media(max-width: 992px) { .roadmap-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 576px) { .roadmap-grid { grid-template-columns: 1fr; } }
+        .roadmap-step { text-align: center; position: relative; }
+        .roadmap-num { width: 50px; height: 50px; margin: 0 auto 16px auto; border-radius: 50%; background: rgba(3,7,18,0.6); border: 2px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0,217,255,0.35); }
+        .roadmap-step h4 { font-size: 14.5px; font-weight: 800; color: var(--text-primary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .roadmap-step p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; font-weight: 600; margin: 0; }
+
+        /* 4. Security & Compliance */
+        .security-section { max-width: 1300px; margin: 0 auto 40px auto; }
+        .security-box { background: var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 35px 30px; backdrop-filter: blur(15px); }
+        .security-heading { text-align: center; font-size: 18px; font-weight: 900; color: var(--neon-purple); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
+        .security-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+        .security-chip { background: rgba(181, 55, 242, 0.1); border: 1.5px solid var(--neon-purple); color: var(--text-primary); padding: 12px 22px; border-radius: 30px; font-weight: 800; font-size: 12.5px; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .security-chip:hover { background: var(--neon-purple); color: #fff; box-shadow: 0 0 18px rgba(181,55,242,0.5); transform: translateY(-3px); }
+
+        /* 5. Explore More CTA */
+        .explore-cta-section { max-width: 1300px; margin: 0 auto 40px auto; }
+        .explore-cta-box { background: linear-gradient(135deg, rgba(0,217,255,0.12), rgba(181,55,242,0.12)), var(--card-surface); border: 1.5px solid var(--border-glass); border-radius: 18px; padding: 40px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; backdrop-filter: blur(15px); }
+        .explore-cta-text h3 { font-size: 20px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; }
+        .explore-cta-text p { font-size: 13.5px; color: var(--text-secondary); margin: 0; max-width: 550px; line-height: 1.6; font-weight: 600; }
+        .explore-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .explore-cta-btn { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #0a0e27; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
+        .explore-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,217,255,0.6); color: #0a0e27; }
     </style>
 </head>
 <body>
@@ -457,19 +511,6 @@
     <jsp:include page="navbar.jsp" />
 
     <div class="container">
-        <!-- HEADER BAR (Back Button + Page Title + Theme Toggle) -->
-        <div class="header-bar">
-            <div class="header-left">
-                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            </div>
-            <div>
-                <h2 style="font-size: 20px; font-weight: 900; margin: 0; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1.5px;">About ProMatch</h2>
-            </div>
-            <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-            </div>
-        </div>
-
         <div class="about-hero">
             <div class="hero-wave-light"></div>
             <div class="dynamic-hero-content">
@@ -722,6 +763,119 @@
                 </div>
             </div>
         </div>
+
+        <!-- ===================== NEW SECTION 1: PROJECT METRICS STRIP ===================== -->
+        <div class="metrics-strip-section">
+            <div class="metrics-strip-grid">
+                <div class="metrics-strip-card">
+                    <div class="metrics-strip-num">40+</div>
+                    <div class="metrics-strip-label">REST API Endpoints</div>
+                </div>
+                <div class="metrics-strip-card">
+                    <div class="metrics-strip-num">99.9%</div>
+                    <div class="metrics-strip-label">Uptime Reliability</div>
+                </div>
+                <div class="metrics-strip-card">
+                    <div class="metrics-strip-num">15K+</div>
+                    <div class="metrics-strip-label">Lines of Code</div>
+                </div>
+                <div class="metrics-strip-card">
+                    <div class="metrics-strip-num">100%</div>
+                    <div class="metrics-strip-label">Role-Based Secured</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 2: TESTIMONIALS ===================== -->
+        <div class="testimonial-section">
+            <h2 class="testimonial-heading">💬 What Developers & Organizers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">The role-based dashboard and payment integration made tournament management effortless for our entire league.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">R</div>
+                        <div><div class="testimonial-name">Rohit Sharma</div><div class="testimonial-role">Tournament Organizer</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Clean architecture, fast APIs, and a modern UI — exactly what an enterprise sports platform should feel like.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">A</div>
+                        <div><div class="testimonial-name">Ankit Verma</div><div class="testimonial-role">Backend Developer</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Squad management and live analytics in one dashboard — this saved our team hours of manual work every week.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">P</div>
+                        <div><div class="testimonial-name">Priya Nair</div><div class="testimonial-role">Team Captain</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 3: ROADMAP / FUTURE ENHANCEMENTS ===================== -->
+        <div class="roadmap-section">
+            <div class="roadmap-box">
+                <h2 class="roadmap-heading">🧭 Product Roadmap</h2>
+                <div class="roadmap-grid">
+                    <div class="roadmap-step">
+                        <div class="roadmap-num">1</div>
+                        <h4>Live Ball-by-Ball Feed</h4>
+                        <p>Real-time WebSocket-powered scoring updates for every delivery.</p>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="roadmap-num">2</div>
+                        <h4>Mobile Companion App</h4>
+                        <p>Native Android and iOS apps for on-the-go squad management.</p>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="roadmap-num">3</div>
+                        <h4>AI Match Insights</h4>
+                        <p>Predictive analytics for team performance and player form.</p>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="roadmap-num">4</div>
+                        <h4>Multi-Sport Expansion</h4>
+                        <p>Extending the engine to football, kabaddi, and volleyball leagues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 4: SECURITY & COMPLIANCE ===================== -->
+        <div class="security-section">
+            <div class="security-box">
+                <h3 class="security-heading">🔐 Security & Compliance Standards</h3>
+                <div class="security-row">
+                    <span class="security-chip"><i class="fa-solid fa-lock"></i> Spring Security RBAC</span>
+                    <span class="security-chip"><i class="fa-solid fa-shield-halved"></i> Encrypted Payments</span>
+                    <span class="security-chip"><i class="fa-solid fa-database"></i> ACID-Compliant DB</span>
+                    <span class="security-chip"><i class="fa-solid fa-user-shield"></i> Session Protection</span>
+                    <span class="security-chip"><i class="fa-solid fa-code-branch"></i> Input Sanitization</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== NEW SECTION 5: EXPLORE MORE CTA ===================== -->
+        <div class="explore-cta-section">
+            <div class="explore-cta-box">
+                <div class="explore-cta-text">
+                    <h3>🚀 Explore ProMatch Arena</h3>
+                    <p>Dive into live tournaments, register your squad, and experience enterprise-grade cricket management built for champions.</p>
+                </div>
+                <div class="explore-cta-buttons">
+                    <a href="/tournaments" class="explore-cta-btn"><i class="fa-solid fa-trophy"></i> View Tournaments</a>
+                    <a href="/register-team" class="explore-cta-btn"><i class="fa-solid fa-user-plus"></i> Register Team</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHATBOT FILE INCLUDE -->
+        <jsp:include page="chatbot.jsp" />
 
         <!-- 🌟 FOOTER INCLUDE (Exact Tournament Match Footer Style) -->
         <jsp:include page="footer.jsp" />

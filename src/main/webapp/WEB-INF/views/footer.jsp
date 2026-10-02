@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!-- Role check (same as navbar): Role enum = ADMIN / USER -->
+<c:set var="isAdmin" value="${sessionScope.user.role == 'ADMIN'}" />
+
 <style>
     /* Footer Newsletter Button & Input Alignment */
     .footer-newsletter form { 
@@ -72,12 +77,65 @@
         color: #ffffff; 
         text-decoration: underline; 
     }
+
+    /* Brand title link (home / admin home) - looks exactly like plain heading */
+    .footer-brand h3 a { color: inherit; text-decoration: none; font: inherit; }
+
+    /* Active link highlight (same idea as navbar) */
+    .footer-links a.active {
+        color: var(--neon-cyan) !important;
+        text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+</style>
+
+<style>
+    /* ===== RESPONSIVE ADD-ON (original rules untouched) ===== */
+    .grand-footer-section { max-width: 100%; overflow-x: clip; }
+    .grand-footer-content > * { min-width: 0; }
+    .footer-brand p, .footer-newsletter p, .footer-links a, .footer-bottom-bar p { overflow-wrap: anywhere; }
+    .footer-socials { flex-wrap: wrap; }
+    .footer-newsletter input { min-width: 0; }
+    .footer-bottom-bar { box-sizing: border-box; width: 100%; }
+
+    /* Tablet: brand + newsletter full width, link columns side by side */
+    @media (max-width: 1023px) {
+        .grand-footer-section { padding-left: 24px !important; padding-right: 24px !important; }
+        .grand-footer-content {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px 28px !important;
+        }
+        .footer-brand, .footer-newsletter { grid-column: 1 / -1 !important; }
+    }
+
+    /* Phone: single column, centered bottom bar */
+    @media (max-width: 575px) {
+        .grand-footer-section { padding-left: 18px !important; padding-right: 18px !important; }
+        .grand-footer-content {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 28px !important;
+        }
+        .footer-newsletter input { font-size: 16px; }   /* stops iOS zoom on focus */
+        .footer-bottom-bar {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            gap: 12px;
+        }
+        .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
+    }
+
+    /* Very small phones: stack newsletter input and button */
+    @media (max-width: 360px) {
+        .footer-newsletter form { flex-direction: column; align-items: stretch; }
+        .footer-newsletter button { width: 100%; }
+    }
 </style>
 
 <footer class="grand-footer-section">
     <div class="grand-footer-content">
         <div class="footer-brand">
-            <h3><span>ProMatch</span> Arena</h3>
+            <h3><a href="${isAdmin ? '/admin/home' : '/home'}"><span>ProMatch</span> Arena</a></h3>
             <p>Advanced Enterprise Cricket Tournament & Match Control Center. Built with Spring Boot, JSP, and PostgreSQL to deliver high-performance sports analytics.</p>
             <div class="footer-socials">
                 <a href="https://www.linkedin.com/in/jitendra-singh-725698290/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -91,21 +149,41 @@
         
         <div class="footer-links">
             <h4>Quick Navigation</h4>
-            <ul>
-                <li><a href="/home"><i class="fa-solid fa-angle-right"></i> Home</a></li>
-                <li><a href="/teams"><i class="fa-solid fa-angle-right"></i> View Teams</a></li>
-                <li><a href="/register-team"><i class="fa-solid fa-angle-right"></i> Register Team</a></li>
-                <li><a href="/matches"><i class="fa-solid fa-angle-right"></i> Live Matches</a></li>
-                <li><a href="/tournaments"><i class="fa-solid fa-angle-right"></i> Tournaments</a></li>
+            <ul id="pmFooterNav">
+                <c:choose>
+                    <c:when test="${isAdmin}">
+                        <li><a href="/admin/home"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+                        <li><a href="/admin/teams"><i class="fa-solid fa-angle-right"></i> Teams</a></li>
+                        <li><a href="/admin/matches"><i class="fa-solid fa-angle-right"></i> Matches</a></li>
+                        <li><a href="/admin/tournaments"><i class="fa-solid fa-angle-right"></i> Tournaments</a></li>
+                        <li><a href="/admin/users"><i class="fa-solid fa-angle-right"></i> Users</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/home"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+                        <li><a href="/teams"><i class="fa-solid fa-angle-right"></i> View Teams</a></li>
+                        <li><a href="/register-team"><i class="fa-solid fa-angle-right"></i> Register Team</a></li>
+                        <li><a href="/matches"><i class="fa-solid fa-angle-right"></i> Live Matches</a></li>
+                        <li><a href="/tournaments"><i class="fa-solid fa-angle-right"></i> Tournaments</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
 
         <div class="footer-links">
             <h4>Standings & Stats</h4>
-            <ul>
-                <li><a href="/pointsTable"><i class="fa-solid fa-angle-right"></i> Points Table</a></li>
+            <ul id="pmFooterStats">
+                <c:choose>
+                    <c:when test="${isAdmin}">
+                        <li><a href="/admin/pointsTable"><i class="fa-solid fa-angle-right"></i> Points Table</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/pointsTable"><i class="fa-solid fa-angle-right"></i> Points Table</a></li>
+                    </c:otherwise>
+                </c:choose>
+                <!-- Common pages (same for admin and user) -->
                 <li><a href="/about"><i class="fa-solid fa-angle-right"></i> About Architecture</a></li>
                 <li><a href="/faq"><i class="fa-solid fa-angle-right"></i> FAQ Help Center</a></li>
+                <li><a href="/rules"><i class="fa-solid fa-angle-right"></i> Rules & Regulations</a></li>
             </ul>
         </div>
 
@@ -128,3 +206,17 @@
         </div>
     </div>
 </footer>
+
+<script>
+    /* ===== Footer active link (by current URL, same logic as navbar) ===== */
+    (function () {
+        var links = document.querySelectorAll('#pmFooterNav a, #pmFooterStats a');
+        var path = window.location.pathname.replace(/\/+$/, '') || '/';
+        links.forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (path === href || (path === '/' && href === '/home') || path.indexOf(href + '/') === 0) {
+                a.classList.add('active');
+            }
+        });
+    })();
+</script>

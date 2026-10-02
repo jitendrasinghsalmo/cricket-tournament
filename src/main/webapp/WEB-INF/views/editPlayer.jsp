@@ -4,20 +4,26 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProMatch Arena | Edit Player Profile</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.82);
+            --card-surface: rgba(13, 18, 30, 0.72);
             --neon-cyan: #38bdf8;
             --neon-emerald: #10b981;
+            --neon-rose: #f43f5e;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --border-glass: rgba(56, 189, 248, 0.22);
-            --body-overlay: rgba(3, 7, 18, 0.85);
-            --input-bg: rgba(3, 7, 18, 0.6);
+            --body-overlay: rgba(3, 7, 18, 0.82);
+            --input-bg: rgba(3, 7, 18, 0.45);
         }
+
+        * { box-sizing: border-box; }
+
+        html, body { max-width: 100%; overflow-x: hidden; }
 
         body { 
             font-family: 'Inter', system-ui, -apple-system, sans-serif; 
@@ -26,111 +32,201 @@
             background-size: cover;
             color: var(--text-primary); 
             margin: 0; 
-            padding: 40px 20px; 
+            padding: 60px 15px 14px 15px; 
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Top-Left Back Button */
+        .btn-top-left-back {
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            background: rgba(14, 165, 233, 0.16);
+            color: #22d3ee;
+            border: 2px solid #06b6d4;
+            padding: 9px 22px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
+            transition: all 0.25s ease;
+            z-index: 1000;
+        }
+        .btn-top-left-back:hover {
+            background: #06b6d4;
+            color: #030712;
+            transform: translateX(-3px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Form size auto-scales with screen height, so no scroll */
         .form-container {
-            max-width: 750px; margin: 0 auto;
-            background: var(--card-surface); backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass); border-radius: 20px;
-            padding: 30px 35px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            position: relative; overflow: hidden;
+            width: 100%;
+            max-width: 620px;
+            background: var(--card-surface);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: clamp(16px, 4vh, 40px) 34px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
         }
         .form-container::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-emerald));
         }
 
-        .form-top-bar {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border-glass);
+        h2 {
+            text-align: center;
+            color: var(--text-primary);
+            margin-top: 0;
+            margin-bottom: clamp(9px, 2.6vh, 26px);
+            font-weight: 800;
+            font-size: clamp(16px, 3vh, 23px);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-
-        .btn-back-inline {
-            background: rgba(56, 189, 248, 0.08); color: var(--neon-cyan);
-            border: 1px solid var(--border-glass); padding: 7px 14px;
-            border-radius: 8px; text-decoration: none; font-weight: 700;
-            font-size: 12.5px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-        }
-        .btn-back-inline:hover {
-            background: var(--neon-cyan); color: #030712;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-        }
-
-        .form-title {
-            font-size: 17px; font-weight: 800; color: var(--text-primary);
-            text-transform: uppercase; letter-spacing: 0.8px; margin: 0;
-        }
-
-        .form-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
-        }
-        @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+        h2 span { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
 
         .form-group {
-            display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;
+            margin-bottom: clamp(7px, 2.2vh, 18px);
         }
-        .form-group.full-width { grid-column: 1 / -1; }
 
         label {
-            font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;
+            display: block;
+            font-size: clamp(10.5px, 1.8vh, 12.5px);
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: clamp(3px, 0.8vh, 6px);
         }
 
-        input[type="text"], input[type="number"], select {
-            background: var(--input-bg); border: 1px solid var(--border-glass);
-            border-radius: 10px; padding: 11px 14px; color: var(--text-primary);
-            font-size: 14px; outline: none; transition: all 0.2s ease; width: 100%; box-sizing: border-box;
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"],
+        select {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: clamp(7px, 2.2vh, 15px) 14px;
+            color: #ffffff;
+            font-size: clamp(12.5px, 2vh, 14.5px);
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
         }
-        input:focus, select:focus {
-            border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
-            background: rgba(3, 7, 18, 0.85);
+
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.8;
+        }
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
         }
 
         select option {
-            background: var(--bg-deep); color: var(--text-primary); padding: 10px;
+            background: #030712;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        ::placeholder {
+            color: #94a3b8;
+            opacity: 1;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+            background: rgba(3, 7, 18, 0.7);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-row .form-group { min-width: 0; }
+
+        .button-group {
+            margin-top: clamp(9px, 2.6vh, 24px);
         }
 
         .btn-submit {
+            width: 100%;
             background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
-            color: #ffffff; border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #ffffff;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: clamp(9px, 2.2vh, 15px);
+            border-radius: 10px;
+            font-size: clamp(12.5px, 2vh, 14.5px);
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s ease;
             box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-            width: 100%; padding: 12px; border-radius: 10px;
-            font-size: 13px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 0.5px; cursor: pointer; transition: all 0.25s ease;
-            margin-top: 15px; grid-column: 1 / -1;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
         }
+
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
             background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
         }
 
-        .footer-bottom-bar {
-            max-width: 750px; margin: 20px auto 0 auto; text-align: center;
-            color: var(--text-secondary); font-size: 11.5px; letter-spacing: 0.5px;
+        /* Mobile */
+        @media(max-width: 768px) {
+            body { padding: 54px 12px 12px 12px; }
+            .btn-top-left-back { top: 12px; left: 14px; padding: 6px 15px; font-size: 13px; border-radius: 12px; gap: 8px; }
+            .form-container { padding: clamp(12px, 2.6vh, 22px) 15px; max-width: 480px; }
+            .form-row { gap: 10px; }
+            .form-row.stack-mobile { grid-template-columns: 1fr; gap: 0; }
+            h2 { font-size: clamp(14.5px, 2.6vh, 19px); margin-bottom: clamp(7px, 1.7vh, 14px); }
+            .form-group { margin-bottom: clamp(4px, 1.35vh, 12px); }
+            input[type="text"],
+            input[type="datetime-local"],
+            input[type="number"],
+            select { padding: clamp(5px, 1.55vh, 10px) 10px; font-size: clamp(12px, 1.8vh, 13.5px); border-radius: 8px; }
+            label { font-size: clamp(9px, 1.4vh, 10.5px); margin-bottom: 2px; }
+            .button-group { margin-top: clamp(7px, 1.6vh, 14px); }
+            .btn-submit { padding: clamp(8px, 1.6vh, 11px); font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Top-Left Back Button -->
+    <a href="javascript:history.back()" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
     <div class="form-container">
-        <!-- Back Button on Left Side -->
-        <div class="form-top-bar">
-            <a href="javascript:history.back()" class="btn-back-inline"><i class="fa-solid fa-arrow-left"></i> Back</a>
-            <div class="form-title">⚡ Edit Player Profile</div>
-        </div>
+        <h2>⚡ <span>Edit</span> Player Profile</h2>
 
         <form action="${pageContext.request.contextPath}/updatePlayer" method="post">
             <input type="hidden" name="id" value="${player.id}">
             <input type="hidden" name="teamId" value="${teamId}">
-            
-            <div class="form-grid">
-                <div class="form-group full-width">
-                    <label>Player Full Name</label>
-                    <input type="text" name="playerName" value="${player.playerName}" placeholder="Enter player name" required autocomplete="off">
-                </div>
 
+            <div class="form-group">
+                <label>Player Full Name</label>
+                <input type="text" name="playerName" value="${player.playerName}" placeholder="Enter player name" required autocomplete="off">
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
                     <label>Age</label>
                     <input type="number" name="age" value="${player.age}" placeholder="Enter age" min="10" max="60" required>
@@ -140,18 +236,20 @@
                     <label>Jersey Number</label>
                     <input type="number" name="jerseyNumber" value="${player.jerseyNumber}" placeholder="Enter jersey number" min="0" max="999" required>
                 </div>
+            </div>
 
-                <div class="form-group full-width">
-                    <label>Player Role</label>
-                    <select name="role" required>
-                        <!-- Yahan values uppercase karni zaroori hain taaki Spring error na de -->
-                        <option value="BATSMAN" ${player.role.name() == 'BATSMAN' ? 'selected' : ''}>Batsman</option>
-                        <option value="BOWLER" ${player.role.name() == 'BOWLER' ? 'selected' : ''}>Bowler</option>
-                        <option value="ALL_ROUNDER" ${player.role.name() == 'ALL_ROUNDER' ? 'selected' : ''}>All-Rounder</option>
-                        <option value="WICKET_KEEPER" ${player.role.name() == 'WICKET_KEEPER' ? 'selected' : ''}>Wicket-Keeper</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label>Player Role</label>
+                <select name="role" required>
+                    <!-- Yahan values uppercase karni zaroori hain taaki Spring error na de -->
+                    <option value="BATSMAN" ${player.role.name() == 'BATSMAN' ? 'selected' : ''}>Batsman</option>
+                    <option value="BOWLER" ${player.role.name() == 'BOWLER' ? 'selected' : ''}>Bowler</option>
+                    <option value="ALL_ROUNDER" ${player.role.name() == 'ALL_ROUNDER' ? 'selected' : ''}>All-Rounder</option>
+                    <option value="WICKET_KEEPER" ${player.role.name() == 'WICKET_KEEPER' ? 'selected' : ''}>Wicket-Keeper</option>
+                </select>
+            </div>
 
+            <div class="form-row stack-mobile">
                 <div class="form-group">
                     <label>Batting Style</label>
                     <select name="battingStyle" required>
@@ -171,13 +269,11 @@
                     </select>
                 </div>
             </div>
-            
-            <button type="submit" class="btn-submit">💾 Save Changes</button>
-        </form>
-    </div>
 
-    <div class="footer-bottom-bar">
-        <p>&copy; 2026 ProMatch Arena &bull; All Rights Reserved.</p>
+            <div class="button-group">
+                <button type="submit" class="btn-submit">💾 Save Changes</button>
+            </div>
+        </form>
     </div>
 
 </body>

@@ -216,6 +216,15 @@
             transition: color 0.2s; 
         }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* ===================== EXTRA TERMS SECTIONS (added, nothing else touched) ===================== */
+        .toc-box { background: rgba(0, 217, 255, 0.05); border: 1.5px solid var(--border-glass); border-radius: 16px; padding: 22px 28px; margin-bottom: 30px; }
+        .toc-box h4 { font-size: 15px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 14px 0; }
+        .toc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        @media(max-width: 650px) { .toc-list { grid-template-columns: 1fr; } }
+        .toc-list li a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .toc-list li a:hover { color: var(--neon-cyan); transform: translateX(3px); }
+        .toc-list li a i { color: var(--neon-emerald); font-size: 11px; }
     </style>
 </head>
 <body>
@@ -224,25 +233,31 @@
     <jsp:include page="navbar.jsp" />
 
     <div class="main-content-wrap">
-        <div class="header-bar">
-            <div class="header-left">
-                <button onclick="history.back()" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            </div>
-            <div>
-                <h2 style="font-size: 20px; font-weight: 900; margin: 0; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1.5px;">Terms & Conditions</h2>
-            </div>
-            <div class="header-right">
-                <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-            </div>
-        </div>
 
         <div class="terms-container">
             <h1><i class="fa-solid fa-file-contract"></i> Comprehensive Terms & Conditions</h1>
             <span class="last-updated">Last updated & Effective Date: June 2026 | ProMatch Arena Governance & User Obligations</span>
-            
+
+            <!-- ===================== TABLE OF CONTENTS ===================== -->
+            <div class="toc-box">
+                <h4>📑 Quick Navigation</h4>
+                <ul class="toc-list">
+                    <li><a href="#sec1"><i class="fa-solid fa-caret-right"></i> Scope of Agreement</a></li>
+                    <li><a href="#sec2"><i class="fa-solid fa-caret-right"></i> Account Obligations & Security</a></li>
+                    <li><a href="#sec3"><i class="fa-solid fa-caret-right"></i> Intellectual Property & Licensing</a></li>
+                    <li><a href="#sec4"><i class="fa-solid fa-caret-right"></i> Limitation of Liability</a></li>
+                    <li><a href="#sec5"><i class="fa-solid fa-caret-right"></i> Suspension & Modification of Terms</a></li>
+                    <li><a href="#sec6"><i class="fa-solid fa-caret-right"></i> Technical Support & Contact</a></li>
+                    <li><a href="#sec7"><i class="fa-solid fa-caret-right"></i> Payment & Refund Policy</a></li>
+                    <li><a href="#sec8"><i class="fa-solid fa-caret-right"></i> Data Privacy & Cookie Policy</a></li>
+                    <li><a href="#sec9"><i class="fa-solid fa-caret-right"></i> Fair Play & Prohibited Conduct</a></li>
+                    <li><a href="#sec10"><i class="fa-solid fa-caret-right"></i> Dispute Resolution & Governing Law</a></li>
+                </ul>
+            </div>
+
             <p>Welcome to <strong>ProMatch Arena</strong>. By accessing, logging into, navigating, or utilizing our enterprise-grade cricket tournament management system, you formally agree to abide by these exhaustive Terms and Conditions. Please read every condition, rule, and governance clause carefully before interacting with our digital ecosystem. This agreement is structured to safeguard platform integrity, protect user accounts, and maintain absolute transparency across all sports analytics operations.</p>
 
-            <h3>1. Scope of Agreement & Platform Architecture Acceptance</h3>
+            <h3 id="sec1">1. Scope of Agreement & Platform Architecture Acceptance</h3>
             <p>This document constitutes a legally binding contract between you (acting as a user, player, team registrar, tournament coordinator, or system administrator) and ProMatch Arena. Our platform operates on a robust, high-performance, and scalable digital infrastructure engineered specifically for professional sports management, live scorekeeping, and tournament analytics. By accessing our services, you acknowledge and accept our multi-tier architecture:</p>
             <ul>
                 <li><strong>Backend Routing Engine:</strong> Powered by Spring Boot enterprise controllers that manage request lifecycles, REST API endpoints, asynchronous threads, and core business logic execution with minimal latency.</li>
@@ -251,7 +266,7 @@
                 <li><strong>Frontend Presentation Layer:</strong> Developed using dynamic JSP views enhanced with modern Cyber Glassmorphism UI styling, continuous CSS animations, interactive modal dialogues, automated Net Run Rate (NRR) computation utilities, and an integrated AI assistant chatbot.</li>
             </ul>
 
-            <h3>2. User Account Obligations, Credential Security & Access Rules</h3>
+            <h3 id="sec2">2. User Account Obligations, Credential Security & Access Rules</h3>
             <p>Account security, integrity, and fair play are absolute prerequisites for participating within ProMatch Arena. Every registered participant, team captain, and system operator must strictly follow these mandatory compliance rules:</p>
             <ul>
                 <li><strong>Credential Confidentiality & Management:</strong> Users are solely and exclusively responsible for safeguarding their login credentials, including usernames, hashed passwords, and active browser session tokens. Sharing login credentials across unauthorized individuals, teams, or external entities is strictly prohibited under any circumstances.</li>
@@ -259,16 +274,16 @@
                 <li><strong>Authenticity of Registered Data:</strong> Team managers, club representatives, and tournament registrars must submit verified, accurate player details, authentic jersey assignments, and legitimate contact information during squad creation and match scorecard verification.</li>
             </ul>
 
-            <h3>3. Intellectual Property, Software Proprietary Rights & Licensing</h3>
+            <h3 id="sec3">3. Intellectual Property, Software Proprietary Rights & Licensing</h3>
             <p>All source code, software architectures, custom database mappings, graphical assets, video embedding integrations, responsive UI themes, database migration scripts, and textual documentation associated with ProMatch Arena are protected as proprietary intellectual property. Unauthorized copying, unauthorized redistribution, reverse engineering, unauthorized modification, or commercial resale of this platform or any of its modular components is strictly forbidden under domestic and international copyright regulations. All platform visuals and code structures remain the exclusive property of the system architects.</p>
 
-            <h3>4. Limitation of Liability, System Reliability & Operational Uptime</h3>
+            <h3 id="sec4">4. Limitation of Liability, System Reliability & Operational Uptime</h3>
             <p>ProMatch Arena is provided to users on an "as-is" and "as-available" basis without warranties of any kind, whether express or implied. The platform creators, lead developers, and system administrators do not guarantee absolute uninterrupted server uptime, 100% error-free software execution, or immunity from local browser storage cache clearances. We shall bear no liability whatsoever for accidental data loss resulting from improper local database adjustments, third-party internet service provider outages, browser incompatibilities, or unscheduled emergency server maintenance windows.</p>
 
-            <h3>5. Suspension, Termination & Modification of Operating Terms</h3>
+            <h3 id="sec5">5. Suspension, Termination & Modification of Operating Terms</h3>
             <p>We reserve the absolute, unrestricted right to modify, update, suspend, or terminate platform features, JSP views, backend controllers, or user accounts at any time without prior individual notice. Continued interaction with ProMatch Arena following the publication of policy updates constitutes your formal, binding consent to the revised terms, conditions, and updated operational guidelines across all future tournaments.</p>
 
-            <h3>6. Official Administrative, Developer & Technical Support</h3>
+            <h3 id="sec6">6. Official Administrative, Developer & Technical Support</h3>
             <p>For any formal legal inquiries, partnership proposals, security vulnerability disclosures, or technical support requests regarding these comprehensive Terms and Conditions, please contact the platform creator and lead systems architect directly through the following official communication channels:</p>
             
             <div class="contact-box">
@@ -277,7 +292,50 @@
                 <p><i class="fa-solid fa-envelope me-2 text-primary"></i> Official Email: jitendrasingh07022004@gmail.com</p>
                 <p><i class="fa-solid fa-code me-2 text-primary"></i> System Architecture: ProMatch Arena Enterprise Tournament Hub</p>
             </div>
+
+            <!-- ===================== NEW SECTION 7: PAYMENT & REFUND POLICY ===================== -->
+            <h3 id="sec7">7. Payment, Entry Fees & Refund Policy</h3>
+            <p>All tournament entry fees, registration charges, and premium feature payments processed through ProMatch Arena are handled via our secure Razorpay payment gateway integration. By completing a payment, you agree to the following financial terms:</p>
+            <ul>
+                <li><strong>Payment Confirmation:</strong> Team registration is considered complete only after successful payment verification and confirmation via automated email or dashboard notification.</li>
+                <li><strong>Refund Eligibility:</strong> Refund requests for cancelled tournaments are processed within 7–10 business days. Refunds are not issued once a tournament has commenced or if cancellation occurs due to a team's own withdrawal after the registration deadline.</li>
+                <li><strong>Failed Transactions:</strong> In case of a failed or duplicate transaction, the amount is automatically reversed to the original payment source within the standard banking timeframe.</li>
+                <li><strong>Disputed Charges:</strong> Any disputed or unauthorized charge must be reported to our support team within 48 hours of the transaction for investigation.</li>
+            </ul>
+
+            <!-- ===================== NEW SECTION 8: DATA PRIVACY & COOKIE POLICY ===================== -->
+            <h3 id="sec8">8. Data Privacy, Cookies & Information Handling</h3>
+            <p>ProMatch Arena collects and processes user data solely to deliver, secure, and improve platform services. Our data handling practices include:</p>
+            <ul>
+                <li><strong>Data Collected:</strong> Account details, team and squad information, match statistics, session tokens, and communication logs submitted through contact forms or the AI assistant chatbot.</li>
+                <li><strong>Cookie Usage:</strong> We use browser <code>localStorage</code> and session cookies strictly for theme preference persistence (Dark/Light mode) and session authentication — never for third-party advertising or tracking.</li>
+                <li><strong>Data Sharing:</strong> User data is never sold or shared with third-party marketers. Data may be disclosed only when legally required by governmental or judicial authorities.</li>
+                <li><strong>Data Retention:</strong> Account and tournament records are retained as long as the account remains active, and securely purged upon verified account deletion requests.</li>
+            </ul>
+
+            <!-- ===================== NEW SECTION 9: FAIR PLAY & PROHIBITED CONDUCT ===================== -->
+            <h3 id="sec9">9. Fair Play Policy & Prohibited Conduct</h3>
+            <p>ProMatch Arena is committed to maintaining the spirit and integrity of competitive cricket. All participants, captains, and organizers must adhere to the following conduct standards:</p>
+            <ul>
+                <li><strong>Sportsmanship:</strong> Unsportsmanlike behavior, verbal abuse, threats, or harassment directed at players, umpires, or administrators results in immediate disqualification and possible permanent platform ban.</li>
+                <li><strong>Match Integrity:</strong> Manipulation of match results, score-fixing, or submission of falsified scorecards is strictly prohibited and will be reported to relevant sporting authorities where applicable.</li>
+                <li><strong>Multiple Accounts:</strong> Creating duplicate accounts to bypass squad restrictions, registration limits, or bans is a direct violation of platform policy.</li>
+                <li><strong>Reporting Violations:</strong> Any witnessed violation should be reported immediately through the Contact Support page or the in-platform AI assistant for prompt administrative review.</li>
+            </ul>
+
+            <!-- ===================== NEW SECTION 10: DISPUTE RESOLUTION & GOVERNING LAW ===================== -->
+            <h3 id="sec10">10. Dispute Resolution & Governing Law</h3>
+            <p>Any disputes, claims, or disagreements arising out of or relating to the use of ProMatch Arena shall be governed by and resolved in accordance with the following framework:</p>
+            <ul>
+                <li><strong>Informal Resolution First:</strong> Users must first attempt to resolve any dispute by directly contacting our support team, allowing a reasonable 15-day window for administrative review and resolution.</li>
+                <li><strong>Governing Law:</strong> These Terms and Conditions are governed by and construed in accordance with the laws of India, without regard to conflict-of-law principles.</li>
+                <li><strong>Jurisdiction:</strong> Any unresolved legal disputes shall fall under the exclusive jurisdiction of the competent courts located in Bangalore, Karnataka, India.</li>
+                <li><strong>Severability:</strong> If any provision of these Terms is found unenforceable, the remaining provisions shall continue in full force and effect.</li>
+            </ul>
         </div>
+
+        <!-- CHATBOT FILE INCLUDE -->
+        <jsp:include page="chatbot.jsp" />
 
         <!-- 🌟 FOOTER INCLUDE -->
         <jsp:include page="footer.jsp" />

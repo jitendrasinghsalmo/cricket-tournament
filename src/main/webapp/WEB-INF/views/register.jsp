@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ProMatch Arena | User Registration</title>
     <!-- FontAwesome for Eye Icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -19,19 +21,6 @@
             --input-bg: rgba(3, 7, 18, 0.5);
         }
 
-        body.light-theme {
-            --bg-deep: #f1f5f9;
-            --card-surface: rgba(255, 255, 255, 0.82);
-            --neon-cyan: #0284c7;
-            --neon-emerald: #059669;
-            --neon-rose: #e11d48;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --border-glass: rgba(2, 132, 199, 0.25);
-            --body-overlay: rgba(241, 245, 249, 0.82);
-            --input-bg: rgba(255, 255, 255, 0.7);
-        }
-
         body { 
             font-family: 'Inter', system-ui, -apple-system, sans-serif; 
             background: linear-gradient(135deg, var(--body-overlay) 0%, var(--body-overlay) 100%), 
@@ -40,38 +29,15 @@
             color: var(--text-primary); 
             margin: 0; 
             display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; padding: 20px; box-sizing: border-box;
-            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh; min-height: 100dvh; padding: 10px; box-sizing: border-box;
         }
-
-        /* Top Left Back Button -> Redirects to Home */
-        .btn-back {
-            position: absolute; top: 25px; left: 25px;
-            background: var(--card-surface); color: var(--neon-cyan);
-            border: 1px solid var(--border-glass); padding: 9px 16px;
-            border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-            backdrop-filter: blur(12px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .btn-back:hover { background: var(--neon-cyan); color: #030712; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-
-        /* Top Right Theme Toggle */
-        .theme-toggle-btn {
-            position: absolute; top: 25px; right: 25px;
-            background: var(--card-surface); color: var(--text-primary);
-            border: 1px solid var(--border-glass); padding: 9px 14px;
-            border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-            backdrop-filter: blur(12px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .theme-toggle-btn:hover { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); }
 
         .auth-container {
             width: 100%; max-width: 420px;
             background: var(--card-surface); backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border-glass); border-radius: 22px;
-            padding: 35px 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+            padding: 22px 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.45);
             position: relative; overflow: hidden;
         }
         .auth-container::before {
@@ -81,15 +47,15 @@
 
         .auth-title {
             font-size: 22px; font-weight: 900; color: var(--text-primary);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
             text-align: center;
         }
         .auth-subtitle {
-            font-size: 12.5px; color: var(--text-secondary); text-align: center; margin-bottom: 25px;
+            font-size: 12.5px; color: var(--text-secondary); text-align: center; margin-bottom: 14px;
         }
 
         .form-group {
-            display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
+            display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px;
         }
 
         label {
@@ -98,7 +64,7 @@
 
         input {
             background: var(--input-bg); border: 1px solid var(--border-glass);
-            border-radius: 10px; padding: 12px 15px; color: var(--text-primary);
+            border-radius: 10px; padding: 9px 14px; color: var(--text-primary);
             font-size: 14px; outline: none; transition: all 0.2s ease; width: 100%; box-sizing: border-box;
             backdrop-filter: blur(5px);
         }
@@ -113,7 +79,7 @@
         }
         .toggle-password {
             position: absolute;
-            top: 36px;
+            top: 27px;
             right: 14px;
             background: none;
             border: none;
@@ -131,10 +97,10 @@
             background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             color: #ffffff; border: 1px solid rgba(56, 189, 248, 0.4);
             box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-            padding: 13px; border-radius: 11px;
+            padding: 11px; border-radius: 11px;
             font-size: 13px; font-weight: 800; text-transform: uppercase;
             letter-spacing: 0.6px; cursor: pointer; transition: all 0.25s ease;
-            margin-top: 10px; box-sizing: border-box;
+            margin-top: 4px; box-sizing: border-box;
         }
         .btn-submit:hover {
             transform: translateY(-2px);
@@ -143,23 +109,39 @@
         }
 
         .auth-footer-text {
-            text-align: center; margin-top: 20px; font-size: 12.5px; color: var(--text-secondary);
+            text-align: center; margin-top: 12px; font-size: 12.5px; color: var(--text-secondary);
         }
         .auth-footer-text a {
             color: var(--neon-cyan); font-weight: 700; text-decoration: none; transition: 0.2s;
         }
         .auth-footer-text a:hover { text-decoration: underline; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            body { padding: 8px; }
+            .auth-container { padding: 18px 20px; border-radius: 18px; }
+            .auth-title { font-size: 19px; }
+            .auth-subtitle { font-size: 12px; margin-bottom: 12px; }
+            input { font-size: 16px; } /* prevents zoom on iOS */
+            .toggle-password { top: 28px; }
+        }
+
+        /* Short screens (small phones / landscape) */
+        @media (max-height: 560px) {
+            body { padding: 6px; }
+            .auth-container { padding: 14px 20px; }
+            .auth-title { font-size: 17px; margin-bottom: 2px; }
+            .auth-subtitle { margin-bottom: 8px; font-size: 11.5px; }
+            .form-group { margin-bottom: 6px; gap: 3px; }
+            label { font-size: 10.5px; }
+            input { padding: 7px 12px; }
+            .toggle-password { top: 22px; }
+            .btn-submit { padding: 9px; margin-top: 2px; }
+            .auth-footer-text { margin-top: 8px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Top Left Back Button (Fixed to Home) -->
-    <a href="${pageContext.request.contextPath}/home" class="btn-back">⬅ Back</a>
-
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-        🌙 <span id="themeBtnText">Dark</span>
-    </button>
 
     <div class="auth-container">
         <div class="auth-title">🚀 Create Account</div>
@@ -198,25 +180,6 @@
     </div>
 
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('promatch_theme') === 'light') {
-                document.body.classList.add('light-theme');
-                document.getElementById('themeToggleBtn').innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            }
-        });
-
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            let btn = document.getElementById('themeToggleBtn');
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('promatch_theme', 'light');
-                btn.innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            } else {
-                localStorage.setItem('promatch_theme', 'dark');
-                btn.innerHTML = '🌙 <span id="themeBtnText">Dark</span>';
-            }
-        }
-
         function togglePassword() {
             const input = document.getElementById('passwordInput');
             const icon = document.getElementById('toggleIcon');
