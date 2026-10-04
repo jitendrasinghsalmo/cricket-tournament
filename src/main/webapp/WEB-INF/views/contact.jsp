@@ -810,6 +810,22 @@
 
         .contact-hero h1 { animation: fxTitleFloat 5s ease-in-out infinite; }
         @keyframes fxTitleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        /* =====================================================
+           MOBILE ONLY FIX: footer ke 6 social icons ek hi line me
+           (footer.jsp me kuch change nahi; selector zyada specific
+           hai isliye footer.jsp ke flex-wrap: wrap ko override karta hai)
+           Desktop/laptop pe koi change nahi.
+           ===================================================== */
+        @media (max-width: 650px) {
+            .grand-footer-section .footer-socials { flex-wrap: nowrap; gap: 8px; justify-content: center; }
+            .grand-footer-section .footer-socials a { width: 34px; height: 34px; font-size: 13px; flex-shrink: 0; }
+        }
+        @media (max-width: 380px) {
+            .grand-footer-section { padding-left: 14px; padding-right: 14px; }
+            .grand-footer-section .footer-socials { gap: 6px; }
+            .grand-footer-section .footer-socials a { width: 32px; height: 32px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
@@ -1164,17 +1180,17 @@
             </div>
         </div>
 
-        <!-- SOCIAL CONNECT -->
+        <!-- SOCIAL CONNECT (links ab active hain, naye tab me khulenge) -->
         <div class="section-spacer">
             <div class="social-connect-section">
                 <div class="social-connect-box">
                     <h3 class="social-connect-heading">🌐 Connect With Us</h3>
                     <div class="social-connect-row">
-                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-twitter"></i> Twitter</a>
-                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-facebook"></i> Facebook</a>
-                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-youtube"></i> YouTube</a>
-                        <a href="#" class="social-connect-chip"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.instagram.com/jitendra_singh_salmo/" target="_blank" rel="noopener noreferrer" class="social-connect-chip"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                        <a href="https://x.com/JitendraSi31162" target="_blank" rel="noopener noreferrer" class="social-connect-chip"><i class="fa-brands fa-twitter"></i> Twitter</a>
+                        <a href="https://www.facebook.com/JitendraSinghSalmo" target="_blank" rel="noopener noreferrer" class="social-connect-chip"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        <a href="https://www.youtube.com/@JitendraSalmo" target="_blank" rel="noopener noreferrer" class="social-connect-chip"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                        <a href="https://www.linkedin.com/in/jitendra-singh-725698290/" target="_blank" rel="noopener noreferrer" class="social-connect-chip"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
@@ -1209,10 +1225,10 @@
 
         <!-- CHATBOT FILE INCLUDE -->
         <jsp:include page="chatbot.jsp" />
-
-        <!-- FOOTER INCLUDE -->
-        <jsp:include page="footer.jsp" />
     </div>
+
+    <!-- FOOTER INCLUDE (wrapper se bahar, taaki mobile pe footer ko poori width mile) -->
+    <jsp:include page="footer.jsp" />
 
     <!-- SUCCESS POPUP MODAL -->
     <div class="success-modal" id="successModal">

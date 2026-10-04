@@ -1375,6 +1375,43 @@
         .footer-newsletter input { background: var(--pm-newsletter-bg); }
 
     </style>
+
+    <!-- 🌟 NEW (sirf MOBILE fix, laptop pe koi change nahi): "Take ProMatch Arena Everywhere" ke 2 buttons ek hi line me -->
+    <style>
+        @media (max-width: 768px) {
+            .app-promo-box { padding: 26px 14px; }
+            .app-promo-buttons {
+                flex-wrap: nowrap;
+                gap: 8px;
+                width: 100%;
+                justify-content: center;
+            }
+            .app-promo-btn {
+                flex: 1 1 0;
+                min-width: 0;
+                width: auto;
+                justify-content: center;
+                text-align: center;
+                gap: 6px;
+                padding: 12px 8px;
+                font-size: 11.5px;
+                letter-spacing: 0.3px;
+                line-height: 1.25;
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-promo-btn { width: auto; font-size: 11px; padding: 11px 6px; }
+            .app-promo-btn i { font-size: 13px; }
+        }
+
+        /* Bahut chhoti screen (320px jaisi) */
+        @media (max-width: 360px) {
+            .app-promo-box { padding: 22px 10px; }
+            .app-promo-btn { font-size: 10.5px; padding: 10px 4px; gap: 4px; }
+        }
+    </style>
 </head>
 <body>
 

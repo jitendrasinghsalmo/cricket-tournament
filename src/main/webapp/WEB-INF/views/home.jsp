@@ -716,13 +716,24 @@
             .hero-banner { padding: 30px 20px; gap: 22px; border-radius: 22px; }
             .hero-content { min-width: 0; width: 100%; }
             .hero-content p { margin-bottom: 18px; }
-            .hero-content > div:not([class]) { flex-direction: column; align-items: stretch; }
-            .btn-custom-glow, .btn-signup-outline { justify-content: center; width: 100%; box-sizing: border-box; }
+
+            /* 🌟 CHANGE 1: hero ke dono button mobile par ek hi line me */
+            .hero-content > div:not([class]) { flex-direction: row; flex-wrap: nowrap; align-items: stretch; gap: 10px; }
+            .btn-custom-glow, .btn-signup-outline {
+                flex: 1 1 0; min-width: 0; justify-content: center; box-sizing: border-box;
+                padding: 11px 8px; font-size: 11.5px; gap: 6px;
+                white-space: normal; text-align: center; line-height: 1.25;
+            }
+
             .hero-stadium-art { width: 100%; }
             .hero-ball.b1 { left: 70%; }
             .hero-ball.b3 { display: none; }
         }
-        @media (max-width: 400px) { .live-scoreboard { padding: 12px 12px; } .team-row { font-size: 12.5px; } }
+        @media (max-width: 400px) {
+            .live-scoreboard { padding: 12px 12px; }
+            .team-row { font-size: 12.5px; }
+            .btn-custom-glow, .btn-signup-outline { font-size: 10.5px; padding: 10px 6px; gap: 5px; }
+        }
 
         /* ---------- NEW SECTION: TOURNAMENT JOURNEY ---------- */
         .jr-wrap { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; margin-bottom: 25px; padding-top: 6px; }
@@ -941,6 +952,80 @@
         }
     </style>
 
+    <!-- 🌟 NEW (CHANGE 2, 3, 4): Architecture Show More + Store badges one line + Video popup fit -->
+    <style>
+        /* ---------- CHANGE 2: About Project Architecture - 9 cards, pehle 3 dikhenge ---------- */
+        .about-project-grid:not(.show-all) .about-card-extra { display: none; }
+        .about-project-grid.show-all .about-card-extra { animation: archFade 0.45s ease; }
+        @keyframes archFade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .arch-toggle-wrap { text-align: center; margin-top: 28px; }
+        .arch-toggle-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: var(--pm-on-accent);
+            border: none; padding: 12px 34px; border-radius: 30px;
+            font-weight: 800; font-size: 13.5px; letter-spacing: 0.5px; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); transition: all 0.3s ease;
+        }
+        .arch-toggle-btn:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(56, 189, 248, 0.65); }
+        .arch-toggle-btn i { transition: transform 0.3s ease; }
+        .arch-toggle-btn.open i { transform: rotate(180deg); }
+        body.light-mode .arch-toggle-btn { color: #ffffff; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35); }
+
+        /* ---------- CHANGE 3: Google Play + App Store mobile par ek line me ---------- */
+        @media (max-width: 600px) {
+            .get-app-section { padding: 24px 16px; gap: 28px; }
+            .store-badges { flex-wrap: nowrap; gap: 10px; }
+            .store-badge { flex: 1 1 0; min-width: 0; padding: 8px 10px; gap: 8px; border-radius: 10px; justify-content: center; }
+            .store-badge i { font-size: 20px; flex-shrink: 0; }
+            .store-badge .store-badge-text small { font-size: 8px; letter-spacing: 0.3px; white-space: nowrap; }
+            .store-badge .store-badge-text strong { font-size: 12px; white-space: nowrap; }
+        }
+        @media (max-width: 360px) {
+            .store-badge { padding: 7px 8px; gap: 6px; }
+            .store-badge i { font-size: 17px; }
+            .store-badge .store-badge-text small { font-size: 7.5px; }
+            .store-badge .store-badge-text strong { font-size: 11px; }
+        }
+
+        /* ---------- CHANGE 4: Video popup - mobile portrait + landscape me proper fit ---------- */
+        #videoPlayer { width: 100%; margin: 0 auto; }
+        #videoPlayer > video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+        .close-modal {
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: rgba(148, 163, 184, 0.18); line-height: 1; top: 12px; right: 14px;
+        }
+        .video-modal-content h4 { padding-right: 44px; }
+
+        @media (max-width: 768px) {
+            .video-modal { padding: 12px; }
+            .video-modal-content { padding: 16px 12px 14px; border-radius: 16px; }
+            .video-modal-content h4 { font-size: 14px; margin-bottom: 12px !important; }
+        }
+
+        /* Phone rotate (landscape): video screen ki height me fit, upar-neeche se na kate */
+        @media (orientation: landscape) and (max-height: 520px) {
+            .video-modal { padding: 6px; }
+            .video-modal-content {
+                background: transparent; border: none; box-shadow: none; padding: 0;
+                width: auto; max-width: none; border-radius: 0;
+            }
+            .video-modal-content h4 { display: none; }
+            #videoPlayer {
+                width: min(calc(100vw - 24px), calc((100vh - 12px) * 1.7778));
+                width: min(calc(100vw - 24px), calc((100dvh - 12px) * 1.7778));
+            }
+            .close-modal {
+                position: fixed; top: 8px; right: 12px; z-index: 2100;
+                background: rgba(3, 7, 18, 0.7); color: #ffffff;
+            }
+            body.light-mode .close-modal { color: #ffffff; }
+        }
+    </style>
+
     <!-- Script to hide YouTube extras (logos, titles, captions, share buttons) -->
     <script>
         function getYouTubeId(url) {
@@ -1136,13 +1221,14 @@
         </div>
 
         <!-- ABOUT THE PROJECT ARCHITECTURE -->
-        <div class="section-title">
+        <div class="section-title" id="archSection">
             <span>About The Project Architecture</span>
             <span style="font-size: 12px; color: var(--accent-blue);">3D Interactive Highlights ⚾</span>
         </div>
 
         <div class="perspective-container">
-            <div class="about-project-grid">
+            <div class="about-project-grid" id="archGrid">
+                <!-- Pehle 3 cards hamesha dikhenge -->
                 <div class="about-card">
                     <h5>Spring Boot Core</h5>
                     <p>Robust enterprise backend architecture ensuring fast modular routing and dependency injection.</p>
@@ -1155,18 +1241,38 @@
                     <h5>Spring Security Hub</h5>
                     <p>Role-based access control (ADMIN vs USER) securing dashboards and restricted management zones.</p>
                 </div>
-                <div class="about-card">
+
+                <!-- Neeche ke 6 cards Show More dabane par khulenge -->
+                <div class="about-card about-card-extra">
                     <h5>Automated NRR Engine</h5>
                     <p>Dynamic Net Run Rate calculator updating standings instantaneously upon match completion.</p>
                 </div>
-                <div class="about-card">
+                <div class="about-card about-card-extra">
                     <h5>Roster & Squad Control</h5>
                     <p>Comprehensive player management, jersey assignments, and batch squad deletion features.</p>
                 </div>
-                <div class="about-card">
+                <div class="about-card about-card-extra">
                     <h5>Cyber Glassmorphism UI</h5>
                     <p>High-end responsive interface crafted with custom styling, dark themes, and smooth animations.</p>
                 </div>
+                <div class="about-card about-card-extra">
+                    <h5>Razorpay Payments</h5>
+                    <p>Encrypted checkout flow verifying tournament entry fees with instant payment confirmation.</p>
+                </div>
+                <div class="about-card about-card-extra">
+                    <h5>Hibernate / JPA Layer</h5>
+                    <p>Clean ORM mapping with repositories delivering atomic transactions and fast data retrieval.</p>
+                </div>
+                <div class="about-card about-card-extra">
+                    <h5>JSP & JSTL Views</h5>
+                    <p>Dynamic server-side rendered pages with reusable navbar, footer and role-aware components.</p>
+                </div>
+            </div>
+
+            <div class="arch-toggle-wrap">
+                <button type="button" id="archToggleBtn" class="arch-toggle-btn" onclick="toggleArch()" aria-expanded="false" aria-controls="archGrid">
+                    <span id="archToggleText">Show More</span> <i class="fa-solid fa-chevron-down"></i>
+                </button>
             </div>
         </div>
 
@@ -1637,6 +1743,24 @@
                 }
             });
         })();
+    </script>
+
+    <!-- 🌟 NEW: Architecture cards Show More / Show Less -->
+    <script>
+        function toggleArch() {
+            var grid = document.getElementById('archGrid');
+            var btn  = document.getElementById('archToggleBtn');
+            var txt  = document.getElementById('archToggleText');
+            var isOpen = grid.classList.toggle('show-all');
+            btn.classList.toggle('open', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            txt.textContent = isOpen ? 'Show Less' : 'Show More';
+            /* Show Less dabane par section ke top par wapas le aao */
+            if (!isOpen) {
+                var title = document.getElementById('archSection');
+                if (title) title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
     </script>
 
     <!-- 🌟 NEW: Journey section scroll-reveal -->

@@ -331,6 +331,20 @@
             .last-updated { font-size: 12.5px; }
             .logo-text { font-size: 16px; }
         }
+
+        /* =====================================================
+           MOBILE ONLY FIX: footer social icons ek hi line me
+           (desktop/laptop pe koi change nahi)
+           ===================================================== */
+        @media (max-width: 650px) {
+            .footer-socials { flex-wrap: nowrap; gap: 8px; justify-content: center; }
+            .footer-socials a { width: 34px; height: 34px; font-size: 13px; flex-shrink: 0; }
+        }
+        @media (max-width: 380px) {
+            .grand-footer-section { padding-left: 14px; padding-right: 14px; }
+            .footer-socials { gap: 6px; }
+            .footer-socials a { width: 32px; height: 32px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
@@ -446,10 +460,10 @@
 
         <!-- CHATBOT FILE INCLUDE -->
         <jsp:include page="chatbot.jsp" />
-
-        <!-- 🌟 FOOTER INCLUDE -->
-        <jsp:include page="footer.jsp" />
     </div>
+
+    <!-- 🌟 FOOTER INCLUDE (moved outside .main-content-wrap, same as Register Team page, so footer gets full width on mobile) -->
+    <jsp:include page="footer.jsp" />
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

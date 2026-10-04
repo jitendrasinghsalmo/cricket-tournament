@@ -108,14 +108,38 @@
         .footer-brand, .footer-newsletter { grid-column: 1 / -1 !important; }
     }
 
-    /* Phone: single column, centered bottom bar */
+    /* Phone: link columns stay 2 side by side, newsletter in one line */
     @media (max-width: 575px) {
         .grand-footer-section { padding-left: 18px !important; padding-right: 18px !important; }
+
         .grand-footer-content {
-            grid-template-columns: minmax(0, 1fr) !important;
-            gap: 28px !important;
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 28px 16px !important;
         }
-        .footer-newsletter input { font-size: 16px; }   /* stops iOS zoom on focus */
+        .footer-brand, .footer-newsletter { grid-column: 1 / -1 !important; }
+
+        .footer-links a { font-size: 13.5px; }
+
+        /* Email box + Join button in ONE line */
+        .footer-newsletter form {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+        .footer-newsletter input {
+            flex: 1 1 auto !important;
+            width: auto !important;
+            min-width: 0 !important;
+            font-size: 16px;            /* stops iOS zoom on focus */
+        }
+        .footer-newsletter button {
+            flex: 0 0 auto !important;
+            width: auto !important;
+            padding: 0 20px !important;
+        }
+
         .footer-bottom-bar {
             flex-direction: column;
             justify-content: center;
@@ -123,12 +147,6 @@
             gap: 12px;
         }
         .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
-    }
-
-    /* Very small phones: stack newsletter input and button */
-    @media (max-width: 360px) {
-        .footer-newsletter form { flex-direction: column; align-items: stretch; }
-        .footer-newsletter button { width: 100%; }
     }
 </style>
 

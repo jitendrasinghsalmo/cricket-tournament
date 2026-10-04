@@ -222,6 +222,34 @@
             margin-bottom: 12px;
         }
 
+        /* ===== SHOW MORE / SHOW LESS (overview text) ===== */
+        .overview-more { display: none; }
+        .overview-more.open { display: block; animation: overviewFade 0.45s ease; }
+        @keyframes overviewFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .overview-toggle-wrap { text-align: center; margin-top: 8px; }
+        .overview-toggle-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald));
+            color: #030712;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 13.5px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 18px rgba(0, 217, 255, 0.45);
+            transition: all 0.3s ease;
+        }
+        .overview-toggle-btn:hover { transform: translateY(-2px); box-shadow: 0 0 26px rgba(0, 217, 255, 0.7); }
+        .overview-toggle-btn i { transition: transform 0.3s ease; }
+        .overview-toggle-btn.open i { transform: rotate(180deg); }
+
         /* ELITE SHOWCASE CARDS */
         .elite-cricket-showcase {
             max-width: 1300px; margin: 0 auto 45px auto;
@@ -592,6 +620,7 @@
         body.light-mode .explore-cta-btn,
         body.light-mode .explore-cta-btn:hover { color: #ffffff; }
         body.light-mode .footer-newsletter button { color: #ffffff; }
+        body.light-mode .overview-toggle-btn { color: #ffffff; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35); }
 
         /* =====================================================
            FULL RESPONSIVE (mobile / tablet / desktop)
@@ -626,6 +655,7 @@
             .project-description-box h3 { font-size: 18px; }
             .project-description-content p { font-size: 13.5px; line-height: 1.75; }
             .project-description-content h4 { font-size: 16px; }
+            .overview-toggle-btn { padding: 11px 28px; font-size: 13px; }
             .elite-cricket-showcase { padding: 26px 16px; border-radius: 20px; }
             .elite-showcase-title { font-size: 20px; }
             .workflow-box { padding: 26px 16px; border-radius: 18px; }
@@ -661,6 +691,71 @@
             .logo-text { font-size: 16px; }
         }
     </style>
+
+    <!-- 🌟 NEW (sirf MOBILE fix, laptop pe koi change nahi): Explore CTA buttons ek line me + Footer social icons ek line me -->
+    <style>
+        @media (max-width: 768px) {
+
+            /* ---- 1) Explore ProMatch Arena: dono buttons ek hi line me, barabar width ---- */
+            .explore-cta-box { padding: 26px 14px; }
+            .explore-cta-buttons {
+                flex-wrap: nowrap;
+                gap: 8px;
+                width: 100%;
+                justify-content: center;
+            }
+            .explore-cta-btn {
+                flex: 1 1 0;
+                min-width: 0;
+                justify-content: center;
+                text-align: center;
+                gap: 6px;
+                padding: 12px 8px;
+                font-size: 11.5px;
+                letter-spacing: 0.3px;
+                line-height: 1.25;
+                white-space: normal;
+            }
+
+            /* ---- 2) Footer: container ke andar bhi poori width, taaki icons ko jagah mile ---- */
+            .grand-footer-section {
+                width: 100%;
+                padding: 36px 16px 24px 16px;
+            }
+
+            /* ---- 3) Footer social icons: 6 icons ek hi line me (center) ---- */
+            .grand-footer-section .footer-socials {
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            .grand-footer-section .footer-socials a {
+                width: 34px !important;
+                height: 34px !important;
+                flex: 0 0 34px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .explore-cta-btn { font-size: 11px; padding: 11px 6px; }
+            .explore-cta-btn i { font-size: 12px; }
+        }
+
+        /* Bahut chhoti screen (320px jaisi) */
+        @media (max-width: 360px) {
+            .explore-cta-box { padding: 22px 10px; }
+            .explore-cta-btn { font-size: 10.5px; padding: 10px 4px; gap: 4px; }
+            .grand-footer-section { padding: 30px 12px 22px 12px; }
+            .grand-footer-section .footer-socials { gap: 6px; }
+            .grand-footer-section .footer-socials a {
+                width: 32px !important;
+                height: 32px !important;
+                flex: 0 0 32px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -679,15 +774,25 @@
         <div class="project-description-box">
             <h3><i class="fa-solid fa-circle-info"></i> Comprehensive Overview & System Architecture</h3>
             <div class="project-description-content">
+                <!-- Pehla paragraph hamesha dikhega -->
                 <p>ProMatch Arena is engineered as an enterprise-grade sports management and tournament orchestration ecosystem designed to streamline the complexities of modern cricket leagues. In competitive athletics, managing multi-tiered tournaments, maintaining live squad rosters, coordinating real-time registration pipelines, and handling secure payment verifications require a highly resilient technical foundation. Traditional manual record-keeping or fragmented software solutions often struggle with data concurrency, session synchronization bottlenecks, and inadequate user interfaces. ProMatch Arena solves these challenges by combining a powerful Spring Boot backend with a futuristic Cyber Glassmorphism interface, delivering a seamless experience for administrators, team organizers, and cricket fans alike.</p>
-                
-                <p>The system is built upon robust object-oriented programming principles, utilizing Java Spring Boot for rapid service orchestration and RESTful API management. Data persistence is handled via Hibernate and Java Persistence API (JPA), interfacing directly with a secure PostgreSQL database. This ensures atomic transactions, ACID compliance, and zero-latency retrieval of team statistics, player profiles, and points standings. Whether executing intricate Net Run Rate (NRR) mathematical calculations or rendering dynamic pagination layouts, the backend core maintains high throughput even under intense concurrent traffic loads.</p>
 
-                <h4>Role-Based Access Control & Security Architecture</h4>
-                <p>Security is paramount within the ProMatch Arena ecosystem. Powered by Spring Security, the application implements strict role-based authorization hierarchies distinguishing between regular participants and authorized system administrators. Administrators are equipped with an advanced Tournament Command Center, granting them granular control over tournament lifecycles, team approvals, match schedulers, and database maintenance protocols. Users interact with dedicated dashboards where they can securely register new teams, manage player rosters, and review tournament analytics. Session persistence and input sanitization protocols further protect the system against common web vulnerabilities, guaranteeing absolute data protection.</p>
+                <!-- Baaki ka text Show More dabane par khulega -->
+                <div id="overviewMore" class="overview-more">
+                    <p>The system is built upon robust object-oriented programming principles, utilizing Java Spring Boot for rapid service orchestration and RESTful API management. Data persistence is handled via Hibernate and Java Persistence API (JPA), interfacing directly with a secure PostgreSQL database. This ensures atomic transactions, ACID compliance, and zero-latency retrieval of team statistics, player profiles, and points standings. Whether executing intricate Net Run Rate (NRR) mathematical calculations or rendering dynamic pagination layouts, the backend core maintains high throughput even under intense concurrent traffic loads.</p>
 
-                <h4>User Interface & Modular Ecosystem Workflows</h4>
-                <p>Complementing its backend strength, the platform features a responsive Cyber Glassmorphism UI crafted using HTML5, CSS3, JavaScript, and Bootstrap. The visual language utilizes deep midnight gradients accented by neon cyan and emerald green tones, establishing an immersive athletic atmosphere. A persistent dual-theme mechanism empowers users to switch instantly between an immersive Cyber Dark mode and a clean Professional Light mode. Through its modular architecture—spanning automated tournament registration, secure Razorpay financial checkouts, live fixture scorecards, and architectural document centers—ProMatch Arena sets a benchmark for professional cricket league management software.</p>
+                    <h4>Role-Based Access Control & Security Architecture</h4>
+                    <p>Security is paramount within the ProMatch Arena ecosystem. Powered by Spring Security, the application implements strict role-based authorization hierarchies distinguishing between regular participants and authorized system administrators. Administrators are equipped with an advanced Tournament Command Center, granting them granular control over tournament lifecycles, team approvals, match schedulers, and database maintenance protocols. Users interact with dedicated dashboards where they can securely register new teams, manage player rosters, and review tournament analytics. Session persistence and input sanitization protocols further protect the system against common web vulnerabilities, guaranteeing absolute data protection.</p>
+
+                    <h4>User Interface & Modular Ecosystem Workflows</h4>
+                    <p>Complementing its backend strength, the platform features a responsive Cyber Glassmorphism UI crafted using HTML5, CSS3, JavaScript, and Bootstrap. The visual language utilizes deep midnight gradients accented by neon cyan and emerald green tones, establishing an immersive athletic atmosphere. A persistent dual-theme mechanism empowers users to switch instantly between an immersive Cyber Dark mode and a clean Professional Light mode. Through its modular architecture—spanning automated tournament registration, secure Razorpay financial checkouts, live fixture scorecards, and architectural document centers—ProMatch Arena sets a benchmark for professional cricket league management software.</p>
+                </div>
+
+                <div class="overview-toggle-wrap">
+                    <button type="button" id="overviewToggleBtn" class="overview-toggle-btn" onclick="toggleOverview()" aria-expanded="false" aria-controls="overviewMore">
+                        <span id="overviewToggleText">Show More</span> <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -1045,6 +1150,22 @@
         function closeVideo() {
             document.getElementById('videoIframe').src = '';
             document.getElementById('videoModal').style.display = 'none';
+        }
+
+        /* ===== Overview: Show More / Show Less ===== */
+        function toggleOverview() {
+            var more = document.getElementById('overviewMore');
+            var btn  = document.getElementById('overviewToggleBtn');
+            var txt  = document.getElementById('overviewToggleText');
+            var isOpen = more.classList.toggle('open');
+            btn.classList.toggle('open', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            txt.textContent = isOpen ? 'Show Less' : 'Show More';
+            /* Hide dabane par box ke top par wapas le aao taaki user kho na jaye */
+            if (!isOpen) {
+                var box = document.querySelector('.project-description-box');
+                if (box) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         const bodyElement = document.body;

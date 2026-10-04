@@ -201,6 +201,8 @@
             animation: dropInChar 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             animation-delay: calc(0.05s * var(--i));
         }
+        /* Poora word ek saath rahe (beech se na tute), line sirf words ke beech se badle */
+        .jumping-title .jt-word { display: inline-block; white-space: nowrap; font-weight: inherit; }
 
         @keyframes dropInChar {
             0% { opacity: 0; transform: translateY(-30px) scale(0.5); }
@@ -1112,8 +1114,17 @@
             .nav-links a { padding: 7px 10px; font-size: 12px; }
             .main-content-wrap { padding: 0 12px; margin: 18px auto; }
             .header-bar { flex-direction: column; align-items: stretch; text-align: center; }
-            .header-left, .header-right { justify-content: center; flex-wrap: wrap; }
+            .header-left { justify-content: center; flex-wrap: wrap; }
             .jumping-title { font-size: 18px; letter-spacing: 1px; }
+
+            /* 🌟 FIX: New Tournament + Delete All mobile par ek hi line me */
+            .header-right { justify-content: center; flex-wrap: nowrap; gap: 10px; width: 100%; }
+            .btn-top-add, .btn-delete-all {
+                flex: 1 1 0; min-width: 0;
+                display: flex; align-items: center; justify-content: center; gap: 5px;
+                text-align: center; padding: 11px 8px; font-size: 12px; line-height: 1.25;
+            }
+
             .control-bar { flex-direction: column; align-items: stretch; padding: 14px; }
             .search-input { width: 100%; }
             .stats-badge { text-align: center; }
@@ -1135,6 +1146,11 @@
             .timeline-box { padding: 12px; gap: 8px; }
             .stat-value { font-size: 24px; }
             .prize-pool-card { padding: 22px; }
+        }
+
+        @media (max-width: 360px) {
+            .btn-top-add, .btn-delete-all { font-size: 11px; padding: 10px 6px; }
+            .jumping-title { font-size: 16px; letter-spacing: 0.5px; }
         }
     </style>
 </head>
@@ -1472,11 +1488,18 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        /* Title animation: har word ek <b> me, har letter ek <span> me.
+           Isse line sirf words ke beech se tutegi, word ke beech se nahi (CE / NTER wali problem fix) */
         const titleEl = document.getElementById('animatedTitle');
-        if(titleEl) {
-            titleEl.innerHTML = titleEl.innerText.split('').map((char, index) => 
-                char === ' ' ? '<span style="--i:' + index + '">&nbsp;</span>' : '<span style="--i:' + index + '">' + char + '</span>'
-            ).join('');
+        if (titleEl) {
+            var pmCharIndex = 0;
+            titleEl.innerHTML = titleEl.innerText.trim().split(/\s+/).map(function (word) {
+                var letters = word.split('').map(function (ch) {
+                    return '<span style="--i:' + (pmCharIndex++) + '">' + ch + '</span>';
+                }).join('');
+                pmCharIndex++; /* space ke liye delay slot */
+                return '<b class="jt-word">' + letters + '</b>';
+            }).join(' ');
         }
 
         var pmTotalText = null;
