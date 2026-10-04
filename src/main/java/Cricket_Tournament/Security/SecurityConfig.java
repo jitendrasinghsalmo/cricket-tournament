@@ -25,25 +25,19 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/",
-                    "/home",
-                    "/login", 
-                    "/register", 
-                    "/forgot-password", 
-                    "/verify-otp", 
-                    "/reset-password", 
-                    "/change-password",
-                    "/about",
-                    "/contact",
-                    "/faq",
-                    "/rules",
-                    "/teams",
-                    "/search",
-                    "/css/**", 
-                    "/js/**", 
-                    "/error"
-                ).permitAll()
+            		.requestMatchers(
+            			    "/",
+            			    "/home",
+            			    "/login",
+            			    "/register",
+            			    "/forgot-password",
+            			    "/verify-otp",
+            			    "/reset-password",
+            			    "/change-password",
+            			    "/css/**",
+            			    "/js/**",
+            			    "/error"
+            			).permitAll()
                 // Admin specific paths
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 // Allow both ADMIN and USER to access all player CRUD operations (Case-matched with Controller)
