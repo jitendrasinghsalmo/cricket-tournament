@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="page" value="addMatch" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProMatch Arena | Add New Match</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.72); /* Transparent glassmorphism */
+            --card-surface: rgba(13, 18, 30, 0.85);
             --neon-cyan: #38bdf8;
             --neon-emerald: #10b981;
             --neon-rose: #f43f5e;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --border-glass: rgba(56, 189, 248, 0.22);
+            --border-glass: rgba(56, 189, 248, 0.25);
             --body-overlay: rgba(3, 7, 18, 0.82);
-            --input-bg: rgba(3, 7, 18, 0.45);
+            --input-bg: rgba(3, 7, 18, 0.65);
+            --input-text: #ffffff;
+        }
+
+        body.light-mode {
+            --bg-deep: #f1f5f9;
+            --card-surface: rgba(255, 255, 255, 0.94);
+            --neon-cyan: #0284c7;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --body-overlay: rgba(241, 245, 249, 0.82);
+            --input-bg: #ffffff;
+            --input-text: #0f172a;
         }
 
         * { box-sizing: border-box; }
@@ -38,6 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Top-Left Back Button */
@@ -46,13 +64,13 @@
             top: 18px;
             left: 22px;
             background: rgba(14, 165, 233, 0.16);
-            color: #22d3ee;
-            border: 2px solid #06b6d4;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
             padding: 9px 22px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 800;
-            font-size: 16px;
+            font-size: 15px;
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -62,11 +80,12 @@
             z-index: 1000;
         }
         .btn-top-left-back:hover {
-            background: #06b6d4;
+            background: var(--neon-cyan);
             color: #030712;
             transform: translateX(-3px);
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         }
+        body.light-mode .btn-top-left-back:hover { color: #ffffff; }
 
         .form-container {
             width: 100%;
@@ -74,12 +93,13 @@
             background: var(--card-surface);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--border-glass);
+            border: 1.5px solid var(--border-glass);
             border-radius: 18px;
             padding: 24px 34px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
             position: relative;
             overflow: hidden;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .form-container::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
@@ -91,12 +111,12 @@
             color: var(--text-primary);
             margin-top: 0;
             margin-bottom: 16px;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 21px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-        h2 span { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+        h2 span { color: var(--neon-cyan); }
 
         .form-group {
             margin-bottom: 13px;
@@ -105,7 +125,7 @@
         label {
             display: block;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -117,15 +137,21 @@
         select {
             width: 100%;
             background: var(--input-bg);
-            border: 1px solid var(--border-glass);
+            border: 1.5px solid var(--border-glass);
             border-radius: 10px;
             padding: 11px 14px;
-            color: #ffffff;
+            color: var(--input-text);
             font-size: 14px;
             font-family: inherit;
+            font-weight: 600;
             outline: none;
             box-sizing: border-box;
             transition: all 0.2s ease;
+        }
+
+        body.light-mode input[type="text"]::placeholder {
+            color: #64748b;
+            opacity: 1;
         }
 
         /* Calendar Icon visibility fix for date inputs */
@@ -133,6 +159,9 @@
             filter: invert(1);
             cursor: pointer;
             opacity: 0.8;
+        }
+        body.light-mode input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: none;
         }
         input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
             opacity: 1;
@@ -143,16 +172,19 @@
             color: #ffffff;
             padding: 10px;
         }
+        body.light-mode select option {
+            background: #ffffff;
+            color: #0f172a;
+        }
 
         ::placeholder {
-            color: #94a3b8;
-            opacity: 1;
+            color: var(--text-secondary);
+            opacity: 0.8;
         }
 
         input:focus, select:focus {
             border-color: var(--neon-cyan);
             box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
-            background: rgba(3, 7, 18, 0.7);
         }
 
         .form-row {
@@ -181,48 +213,37 @@
             label { font-size: 11px; }
         }
 
-        @media(max-height: 640px) {
-            body { padding-top: 56px; }
-            .form-container { padding: 16px 16px; }
-            h2 { margin-bottom: 10px; font-size: 16px; }
-            .form-group { margin-bottom: 8px; }
-            input[type="text"],
-            input[type="datetime-local"],
-            select { padding: 7px 10px; }
-            .button-group { margin-top: 10px; }
-        }
-
         .button-group {
             margin-top: 16px;
         }
 
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
-            color: #ffffff;
-            border: 1px solid rgba(56, 189, 248, 0.4);
+            background: linear-gradient(135deg, var(--neon-cyan) 0%, #0284c7 100%);
+            color: #030712;
+            border: none;
             padding: 12px;
             border-radius: 10px;
             font-size: 14px;
-            font-weight: 800;
+            font-weight: 900;
             cursor: pointer;
             transition: all 0.25s ease;
             box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
+        body.light-mode .btn-submit { color: #ffffff; }
 
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
-            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
         }
     </style>
 </head>
 <body>
 
     <!-- Top-Left Back Button -->
-    <a href="/matches" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <a href="${pageContext.request.contextPath}/matches" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
 
     <div class="form-container">
         <h2>Add New <span>Match Fixture</span></h2>
@@ -288,6 +309,15 @@
 
         </form>
     </div>
+
+    <script>
+        // Synchronize theme seamlessly with other pages using localStorage keys
+        if (localStorage.getItem('matchTheme') === 'light' || localStorage.getItem('promatch_theme') === 'light') {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+    </script>
 
 </body>
 </html>

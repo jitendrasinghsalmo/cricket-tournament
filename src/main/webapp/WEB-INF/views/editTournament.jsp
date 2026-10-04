@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="page" value="editTournament" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProMatch Arena | Edit Tournament</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #030712;
-            --card-surface: rgba(13, 18, 30, 0.72); /* Transparent glassmorphism */
+            --card-surface: rgba(13, 18, 30, 0.72);
             --neon-cyan: #38bdf8;
             --neon-emerald: #10b981;
             --neon-rose: #f43f5e;
@@ -19,6 +21,21 @@
             --border-glass: rgba(56, 189, 248, 0.22);
             --body-overlay: rgba(3, 7, 18, 0.82);
             --input-bg: rgba(3, 7, 18, 0.45);
+            --input-text: #ffffff;
+        }
+
+        body.light-mode {
+            --bg-deep: #f8fafc;
+            --card-surface: rgba(255, 255, 255, 0.82);
+            --neon-cyan: #0284c7;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: rgba(2, 132, 199, 0.25);
+            --body-overlay: rgba(241, 245, 249, 0.82);
+            --input-bg: #ffffff;
+            --input-text: #0f172a;
         }
 
         * { box-sizing: border-box; }
@@ -38,6 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Top-Left Back Button */
@@ -67,6 +85,7 @@
             transform: translateX(-3px);
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         }
+        body.light-mode .btn-top-left-back:hover { color: #ffffff; }
 
         .form-container {
             width: 100%;
@@ -80,6 +99,7 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.6);
             position: relative;
             overflow: hidden;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .form-container::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
@@ -120,7 +140,7 @@
             border: 1px solid var(--border-glass);
             border-radius: 10px;
             padding: 11px 14px;
-            color: #ffffff;
+            color: var(--input-text);
             font-size: 14px;
             font-family: inherit;
             outline: none;
@@ -128,11 +148,19 @@
             transition: all 0.2s ease;
         }
 
+        body.light-mode input[type="text"]::placeholder {
+            color: #64748b;
+            opacity: 1;
+        }
+
         /* Calendar Icon visibility fix for date inputs */
         input[type="date"]::-webkit-calendar-picker-indicator {
             filter: invert(1);
             cursor: pointer;
             opacity: 0.8;
+        }
+        body.light-mode input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: none;
         }
         input[type="date"]::-webkit-calendar-picker-indicator:hover {
             opacity: 1;
@@ -142,6 +170,10 @@
             background: #030712;
             color: #ffffff;
             padding: 10px;
+        }
+        body.light-mode select option {
+            background: #ffffff;
+            color: #0f172a;
         }
 
         ::placeholder {
@@ -153,6 +185,9 @@
             border-color: var(--neon-cyan);
             box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
             background: rgba(3, 7, 18, 0.7);
+        }
+        body.light-mode input:focus, body.light-mode select:focus {
+            background: #ffffff;
         }
 
         .form-row {
@@ -210,6 +245,7 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
+        body.light-mode .btn-submit { color: #ffffff; }
 
         .btn-submit:hover {
             transform: translateY(-2px);
@@ -221,12 +257,12 @@
 <body>
 
     <!-- Top-Left Back Text Link -->
-    <a href="/tournaments" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <a href="${pageContext.request.contextPath}/tournaments" class="btn-top-left-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
 
     <div class="form-container">
         <h2>Edit <span>Tournament</span></h2>
         
-        <form action="/updateTournament" method="post">
+        <form action="${pageContext.request.contextPath}/updateTournament" method="post">
             <input type="hidden" name="id" value="${tournament.id}">
 
             <div class="form-group">
@@ -266,6 +302,15 @@
             </div>
         </form>
     </div>
+
+    <script>
+        // Synchronize theme seamlessly with other pages using localStorage keys
+        if (localStorage.getItem('matchTheme') === 'light' || localStorage.getItem('promatch_theme') === 'light') {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+    </script>
 
 </body>
 </html>

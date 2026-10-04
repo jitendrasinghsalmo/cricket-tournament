@@ -764,6 +764,111 @@
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
 
         .no-record { text-align: center; color: var(--text-secondary); padding: 40px; font-size: 14px; font-weight: 700; }
+
+        /* =====================================================
+           FIX 1: DARK + LIGHT MODE  (text hamesha visible)
+           ===================================================== */
+        :root {
+            --pm-input-bg: rgba(3, 7, 18, 0.75);
+            --pm-soft-bg: rgba(13, 18, 35, 0.45);
+            --pm-soft2-bg: rgba(13, 18, 35, 0.6);
+            --pm-gal-bg: rgba(13, 18, 35, 0.85);
+            --pm-img-bg: #020617;
+            --pm-badge-bg: rgba(10, 14, 39, 0.7);
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"],
+        :root[data-bs-theme="light"],
+        :root.light,
+        :root.light-mode,
+        :root.light-theme,
+        :root.theme-light,
+        body[data-theme="light"],
+        body[data-bs-theme="light"],
+        body.light,
+        body.light-mode,
+        body.light-theme,
+        body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: #ffffff;
+            --body-overlay: #eef2f7;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #9333ea;
+            --neon-gold: #b45309;
+            --pm-input-bg: #ffffff;
+            --pm-soft-bg: #f1f5f9;
+            --pm-soft2-bg: #f1f5f9;
+            --pm-gal-bg: #ffffff;
+            --pm-img-bg: #e2e8f0;
+            --pm-badge-bg: #f1f5f9;
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        .search-input { background: var(--pm-input-bg); }
+        .highlight-item { background: var(--pm-soft-bg); }
+        .hero-pill, .pod-box, .broadcast-card, .podium-card { background: var(--pm-soft2-bg); }
+        .gallery-card { background: var(--pm-gal-bg); }
+        .card-image { background: var(--pm-img-bg); }
+        .elite-badge-item { background: var(--pm-badge-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+
+        /* =====================================================
+           FIX 2: FULL RESPONSIVE
+           ===================================================== */
+        img { max-width: 100%; }
+        body { overflow-x: hidden; }
+        table { min-width: 760px; }
+        td, th { white-space: nowrap; }
+        .top-stats-section { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
+        .highlights-grid { grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr)); }
+        .mega-stats-row { flex-wrap: wrap; }
+
+        @media (max-width: 900px) {
+            .header-bar { flex-wrap: wrap; gap: 14px; padding: 16px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content-wrap { padding: 0 12px; margin: 18px auto; }
+            .header-bar { flex-direction: column; align-items: stretch; text-align: center; }
+            .header-left, .header-right { justify-content: center; }
+            .animated-heading { font-size: 17px; letter-spacing: 1px; white-space: normal; }
+            .control-bar { flex-direction: column; align-items: stretch; padding: 14px; }
+            .search-input { width: 100%; max-width: 100%; }
+            .stats-badge { text-align: center; }
+            .table-container { padding: 16px 12px; }
+            .pagination-bar-wrapper { justify-content: center; }
+            .pagination-bar { justify-content: center; gap: 12px; }
+            .highlights-section, .broadcast-section, .gallery-section, .podium-section, .form-guide-section, .pro-tournament-pod { padding: 18px 14px; }
+            .attractive-hero-banner { padding: 26px 18px; }
+            .hero-banner-title { font-size: 20px; }
+            .mega-feature-content h2 { font-size: 22px; }
+            .elite-content h2 { font-size: 22px; }
+            .card-image { height: 220px; }
+            .form-row .form-team { min-width: 0; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .points-cta-banner { padding: 26px 18px; }
+        }
+
+        @media (max-width: 480px) {
+            .stat-value { font-size: 19px; }
+            .mega-pulse-badge { width: 150px; height: 150px; }
+            .podium-card { padding: 18px 14px; }
+        }
     </style>
 </head>
 <body>
@@ -788,7 +893,7 @@
         </div>
 
         <div class="control-bar">
-            <input type="text" id="tableSearch" class="search-input" placeholder="🔍 Search team or tournament..." onkeyup="filterTable()" autocomplete="off">
+            <input type="text" id="tableSearch" class="search-input" placeholder="🔍 Search team or tournament..." onkeyup="filterTable()" oninput="filterTable()" autocomplete="off">
             <div class="stats-badge">Total Records: <span>${pointsList.size()}</span></div>
         </div>
 
@@ -1192,20 +1297,48 @@
             }
         });
 
-        function filterTable() {
-            let input = document.getElementById('tableSearch').value.toLowerCase().trim();
-            let rows = document.querySelectorAll('#pointsTableElement tbody tr');
+        var pmTotalText = null;
 
-            rows.forEach(row => {
-                let searchData = row.getAttribute('data-search');
-                if (searchData) {
-                    if (input === "" || searchData.indexOf(input) > -1) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                }
+        function filterTable() {
+            var box = document.getElementById('tableSearch');
+            var input = (box ? box.value : '').toLowerCase().replace(/\s+/g, ' ').trim();
+            var tbody = document.querySelector('#pointsTableElement tbody');
+            var rows = tbody ? tbody.querySelectorAll('tr[data-search]') : [];
+            var statsSpan = document.querySelector('.stats-badge span');
+            var visibleCount = 0;
+
+            if (statsSpan && pmTotalText === null) pmTotalText = statsSpan.innerText;
+
+            rows.forEach(function (row) {
+                var teamEl = row.querySelector('.team-name');
+                var tourEl = row.querySelector('.tournament-name');
+                var text = ((row.getAttribute('data-search') || '') + ' ' +
+                            (teamEl ? teamEl.textContent : '') + ' ' +
+                            (tourEl ? tourEl.textContent : '')).toLowerCase().replace(/\s+/g, ' ');
+                var show = (input === '' || text.indexOf(input) > -1);
+                row.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
             });
+
+            // Koi match na mile to message dikhao
+            var emptyRow = document.getElementById('noSearchResult');
+            if (input !== '' && rows.length > 0 && visibleCount === 0) {
+                if (!emptyRow) {
+                    emptyRow = document.createElement('tr');
+                    emptyRow.id = 'noSearchResult';
+                    var cell = document.createElement('td');
+                    cell.colSpan = 10;
+                    cell.className = 'no-record';
+                    cell.textContent = '🔍 No team or tournament matches your search.';
+                    emptyRow.appendChild(cell);
+                    tbody.appendChild(emptyRow);
+                }
+                emptyRow.style.display = '';
+            } else if (emptyRow) {
+                emptyRow.style.display = 'none';
+            }
+
+            if (statsSpan) statsSpan.innerText = (input === '') ? pmTotalText : visibleCount;
         }
     </script>
 

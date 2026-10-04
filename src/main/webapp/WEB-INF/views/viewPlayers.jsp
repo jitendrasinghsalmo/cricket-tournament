@@ -855,6 +855,178 @@
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
 
         .no-player { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; padding: 60px; font-size: 15px; font-weight: 700; background: var(--card-surface); border: 1.5px dashed var(--border-glass); border-radius: 16px; text-transform: uppercase; }
+
+        /* =====================================================
+           DARK + LIGHT MODE SYSTEM (same as Teams page)
+           Text hamesha visible rahega
+           ===================================================== */
+        :root {
+            --pm-nav-bg: #0d1222;
+            --pm-input-bg: #030712;
+            --pm-chip-bg: #111827;
+            --pm-pod-bg: #080b1e;
+            --pm-img-bg: #020617;
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+            --pm-player-bg: linear-gradient(145deg, #0e1428 0%, #060917 100%);
+            --pm-hl-bg: linear-gradient(145deg, #0e1428 0%, #060917 100%);
+            --pm-modern-bg: linear-gradient(135deg, rgba(14, 20, 40, 0.95), rgba(8, 11, 30, 0.98));
+            --pm-master-bg: linear-gradient(135deg, rgba(14, 20, 40, 0.98) 0%, rgba(10, 14, 39, 0.99) 100%);
+            --pm-exec-bg: linear-gradient(135deg, #090e21 0%, #121936 100%);
+            --pm-soft-bg: rgba(255, 255, 255, 0.02);
+            --pm-soft-hover: rgba(0, 217, 255, 0.04);
+            --pm-soft-border: rgba(30, 41, 75, 0.5);
+            --pm-shadow: rgba(0, 0, 0, 0.3);
+            --pm-nav-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: #ffffff;
+            --body-overlay: #eef2f7;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #9333ea;
+            --neon-gold: #b45309;
+            --pm-nav-bg: #ffffff;
+            --pm-input-bg: #ffffff;
+            --pm-chip-bg: #e2e8f0;
+            --pm-pod-bg: #f1f5f9;
+            --pm-img-bg: #e2e8f0;
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+            --pm-player-bg: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            --pm-hl-bg: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            --pm-modern-bg: #ffffff;
+            --pm-master-bg: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            --pm-exec-bg: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);
+            --pm-soft-bg: rgba(15, 23, 42, 0.03);
+            --pm-soft-hover: rgba(8, 145, 178, 0.08);
+            --pm-soft-border: #e2e8f0;
+            --pm-shadow: rgba(15, 23, 42, 0.12);
+            --pm-nav-shadow: rgba(15, 23, 42, 0.12);
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); box-shadow: 0 15px 35px var(--pm-nav-shadow); }
+        .search-input { background: var(--pm-input-bg); }
+        .stats-badge { background: var(--pm-chip-bg); }
+        .training-card { background: var(--pm-pod-bg); }
+        .gallery-card-img-wrapper { background: var(--pm-img-bg); }
+        .player-card { background: var(--pm-player-bg); box-shadow: 0 15px 35px var(--pm-shadow); }
+        .player-info-item { background: var(--pm-soft-bg); border-color: var(--pm-soft-border); }
+        .hl-box-large { background: var(--pm-hl-bg); box-shadow: 0 15px 40px var(--pm-shadow); }
+        .new-custom-card { background: var(--pm-modern-bg); box-shadow: 0 10px 30px var(--pm-shadow); }
+        .master-hero-banner { background: var(--pm-master-bg); }
+        .pro-executive-showcase { background: var(--pm-exec-bg); }
+        .hero-mini-box, .pro-exec-card { background: var(--pm-soft-bg); }
+        .hero-mini-box:hover { background: var(--pm-soft-hover); }
+        .stat-box, .role-card, .criteria-card, .gallery-clean-card { box-shadow: 0 10px 30px var(--pm-shadow); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+        .footer-newsletter input::placeholder { color: var(--text-secondary); opacity: 0.8; }
+
+        /* Light mode me text/glow clear rakhne ke liye */
+        body.light-mode .jumping-title span,
+        body.light-mode .master-hero-title h2,
+        body.light-mode .footer-brand h3 span { text-shadow: none; }
+        body.light-mode .btn-back:hover,
+        body.light-mode .btn-edit:hover,
+        body.light-mode .footer-socials a:hover { color: #ffffff; }
+        body.light-mode .logo-icon,
+        body.light-mode .master-hero-icon,
+        body.light-mode .players-cta-btn,
+        body.light-mode .players-cta-btn:hover,
+        body.light-mode .footer-newsletter button { color: #ffffff; }
+        :root[data-theme="light"] .btn-back:hover, :root.light .btn-back:hover, :root.light-mode .btn-back:hover,
+        :root[data-theme="light"] .btn-edit:hover, :root.light .btn-edit:hover, :root.light-mode .btn-edit:hover,
+        :root[data-theme="light"] .footer-socials a:hover, :root.light .footer-socials a:hover, :root.light-mode .footer-socials a:hover { color: #ffffff; }
+        :root[data-theme="light"] .logo-icon, :root.light .logo-icon, :root.light-mode .logo-icon,
+        :root[data-theme="light"] .master-hero-icon, :root.light .master-hero-icon, :root.light-mode .master-hero-icon,
+        :root[data-theme="light"] .players-cta-btn, :root.light .players-cta-btn, :root.light-mode .players-cta-btn,
+        :root[data-theme="light"] .footer-newsletter button, :root.light .footer-newsletter button, :root.light-mode .footer-newsletter button { color: #ffffff; }
+
+        /* =====================================================
+           FULL RESPONSIVE (mobile / tablet / desktop)
+           ===================================================== */
+        html, body { width: 100%; overflow-x: hidden; }
+        img { max-width: 100%; }
+        .player-name, .player-info-item strong { min-width: 0; overflow-wrap: anywhere; }
+
+        @media (max-width: 1024px) {
+            .main-content-wrap { padding: 0 18px; }
+            .master-hero-banner { padding: 40px 30px; }
+            .pro-executive-showcase { padding: 40px 30px; }
+            .hl-box-large { padding: 30px 28px; }
+            .hl-grand-wide { padding: 32px 28px; }
+        }
+
+        @media (max-width: 900px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { font-size: 12px; }
+            .main-content-wrap { padding: 0 12px; margin: 22px auto; }
+            .header-bar { flex-direction: column; align-items: stretch; text-align: center; padding: 18px 16px; margin-bottom: 26px; }
+            .header-left, .header-right { justify-content: center; flex-wrap: wrap; }
+            .jumping-title { font-size: 18px; letter-spacing: 1px; }
+            .control-bar { flex-direction: column; align-items: stretch; padding: 14px; margin-bottom: 28px; }
+            .search-input { width: 100%; max-width: 100%; }
+            .stats-badge { text-align: center; }
+            .player-card { padding: 22px; }
+            .team-stats-section, .role-breakdown-section, .selection-criteria-section,
+            .training-section, .players-cta-banner, .gallery-section { margin: 36px auto; }
+            .highlight-sections-wrapper { margin: 36px auto; gap: 20px; }
+            .hl-box-large, .hl-grand-wide { padding: 24px 20px; }
+            .hl-grand-wide { border-left-width: 6px; }
+            .master-hero-header { flex-direction: column; text-align: center; gap: 16px; }
+            .master-hero-title h2 { font-size: 21px; letter-spacing: 1px; }
+            .master-hero-desc { font-size: 14px; line-height: 1.7; }
+            .master-hero-banner { border-radius: 22px; }
+            .pro-executive-showcase { border-radius: 22px; padding: 30px 20px; }
+            .pro-exec-title-group h2 { font-size: 22px; }
+            .pro-exec-card { padding: 22px; }
+            .training-section { padding: 22px 16px; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .gallery-clean-card:hover { transform: scale(1.02); }
+        }
+
+        @media (max-width: 600px) {
+            .hl-box-large { flex-direction: column; text-align: center; }
+            .hl-big-icon { margin-right: 0; margin-bottom: 18px; width: 72px; height: 72px; font-size: 28px; }
+            .hl-content-large h3 { font-size: 17px; }
+            .hl-content-large p { font-size: 13.5px; }
+            .pro-exec-card { flex-direction: column; align-items: center; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text { font-size: 16px; }
+            .player-card { padding: 18px; }
+            .player-name { font-size: 17px; }
+            .player-info-item { padding: 9px 11px; font-size: 12.5px; gap: 8px; }
+            .card-actions { gap: 10px; }
+            .card-actions a { padding: 11px 6px; font-size: 11px; }
+            .stat-number { font-size: 26px; }
+            .master-hero-banner { padding: 28px 16px; }
+            .master-hero-icon { width: 76px; height: 76px; font-size: 32px; }
+            .new-custom-card { padding: 22px; }
+            .players-cta-btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body>

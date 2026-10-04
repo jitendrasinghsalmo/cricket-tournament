@@ -588,6 +588,162 @@
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
 
         .no-match { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; padding: 60px; font-size: 15px; font-weight: 700; background: var(--card-surface); border: 1px dashed var(--border-glass); border-radius: 16px; text-transform: uppercase; }
+
+        /* =====================================================
+           FIX 1: DARK + LIGHT MODE  (text hamesha visible)
+           ===================================================== */
+        :root {
+            --pm-nav-bg: #0d1222;
+            --pm-input-bg: #030712;
+            --pm-chip-bg: #111827;
+            --pm-card-bg: #0e1428;
+            --pm-pod-bg: #080b1e;
+            --pm-img-bg: #020617;
+            --pm-yellow-bg: #1e1b18;
+            --pm-footer-bg: #0d1222;
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"],
+        :root[data-bs-theme="light"],
+        :root.light,
+        :root.light-mode,
+        :root.light-theme,
+        :root.theme-light,
+        body[data-theme="light"],
+        body[data-bs-theme="light"],
+        body.light,
+        body.light-mode,
+        body.light-theme,
+        body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: #ffffff;
+            --body-overlay: #eef2f7;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #9333ea;
+            --neon-gold: #b45309;
+            --pm-nav-bg: #ffffff;
+            --pm-input-bg: #ffffff;
+            --pm-chip-bg: #e2e8f0;
+            --pm-card-bg: #ffffff;
+            --pm-pod-bg: #f1f5f9;
+            --pm-img-bg: #e2e8f0;
+            --pm-yellow-bg: #fffbeb;
+            --pm-footer-bg: #ffffff;
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); }
+        .search-input, .footer-newsletter input { background: var(--pm-input-bg); }
+        .stats-badge { background: var(--pm-chip-bg); }
+        .mega-showcase-banner, .pro-feature-card, .circle-badge-card, .master-hero-showcase,
+        .highlight-card, .performer-card, .gallery-card-item, .protocol-card, .venue-card,
+        .fan-access-section { background: var(--pm-card-bg); }
+        .mega-stat-box, .master-metric-item, .fan-access-item { background: var(--pm-pod-bg); }
+        .yellow-highlight-banner { background: var(--pm-yellow-bg); }
+        .gallery-item-circle { background: var(--pm-img-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .match-cta-banner { background: linear-gradient(135deg, rgba(0,217,255,0.16), rgba(0,255,136,0.1)), var(--pm-card-bg); }
+
+        /* Light mode me hover par white text invisible hota tha - fix */
+        :root[data-theme="light"] .btn-edit-pro:hover,
+        :root[data-theme="light"] .btn-delete-pro:hover,
+        :root[data-bs-theme="light"] .btn-edit-pro:hover,
+        :root[data-bs-theme="light"] .btn-delete-pro:hover,
+        :root.light .btn-edit-pro:hover,
+        :root.light .btn-delete-pro:hover,
+        :root.light-mode .btn-edit-pro:hover,
+        :root.light-mode .btn-delete-pro:hover,
+        :root.light-theme .btn-edit-pro:hover,
+        :root.light-theme .btn-delete-pro:hover,
+        :root.theme-light .btn-edit-pro:hover,
+        :root.theme-light .btn-delete-pro:hover,
+        body[data-theme="light"] .btn-edit-pro:hover,
+        body[data-theme="light"] .btn-delete-pro:hover,
+        body[data-bs-theme="light"] .btn-edit-pro:hover,
+        body[data-bs-theme="light"] .btn-delete-pro:hover,
+        body.light .btn-edit-pro:hover,
+        body.light .btn-delete-pro:hover,
+        body.light-mode .btn-edit-pro:hover,
+        body.light-mode .btn-delete-pro:hover,
+        body.light-theme .btn-edit-pro:hover,
+        body.light-theme .btn-delete-pro:hover,
+        body.theme-light .btn-edit-pro:hover,
+        body.theme-light .btn-delete-pro:hover { color: var(--text-primary); }
+        :root[data-theme="light"] .yellow-highlight-banner h3,
+        :root[data-bs-theme="light"] .yellow-highlight-banner h3,
+        :root.light .yellow-highlight-banner h3,
+        :root.light-mode .yellow-highlight-banner h3,
+        :root.light-theme .yellow-highlight-banner h3,
+        :root.theme-light .yellow-highlight-banner h3,
+        body[data-theme="light"] .yellow-highlight-banner h3,
+        body[data-bs-theme="light"] .yellow-highlight-banner h3,
+        body.light .yellow-highlight-banner h3,
+        body.light-mode .yellow-highlight-banner h3,
+        body.light-theme .yellow-highlight-banner h3,
+        body.theme-light .yellow-highlight-banner h3 { color: #92400e; }
+
+        /* =====================================================
+           FIX 2: FULL RESPONSIVE
+           ===================================================== */
+        img { max-width: 100%; }
+        body { overflow-x: hidden; }
+        .control-bar { flex-wrap: wrap; gap: 12px; }
+        .search-input { max-width: 100%; }
+        .match-header-row { gap: 8px; }
+        .tournament-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .card-details-side { min-width: 0; }
+        .teams-display { word-break: break-word; }
+        .cricket-grid { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+        .mega-banner-right { flex-wrap: wrap; justify-content: center; }
+
+        @media (max-width: 900px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .header-bar { flex-wrap: wrap; gap: 14px; padding: 16px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 7px 10px; font-size: 12px; }
+            .main-content-area { padding: 0 12px; margin: 18px auto; }
+            .header-bar { flex-direction: column; align-items: stretch; text-align: center; }
+            .header-left, .header-right { justify-content: center; flex-wrap: wrap; }
+            .jumping-title { font-size: 18px; letter-spacing: 1px; }
+            .control-bar { flex-direction: column; align-items: stretch; padding: 14px; }
+            .search-input { width: 100%; }
+            .stats-badge { text-align: center; }
+            .matches-grid { gap: 20px; }
+            .pagination-bar { justify-content: center; flex-wrap: wrap; gap: 12px; padding: 12px; }
+            .mega-banner-left h2 { font-size: 22px; }
+            .master-hero-showcase { padding: 28px 18px; }
+            .master-hero-title-area h3 { font-size: 19px; }
+            .fan-access-section { padding: 20px; }
+            .yellow-highlight-banner { padding: 26px 18px; }
+            .yellow-highlight-banner h3 { font-size: 20px; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .match-cta-banner { padding: 26px 18px; }
+        }
+
+        @media (max-width: 560px) {
+            .match-card { flex-direction: column; }
+            .card-image-side {
+                flex: none; min-height: 90px; flex-direction: row; align-items: flex-start;
+                border-left: none; border-top: 1px solid var(--border-glass);
+            }
+            .mega-stat-box { min-width: 110px; padding: 16px 18px; }
+            .pro-feature-card { padding: 22px; }
+        }
+    
     </style>
 </head>
 <body>
@@ -610,7 +766,7 @@
         </div>
 
         <div class="control-bar">
-            <input type="text" id="matchSearch" class="search-input" placeholder="🔍 Search match by team..." onkeyup="filterMatches()" autocomplete="off">
+            <input type="text" id="matchSearch" class="search-input" placeholder="🔍 Search match by team..." onkeyup="filterMatches()" oninput="filterMatches()" autocomplete="off">
             <div class="stats-badge">Total Matches: <span>${matches.size()}</span></div>
         </div>
 
@@ -962,21 +1118,47 @@
             char === ' ' ? '<span style="--i:' + index + '">&nbsp;</span>' : '<span style="--i:' + index + '">' + char + '</span>'
         ).join('');
 
+        var pmTotalText = null;
+
         function filterMatches() {
-            let input = document.getElementById('matchSearch').value.toLowerCase().trim();
-            let cards = document.getElementsByClassName('match-card');
-            let visibleCount = 0;
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getAttribute('data-name');
-                if (input === "" || name.indexOf(input) > -1) {
-                    cards[i].style.display = "";
-                    visibleCount++;
-                } else {
-                    cards[i].style.display = "none";
+            var box = document.getElementById('matchSearch');
+            var input = (box ? box.value : '').toLowerCase().replace(/\s+/g, ' ').trim();
+            var grid = document.getElementById('matchesGrid');
+            var cards = grid ? grid.querySelectorAll('.match-card') : [];
+            var statsSpan = document.querySelector('.stats-badge span');
+            var visibleCount = 0;
+
+            if (statsSpan && pmTotalText === null) pmTotalText = statsSpan.innerText;
+
+            cards.forEach(function (card) {
+                var teamsEl = card.querySelector('.teams-display');
+                var tourEl = card.querySelector('.tournament-title');
+                var text = ((card.getAttribute('data-name') || '') + ' ' +
+                            (teamsEl ? teamsEl.textContent : '') + ' ' +
+                            (tourEl ? tourEl.textContent : '')).toLowerCase().replace(/\s+/g, ' ');
+                var show = (input === '' || text.indexOf(input) > -1);
+                card.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Koi match na mile to message dikhao
+            var emptyMsg = document.getElementById('noSearchResult');
+            if (input !== '' && cards.length > 0 && visibleCount === 0) {
+                if (!emptyMsg) {
+                    emptyMsg = document.createElement('div');
+                    emptyMsg.id = 'noSearchResult';
+                    emptyMsg.className = 'no-match';
+                    emptyMsg.textContent = '🔍 No matches found for your search.';
+                    grid.appendChild(emptyMsg);
                 }
+                emptyMsg.style.display = '';
+            } else if (emptyMsg) {
+                emptyMsg.style.display = 'none';
             }
-            document.querySelector('.stats-badge span').innerText = visibleCount;
+
+            if (statsSpan) statsSpan.innerText = (input === '') ? pmTotalText : visibleCount;
         }
     </script>
+
 </body>
 </html>

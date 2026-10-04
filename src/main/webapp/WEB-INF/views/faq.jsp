@@ -1144,6 +1144,236 @@
         .app-promo-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
         .app-promo-btn { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #0a0e27; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
         .app-promo-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,217,255,0.6); color: #0a0e27; }
+
+        /* ============================================================
+           ADD-ON: TEXT VISIBILITY (DARK + LIGHT) & FULL RESPONSIVE
+           Added block - sits just above the closing style tag.
+           No existing line is modified - these only override/extend.
+           ============================================================ */
+
+        html, body { max-width: 100%; overflow-x: hidden; }
+        img { max-width: 100%; }
+
+        /* ---------- FAQ answer: text never gets cut off (any screen) ---------- */
+        .faq-item.active .faq-answer { max-height: 1200px; }
+        .faq-question { gap: 10px; word-break: break-word; }
+        .faq-answer { word-break: break-word; }
+
+        /* ---------- Contact grid: no overflow on very small screens ---------- */
+        .contact-grid { grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
+        .contact-info { overflow-wrap: anywhere; }
+
+        /* ============================================================
+           LIGHT MODE - fix dark boxes that held light-mode dark text
+           ============================================================ */
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 25px rgba(26, 37, 80, 0.12);
+        }
+        body.light-mode .nav-links a { color: #33415f; }
+        body.light-mode .nav-links a:hover { color: #006a8c; background: rgba(0, 153, 204, 0.12); }
+        body.light-mode .nav-links a.active { color: #030712; }
+        body.light-mode .logo-text span { color: #006a8c; }
+
+        body.light-mode { --text-secondary: #44516f; }
+
+        body.light-mode .hero-badge { color: #006a8c; background: rgba(0, 153, 204, 0.12); }
+        body.light-mode .faq-hero { box-shadow: 0 25px 50px rgba(26, 37, 80, 0.15); }
+        body.light-mode .faq-hero h1,
+        body.light-mode .faq-showcase-title {
+            background: linear-gradient(135deg, #006a8c, #007a33, #8a5a00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+        body.light-mode .card-header h4 {
+            background: linear-gradient(135deg, #006a8c, #8a5a00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.light-mode .stats-strip-num {
+            background: linear-gradient(135deg, #006a8c, #007a33);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-mode .btn-back { color: #006a8c; border-color: #006a8c; }
+        body.light-mode .btn-back:hover { color: #030712; }
+        body.light-mode .tab-btn:hover { color: #006a8c; }
+        body.light-mode .faq-question:hover { color: #006a8c; }
+        body.light-mode .legacy-box h2,
+        body.light-mode .event-banner-box h3 { color: #8a5a00; }
+        body.light-mode .extra-banner-full h3,
+        body.light-mode .howitworks-heading { color: #007a33; }
+        body.light-mode .custom-info-card h3,
+        body.light-mode .testimonial-heading,
+        body.light-mode .legacy-stat-num,
+        body.light-mode .countdown-num,
+        body.light-mode .howitworks-num { color: #006a8c; }
+        body.light-mode .rotating-features-box h2,
+        body.light-mode .sponsors-heading { color: #6a00cc; }
+
+        /* dark inner boxes -> light boxes in light mode */
+        body.light-mode .legacy-stat-item,
+        body.light-mode .countdown-box,
+        body.light-mode .howitworks-num,
+        body.light-mode .rotating-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(0, 153, 204, 0.35);
+        }
+        body.light-mode .rotating-card { border-color: rgba(0, 153, 204, 0.2); }
+        body.light-mode .rotating-card:hover { background: rgba(0, 153, 204, 0.08); }
+        body.light-mode .faq-showcase-card { background: rgba(255, 255, 255, 0.95); }
+        body.light-mode .card-header { background: rgba(240, 246, 255, 0.98); }
+        body.light-mode .ticker-container { background: rgba(10, 14, 39, 0.95); }
+        body.light-mode .ticker-item { color: #00d9ff; }
+        body.light-mode .sponsor-chip { color: #1a2550; }
+        body.light-mode .sponsor-chip:hover { color: #fff; }
+        body.light-mode .modal-overlay { background: rgba(26, 37, 80, 0.55); }
+        body.light-mode .modal-close { color: #006a8c; }
+        body.light-mode .form-input,
+        body.light-mode .form-textarea { background: #fff; color: #1a2550; }
+
+        /* footer (light mode) */
+        body.light-mode .grand-footer-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 243, 255, 0.99));
+            box-shadow: 0 -15px 40px rgba(26, 37, 80, 0.12);
+        }
+        body.light-mode .footer-brand h3 span { color: #006a8c; text-shadow: none; }
+        body.light-mode .footer-links h4,
+        body.light-mode .footer-newsletter h4 { color: #006a8c; }
+        body.light-mode .footer-links a:hover,
+        body.light-mode .footer-bottom-links a:hover { color: #006a8c; }
+        body.light-mode .footer-socials a { color: #006a8c; }
+        body.light-mode .footer-socials a:hover { color: #030712; }
+        body.light-mode .footer-newsletter input { background: #fff; color: #1a2550; }
+
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 992px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 6px; }
+            .nav-links a { padding: 7px 12px; font-size: 12px; }
+            .faq-hero { padding: 60px 30px; }
+            .faq-hero h1 { font-size: 2.4rem; }
+            .grand-footer-section { padding: 45px 25px 25px 25px; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content-wrap { padding: 0 14px; margin: 20px auto; }
+            .faq-hero { padding: 45px 20px; border-radius: 22px; }
+            .faq-hero h1 { font-size: 1.9rem; letter-spacing: 0.8px; }
+            .faq-hero p { font-size: 1rem; }
+            .hero-badge { font-size: 11px; padding: 7px 14px; letter-spacing: 1px; }
+            .ticker-item { font-size: 12px; padding-right: 35px; }
+            .category-tabs { gap: 8px; margin-bottom: 28px; }
+            .tab-btn { padding: 10px 14px; font-size: 11px; }
+            .faq-question { padding: 14px 16px; font-size: 13.5px; }
+            .faq-item.active .faq-answer { padding: 16px; font-size: 13.5px; line-height: 1.7; }
+            .cyber-feature-card { padding: 28px 20px; }
+            .legacy-box, .rotating-features-box, .howitworks-box, .sponsors-box { padding: 28px 18px; }
+            .elite-duo-card { padding: 24px 18px; flex-direction: column; text-align: center; }
+            .contact-section { padding: 24px 16px; }
+            .contact-title { font-size: 16px; }
+            .help-box { padding: 30px 18px; margin: 35px auto; }
+            .help-box h3 { font-size: 20px; }
+            .custom-info-card, .event-banner-box { padding: 22px 18px; }
+            .extra-banner-full { padding: 28px 18px; }
+            .extra-banner-full h3 { font-size: 18px; }
+            .faq-showcase-title { font-size: 19px; }
+            .faq-showcase-img-box { height: 200px; }
+            .app-promo-box { padding: 26px 18px; flex-direction: column; text-align: center; }
+            .app-promo-buttons { justify-content: center; width: 100%; }
+            .testimonial-heading, .howitworks-heading { font-size: 18px; }
+            .stats-strip-num { font-size: 24px; }
+            .grand-footer-section { padding: 35px 16px 20px 16px; margin: 40px auto 10px auto; }
+            .footer-newsletter form { flex-wrap: wrap; }
+            .footer-newsletter input { min-width: 0; width: 100%; flex: 1 1 100%; }
+            .footer-newsletter button { width: 100%; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+            .modal-container { padding: 20px 18px; max-height: 90vh; overflow-y: auto; }
+        }
+
+        @media (max-width: 480px) {
+            .faq-hero h1 { font-size: 1.5rem; }
+            .logo-text { font-size: 16px; }
+            .nav-links a { padding: 6px 10px; font-size: 11px; }
+            .help-btn { width: 100%; }
+            .help-buttons { flex-direction: column; }
+            .countdown-grid { gap: 8px; }
+            .countdown-box { padding: 10px 6px; }
+            .countdown-num { font-size: 17px; }
+            .legacy-stat-num { font-size: 21px; }
+            .stats-strip-card { padding: 20px 10px; }
+            .stats-strip-label { font-size: 10.5px; }
+            .sponsor-chip { padding: 10px 16px; font-size: 11.5px; }
+            .app-promo-btn { width: 100%; justify-content: center; }
+            .testimonial-card { padding: 22px 18px; }
+        }
+
+        /* =====================================================
+           THEME FIX (same technique as Teams page)
+           Dark + Light mode - text hamesha visible
+           ===================================================== */
+        :root {
+            --pm-nav-bg: rgba(10, 14, 39, 0.92);
+            --pm-dark-box: rgba(3, 7, 18, 0.6);
+            --pm-dark-box-soft: rgba(3, 7, 18, 0.5);
+            --pm-card-head-bg: rgba(3, 7, 18, 0.95);
+            --pm-showcase-bg: rgba(13, 18, 35, 0.95);
+            --pm-img-bg: #020617;
+            --pm-chat-bg: rgba(3, 7, 18, 0.4);
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+            --pm-ticker-bg: rgba(3, 7, 18, 0.95);
+            --pm-ticker-text: #00d9ff;
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #9333ea;
+            --neon-gold: #b45309;
+            --pm-nav-bg: #ffffff;
+            --pm-dark-box: #f1f5f9;
+            --pm-dark-box-soft: #f1f5f9;
+            --pm-card-head-bg: #f8fafc;
+            --pm-showcase-bg: #ffffff;
+            --pm-img-bg: #e2e8f0;
+            --pm-chat-bg: #f1f5f9;
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); }
+        .ticker-container { background: var(--pm-ticker-bg); }
+        .ticker-item { color: var(--pm-ticker-text); }
+        .legacy-stat-item { background: var(--pm-dark-box-soft); }
+        .countdown-box, .rotating-card, .howitworks-num { background: var(--pm-dark-box); }
+        .faq-showcase-card { background: var(--pm-showcase-bg); }
+        .card-header { background: var(--pm-card-head-bg); }
+        .faq-showcase-img-box { background: var(--pm-img-bg); }
+        .chat-box-body { background: var(--pm-chat-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+
     </style>
 </head>
 <body>

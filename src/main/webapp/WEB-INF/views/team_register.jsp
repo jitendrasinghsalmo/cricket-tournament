@@ -236,6 +236,81 @@
             .form-container { border-radius: 18px; }
             input[type="text"], input[type="number"] { font-size: 16px; } /* prevents zoom on iOS */
         }
+
+        /* =====================================================
+           DARK + LIGHT MODE SYSTEM (same as Teams page)
+           Text hamesha visible rahega
+           ===================================================== */
+        :root {
+            --pm-nav-bg: rgba(10, 14, 39, 0.92);
+            --pm-input-bg: rgba(3, 7, 18, 0.65);
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+            --pm-shadow: rgba(0, 0, 0, 0.45);
+            --pm-placeholder: #64748b;
+        }
+
+        /* Light mode - data-theme / class, jo bhi toggle method ho sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: rgba(255, 255, 255, 0.94);
+            --body-overlay: rgba(238, 242, 247, 0.9);
+            --input-bg: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --pm-nav-bg: rgba(255, 255, 255, 0.95);
+            --pm-input-bg: #ffffff;
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+            --pm-shadow: rgba(15, 23, 42, 0.15);
+            --pm-placeholder: #94a3b8;
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+        .form-container { box-shadow: 0 25px 50px var(--pm-shadow); }
+        input[type="text"], input[type="number"] { background: var(--pm-input-bg); color: var(--text-primary); }
+        input::placeholder { color: var(--pm-placeholder); opacity: 1; }
+        .footer-newsletter input::placeholder { color: var(--pm-placeholder); opacity: 1; }
+
+        /* =====================================================
+           FULL RESPONSIVE
+           ===================================================== */
+        img { max-width: 100%; height: auto; }
+
+        @media (max-width: 900px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 7px 10px; font-size: 12px; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .page-content { padding: 14px 12px; }
+            .form-container { padding: 16px 14px; }
+            .logo-text { font-size: 16px; }
+        }
+
+        @media (max-height: 700px) and (min-width: 481px) {
+            .page-content { justify-content: flex-start; }
+        }
     </style>
 </head>
 <body>

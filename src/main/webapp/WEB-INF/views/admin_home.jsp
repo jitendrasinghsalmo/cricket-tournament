@@ -477,6 +477,88 @@
         .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
     </style>
+
+    <!-- 🌟 NEW: LIGHT MODE FIX (navbar.jsp ka html[data-theme="light"] follow karta hai) - dark mode same rehta hai -->
+    <style>
+        html[data-theme="light"] {
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #e0f2fe;
+            --accent-red: #e11d48;
+            --accent-green: #059669;
+            --accent-blue: #0284c7;
+            --accent-amber: #d97706;
+            --accent-purple: #9333ea;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --neon-cyan: #0284c7;
+            --neon-emerald: #059669;
+            --border-glass: rgba(2, 132, 199, 0.3);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+        }
+
+        /* HERO */
+        html[data-theme="light"] .hero-banner {
+            background: linear-gradient(120deg, #e0f2fe, #f0fdf4, #ede9fe, #e0f2fe);
+            background-size: 300% 300%;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+        }
+        html[data-theme="light"] .hero-grid-lines {
+            background-image:
+                linear-gradient(rgba(2,132,199,0.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(2,132,199,0.10) 1px, transparent 1px);
+        }
+        html[data-theme="light"] .hero-content h1 { color: #0f172a; text-shadow: none; }
+        html[data-theme="light"] .hero-content p { color: #475569; }
+        html[data-theme="light"] .hero-clock { background: rgba(255,255,255,0.75); border-color: rgba(2,132,199,0.3); }
+        html[data-theme="light"] .btn-primary { color: #ffffff; box-shadow: 0 6px 16px rgba(2,132,199,0.3); }
+        html[data-theme="light"] .btn-primary:hover { color: #ffffff; }
+        /* ✅ FIX 1: "View Teams" button visible */
+        html[data-theme="light"] .btn-secondary {
+            background: #ffffff; color: #0f172a; border: 1.5px solid #0284c7;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+        html[data-theme="light"] .btn-secondary:hover { background: #e0f2fe; color: #0284c7; border-color: #0284c7; }
+
+        /* CARDS / TEXT */
+        html[data-theme="light"] .ticker-bar,
+        html[data-theme="light"] .card-box,
+        html[data-theme="light"] .adm-card,
+        html[data-theme="light"] .media-card,
+        html[data-theme="light"] .sc-card { box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06); }
+        html[data-theme="light"] .quick-nav-item { background: #ffffff; color: #0f172a; }
+        html[data-theme="light"] .quick-nav-item:hover { background: #e0f2fe; color: #0284c7; }
+        html[data-theme="light"] .media-body h5,
+        html[data-theme="light"] .sc-card h5,
+        html[data-theme="light"] .adm-card h5,
+        html[data-theme="light"] .hof-team { color: #0f172a; }
+        html[data-theme="light"] .section-title { color: #0f172a; }
+        html[data-theme="light"] .hof-year { color: #b45309; background: rgba(245,158,11,0.14); border-color: rgba(180,83,9,0.35); }
+        html[data-theme="light"] .hof-trophy { color: #d97706; }
+
+        /* ✅ FIX 2: "Need Help Managing the System?" banner visible */
+        html[data-theme="light"] .help-cta {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 60%, #ffffff 100%);
+            border: 1.5px solid #cbd5e1;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+        }
+        html[data-theme="light"] .help-cta-text h2 { color: #0f172a; }
+        html[data-theme="light"] .help-cta-text p { color: #475569; }
+        html[data-theme="light"] .help-cta .btn-help { background: #0284c7; color: #ffffff; box-shadow: 0 6px 16px rgba(2,132,199,0.3); }
+
+        /* FOOTER */
+        html[data-theme="light"] .footer-newsletter input { background: #ffffff; color: #0f172a; border-color: #cbd5e1; }
+        html[data-theme="light"] .footer-newsletter input::placeholder { color: #64748b; opacity: 1; }
+        html[data-theme="light"] .footer-newsletter button { color: #ffffff; }
+        html[data-theme="light"] .footer-socials a:hover { color: #ffffff; }
+        html[data-theme="light"] .grand-footer-section { box-shadow: 0 -10px 30px rgba(15,23,42,0.12); }
+        @media (max-width: 400px) {
+            .footer-newsletter form { flex-direction: column; }
+            .footer-newsletter button { width: 100%; }
+        }
+    </style>
 </head>
 <body>
 

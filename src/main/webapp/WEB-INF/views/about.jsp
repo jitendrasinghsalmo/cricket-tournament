@@ -504,6 +504,162 @@
         .explore-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
         .explore-cta-btn { background: linear-gradient(135deg, var(--neon-cyan), var(--neon-emerald)); color: #0a0e27; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
         .explore-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,217,255,0.6); color: #0a0e27; }
+
+        /* =====================================================
+           DARK + LIGHT MODE SYSTEM (same as Teams page)
+           Text hamesha visible rahega
+           ===================================================== */
+        :root {
+            --pm-nav-bg: rgba(10, 14, 39, 0.92);
+            --pm-card-bg: rgba(13, 18, 35, 0.9);
+            --pm-card-bg-strong: rgba(13, 18, 35, 0.98);
+            --pm-inner-bg: rgba(3, 7, 18, 0.7);
+            --pm-header-bg: rgba(3, 7, 18, 0.95);
+            --pm-inner-hover: rgba(0, 217, 255, 0.08);
+            --pm-num-bg: rgba(3, 7, 18, 0.6);
+            --pm-modal-bg: rgba(3, 7, 18, 0.9);
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+            --pm-shadow: rgba(0, 0, 0, 0.4);
+            --pm-shadow-strong: rgba(0, 0, 0, 0.6);
+            --pm-nav-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Light mode - class / data-theme, jo bhi toggle method ho sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: rgba(255, 255, 255, 0.94);
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #7c3aed;
+            --neon-gold: #b45309;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --pm-nav-bg: rgba(255, 255, 255, 0.96);
+            --pm-card-bg: #ffffff;
+            --pm-card-bg-strong: #ffffff;
+            --pm-inner-bg: #f1f5f9;
+            --pm-header-bg: #f1f5f9;
+            --pm-inner-hover: rgba(8, 145, 178, 0.1);
+            --pm-num-bg: #ffffff;
+            --pm-modal-bg: rgba(226, 232, 240, 0.92);
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+            --pm-shadow: rgba(15, 23, 42, 0.12);
+            --pm-shadow-strong: rgba(15, 23, 42, 0.18);
+            --pm-nav-shadow: rgba(15, 23, 42, 0.12);
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); box-shadow: 0 15px 35px var(--pm-nav-shadow); }
+        .header-bar { box-shadow: 0 10px 30px var(--pm-shadow); }
+        .about-hero { box-shadow: 0 35px 70px var(--pm-shadow-strong); }
+        .project-description-box, .doc-card, .workflow-box, .video-highlights-box,
+        .pro-showcase-gallery-section { box-shadow: 0 20px 45px var(--pm-shadow); }
+        .elite-cricket-showcase { box-shadow: 0 25px 50px var(--pm-shadow); }
+        .elite-showcase-card, .pro-showcase-box { background: var(--pm-card-bg); }
+        .tech-item, .step-card { background: var(--pm-inner-bg); }
+        .tech-item:hover { background: var(--pm-inner-hover); }
+        .step-card:hover { background: var(--pm-inner-hover); }
+        .v-card-front { background: var(--pm-card-bg-strong); }
+        .v-card-back { background: var(--pm-card-bg-strong); }
+        .video-content-top { background: var(--pm-card-bg-strong); }
+        .pro-box-header { background: var(--pm-header-bg); }
+        .roadmap-num { background: var(--pm-num-bg); }
+        .video-modal { background: var(--pm-modal-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+        .footer-newsletter input::placeholder { color: var(--text-secondary); opacity: 0.8; }
+
+        /* Light mode me neon glow/shadow soft + text clear */
+        body.light-mode .about-hero h1 span,
+        body.light-mode .jumping-title span,
+        body.light-mode .footer-brand h3 span,
+        body.light-mode .feature-highlight-banner h3 { text-shadow: none; }
+        body.light-mode .nav-links a.active { color: #ffffff; }
+        body.light-mode .btn-back:hover { color: #ffffff; }
+        body.light-mode .footer-socials a:hover { color: #ffffff; }
+        body.light-mode .play-btn-overlay { color: #ffffff; }
+        body.light-mode .step-num { color: #ffffff; }
+        body.light-mode .logo-icon { color: #ffffff; }
+        body.light-mode .elite-duo-icon { color: #ffffff; }
+        body.light-mode .explore-cta-btn,
+        body.light-mode .explore-cta-btn:hover { color: #ffffff; }
+        body.light-mode .footer-newsletter button { color: #ffffff; }
+
+        /* =====================================================
+           FULL RESPONSIVE (mobile / tablet / desktop)
+           ===================================================== */
+        html, body { width: 100%; overflow-x: hidden; }
+        * { box-sizing: border-box; }
+        img { max-width: 100%; height: auto; }
+        iframe { max-width: 100%; }
+        .video-thumb-wrapper img, .pro-box-img-wrapper img { height: 100%; }
+
+        @media (max-width: 992px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .about-hero { padding: 60px 30px; }
+            .about-hero h1 { font-size: 34px; }
+            .project-description-box, .workflow-box, .video-highlights-box { padding: 32px 26px; }
+            .doc-card { padding: 30px 24px; }
+            .tech-stack-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 7px 10px; font-size: 12px; }
+            .container { padding: 0 12px; margin: 18px auto; }
+            .header-bar { flex-direction: column; align-items: stretch; text-align: center; padding: 16px; }
+            .header-left, .header-right { justify-content: center; flex-wrap: wrap; }
+            .about-hero { padding: 44px 20px; border-radius: 22px; margin-bottom: 30px; }
+            .about-hero h1 { font-size: 27px; }
+            .about-hero p { font-size: 14px; line-height: 1.7; }
+            .hero-badge { font-size: 11px; padding: 8px 14px; letter-spacing: 1px; }
+            .project-description-box { padding: 24px 18px; border-radius: 18px; margin-bottom: 30px; }
+            .project-description-box h3 { font-size: 18px; }
+            .project-description-content p { font-size: 13.5px; line-height: 1.75; }
+            .project-description-content h4 { font-size: 16px; }
+            .elite-cricket-showcase { padding: 26px 16px; border-radius: 20px; }
+            .elite-showcase-title { font-size: 20px; }
+            .workflow-box { padding: 26px 16px; border-radius: 18px; }
+            .doc-card h3 { font-size: 17px; }
+            .feature-list li { font-size: 13.5px; }
+            .feature-highlight-banner { padding: 28px 18px; }
+            .feature-highlight-banner h3 { font-size: 18px; }
+            .video-highlights-box { padding: 24px 16px; }
+            .video-card-item { height: 340px; }
+            .video-thumb-wrapper { height: 210px; }
+            .pro-showcase-gallery-section { padding: 24px 16px; }
+            .pro-box-img-wrapper { height: 220px; }
+            .elite-duo-card { padding: 24px 18px; }
+            .explore-cta-box { padding: 28px 18px; flex-direction: column; text-align: center; }
+            .explore-cta-buttons { justify-content: center; width: 100%; }
+            .explore-cta-btn { flex: 1 1 100%; justify-content: center; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); margin-top: 40px; }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .video-modal-content { padding: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero h1 { font-size: 23px; }
+            .tech-stack-grid { grid-template-columns: 1fr; }
+            .elite-duo-card { flex-direction: column; text-align: center; }
+            .metrics-strip-num { font-size: 22px; }
+            .metrics-strip-card { padding: 20px 10px; }
+            .security-chip { padding: 10px 14px; font-size: 11.5px; }
+            .testimonial-card { padding: 22px 18px; }
+            .roadmap-box { padding: 28px 18px; }
+            .logo-text { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -745,14 +901,14 @@
                         <h4>🏟️ Arena Stadium</h4>
                         <p>Grand venue illumination for professional fixtures.</p>
                     </div>
-                    <div class="pro-box-img-wrapper"><img src="https://img.magnific.com/premium-photo/charming-energetic-poster-announcing-upc_981650-68087.jpg?w=1500" alt="Stadium Arena"></div>
+                    <div class="pro-box-img-wrapper"><img src="https://i.pinimg.com/736x/75/fd/e9/75fde9c9aeb9f6591c72256ac864a757.jpg" alt="Stadium Arena"></div>
                 </div>
                 <div class="pro-showcase-box">
                     <div class="pro-box-header">
                         <h4>⚡ Match Action</h4>
                         <p>High-voltage cricket action and gameplay.</p>
                     </div>
-                    <div class="pro-box-img-wrapper"><img src="https://img.magnific.com/premium-vector/cricket-championship-concept_1302-17549.jpg?w=1500" alt="Cricket Match"></div>
+                    <div class="pro-box-img-wrapper"><img src="https://i.pinimg.com/1200x/8b/17/d3/8b17d360a24c071aa420c817f287acdf.jpg" alt="Cricket Match"></div>
                 </div>
                 <div class="pro-showcase-box">
                     <div class="pro-box-header">

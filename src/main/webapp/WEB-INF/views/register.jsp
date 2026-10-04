@@ -5,6 +5,18 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ProMatch Arena | User Registration</title>
+
+    <!-- Theme apply (runs immediately, no flash) - same key as navbar.jsp -->
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('promatch_theme') === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <!-- FontAwesome for Eye Icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -140,6 +152,26 @@
             .auth-footer-text { margin-top: 8px; font-size: 12px; }
         }
     </style>
+
+    <!-- 🌟 NEW: DARK + LIGHT MODE (navbar.jsp ki saved theme follow karta hai, toggle nahi) -->
+    <style>
+        html[data-theme="light"] {
+            --bg-deep: #f1f5f9;
+            --card-surface: rgba(255, 255, 255, 0.88);
+            --neon-cyan: #0284c7;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: rgba(2, 132, 199, 0.35);
+            --body-overlay: rgba(241, 245, 249, 0.88);
+            --input-bg: #ffffff;
+        }
+        html[data-theme="light"] .auth-container { box-shadow: 0 25px 50px rgba(15, 23, 42, 0.18); }
+        html[data-theme="light"] input::placeholder { color: #64748b; opacity: 1; }
+        html[data-theme="light"] input:focus { background: #ffffff; }
+        input::placeholder { color: var(--text-secondary); opacity: 0.8; }
+    </style>
 </head>
 <body>
 
@@ -193,6 +225,18 @@
                 icon.classList.add("fa-eye");
             }
         }
+    </script>
+
+    <!-- 🌟 NEW: saved theme follow (no toggle here) -->
+    <script>
+        (function () {
+            var root = document.documentElement, KEY = 'promatch_theme';
+            window.addEventListener('storage', function (e) {
+                if (e.key !== KEY) return;
+                if (e.newValue === 'light') root.setAttribute('data-theme', 'light');
+                else root.removeAttribute('data-theme');
+            });
+        })();
     </script>
 </body>
 </html>

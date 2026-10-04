@@ -233,6 +233,129 @@
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* =====================================================
+           ADD-ON 1: DARK + LIGHT MODE (text hamesha visible)
+           Same technique as Teams page - sab toggle methods cover
+           ===================================================== */
+        :root {
+            --pm-body-bg: linear-gradient(135deg, #030712 0%, #0a0f1d 100%);
+            --pm-hero-bg: linear-gradient(135deg, rgba(13, 18, 30, 0.95) 0%, rgba(3, 7, 18, 0.98) 100%);
+            --pm-hero-title: #ffffff;
+            --pm-pill-bg: rgba(3, 7, 18, 0.6);
+            --pm-badge-bg: rgba(3, 7, 18, 0.6);
+            --pm-row-bg: rgba(3, 7, 18, 0.55);
+            --pm-track-bg: rgba(3, 7, 18, 0.7);
+            --pm-spotlight-bg: linear-gradient(135deg, rgba(245,158,11,0.14), rgba(13,18,30,0.95));
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+        }
+
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --accent-red: #e11d48;
+            --accent-green: #059669;
+            --accent-blue: #0284c7;
+            --accent-amber: #b45309;
+            --accent-purple: #9333ea;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --border-glass: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --pm-body-bg: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --pm-hero-bg: linear-gradient(135deg, #ffffff 0%, #e8f1fb 100%);
+            --pm-hero-title: #0f172a;
+            --pm-pill-bg: rgba(255, 255, 255, 0.9);
+            --pm-badge-bg: #f1f5f9;
+            --pm-row-bg: #f8fafc;
+            --pm-track-bg: #e2e8f0;
+            --pm-spotlight-bg: linear-gradient(135deg, rgba(245,158,11,0.14), #ffffff);
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+        }
+
+        /* Hardcoded dark / white values ab variables se chalenge */
+        body { background: var(--pm-body-bg); }
+        .hero-banner { background: var(--pm-hero-bg); }
+        .hero-content h1 { color: var(--pm-hero-title); }
+        .hero-search-pill { background: var(--pm-pill-bg); }
+        .hero-search-pill .num { color: var(--pm-hero-title); }
+        .count-badge { background: var(--pm-badge-bg); }
+        .item-row { background: var(--pm-row-bg); }
+        .breakdown-track { background: var(--pm-track-bg); }
+        .spotlight-box { background: var(--pm-spotlight-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+
+        /* Light mode me heavy dark shadows halke kar do (hover glow safe rehta hai) */
+        :where(:root[data-theme="light"], :root[data-bs-theme="light"], :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+               body[data-theme="light"], body[data-bs-theme="light"], body.light, body.light-mode, body.light-theme, body.theme-light)
+        :is(.hero-banner, .matrix-card, .breakdown-box, .recent-card, .spotlight-box, .tip-card,
+            .activity-box, .trust-card, .metric-card, .explore-tile) {
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.10);
+        }
+
+        /* =====================================================
+           ADD-ON 2: FULL RESPONSIVE
+           ===================================================== */
+        img { max-width: 100%; }
+        .section-title { flex-wrap: wrap; gap: 6px 12px; }
+        .item-row { gap: 10px; }
+        .item-row > div, .item-main-text, .activity-text, .help-cta-text, .spotlight-text { min-width: 0; }
+        .item-main-text { overflow-wrap: anywhere; }
+        .activity-text { overflow-wrap: anywhere; }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 14px; margin: 18px auto; }
+            .hero-banner { padding: 34px 20px; border-radius: 22px; }
+            .hero-content h1 { font-size: 27px; }
+            .hero-content p { font-size: 13px; }
+            .hero-search-stats { gap: 10px; }
+            .hero-search-pill { padding: 8px 14px; flex: 1 1 calc(50% - 10px); justify-content: center; }
+            .section-title { font-size: 16px; margin: 30px 0 16px 0; }
+            .matrix-grid { gap: 18px; }
+            .matrix-card { padding: 18px; }
+            .matrix-header h3 { font-size: 14px; }
+            .item-row { padding: 12px 14px; flex-wrap: wrap; }
+            .breakdown-box, .activity-box { padding: 20px 16px; }
+            .breakdown-label { width: 105px; font-size: 12px; }
+            .recent-grid, .tips-grid, .trust-grid { gap: 16px; }
+            .spotlight-box { padding: 28px 20px; }
+            .spotlight-icon { width: 64px; height: 64px; font-size: 26px; }
+            .spotlight-text h3 { font-size: 19px; }
+            .activity-row { flex-wrap: wrap; gap: 10px 14px; }
+            .activity-time { width: 100%; padding-left: 58px; }
+            .help-cta { padding: 30px 20px; }
+            .help-cta-text h2 { font-size: 21px; }
+            .help-cta .btn-help-white { width: 100%; justify-content: center; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-newsletter button { width: 100%; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 23px; }
+            .hero-search-pill { flex: 1 1 100%; }
+            .metrics-grid, .explore-grid { grid-template-columns: 1fr; }
+            .refine-chip { width: 100%; justify-content: center; }
+            .breakdown-row { flex-wrap: wrap; gap: 8px 12px; }
+            .breakdown-label { width: 100%; }
+            .breakdown-track { flex: 1 1 0; }
+            .tip-card { padding: 18px; }
+            .metric-val { font-size: 21px; }
+        }
+
     </style>
 </head>
 <body>

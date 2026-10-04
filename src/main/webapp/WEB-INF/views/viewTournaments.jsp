@@ -685,7 +685,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;~
+            width: 100%;
             height: 3px;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
         }
@@ -1018,6 +1018,124 @@
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .footer-bottom-links a:hover { color: var(--neon-cyan); }
+
+        /* "No tournaments" / "No search result" message (pehle inline style tha) */
+        .no-tournament { grid-column: 1 / -1; text-align: center; padding: 60px; font-weight: 700; color: var(--text-secondary); background: var(--card-surface); border: 1px dashed var(--border-glass); border-radius: 16px; text-transform: uppercase; }
+
+        /* =====================================================
+           FIX 1: DARK + LIGHT MODE  (text hamesha visible)
+           ===================================================== */
+        :root {
+            --pm-nav-bg: rgba(10, 14, 39, 0.92);
+            --pm-input-bg: rgba(3, 7, 18, 0.6);
+            --pm-input-focus-bg: rgba(3, 7, 18, 0.8);
+            --pm-stat-bg: rgba(13, 18, 35, 0.95);
+            --pm-stat-label: #ffffff;
+            --pm-stat-desc: #f0f4ff;
+            --pm-step-bg: rgba(3, 7, 18, 0.5);
+            --pm-gal-content-bg: rgba(13, 18, 30, 0.85);
+            --pm-img-bg: #020617;
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"],
+        :root[data-bs-theme="light"],
+        :root.light,
+        :root.light-mode,
+        :root.light-theme,
+        :root.theme-light,
+        body[data-theme="light"],
+        body[data-bs-theme="light"],
+        body.light,
+        body.light-mode,
+        body.light-theme,
+        body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #9333ea;
+            --neon-gold: #b45309;
+            --pm-nav-bg: #ffffff;
+            --pm-input-bg: #ffffff;
+            --pm-input-focus-bg: #ffffff;
+            --pm-stat-bg: #ffffff;
+            --pm-stat-label: #0f172a;
+            --pm-stat-desc: #334155;
+            --pm-step-bg: #f1f5f9;
+            --pm-gal-content-bg: #ffffff;
+            --pm-img-bg: #e2e8f0;
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+        }
+
+        /* Hardcoded dark backgrounds / white text ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); }
+        .search-input { background: var(--pm-input-bg); }
+        .search-input:focus { background: var(--pm-input-focus-bg); }
+        .stat-card { background: var(--pm-stat-bg); }
+        .stat-label { color: var(--pm-stat-label); }
+        .stat-desc { color: var(--pm-stat-desc); }
+        .journey-step { background: var(--pm-step-bg); }
+        .gallery-card-content { background: var(--pm-gal-content-bg); }
+        .gallery-card-img-wrapper { background: var(--pm-img-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+
+        /* =====================================================
+           FIX 2: FULL RESPONSIVE
+           ===================================================== */
+        img { max-width: 100%; }
+        body { overflow-x: hidden; }
+        .control-bar { flex-wrap: wrap; gap: 12px; }
+        .search-input { max-width: 100%; }
+        .time-col { min-width: 0; }
+        .cricket-stats-section { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+        .leaderboard-section { overflow-x: auto; }
+        .leaderboard-table { min-width: 520px; }
+
+        @media (max-width: 900px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .header-bar { flex-wrap: wrap; gap: 14px; padding: 16px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 7px 10px; font-size: 12px; }
+            .main-content-wrap { padding: 0 12px; margin: 18px auto; }
+            .header-bar { flex-direction: column; align-items: stretch; text-align: center; }
+            .header-left, .header-right { justify-content: center; flex-wrap: wrap; }
+            .jumping-title { font-size: 18px; letter-spacing: 1px; }
+            .control-bar { flex-direction: column; align-items: stretch; padding: 14px; }
+            .search-input { width: 100%; }
+            .stats-badge { text-align: center; }
+            .tournaments-grid { gap: 20px; }
+            .pagination-bar { justify-content: center; flex-wrap: wrap; gap: 12px; padding: 12px; }
+            .leaderboard-section, .journey-section { padding: 20px 16px; }
+            .alt-feature-box { padding: 24px; }
+            .yellow-highlight-banner { padding: 26px 18px; }
+            .yellow-highlight-banner h3 { font-size: 20px; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .tourn-cta-banner { padding: 26px 18px; }
+        }
+
+        @media (max-width: 480px) {
+            .card-inner { padding: 18px; }
+            .timeline-box { padding: 12px; gap: 8px; }
+            .stat-value { font-size: 24px; }
+            .prize-pool-card { padding: 22px; }
+        }
     </style>
 </head>
 <body>
@@ -1040,7 +1158,7 @@
         </div>
 
         <div class="control-bar">
-            <input type="text" id="tournamentSearch" class="search-input" placeholder="🔍 Search tournament by name..." onkeyup="filterTournaments()" autocomplete="off">
+            <input type="text" id="tournamentSearch" class="search-input" placeholder="🔍 Search tournament by name..." onkeyup="filterTournaments()" oninput="filterTournaments()" autocomplete="off">
             <div class="stats-badge">Total Tournaments: <span>${tournaments.size()}</span></div>
         </div>
         
@@ -1071,7 +1189,7 @@
                 </div>
             </c:forEach>
             <c:if test="${empty tournaments}">
-                <div style="grid-column: 1 / -1; text-align: center; padding: 60px; font-weight: 700; color: var(--text-secondary); background: var(--card-surface); border: 1px dashed var(--border-glass); border-radius: 16px; text-transform: uppercase;">🏏 No Active Tournaments Deployed In The System Matrix</div>
+                <div class="no-tournament">🏏 No Active Tournaments Deployed In The System Matrix</div>
             </c:if>
         </div>
 
@@ -1224,15 +1342,15 @@
         <!-- GALLERY SECTION -->
         <div class="footer-gallery-section">
             <div class="footer-gallery-grid">
-				<div class="gallery-card-item">
-				    <div class="gallery-card-content">
-				        <h4>🏟️ Grand Stadium Arena</h4>
-				        <p>Witness magnificent stadium lights, roaring crowds, massive roars</p>
-				    </div>
-				    <div class="gallery-card-img-wrapper">
-				        <img src="https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2025/07/09/4619556-1034009131.jpg?itok=cdFO0JjU" alt="Stadium">
-				    </div>
-				</div>
+                <div class="gallery-card-item">
+                    <div class="gallery-card-content">
+                        <h4>🏟️ Grand Stadium Arena</h4>
+                        <p>Witness magnificent stadium lights, roaring crowds, massive roars</p>
+                    </div>
+                    <div class="gallery-card-img-wrapper">
+                        <img src="https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2025/07/09/4619556-1034009131.jpg?itok=cdFO0JjU" alt="Stadium">
+                    </div>
+                </div>
                 <div class="gallery-card-item">
                     <div class="gallery-card-content">
                         <h4>⚡ High Voltage Match Action</h4>
@@ -1361,21 +1479,43 @@
             ).join('');
         }
 
+        var pmTotalText = null;
+
         function filterTournaments() {
-            let input = document.getElementById('tournamentSearch').value.toLowerCase().trim();
-            let cards = document.getElementsByClassName('tournament-card');
-            let visibleCount = 0;
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getAttribute('data-name');
-                if (input === "" || name.indexOf(input) > -1) {
-                    cards[i].style.display = "";
-                    visibleCount++;
-                } else {
-                    cards[i].style.display = "none";
+            var box = document.getElementById('tournamentSearch');
+            var input = (box ? box.value : '').toLowerCase().replace(/\s+/g, ' ').trim();
+            var grid = document.getElementById('tournamentsGrid');
+            var cards = grid ? grid.querySelectorAll('.tournament-card') : [];
+            var statSpan = document.querySelector('.stats-badge span');
+            var visibleCount = 0;
+
+            if (statSpan && pmTotalText === null) pmTotalText = statSpan.innerText;
+
+            cards.forEach(function (card) {
+                var titleNode = card.querySelector('.tournament-title');
+                var text = ((card.getAttribute('data-name') || '') + ' ' +
+                            (titleNode ? titleNode.textContent : '')).toLowerCase().replace(/\s+/g, ' ');
+                var show = (input === '' || text.indexOf(input) > -1);
+                card.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Koi match na mile to message dikhao
+            var emptyMsg = document.getElementById('noSearchResult');
+            if (input !== '' && cards.length > 0 && visibleCount === 0) {
+                if (!emptyMsg) {
+                    emptyMsg = document.createElement('div');
+                    emptyMsg.id = 'noSearchResult';
+                    emptyMsg.className = 'no-tournament';
+                    emptyMsg.textContent = '🔍 No tournaments match your search.';
+                    grid.appendChild(emptyMsg);
                 }
+                emptyMsg.style.display = '';
+            } else if (emptyMsg) {
+                emptyMsg.style.display = 'none';
             }
-            let statSpan = document.querySelector('.stats-badge span');
-            if(statSpan) statSpan.innerText = visibleCount;
+
+            if (statSpan) statSpan.innerText = (input === '') ? pmTotalText : visibleCount;
         }
 
         const galleryCards = document.querySelectorAll('.gallery-card-item');

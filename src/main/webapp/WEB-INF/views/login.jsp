@@ -3,7 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ProMatch Arena | Secure Login</title>
+
+    <!-- Theme apply (runs immediately, no flash) - navbar.jsp wali same key -->
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('promatch_theme') === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <!-- FontAwesome for Eye Icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -130,6 +143,46 @@
         .auth-footer-links a:hover { text-decoration: underline; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
         .auth-footer-links span { color: var(--text-secondary); }
     </style>
+
+    <!-- 🌟 NEW: DARK + LIGHT MODE (navbar.jsp ki saved theme follow karta hai, toggle nahi) + MOBILE RESPONSIVE -->
+    <style>
+        html[data-theme="light"] {
+            --bg-deep: #f1f5f9;
+            --card-surface: rgba(255, 255, 255, 0.88);
+            --neon-cyan: #0284c7;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: rgba(2, 132, 199, 0.35);
+            --body-overlay: rgba(241, 245, 249, 0.88);
+            --input-bg: #ffffff;
+        }
+        html[data-theme="light"] .auth-container { box-shadow: 0 25px 50px rgba(15, 23, 42, 0.18); }
+        html[data-theme="light"] input:focus { background: #ffffff; }
+        html[data-theme="light"] input::placeholder { color: #64748b; opacity: 1; }
+        input::placeholder { color: var(--text-secondary); opacity: 0.8; }
+        html[data-theme="light"] .alert-error { background: rgba(225, 29, 72, 0.1); border-color: rgba(225, 29, 72, 0.4); }
+        html[data-theme="light"] .alert-success { background: rgba(5, 150, 105, 0.1); border-color: rgba(5, 150, 105, 0.4); }
+
+        html, body { max-width: 100%; overflow-x: hidden; }
+        body { min-height: 100dvh; }
+        .auth-footer-links { flex-wrap: wrap; gap: 8px 12px; justify-content: center; }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .auth-container { padding: 24px 20px; border-radius: 18px; }
+            .auth-title { font-size: 19px; }
+            .auth-subtitle { font-size: 12px; margin-bottom: 18px; }
+            input { font-size: 16px; } /* iOS zoom na ho */
+        }
+        @media (max-height: 560px) {
+            body { padding: 6px; align-items: flex-start; }
+            .auth-container { padding: 16px 20px; }
+            .auth-subtitle { margin-bottom: 12px; }
+            .form-group { margin-bottom: 10px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -182,6 +235,18 @@
                 icon.classList.add("fa-eye");
             }
         }
+    </script>
+
+    <!-- 🌟 NEW: saved theme follow (no toggle here) -->
+    <script>
+        (function () {
+            var root = document.documentElement, KEY = 'promatch_theme';
+            window.addEventListener('storage', function (e) {
+                if (e.key !== KEY) return;
+                if (e.newValue === 'light') root.setAttribute('data-theme', 'light');
+                else root.removeAttribute('data-theme');
+            });
+        })();
     </script>
 </body>
 </html>

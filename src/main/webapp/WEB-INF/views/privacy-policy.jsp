@@ -225,6 +225,112 @@
         .toc-list li a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
         .toc-list li a:hover { color: var(--neon-cyan); transform: translateX(3px); }
         .toc-list li a i { color: var(--neon-emerald); font-size: 11px; }
+
+        /* =====================================================
+           DARK + LIGHT MODE SYSTEM (same as Teams page)
+           Text hamesha visible rahega
+           ===================================================== */
+        :root {
+            --pm-nav-bg: rgba(10, 14, 39, 0.92);
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+            --pm-contact-bg: rgba(0, 217, 255, 0.08);
+            --pm-toc-bg: rgba(0, 217, 255, 0.05);
+            --pm-shadow: rgba(0, 0, 0, 0.5);
+            --pm-nav-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-deep: #f1f5f9;
+            --card-surface: rgba(255, 255, 255, 0.96);
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --neon-rose: #e11d48;
+            --neon-amber: #d97706;
+            --neon-purple: #7c3aed;
+            --neon-gold: #b45309;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-glass: #cbd5e1;
+            --pm-nav-bg: rgba(255, 255, 255, 0.96);
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+            --pm-contact-bg: rgba(8, 145, 178, 0.08);
+            --pm-toc-bg: rgba(8, 145, 178, 0.06);
+            --pm-shadow: rgba(15, 23, 42, 0.12);
+            --pm-nav-shadow: rgba(15, 23, 42, 0.12);
+        }
+
+        /* Hardcoded dark backgrounds ab variables se chalenge */
+        nav { background: var(--pm-nav-bg); box-shadow: 0 15px 35px var(--pm-nav-shadow); }
+        .policy-container { box-shadow: 0 25px 60px var(--pm-shadow); }
+        .contact-box { background: var(--pm-contact-bg); }
+        .toc-box { background: var(--pm-toc-bg); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+        .footer-newsletter input::placeholder { color: var(--text-secondary); opacity: 0.8; }
+
+        /* Light mode me glow soft + text/button clear */
+        body.light-mode .footer-brand h3 span { text-shadow: none; }
+        body.light-mode .nav-links a.active,
+        body.light-mode .btn-back:hover,
+        body.light-mode .footer-socials a:hover,
+        body.light-mode .logo-icon,
+        body.light-mode .footer-newsletter button { color: #ffffff; }
+        :root[data-theme="light"] .footer-brand h3 span, :root.light .footer-brand h3 span, :root.light-mode .footer-brand h3 span { text-shadow: none; }
+        :root[data-theme="light"] .nav-links a.active, :root.light .nav-links a.active, :root.light-mode .nav-links a.active,
+        :root[data-theme="light"] .btn-back:hover, :root.light .btn-back:hover, :root.light-mode .btn-back:hover,
+        :root[data-theme="light"] .footer-socials a:hover, :root.light .footer-socials a:hover, :root.light-mode .footer-socials a:hover,
+        :root[data-theme="light"] .logo-icon, :root.light .logo-icon, :root.light-mode .logo-icon,
+        :root[data-theme="light"] .footer-newsletter button, :root.light .footer-newsletter button, :root.light-mode .footer-newsletter button { color: #ffffff; }
+
+        /* =====================================================
+           FULL RESPONSIVE (mobile / tablet / desktop)
+           ===================================================== */
+        html, body { width: 100%; overflow-x: hidden; }
+        img { max-width: 100%; height: auto; }
+        .policy-container, .policy-container p, .policy-container li,
+        .contact-box p, .toc-list li a { overflow-wrap: anywhere; }
+        html { scroll-behavior: smooth; }
+        .policy-container h3 { scroll-margin-top: 90px; }
+
+        @media (max-width: 992px) {
+            .policy-container { padding: 38px 30px; }
+        }
+
+        @media (max-width: 900px) {
+            nav { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 7px 10px; font-size: 12px; }
+            .main-content-wrap { padding: 0 12px; margin: 22px auto; }
+            .policy-container { padding: 26px 18px; border-radius: 18px; }
+            .policy-container h1 { font-size: 24px; gap: 10px; }
+            .policy-container h3 { font-size: 16.5px; margin-top: 28px; }
+            .policy-container p, .policy-container li { font-size: 14px; line-height: 1.7; }
+            .policy-container ul { padding-left: 18px; }
+            .toc-box { padding: 18px 16px; }
+            .contact-box { padding: 18px 16px; }
+            .contact-box h4 { font-size: 15.5px; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); margin-top: 40px; }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .policy-container { padding: 22px 14px; }
+            .policy-container h1 { font-size: 21px; flex-wrap: wrap; }
+            .last-updated { font-size: 12.5px; }
+            .logo-text { font-size: 16px; }
+        }
     </style>
 </head>
 <body>

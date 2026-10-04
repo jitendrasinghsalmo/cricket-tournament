@@ -252,6 +252,138 @@
             .fee-highlight { flex-direction: column; text-align: center; }
             .fee-highlight .fh-price small { text-align: center; }
         }
+
+        /* =====================================================
+           DARK + LIGHT MODE SYSTEM (same as Teams page)
+           Text hamesha visible rahega
+           ===================================================== */
+        :root {
+            --pm-body-bg: linear-gradient(135deg, #030712 0%, #0a0f1d 100%);
+            --pm-hero-bg: linear-gradient(135deg, rgba(13, 18, 30, 0.95) 0%, rgba(3, 7, 18, 0.98) 100%);
+            --pm-inner-bg: rgba(3, 7, 18, 0.7);
+            --pm-fee-badge-bg: rgba(3, 7, 18, 0.65);
+            --pm-hero-title: #ffffff;
+            --pm-formula-text: #d1fae5;
+            --pm-note-text: #fde68a;
+            --pm-newsletter-bg: rgba(3, 7, 18, 0.7);
+            --pm-footer-bg: linear-gradient(135deg, rgba(13, 18, 35, 0.98), rgba(4, 7, 18, 0.99));
+            --pm-shadow: rgba(0, 0, 0, 0.3);
+            --pm-shadow-strong: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Light mode - jo bhi toggle method use ho (data-theme / class) sab cover hai */
+        :root[data-theme="light"], :root[data-bs-theme="light"],
+        :root.light, :root.light-mode, :root.light-theme, :root.theme-light,
+        body[data-theme="light"], body[data-bs-theme="light"],
+        body.light, body.light-mode, body.light-theme, body.theme-light {
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --accent-red: #e11d48;
+            --accent-green: #059669;
+            --accent-blue: #0284c7;
+            --accent-amber: #b45309;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --neon-cyan: #0891b2;
+            --neon-emerald: #059669;
+            --border-glass: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --pm-body-bg: linear-gradient(135deg, #eef2f7 0%, #f8fafc 100%);
+            --pm-hero-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            --pm-inner-bg: #f1f5f9;
+            --pm-fee-badge-bg: rgba(255, 255, 255, 0.92);
+            --pm-hero-title: #0f172a;
+            --pm-formula-text: #065f46;
+            --pm-note-text: #78350f;
+            --pm-newsletter-bg: #ffffff;
+            --pm-footer-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+            --pm-shadow: rgba(15, 23, 42, 0.12);
+            --pm-shadow-strong: rgba(15, 23, 42, 0.18);
+        }
+
+        /* Hardcoded dark backgrounds / colors ab variables se chalenge */
+        body { background: var(--pm-body-bg); }
+        .rules-hero { background: var(--pm-hero-bg); box-shadow: 0 20px 50px var(--pm-shadow-strong); }
+        .rules-hero h1 { color: var(--pm-hero-title); }
+        .hero-search { background: var(--pm-inner-bg); }
+        .hero-fee { background: var(--pm-fee-badge-bg); }
+        .hero-fee .fee-amount { color: var(--pm-hero-title); }
+        .fact-card, .rule-card, .rules-sidebar { box-shadow: 0 10px 30px var(--pm-shadow); }
+        .point-pill, .step-box, .prize-card { background: var(--pm-inner-bg); }
+        .formula-box { color: var(--pm-formula-text); }
+        .rule-note p { color: var(--pm-note-text); }
+        .grand-footer-section { background: var(--pm-footer-bg); }
+        .footer-newsletter input { background: var(--pm-newsletter-bg); }
+        .footer-newsletter input::placeholder { color: var(--text-secondary); opacity: 0.8; }
+
+        /* Light mode me glow soft + button text clear */
+        body.light-mode .rules-hero h1,
+        body.light-mode .season-tag,
+        body.light-mode .hero-fee .fee-amount,
+        body.light-mode .fee-highlight .fh-price,
+        body.light-mode .footer-brand h3 span { text-shadow: none; }
+        body.light-mode .step-box .step-no,
+        body.light-mode .footer-socials a:hover,
+        body.light-mode .footer-newsletter button { color: #ffffff; }
+        :root[data-theme="light"] .rules-hero h1, :root.light .rules-hero h1, :root.light-mode .rules-hero h1,
+        :root[data-theme="light"] .season-tag, :root.light .season-tag, :root.light-mode .season-tag,
+        :root[data-theme="light"] .hero-fee .fee-amount, :root.light .hero-fee .fee-amount, :root.light-mode .hero-fee .fee-amount,
+        :root[data-theme="light"] .fee-highlight .fh-price, :root.light .fee-highlight .fh-price, :root.light-mode .fee-highlight .fh-price,
+        :root[data-theme="light"] .footer-brand h3 span, :root.light .footer-brand h3 span, :root.light-mode .footer-brand h3 span { text-shadow: none; }
+        :root[data-theme="light"] .step-box .step-no, :root.light .step-box .step-no, :root.light-mode .step-box .step-no,
+        :root[data-theme="light"] .footer-socials a:hover, :root.light .footer-socials a:hover, :root.light-mode .footer-socials a:hover,
+        :root[data-theme="light"] .footer-newsletter button, :root.light .footer-newsletter button, :root.light-mode .footer-newsletter button { color: #ffffff; }
+
+        /* =====================================================
+           FULL RESPONSIVE (mobile / tablet / desktop)
+           ===================================================== */
+        html, body { width: 100%; overflow-x: hidden; }
+        * { box-sizing: border-box; }
+        img { max-width: 100%; height: auto; }
+        .rule-item > div, .fee-highlight .fh-left { min-width: 0; }
+        .rule-item h5, .rule-item p, .formula-box { overflow-wrap: anywhere; }
+
+        @media (max-width: 992px) {
+            .hero-fee { width: 100%; min-width: 0; }
+            .hero-search { max-width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 12px; margin: 18px auto; }
+            .rules-hero { padding: 28px 18px; border-radius: 22px; }
+            .rules-hero h1 { font-size: 25px; }
+            .rules-hero p { font-size: 13.5px; }
+            .hero-fee .fee-amount { font-size: 38px; }
+            .rule-card { padding: 4px 16px; }
+            .rule-section-title { font-size: 16px; }
+            .fee-highlight { padding: 18px 16px; }
+            .fee-highlight .fh-price { font-size: 32px; }
+            .cta-banner { border-radius: 20px; }
+            .cta-banner-text h2 { font-size: 21px; }
+            .btn-cta-white { width: 100%; justify-content: center; }
+            .grand-footer-section { padding: 36px 20px 24px 20px; width: calc(100% - 24px); margin-top: 40px; }
+            .grand-footer-content { gap: 28px; }
+            .footer-newsletter form { flex-direction: column; }
+            .footer-bottom-bar { flex-direction: column; text-align: center; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+            .footer-socials { justify-content: center; }
+            .scroll-top { width: 44px; height: 44px; bottom: 18px; right: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .quick-facts { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .fact-card { padding: 14px 10px; }
+            .fact-card .num { font-size: 20px; }
+            .rules-hero h1 { font-size: 22px; }
+            .rule-item { gap: 12px; padding: 15px 0; }
+            .rule-num { width: 30px; height: 30px; font-size: 12px; }
+            .rule-note { padding: 14px 16px; flex-direction: column; gap: 8px; }
+            .steps-row { gap: 10px; }
+            .rules-sidebar a { font-size: 12px; padding: 8px 10px; }
+        }
     </style>
 </head>
 <body>
