@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>ProMatch Arena | Change Password</title>
     <!-- FontAwesome for Eye Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -20,7 +22,8 @@
             --input-bg: rgba(3, 7, 18, 0.5);
         }
 
-        body.light-theme {
+        body.light-theme,
+        html[data-theme="light"] body {
             --bg-deep: #f1f5f9;
             --card-surface: rgba(255, 255, 255, 0.82);
             --neon-cyan: #0284c7;
@@ -47,7 +50,7 @@
 
         /* Top Left Back Button */
         .btn-back {
-            position: absolute; top: 25px; left: 25px;
+            position: absolute; top: 25px; left: 25px; z-index: 10;
             background: var(--card-surface); color: var(--neon-cyan);
             border: 1px solid var(--border-glass); padding: 9px 16px;
             border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px;
@@ -55,17 +58,6 @@
             backdrop-filter: blur(12px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         .btn-back:hover { background: var(--neon-cyan); color: #030712; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-
-        /* Top Right Theme Toggle */
-        .theme-toggle-btn {
-            position: absolute; top: 25px; right: 25px;
-            background: var(--card-surface); color: var(--text-primary);
-            border: 1px solid var(--border-glass); padding: 9px 14px;
-            border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
-            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
-            backdrop-filter: blur(12px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .theme-toggle-btn:hover { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); }
 
         .auth-container {
             width: 100%; max-width: 420px;
@@ -116,15 +108,24 @@
             font-size: 14px; outline: none; transition: all 0.2s ease; width: 100%; box-sizing: border-box;
             backdrop-filter: blur(5px);
         }
+        input::placeholder { color: var(--text-secondary); opacity: 0.85; }
         input:focus {
             border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
             background: var(--card-surface);
+        }
+        /* keep typed text visible even when the browser autofills */
+        input:-webkit-autofill,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--text-primary);
+            caret-color: var(--text-primary);
+            transition: background-color 9999s ease-in-out 0s;
         }
 
         /* Password Eye Toggle Styling */
         .password-group {
             position: relative;
         }
+        .password-group input { padding-right: 44px; }
         .toggle-password {
             position: absolute;
             top: 36px;
@@ -155,17 +156,63 @@
             box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
             background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
         }
+
+        /* ================= MOBILE: card covers the full screen ================= */
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+                align-items: stretch;
+                justify-content: stretch;
+            }
+            .btn-back { top: 16px; left: 16px; padding: 9px 14px; }
+            .auth-container {
+                max-width: none;
+                min-height: 100vh;
+                min-height: 100dvh;
+                border-radius: 0;
+                border-left: none; border-right: none; border-bottom: none;
+                padding: 84px 22px 32px;
+                padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+                display: flex; flex-direction: column; justify-content: center;
+            }
+            .auth-title { font-size: 21px; }
+            .auth-subtitle { font-size: 13px; margin-bottom: 26px; }
+            input { font-size: 16px; padding: 14px 15px; }
+            .password-group input { padding-right: 50px; }
+            .toggle-password { top: 28px; right: 6px; padding: 10px 12px; }
+            .btn-submit { padding: 15px; font-size: 13.5px; }
+        }
+
+        /* very small phones */
+        @media (max-width: 360px) {
+            .auth-container { padding: 80px 16px 26px; }
+            .auth-title { font-size: 19px; letter-spacing: 0.6px; }
+        }
+
+        /* phone in landscape (short height): start from top and scroll */
+        @media (max-height: 520px) and (orientation: landscape) {
+            body { align-items: stretch; }
+            .auth-container { justify-content: flex-start; padding-top: 70px; }
+            .btn-back { top: 12px; left: 12px; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Theme: follows the theme chosen on the home page (no toggle on this page) -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('promatch_theme') || localStorage.getItem('theme'); } catch (e) {}
+            var dt = document.documentElement.getAttribute('data-theme');
+            if (t === 'light' || dt === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+
     <!-- Top Left Back Button -->
     <a href="${pageContext.request.contextPath}/home" class="btn-back">⬅ Back</a>
-
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-        🌙 <span id="themeBtnText">Dark</span>
-    </button>
 
     <div class="auth-container">
         <div class="auth-title">🔑 Change Password</div>
@@ -209,25 +256,6 @@
     </div>
 
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('promatch_theme') === 'light') {
-                document.body.classList.add('light-theme');
-                document.getElementById('themeToggleBtn').innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            }
-        });
-
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            let btn = document.getElementById('themeToggleBtn');
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('promatch_theme', 'light');
-                btn.innerHTML = '☀️ <span id="themeBtnText">Light</span>';
-            } else {
-                localStorage.setItem('promatch_theme', 'dark');
-                btn.innerHTML = '🌙 <span id="themeBtnText">Dark</span>';
-            }
-        }
-
         function togglePassword(fieldId, iconId) {
             const input = document.getElementById(fieldId);
             const icon = document.getElementById(iconId);

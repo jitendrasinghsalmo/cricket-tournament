@@ -559,6 +559,118 @@
             .footer-newsletter button { width: 100%; }
         }
     </style>
+
+    <!-- 🌟 NEW FIX 1: Hero buttons (Manage Matches + View Teams) mobile pe ek hi line me -->
+    <style>
+        @media (max-width: 480px) {
+            .hero-banner .hero-btns {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+                width: 100%;
+            }
+            .hero-banner .hero-btns a {
+                width: auto !important;
+                flex: 1 1 0 !important;
+                min-width: 0;
+                padding: 11px 8px !important;
+                font-size: 12.5px !important;
+                gap: 5px !important;
+                white-space: nowrap;
+            }
+        }
+        @media (max-width: 360px) {
+            .hero-banner .hero-btns a { font-size: 11.5px !important; padding: 10px 5px !important; }
+        }
+    </style>
+
+    <!-- 🌟 NEW FIX 2: Continuous scrolling ticker (cricket + project + admin text) - purani ticker hide, nayi add -->
+    <style>
+        .ticker-bar:not(.ticker-pro) { display: none !important; }
+
+        .ticker-pro {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            overflow: hidden;
+            padding: 0;
+            margin-bottom: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            position: relative;
+        }
+        .ticker-pro .tp-badge {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 16px;
+            height: 46px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            position: relative;
+            z-index: 2;
+        }
+        .ticker-pro .tp-badge .live-badge { display: inline-flex; align-items: center; gap: 6px; }
+        .ticker-pro .tp-badge .live-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-red); animation: pulseDot 1.2s infinite; }
+        .ticker-pro .tp-viewport {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            position: relative;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+        }
+        .ticker-pro .tp-track-move {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            animation: tickerPro 60s linear infinite;
+        }
+        .ticker-pro:hover .tp-track-move { animation-play-state: paused; }
+        .ticker-pro .tp-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-main);
+            padding: 0 22px;
+            height: 46px;
+            position: relative;
+        }
+        .ticker-pro .tp-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 5px;
+            height: 5px;
+            margin-top: -2.5px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            opacity: 0.6;
+        }
+        .ticker-pro .tp-item i { font-size: 12.5px; }
+        .ticker-pro .tp-item strong { font-weight: 800; }
+        .ticker-pro .tp-item .muted { color: var(--text-muted); font-weight: 500; }
+        .ticker-pro .c-blue { color: var(--accent-blue); }
+        .ticker-pro .c-green { color: var(--accent-green); }
+        .ticker-pro .c-amber { color: var(--accent-amber); }
+        .ticker-pro .c-red { color: var(--accent-red); }
+        .ticker-pro .c-purple { color: var(--accent-purple); }
+        @keyframes tickerPro {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        @media (max-width: 700px) {
+            .ticker-pro .tp-badge { padding: 0 10px; height: 42px; }
+            .ticker-pro .tp-item { font-size: 11.5px; padding: 0 16px; height: 42px; gap: 6px; }
+            .ticker-pro .tp-track-move { animation-duration: 70s; }
+        }
+    </style>
 </head>
 <body>
 
@@ -630,6 +742,32 @@
             <span class="live-badge">SYSTEM LIVE</span>
             <div class="ticker-match"><span>CSK <strong>186/4 (18.2)</strong></span><span style="color:var(--text-muted)">vs</span><span>MI <strong>—</strong></span></div>
             <div class="ticker-match" style="border:none;"><span>RCB <strong>142/6 (16.0)</strong></span><span style="color:var(--text-muted)">vs</span><span>GT <strong>98/2 (10.4)</strong></span></div>
+        </div>
+
+        <!-- 🌟 NEW: CONTINUOUS SCROLLING TICKER (cricket + project + admin updates) -->
+        <div class="ticker-bar ticker-pro">
+            <div class="tp-badge"><span class="live-badge"><span class="dot"></span> SYSTEM LIVE</span></div>
+            <div class="tp-viewport">
+                <div class="tp-track-move" id="tickerProTrack">
+                    <span class="tp-item"><i class="fa-solid fa-baseball-bat-ball c-blue"></i> <span>CSK <strong>186/4 (18.2)</strong> <span class="muted">vs</span> MI <strong>Yet to bat</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-circle-dot c-red"></i> <span>RCB <strong>142/6 (16.0)</strong> <span class="muted">vs</span> GT <strong>98/2 (10.4)</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-hourglass-half c-amber"></i> <span><strong>3 approvals pending:</strong> Thunder Kings, Winter Premier League, Rohan Mehta</span></span>
+                    <span class="tp-item"><i class="fa-solid fa-crown c-amber"></i> <span>Orange Cap: <strong>Aarav Sharma</strong> <span class="muted">(Titans XI)</span> - <strong>612 runs</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-crown c-purple"></i> <span>Purple Cap: <strong>Ishaan Verma</strong> <span class="muted">(Desert Lions)</span> - <strong>24 wickets</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-ranking-star c-green"></i> <span>Points Table &amp; NRR auto-update after every verified result</span></span>
+                    <span class="tp-item"><i class="fa-solid fa-trophy c-amber"></i> <span>Championship Cup 2026: <strong>Round 3 of 4</strong> <span class="muted">- 42 of 56 matches played</span></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-snowflake c-blue"></i> <span>Winter Premier League registrations open: <strong>8 of 20 slots filled</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-indian-rupee-sign c-green"></i> <span>Fee collected: <strong>₹9,000</strong> of <strong>₹12,000</strong> target <span class="muted">(₹500 per team)</span></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-location-dot c-purple"></i> <span>Narendra Modi Stadium <strong>in use</strong> <span class="muted">|</span> Eden Gardens &amp; Chinnaswamy <strong>available</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-tower-broadcast c-red"></i> <span>Live scoring feed is <strong>active</strong> and syncing with the website</span></span>
+                    <span class="tp-item"><i class="fa-solid fa-clipboard-list c-purple"></i> <span>Scorers Desk: <strong>1 slot pending</strong> this week</span></span>
+                    <span class="tp-item"><i class="fa-solid fa-clock c-amber"></i> <span>Background jobs <strong>delayed</strong> - check NRR and points sync</span></span>
+                    <span class="tp-item"><i class="fa-solid fa-shield-halved c-green"></i> <span>Auth &amp; Security: <strong>Secure</strong> <span class="muted">| Database: Healthy</span></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-user-shield c-blue"></i> <span>Admin tip: <strong>review pending approvals daily</strong> to avoid organizer delays</span></span>
+                    <span class="tp-item"><i class="fa-solid fa-bolt c-blue"></i> <span>ProMatch Arena - cricket tournament management built with <strong>Spring Boot, JSP &amp; PostgreSQL</strong></span></span>
+                    <span class="tp-item"><i class="fa-solid fa-people-group c-green"></i> <span>Manage teams, tournaments, matches and users from one control center</span></span>
+                </div>
+            </div>
         </div>
 
         <!-- QUICK NAVIGATION -->
@@ -909,6 +1047,21 @@
             } else {
                 targets.forEach(reveal);
             }
+        })();
+    </script>
+
+    <!-- 🌟 NEW: ticker ko seamless loop banane ke liye items duplicate (continuous chalta rahe) -->
+    <script>
+        (function () {
+            var track = document.getElementById('tickerProTrack');
+            if (!track || track.getAttribute('data-cloned') === '1') return;
+            track.setAttribute('data-cloned', '1');
+            var items = Array.prototype.slice.call(track.children);
+            items.forEach(function (it) {
+                var c = it.cloneNode(true);
+                c.setAttribute('aria-hidden', 'true');
+                track.appendChild(c);
+            });
         })();
     </script>
 </body>

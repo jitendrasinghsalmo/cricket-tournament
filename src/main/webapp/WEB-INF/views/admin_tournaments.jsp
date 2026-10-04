@@ -429,8 +429,10 @@
             .month-grid { grid-template-columns: repeat(3, 1fr); }
             .roadmap { grid-template-columns: 1fr; }
             .help-cta { padding: 26px 20px; flex-direction: column; text-align: center; }
-            .help-btns { width: 100%; flex-direction: column; }
-            .btn-help { width: 100%; }
+            /* ===== MOBILE FIX: both help buttons side by side in one line ===== */
+            .help-btns { width: 100%; flex-direction: row; flex-wrap: nowrap; gap: 8px; }
+            .btn-help { flex: 1 1 0; min-width: 0; width: auto; height: 44px; padding: 0 8px; font-size: 10px; letter-spacing: 0.3px; gap: 5px; }
+            .btn-help i { font-size: 11px; }
             .steps-wrap { padding: 20px 16px; }
             .spotlight { padding: 24px 18px; }
             .spot-count { width: 100%; justify-content: space-between; }

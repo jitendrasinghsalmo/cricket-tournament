@@ -275,6 +275,17 @@ html[data-theme="light"] .jumping-title .ch{text-shadow:none}
 .footer-bottom-links{display:flex;gap:20px}.footer-bottom-links a{color:var(--text-secondary);text-decoration:none}
 @media(max-width:768px){.footer-bottom-bar{flex-direction:column;text-align:center}}
 </style>
+
+<!-- 🌟 NEW FIX: Match Day Desk ke 2 buttons (Schedule Match + Chat With Support) mobile pe ek hi line me -->
+<style>
+@media(max-width:640px){
+.desk .desk-btns{flex-direction:row !important;flex-wrap:nowrap !important;gap:8px !important;width:100%}
+.desk .btn-desk{width:auto !important;flex:1 1 0 !important;min-width:0;height:48px;padding:0 8px !important;font-size:11.5px !important;gap:6px !important;white-space:normal;line-height:1.2;text-align:center}
+}
+@media(max-width:360px){
+.desk .btn-desk{font-size:10.5px !important;padding:0 4px !important;gap:4px !important}
+}
+</style>
 </head>
 <body>
 

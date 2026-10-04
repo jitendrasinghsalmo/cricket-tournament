@@ -212,7 +212,11 @@ html[data-theme="light"] .az-chip.active,html[data-theme="light"] .az-chip.activ
 .ring-wrap{gap:18px}.ring{width:150px;height:150px}.ring div{width:104px;height:104px}
 .trend{height:160px;gap:6px}
 .admin-grid{grid-template-columns:1fr}
-.desk{padding:22px 18px;flex-direction:column;text-align:center}.desk-btns{width:100%;flex-direction:column}.btn-desk{width:100%}
+.desk{padding:22px 18px;flex-direction:column;text-align:center}
+/* ===== MOBILE FIX: both User Desk buttons side by side in one line ===== */
+.desk-btns{width:100%;flex-direction:row;flex-wrap:nowrap;gap:8px}
+.btn-desk{flex:1 1 0;min-width:0;width:auto;height:44px;padding:0 8px;font-size:10px;letter-spacing:.3px;gap:5px}
+.btn-desk i{font-size:11px}
 }
 @media(max-width:380px){.tab span{font-size:10.5px}}
 @media(prefers-reduced-motion:reduce){.jumping-title .ch{animation:none!important;opacity:1;transform:none}}

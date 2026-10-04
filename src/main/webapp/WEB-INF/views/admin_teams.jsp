@@ -139,8 +139,9 @@
             background: linear-gradient(90deg, var(--tc-cyan), var(--tc-green), var(--tc-gold));
         }
         .team-card:hover { transform: translateY(-8px); border-color: var(--tc-cyan); box-shadow: 0 22px 45px rgba(0, 217, 255, 0.25); }
+        /* banner is taller (88px) so the #TEAM badge and the logo never touch */
         .card-banner {
-            height: 68px; background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 255, 136, 0.15));
+            height: 88px; background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 255, 136, 0.15));
             border-bottom: 1.5px solid var(--tc-border); display: flex; justify-content: space-between; align-items: flex-start; padding: 13px 18px;
         }
         .team-id-badge {

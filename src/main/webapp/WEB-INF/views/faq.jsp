@@ -1412,6 +1412,30 @@
             .app-promo-btn { font-size: 10.5px; padding: 10px 4px; gap: 4px; }
         }
     </style>
+
+    <!-- 🌟 NEW FIX: Footer newsletter (Email input + Join button) mobile pe ek hi line me -->
+    <style>
+        @media (max-width: 768px) {
+            .grand-footer-section .footer-newsletter form {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                gap: 8px !important;
+                width: 100%;
+            }
+            .grand-footer-section .footer-newsletter input {
+                flex: 1 1 0 !important;
+                width: auto !important;
+                min-width: 0 !important;
+            }
+            .grand-footer-section .footer-newsletter button {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                white-space: nowrap;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -1988,6 +2012,28 @@
                 setTimeout(() => { card.style.animation = 'spinFiveSecs 5s linear infinite'; }, 800);
             });
         });
+    </script>
+
+    <!-- 🌟 NEW FIX: "Live Chat" button -> chatbot.jsp ka chatbot (toggleChat) open karega -->
+    <script>
+        (function () {
+            var oldOpenContactForm = window.openContactForm;
+            window.openContactForm = function (type) {
+                if (type === 'chat') {
+                    var chatWin = document.getElementById('chatWindow');
+                    if (chatWin && typeof window.toggleChat === 'function') {
+                        if (!chatWin.classList.contains('open')) {
+                            window.toggleChat();
+                        } else {
+                            var inp = document.getElementById('chatInput');
+                            if (inp) inp.focus();
+                        }
+                    }
+                    return;
+                }
+                oldOpenContactForm(type);
+            };
+        })();
     </script>
 </body>
 </html>
