@@ -21,8 +21,8 @@ A full-stack, enterprise-style platform to manage cricket tournaments, teams, sq
 ---
 
 ## 📑 Table of Contents
+
 - [Live Demo](#-live-demo)
-- [Screenshots](#-screenshots)
 - [Key Features](#-key-features)
 - [Tech Stack](#️-tech-stack)
 - [Application Workflow](#-application-workflow)
@@ -36,27 +36,11 @@ A full-stack, enterprise-style platform to manage cricket tournaments, teams, sq
 
 ## 🔗 Live Demo
 
-- **Live Application:** [https://cricket-tournament-43i3.onrender.com]
+- **Live Application:** [https://cricket-tournament-43i3.onrender.com](https://cricket-tournament-43i3.onrender.com)
 - **Demo Admin Login:** `your-admin-email` / `your-password`
 - **Demo User Login:** `your-user-email` / `your-password`
 
-> Note: The app is hosted on a free tier, so the first load may take a few seconds.
-
----
-
-## 📸 Screenshots
-
-| Home (Dark) | Home (Light) |
-|---|---|
-| ![Home Dark](screenshots/home-dark.png) | ![Home Light](screenshots/home-light.png) |
-
-| Admin Panel | Points Table |
-|---|---|
-| ![Admin](screenshots/admin.png) | ![Points](screenshots/points-table.png) |
-
-| Payment (Razorpay) | Mobile View |
-|---|---|
-| ![Payment](screenshots/payment.png) | ![Mobile](screenshots/mobile.png) |
+> **Note:** The app is hosted on a free tier, so the first load may take a few seconds.
 
 ---
 
@@ -71,7 +55,7 @@ A full-stack, enterprise-style platform to manage cricket tournaments, teams, sq
 ### 💳 Razorpay Payments
 - Team registration fee of **₹500** through Razorpay secure checkout.
 - Server-side payment verification before a team is confirmed.
-- Clear flow: Register Team ➔ Pay ₹500 ➔ Admin Verifies ➔ Team Confirmed.
+- Clear flow: **Register Team ➔ Pay ₹500 ➔ Admin Verifies ➔ Team Confirmed**.
 
 ### 🔐 Security & Authentication
 - Role-based access control (**ADMIN** and **USER**) using Spring Security.
@@ -112,11 +96,11 @@ Register / Login  ➔  Register Team + Add Squad  ➔  Pay ₹500 (Razorpay)
         ➔  Points Table + NRR Update Automatically
 ```
 
-1. **Register / Login** with role assignment (ADMIN or USER).
-2. **Register your team** and add squad members.
-3. **Pay ₹500** registration fee through Razorpay.
-4. **Admin verifies** the payment and approves the team.
-5. **Matches are played**, results are approved and the **Points Table + NRR** update automatically.
+1. Register / Login with role assignment (**ADMIN** or **USER**).
+2. Register your team and add squad members.
+3. Pay the ₹500 registration fee through Razorpay.
+4. Admin verifies the payment and approves the team.
+5. Matches are played, results are approved and the Points Table + NRR update automatically.
 
 ---
 
@@ -131,7 +115,6 @@ Cricket_Tournament/
 │   └── Cricket_TournamentService/       # Business logic and services
 ├── src/main/webapp/WEB-INF/views/       # JSP views (Home, Login, Register, Admin panels, Points table)
 ├── src/main/resources/                  # application.properties and static assets
-├── screenshots/                         # README screenshots
 └── pom.xml                              # Maven configuration and dependencies
 ```
 
@@ -146,18 +129,19 @@ Set these before running the app. **Never commit real keys to GitHub.**
 | `SPRING_DATASOURCE_URL` | PostgreSQL connection URL (e.g. `jdbc:postgresql://localhost:5432/cricket_db`) |
 | `SPRING_DATASOURCE_USERNAME` | Database username |
 | `SPRING_DATASOURCE_PASSWORD` | Database password |
-| `RAZORPAY_KEY_ID` | Razorpay Key ID (use **test mode** keys locally) |
+| `RAZORPAY_KEY_ID` | Razorpay Key ID (use test mode keys locally) |
 | `RAZORPAY_KEY_SECRET` | Razorpay Key Secret |
 | `BREVO_API_KEY` | Brevo API key for sending OTP emails |
 | `BREVO_SENDER_EMAIL` | Verified sender email in Brevo |
 
-> Tip: Keep real values in a local `application.properties` (added to `.gitignore`) and commit only an `application-example.properties` with placeholders.
+> **Tip:** Keep real values in a local `application.properties` (added to `.gitignore`) and commit only an `application-example.properties` with placeholders.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - JDK 17 or higher
 - Maven 3.8+
 - PostgreSQL
@@ -166,12 +150,14 @@ Set these before running the app. **Never commit real keys to GitHub.**
 ### Installation
 
 **1. Clone the repository**
+
 ```bash
-git clone https://github.com/jitendrasinghsalmo/your-cricket-tournament-repo.git
-cd Cricket_Tournament
+git clone https://github.com/jitendrasinghsalmo/cricket-tournament.git
+cd cricket-tournament
 ```
 
 **2. Create the database**
+
 ```sql
 CREATE DATABASE cricket_db;
 ```
@@ -181,11 +167,13 @@ CREATE DATABASE cricket_db;
 Update `src/main/resources/application.properties` (or set the environment variables above) with your database, Razorpay and Brevo details.
 
 **4. Run the application**
+
 ```bash
 mvn spring-boot:run
 ```
 
 **5. Open in browser**
+
 ```text
 http://localhost:8080
 ```
@@ -207,7 +195,7 @@ http://localhost:8080
 Java Full Stack Developer | Bengaluru, India
 
 - GitHub: [jitendrasinghsalmo](https://github.com/jitendrasinghsalmo)
-- LinkedIn: [Jitendra Singh](https://linkedin.com/in/jitendra-singh-725698290)
+- LinkedIn: [Jitendra Singh](https://www.linkedin.com/)
 
 ---
 
