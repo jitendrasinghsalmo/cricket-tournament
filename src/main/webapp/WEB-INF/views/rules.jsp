@@ -385,6 +385,68 @@
             .rules-sidebar a { font-size: 12px; padding: 8px 10px; }
         }
     </style>
+
+    <!-- 🌟 NEW (sirf MOBILE fix, laptop pe koi change nahi): Points pills teeno ek line me + Quick Jump links ek line me 2-2 -->
+    <style>
+        @media (max-width: 768px) {
+
+            /* ---- 1) Points System & NRR: Win / Tie / Loss teeno ek hi line me, chhote size me ---- */
+            .points-box {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 8px !important;
+                padding: 16px 0 !important;
+            }
+            .point-pill {
+                padding: 12px 4px;
+                border-radius: 12px;
+                min-width: 0;
+            }
+            .point-pill .pts { font-size: 22px; }
+            .point-pill .lbl {
+                font-size: 9.5px;
+                letter-spacing: 0.4px;
+                line-height: 1.3;
+                display: block;
+            }
+
+            /* ---- 2) Quick Jump: ek line me 2 links, barabar width (grid) ---- */
+            .rules-sidebar {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                padding: 16px 12px;
+            }
+            .rules-sidebar h4 {
+                grid-column: 1 / -1;
+                width: auto;
+                margin-bottom: 8px;
+            }
+            .rules-sidebar a {
+                min-width: 0;
+                padding: 9px 8px;
+                font-size: 11.5px;
+                gap: 6px;
+                line-height: 1.3;
+            }
+            .rules-sidebar a i {
+                width: 14px;
+                font-size: 12px;
+                flex-shrink: 0;
+            }
+        }
+
+        /* Bahut chhoti screen (320px jaisi) */
+        @media (max-width: 360px) {
+            .points-box { gap: 6px !important; }
+            .point-pill { padding: 10px 2px; }
+            .point-pill .pts { font-size: 20px; }
+            .point-pill .lbl { font-size: 9px; letter-spacing: 0.2px; }
+            .rules-sidebar { padding: 14px 8px; gap: 4px; }
+            .rules-sidebar a { font-size: 10.5px; padding: 8px 6px; gap: 5px; }
+            .rules-sidebar a i { width: 12px; font-size: 11px; }
+        }
+    </style>
 </head>
 <body>
 

@@ -756,6 +756,45 @@
             }
         }
     </style>
+
+    <!-- 🌟 NEW (sirf MOBILE fix, laptop pe koi change nahi): Security chips ek line me 2-2, aakhri 5th chip center me -->
+    <style>
+        @media (max-width: 768px) {
+            .security-box { padding: 26px 12px; }
+            .security-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .security-chip {
+                flex: 0 0 calc(50% - 5px);
+                max-width: calc(50% - 5px);
+                min-width: 0;
+                justify-content: center;
+                text-align: center;
+                gap: 6px;
+                padding: 10px 6px;
+                font-size: 11px;
+                letter-spacing: 0.2px;
+                line-height: 1.3;
+                border-radius: 22px;
+            }
+            .security-chip i { font-size: 11px; flex-shrink: 0; }
+        }
+
+        @media (max-width: 360px) {
+            .security-box { padding: 22px 8px; }
+            .security-row { gap: 8px; }
+            .security-chip {
+                flex: 0 0 calc(50% - 4px);
+                max-width: calc(50% - 4px);
+                font-size: 10px;
+                padding: 9px 4px;
+                gap: 4px;
+            }
+        }
+    </style>
 </head>
 <body>
 

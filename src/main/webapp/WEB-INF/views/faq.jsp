@@ -1436,6 +1436,78 @@
             }
         }
     </style>
+
+    <!-- 🌟 NEW (sirf MOBILE fix, laptop pe koi change nahi): Sponsor chips 2-2 ek line me (5th center me) + "Still have questions?" buttons chhote (2 + 1) -->
+    <style>
+        @media (max-width: 768px) {
+
+            /* ---- 1) Trusted By Leagues & Partners: ek line me 2 chips, aakhri center me ---- */
+            .sponsors-box { padding: 26px 12px; }
+            .sponsors-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .sponsor-chip {
+                flex: 0 0 calc(50% - 5px);
+                max-width: calc(50% - 5px);
+                min-width: 0;
+                justify-content: center;
+                text-align: center;
+                gap: 6px;
+                padding: 10px 6px;
+                font-size: 11px;
+                letter-spacing: 0.2px;
+                line-height: 1.3;
+                border-radius: 22px;
+            }
+            .sponsor-chip i { font-size: 11px; flex-shrink: 0; }
+
+            /* ---- 2) Still have questions?: buttons chhote, 2 ek line me + 3rd neeche center me ---- */
+            .help-box { padding: 26px 14px; margin: 30px auto; }
+            .help-box h3 { font-size: 18px; }
+            .help-box p { font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
+            .help-buttons {
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                justify-content: center;
+                gap: 8px;
+            }
+            .help-btn {
+                width: auto !important;
+                flex: 0 0 calc(50% - 4px);
+                max-width: calc(50% - 4px);
+                min-width: 0;
+                padding: 9px 6px;
+                font-size: 10.5px;
+                letter-spacing: 0.3px;
+                line-height: 1.3;
+                border-radius: 9px;
+                border-width: 1.5px;
+            }
+        }
+
+        /* Bahut chhoti screen (320px jaisi) */
+        @media (max-width: 360px) {
+            .sponsors-box { padding: 22px 8px; }
+            .sponsors-row { gap: 8px; }
+            .sponsor-chip {
+                flex: 0 0 calc(50% - 4px);
+                max-width: calc(50% - 4px);
+                font-size: 10px;
+                padding: 9px 4px;
+                gap: 4px;
+            }
+            .help-box { padding: 22px 10px; }
+            .help-btn {
+                flex: 0 0 calc(50% - 4px);
+                max-width: calc(50% - 4px);
+                font-size: 10px;
+                padding: 9px 4px;
+            }
+        }
+    </style>
 </head>
 <body>
 
