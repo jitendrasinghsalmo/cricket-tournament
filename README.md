@@ -36,11 +36,7 @@ A full-stack, enterprise-style platform to manage cricket tournaments, teams, sq
 
 ## 🔗 Live Demo
 
-<<<<<<< HEAD
 - **Live Application:** [https://cricket-tournament-43i3.onrender.com](https://cricket-tournament-43i3.onrender.com)
-=======
-- **Live Application:** https://cricket-tournament-43i3.onrender.com
->>>>>>> e2c64404105ddfe8894190c28e3116bc3c890117
 - **Demo Admin Login:** `your-admin-email` / `your-password`
 - **Demo User Login:** `your-user-email` / `your-password`
 
@@ -199,7 +195,7 @@ http://localhost:8080
 Java Full Stack Developer | Bengaluru, India
 
 - GitHub: [jitendrasinghsalmo](https://github.com/jitendrasinghsalmo)
-- LinkedIn: [Jitendra Singh](https://www.linkedin.com/)
+- LinkedIn: [Jitendra Singh](https://www.linkedin.com/in/jitendra-singh-725698290)
 
 ---
 
