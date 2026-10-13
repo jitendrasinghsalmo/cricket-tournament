@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🏏 ProMatch Arena
-### Cricket Tournament Management System
+### ProMatch Arena (Cricket Tournament & Match Platform)
 
 A full-stack, enterprise-style platform to manage cricket tournaments, teams, squads, matches, payments and live points tables.
 
